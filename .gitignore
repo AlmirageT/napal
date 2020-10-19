@@ -1,13 +1,24 @@
-<<<<<<< HEAD
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
 /vendor
 .env
-.env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.idea/
+/public/img/avatar
+/public/img/comunas
+/public/img/portadas
+/public/img/propiedades
+/public/img/testimonios
+/public/img/c/scod
+/public/img/documentos
+/public/img/noticias
+/public/img/popups
+/public/iv1
+/public/front/img/front
+/public/temp
