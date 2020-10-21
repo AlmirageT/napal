@@ -1,0 +1,7 @@
+@include('layouts.admin.app')
+@section('css')
+@endsection
+@section('content')
+@endsection
+@section('script')
+@endsection
