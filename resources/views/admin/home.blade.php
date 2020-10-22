@@ -1,7 +1,7 @@
-@include('layouts.admin.app')
-@section('css')
+@extends('layouts.admin.app')
+@section('title')
+Home
 @endsection
 @section('content')
 @endsection
-@section('script')
-@endsection
+

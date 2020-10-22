@@ -17,14 +17,12 @@ class Usuario extends Model
     	'password',
     	'profesion',
     	'idIdioma',
-    	'genero',
-    	'idEstadoCivil',
     	'token',
     	'tokenCorto',
     	'activarCuenta',
     	'activarNewsletter',
     	'desactivarCuenta',
     	'idTipoPersona',
-    	'idDireccionUsuario'
+        'idTipoUsuario'
     ];
 }

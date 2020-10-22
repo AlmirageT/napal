@@ -16,6 +16,7 @@ class DireccionUsuario extends Model
     	'idPais',
     	'idProvincia',
     	'idComuna',
+        'idRegion',
     	'latitud',
     	'longitud',
     	'poi'
