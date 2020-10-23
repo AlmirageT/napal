@@ -1,59 +1,29 @@
 @extends('layouts.admin.app')
 @section('title')
-Crear Usuario
+Crear Proyecto
 @endsection
 @section('content')
 <div class="container">
 	<div class="card">
 		<div class="card-header">
 			<div align="center">
-				<h3>Crear Usuario</h3>
+				<h3>Crear Proyecto</h3>
 			</div>
 		</div>
-        {!!Form::open(['route' => 'mantenedor-usuarios.store', 'method' => 'POST','files'=>true])!!}
+        {!!Form::open(['route' => 'mantenedor-proyectos.store', 'method' => 'POST','files'=>true])!!}
         	@csrf
 				<div class="card-body">
 					<div class="row">
-						<div class="col-4">
+						<div class="col-12">
 							<div class="form-group">
 								<label>Nombre</label>
-								{!!Form::text('nombre',null,['class'=>"form-control", 'placeholder'=>"Ingrese sus nombres" , 'required'])!!}
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Apellidos</label>
-								{!! Form::text('apellido',null,['class'=>"form-control", 'placeholder'=>"Ingrese sus apellidos", 'required']) !!}
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Correo</label>
-								{!! Form::email('correo',null,['class'=>"form-control", 'placeholder'=>"ejemplo@ejemplo.com", 'required']) !!}
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Rut</label>
-								{!! Form::text('rut',null,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','onchange'=>"formateaRut(this.value)", 'id'=>"rut"]) !!}
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Contraseña</label>
-								<input type="password" name="password" class="form-control" placeholder="*********" required>
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Confirmar Contraseña</label>
-								<input type="password" name="confirm_password" class="form-control" placeholder="*********" required>
+								{!!Form::text('nombreProyecto',null,['class'=>"form-control", 'placeholder'=>"Ingrese nombre del proyecto" , 'required'])!!}
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<label>Foto Perfil</label>
-								<input type="file" name="avatar" class="form-control" onchange="onFileSelected(event)">
+								<label>Foto Portada</label>
+								<input type="file" required name="fotoPortada" class="form-control" onchange="onFileSelected(event)">
 							</div>
 						</div>
 						<div class="col-12">
@@ -63,14 +33,8 @@ Crear Usuario
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<label>Profesión</label>
-								{!! Form::text('profesion',null,['class'=>"form-control",'placeholder'=>"Ingrese la profesión",'required']) !!}
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="form-group">
 								<label>Pais</label>
-								{!! Form::select('idPais', $paises,null,['class'=>"form-control",'placeholder'=>"Ingrese el pais de residencia",'required','id'=>"paises", 'onchange'=>"sacarRegionPorPais(this.value)"]) !!}
+								{!! Form::select('idPais', $paises,null,['class'=>"form-control",'placeholder'=>"Seleccione pais",'required','id'=>"paises", 'onchange'=>"sacarRegionPorPais(this.value)"]) !!}
 							</div>
 						</div>
 						<div class="col-4">
@@ -94,14 +58,14 @@ Crear Usuario
 						</div>
 						<div class="col-4">
 							<div class="form-group">
-								<label>Dirección 1</label>
-								{!! Form::text('direccion1',null,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','id'=>"txtDireccion"]) !!}
+								<label>Dirección</label>
+								{!! Form::text('direccion',null,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','id'=>"txtDireccion"]) !!}
 							</div>
 						</div>
 						<div class="col-4">
 							<div class="form-group">
 								<label>Número</label>
-								{!! Form::text('direccion2',null,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','id'=>"txtNumero"]) !!}
+								{!! Form::text('numeracionProyecto',null,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','id'=>"txtNumero"]) !!}
 							</div>
 						</div>
 						<div class="col-4">
@@ -126,29 +90,10 @@ Crear Usuario
 								{!! Form::text('longitud',null,['class'=>"form-control",'required','id'=>"longitud"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Idioma</label>
-								{!! Form::select('idIdioma', $idiomas,null,['class'=>"form-control",'placeholder'=>"Ingrese el idioma",'required']) !!}
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Tipo Persona</label>
-								{!! Form::select('idTipoPersona', $tipos_personas,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo persona",'required']) !!}
-							</div>
-						</div>
-						<div class="col-4">
-							<div class="form-group">
-								<label>Tipo Usuario</label>
-								{!! Form::select('idTipoUsuario', $tipos_usuarios,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
-								
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="card-footer">
-					{!! Form::submit('Agregar Usuario',['class'=>"btn btn-primary btn-block"]) !!}
+					{!! Form::submit('Agregar Proyecto',['class'=>"btn btn-primary btn-block"]) !!}
 				</div>
         {!!Form::close()!!}
 	</div>
@@ -171,28 +116,6 @@ Crear Usuario
 	  };
 
 	  reader.readAsDataURL(selectedFile);
-	}
-	function formateaRut(rut) {
-	    var actual = rut.replace(/^0+/, "");
-	    if (actual != '' && actual.length > 1) {
-	        var sinPuntos = actual.replace(/\./g, "");
-	        var actualLimpio = sinPuntos.replace(/-/g, "");
-	        var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-	        var rutPuntos = "";
-	        var i = 0;
-	        var j = 1;
-	        for (i = inicio.length - 1; i >= 0; i--) {
-	            var letra = inicio.charAt(i);
-	            rutPuntos = letra + rutPuntos;
-	            if (j % 3 == 0 && j <= inicio.length - 1) {
-	                rutPuntos = "." + rutPuntos;
-	            }
-	            j++;
-	        }
-	        var dv = actualLimpio.substring(actualLimpio.length - 1);
-	        rutPuntos = rutPuntos + "-" + dv;
-	    }
-	    document.getElementById('rut').value = rutPuntos;
 	}
 	const sacarRegionPorPais = (pais) => {
 		$.get('{{ asset('regiones') }}/'+pais, (data, status) => {

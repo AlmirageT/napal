@@ -128,15 +128,86 @@ class UsuarioController extends Controller
             return redirect::back();
         }
     }
-    public function update(Request $request, $id)
+    public function edit($idUsuario)
     {
-    	# code...
+        $usuario = Usuario::find($idUsuario);
+        $avatar = Avatar::find($usuario->idAvatar);
+        $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
+        $tipos_personas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
+        $paises = Pais::pluck('nombrePais','idPais');
+        $regiones = Region::pluck('nombreRegion','idRegion');
+        $provincias = Provincia::pluck('nombreProvincia','idProvincia');
+        $comunas = Comuna::pluck('nombreComuna','idComuna');
+        $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
+        $direccion_usuario = DireccionUsuario::where('idUsuario',$idUsuario)->first();
+
+        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','direccion_usuario'));
     }
-    public function destroy($id)
+    public function update(Request $request, $idUsuario)
     {
     	try {
-            $usuario = Usuario::find($id);
+            DB::beginTransaction();
+                $id_avatar = null;
+                //guardar imagenes
+                if($request->file('avatar')){
+                    $imagen = $request->file('avatar');
+                    $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+                    $imagen->move('assets/images/users/',$imgName);
+                    $idAvatar_create = Avatar::create([
+                        'rutaAvatar'=> 'assets/images/users/'.$imgName
+                    ]);
+                    $id_avatar = $idAvatar_create->idAvatar;
+                }
+                //guardar usuario
+                $usuario = Usuario::find($idUsuario);
+                $usuario->nombre = $request->nombre;
+                $usuario->apellido = $request->apellido;
+                $usuario->rut = $request->rut;
+                $usuario->correo = $request->correo;
+                if ($id_avatar != null) {
+                    $usuario->idAvatar = $id_avatar;
+                }
+                if ($request->password != null) {
+                    $usuario->password = bcrypt($request->password);
+                }
+                $usuario->profesion = $request->profesion;
+                $usuario->idTipoPersona = $request->idTipoPersona;
+                $usuario->idIdioma = $request->idIdioma;
+                $usuario->idTipoUsuario = $request->idTipoUsuario;
+                $usuario->save();
+                //direccion usuario
+                $direccionUsuario = DireccionUsuario::where('idUsuario',$idUsuario)->first();
+                $direccionUsuario->direccion1 = $request->direccion1;
+                $direccionUsuario->direccion2 = $request->direccion2;
+                $direccionUsuario->codigoPostal = $request->codigoPostal;
+                $direccionUsuario->idPais = $request->idPais;
+                $direccionUsuario->idProvincia = $request->idProvincia;
+                $direccionUsuario->idComuna = $request->idComuna;
+                $direccionUsuario->idRegion = $request->idRegion;
+                $direccionUsuario->latitud = $request->latitud;
+                $direccionUsuario->longitud = $request->longitud;
+                $geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
+                $direccionUsuario->poi = $geoHash[0]->geoHash;
+                $direccionUsuario->save();
+
+                toastr()->success('Actualizado Correctamente', 'El usuario: '.$request->nombre.' ha sido actualizado correctamente', ['timeOut' => 9000]);
+            DB::commit();
+            return redirect::to('napalm/usuarios');
+        } catch (Exception $e) {
+            DB::rollback();
+            toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
+            return redirect::back();
+        }
+    }
+    public function destroy($idUsuario)
+    {
+    	try {
+            $usuario = Usuario::find($idUsuario);
             toastr()->success('Eliminado Correctamente', 'El usuario: '.$usuario->nombre.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+            if ($usuario->idAvatar != null) {
+                $avatar = Avatar::find($usuario->idAvatar);
+                unlink($avatar->rutaAvatar);
+            }
             $usuario->delete();
             return redirect::back();
         } catch (Exception $e) {

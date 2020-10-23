@@ -44,6 +44,7 @@ class Propiedad extends Model
     	'fechaFinalizacion',
     	'fechaInicio',
     	'notasInternas',
-    	'idExpertoAsociado'
+    	'idExpertoAsociado',
+        'idRegion'
     ];
 }

@@ -15,7 +15,7 @@ Usuarios
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table project-list-table table-nowrap table-centered table-borderless">
+				<table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 				  <thead>
 				    <tr>
 			          <th>ID</th>
@@ -73,15 +73,8 @@ Usuarios
 					      	@endif
 					      </td>
 					      <td>
-							<div class="dropdown">
-							  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    Seleccione una acción
-							  </button>
-							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							    <a class="dropdown-item" href="#"></a>
-                        		@include('admin.usuarios.destroy')
-							  </div>
-							</div>
+					      		<a href="{{ asset('napalm/usuarios/editar') }}/{{ $usuario->idUsuario }}" class="btn btn-info">Editar</a>
+	                    		@include('admin.usuarios.destroy')
 					      </td>
 					    </tr>
 					@endforeach
@@ -94,4 +87,9 @@ Usuarios
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>    
 @endsection

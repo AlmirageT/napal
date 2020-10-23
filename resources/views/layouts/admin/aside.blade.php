@@ -32,7 +32,7 @@
                         <span>Proyectos</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-buildings"></i> Proyectos</a></li>
+                        <li><a href="{{ asset('napalm/proyectos') }}"><i class="bx bx-buildings"></i> Proyectos</a></li>
                     </ul>
                 </li>
                 <li>
@@ -41,7 +41,7 @@
                         <span>Propiedades</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-home-alt"></i> Propiedades</a></li>
+                        <li><a href="{{ asset('napalm/propiedades') }}"><i class="bx bx-home-alt"></i> Propiedades</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href=""><i class="bx bx-store-alt"></i> Tienda</a></li>

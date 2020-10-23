@@ -18,6 +18,8 @@ class Proyecto extends Model
     	'latitud',
     	'longitud',
     	'poi',
-    	'fotoPortada'
+    	'fotoPortada',
+        'numeracionProyecto',
+        'idRegion'
     ];
 }
