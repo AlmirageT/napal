@@ -49,6 +49,51 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-home"></i>
+                        <span>Mantenedores</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipos_usuarios') }}"><i class="bx bx-home-alt"></i>Tipo de Usuario</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Persona</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Credito</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Inversión</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Télefono</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Flexibilidad</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Estado</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Documento</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Credito</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Calidad</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Moneda</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Idioma</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bx-store-alt"></i>Estado</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-newspaper"></i>
                         <span>Fidelizador</span>
                     </a>

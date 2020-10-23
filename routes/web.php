@@ -27,6 +27,9 @@ Route::get('napalm/proyectos/editar/{idProyecto}','ProyectoController@edit');
 Route::get('napalm/propiedades','PropiedadController@index');
 Route::get('napalm/propiedades/create','PropiedadController@create');
 Route::get('napalm/propiedades/editar/{idPropiedad}','PropiedadController@edit');
+//mantenedores
+//tipos usuarios
+Route::get('napalm/tipos_usuarios','TipoUsuarioController@index');
 //maps
 Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
@@ -49,4 +52,10 @@ Route::resource('mantenedor-propiedades','PropiedadController');
 Route::delete('mantenedor-propiedades/{idProyecto}',array(
     'uses'=>'PropiedadController@destroy',
     'as'=>'mantenedor-propiedades.delete'
+));
+//crud tipos usuarios
+Route::resource('mantenedor-tipos_usuarios','TipoUsuarioController');
+Route::delete('mantenedor-tipos_usuarios/{idTipoUsuario}',array(
+    'uses'=>'TipoUsuarioController@destroy',
+    'as'=>'mantenedor-tipos_usuarios.delete'
 ));
