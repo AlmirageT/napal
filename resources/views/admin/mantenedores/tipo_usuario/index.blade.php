@@ -29,8 +29,15 @@ Tipos Usuarios
 					      <td>{{ $tipo_usuario->idTipoUsuario }}</td>
 					      <td>{{ $tipo_usuario->nombreTipoUsuario }}</td>
 					      <td>
-					      		<a class="btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_usuario->idTipoUsuario }}">Editar</a>
-	                    		@include('admin.mantenedores.tipo_usuario.destroy')
+					      	<div class="dropdown">
+                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu">
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_usuario->idTipoUsuario }}">Editar</a>
+	                    			@include('admin.mantenedores.tipo_usuario.destroy')
+                                </div>
+                            </div>
 					      </td>
                             @include('admin.mantenedores.tipo_usuario.edit')
 					    </tr>

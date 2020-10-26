@@ -56,40 +56,37 @@
                         <li><a href="{{ asset('napalm/tipos_usuarios') }}"><i class="bx bx-home-alt"></i>Tipo de Usuario</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Persona</a></li>
+                        <li><a href="{{ asset('napalm/tipos_personas') }}"><i class="bx bx-store-alt"></i>Tipo de Persona</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Credito</a></li>
+                        <li><a href="{{ asset('napalm/tipos-creditos') }}"><i class="bx bx-store-alt"></i>Tipo de Credito</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Inversión</a></li>
+                        <li><a href="{{ asset('napalm/tipos_inversiones') }}"><i class="bx bx-store-alt"></i>Tipo de Inversión</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Télefono</a></li>
+                        <li><a href="{{ asset('napalm/tipos_telefonos') }}"><i class="bx bx-store-alt"></i>Tipo de Télefono</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Flexibilidad</a></li>
+                        <li><a href="{{ asset('napalm/tipos_flexibilidades') }}"><i class="bx bx-store-alt"></i>Tipo de Flexibilidad</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Estado</a></li>
+                        <li><a href="{{ asset('napalm/tipos_estados') }}"><i class="bx bx-store-alt"></i>Tipo de Estado</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Documento</a></li>
+                        <li><a href="{{ asset('napalm/tipos-documentos') }}"><i class="bx bx-store-alt"></i>Tipo de Documento</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Credito</a></li>
+                        <li><a href="{{ asset('napalm/tipos-calidades') }}"><i class="bx bx-store-alt"></i>Tipo de Calidad</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Tipo de Calidad</a></li>
+                        <li><a href="{{ asset('napalm/monedas') }}"><i class="bx bx-store-alt"></i>Moneda</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Moneda</a></li>
+                        <li><a href="{{ asset('napalm/idiomas') }}"><i class="bx bx-store-alt"></i>Idioma</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Idioma</a></li>
-                    </ul>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i>Estado</a></li>
+                        <li><a href="{{ asset('napalm/estados') }}"><i class="bx bx-store-alt"></i>Estado</a></li>
                     </ul>
                 </li>
                 <li>
@@ -111,7 +108,7 @@
                         <span>Parametros Generales</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bxs-book"></i> Parametros Generales</a></li>
+                        <li><a href="{{ asset('napalm/parametros-generales') }}"><i class="bx bxs-book"></i> Parametros Generales</a></li>
                     </ul>
                 </li>
                 <!--Link a vista Comunas. -->

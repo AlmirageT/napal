@@ -15,7 +15,7 @@ Propiedades
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+				<table class="table project-list-table table-nowrap table-centered table-borderless">
 				  <thead>
 				    <tr>
 			          <th>ID</th>
@@ -117,8 +117,15 @@ Propiedades
 						      	@endif
 						      </td>
 						      <td>
-						      		<a href="{{ asset('napalm/propiedades/editar') }}/{{ $propiedad->idPropiedad }}" class="btn btn-info">Editar</a>
-		                    		@include('admin.propiedades.destroy')
+						      	<div class="dropdown">
+		                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+		                                <i class="mdi mdi-dots-horizontal font-size-18"></i>
+		                            </a>
+		                            <div class="dropdown-menu dropdown-menu">
+						      			<a href="{{ asset('napalm/propiedades/editar') }}/{{ $propiedad->idPropiedad }}" class="dropdown-item btn btn-info">Editar</a>
+		                    			@include('admin.propiedades.destroy')
+		                            </div>
+		                        </div>
 						      </td>
 						    </tr>
 						@endforeach

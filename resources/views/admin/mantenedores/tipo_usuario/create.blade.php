@@ -1,4 +1,4 @@
-<button class="btn btn-primary" data-toggle="modal" data-target="#create">Agregar Certificaciones <i class="fas fa-plus"></i></button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#create">Agregar Tipo Usuario <i class="fas fa-plus"></i></button>
 
 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="create" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">

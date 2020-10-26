@@ -15,6 +15,9 @@ use App\Region;
 use App\TipoUsuario;
 use App\DireccionUsuario;
 use DB;
+use Illuminate\Support\Facades\Crypt;
+use App\Telefono;
+use App\TipoTelefono;
 
 class UsuarioController extends Controller
 {
@@ -37,7 +40,9 @@ class UsuarioController extends Controller
         $provincias = Provincia::pluck('nombreProvincia','idProvincia');
         $comunas = Comuna::pluck('nombreComuna','idComuna');
         $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
-    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios'));
+        $tipos_telefonos = TipoTelefono::pluck('nombreTipoTelefono','idTipoTelefono');
+
+    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','tipos_telefonos'));
     }
     protected function curls($request)
     {
@@ -91,7 +96,7 @@ class UsuarioController extends Controller
                 $usuario->rut = $request->rut;
                 $usuario->correo = $request->correo;
                 $usuario->idAvatar = $id_avatar;
-                $usuario->password = bcrypt($request->password);
+                $usuario->password = Crypt::encrypt($request->password);
                 $usuario->profesion = $request->profesion;
                 $usuario->tokenCorto = uniqid();
                 $usuario->activarCuenta = 0;
@@ -119,6 +124,12 @@ class UsuarioController extends Controller
                 $direccionUsuario->poi = $geoHash[0]->geoHash;
                 $direccionUsuario->save();
 
+                $telefono = new Telefono();
+                $telefono->idUsuario = $usuario->idUsuario;
+                $telefono->numero = $request->numero;
+                $telefono->idTipoTelefono = $request->idTipoTelefono;
+                $telefono->save();
+
                 toastr()->success('Agregado Correctamente', 'El usuario: '.$request->nombre.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::to('napalm/usuarios');
@@ -140,8 +151,9 @@ class UsuarioController extends Controller
         $comunas = Comuna::pluck('nombreComuna','idComuna');
         $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
         $direccion_usuario = DireccionUsuario::where('idUsuario',$idUsuario)->first();
-
-        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','direccion_usuario'));
+        $tipos_telefonos = TipoTelefono::pluck('nombreTipoTelefono','idTipoTelefono');
+        $telefono = Telefono::where('idUsuario',$idUsuario)->first(); 
+        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','direccion_usuario','tipos_telefonos','telefono'));
     }
     public function update(Request $request, $idUsuario)
     {
@@ -189,6 +201,12 @@ class UsuarioController extends Controller
                 $geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
                 $direccionUsuario->poi = $geoHash[0]->geoHash;
                 $direccionUsuario->save();
+
+                $telefono = Telefono::where('idUsuario',$idUsuario)->first();
+                $telefono->idUsuario = $idUsuario;
+                $telefono->numero = $request->numero;
+                $telefono->idTipoTelefono = $request->idTipoTelefono;
+                $telefono->save();
 
                 toastr()->success('Actualizado Correctamente', 'El usuario: '.$request->nombre.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();

@@ -53,7 +53,7 @@ Crear Usuario
 						<div class="col-12">
 							<div class="form-group">
 								<label>Foto Perfil</label>
-								<input type="file" name="avatar" class="form-control" onchange="onFileSelected(event)">
+								<input type="file" name="avatar" class="form-control" required onchange="onFileSelected(event)">
 							</div>
 						</div>
 						<div class="col-12">
@@ -143,6 +143,20 @@ Crear Usuario
 								<label>Tipo Usuario</label>
 								{!! Form::select('idTipoUsuario', $tipos_usuarios,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
 								
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Télefono</label>
+								{!! Form::number('numero',null,['class'=>"form-control",'required','placeholder'=>"9 87654321"]) !!}
+
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Tipo de Télefono</label>
+								{!! Form::select('idTipoTelefono', $tipos_telefonos,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo de telefono",'required']) !!}
+
 							</div>
 						</div>
 					</div>

@@ -145,6 +145,20 @@ Crear Usuario
 								
 							</div>
 						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Télefono</label>
+								{!! Form::number('numero',$telefono->numero,['class'=>"form-control",'required','placeholder'=>"9 87654321"]) !!}
+
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label>Tipo de Télefono</label>
+								{!! Form::select('idTipoTelefono', $tipos_telefonos,$telefono->idTipoTelefono,['class'=>"form-control",'placeholder'=>"Ingrese tipo de telefono",'required']) !!}
+
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="card-footer">
