@@ -14,6 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//reenvio de msj
+Route::post('/vaes', 'LoginController@reenviarSMS');
+//errores
+Route::get('notificacion/cuentaYaActivada', 'ActivarCuentaController@cuentaYaActivada');
+Route::get('notificacion/cuentaActivadaCorrectamente', 'ActivarCuentaController@cuentaActivadaCorrectamente');
+Route::get('notificacion/cuentaNoEncontrada', 'ActivarCuentaController@cuentaNoEncontrada');
+Route::get('notificacion/errorInterno', 'ActivarCuentaController@errorInterno');
+
 //registrarse como usuario
 Route::resource('registro', 'RegistroController');
 //login
@@ -26,6 +34,7 @@ Route::get('napalm/home','HomeController@home');
 Route::get('napalm/usuarios', 'UsuarioController@index');
 Route::get('napalm/usuarios/create', 'UsuarioController@create');
 Route::get('napalm/usuarios/editar/{idUsuario}','UsuarioController@edit');
+Route::get('napalm/usuarios/telefonos/{idUsuario}','TelefonoController@create');
 //rutas vistas proyectos admin
 Route::get('napalm/proyectos','ProyectoController@index');
 Route::get('napalm/proyectos/create','ProyectoController@create');
@@ -59,6 +68,26 @@ Route::get('napalm/monedas','MonedaController@index');
 Route::get('napalm/idiomas','IdiomaController@index');
 //estados
 Route::get('napalm/estados','EstadoController@index');
+//subir documentos
+Route::get('napalm/subir-documentos/create/{idPropiedad}','DocumentoController@create');
+//ver documento
+Route::get('napalm/documentos/ver-documento/{idDocumento}','DocumentoController@ver_pdf');
+//transacciones
+//ingresos
+Route::get('napalm/ingresos','TrxIngresoController@index');
+Route::get('napalm/ingresos/detalles/{idTrxIngreso}','TrxIngresoController@detalle');
+//egresos
+Route::get('napalm/egresos','TrxEgresoController@index');
+Route::get('napalm/egresos/detalles/{idTrxEgreso}','TrxEgresoController@detalle');
+//destino egresos
+Route::get('napalm/destinos-egresos','DestinoEgresoController@index');
+Route::get('napalm/destinos-egresos/detalles/{idTrxEgreso}','DestinoEgresoController@detalle');
+//busqueda en tiempo real para datatable ingresos
+Route::post('buscador-prueba','BusquedaController@busqueda_ingresos');
+//busqueda en tiempo real para datatable de egresos
+Route::post('buscador-egresos','BusquedaController@busqueda_egresos');
+//busqueda en tiempo real para datatabla de destino degresos
+Route::post('buscador-destinos-egresos','BusquedaController@busqueda_destino_egreso');
 //maps
 Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
@@ -161,4 +190,16 @@ Route::resource('mantenedor-parametros-generales','ParametroGeneralController');
 Route::delete('mantenedor-parametros-generales/{idParametroGeneral}',array(
     'uses'=>'ParametroGeneralController@destroy',
     'as'=>'mantenedor-parametros-generales.delete'
+));
+//crud documentos
+Route::resource('mantenedor-documentos','DocumentoController');
+Route::delete('mantenedor-documentos/{idDocumento}',array(
+    'uses'=>'DocumentoController@destroy',
+    'as'=>'mantenedor-documentos.delete'
+));
+//crud telefonos
+Route::resource('mantenedor-telefonos','TelefonoController');
+Route::delete('mantenedor-telefonos/{idTelefono}',array(
+    'uses'=>'TelefonoController@destroy',
+    'as'=>'mantenedor-telefonos.delete'
 ));

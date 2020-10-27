@@ -12,6 +12,7 @@ class Documento extends Model
     	'nombreDocumento',
     	'rutaDocumento',
     	'idTipoDocumento',
-    	'idPropiedad'
+    	'idPropiedad',
+    	'notas'
     ];
 }

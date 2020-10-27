@@ -124,6 +124,7 @@ Propiedades
 		                            <div class="dropdown-menu dropdown-menu">
 						      			<a href="{{ asset('napalm/propiedades/editar') }}/{{ $propiedad->idPropiedad }}" class="dropdown-item btn btn-info">Editar</a>
 		                    			@include('admin.propiedades.destroy')
+		                    			<a href="{{ asset('napalm/subir-documentos/create') }}/{{ $propiedad->idPropiedad }}" class="dropdown-item">Documentos</a>
 		                            </div>
 		                        </div>
 						      </td>

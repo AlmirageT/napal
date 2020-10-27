@@ -14,149 +14,135 @@ Crear Usuario
         	@csrf
 				<div class="card-body">
 					<div class="row">
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Nombre</label>
 								{!!Form::text('nombre',$usuario->nombre,['class'=>"form-control", 'placeholder'=>"Ingrese sus nombres" , 'required'])!!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Apellidos</label>
 								{!! Form::text('apellido',$usuario->apellido,['class'=>"form-control", 'placeholder'=>"Ingrese sus apellidos", 'required']) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Correo</label>
 								{!! Form::email('correo',$usuario->correo,['class'=>"form-control", 'placeholder'=>"ejemplo@ejemplo.com", 'required']) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Rut</label>
 								{!! Form::text('rut',$usuario->rut,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','onchange'=>"formateaRut(this.value)", 'id'=>"rut"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Contraseña</label>
 								<input type="password" name="password" class="form-control" placeholder="*********" required>
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Confirmar Contraseña</label>
 								<input type="password" name="confirm_password" class="form-control" placeholder="*********" required>
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Perfil</label>
 								<input type="file" name="avatar" class="form-control" onchange="onFileSelected(event)">
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<img id="myimage" src="{{ asset($avatar->rutaAvatar) }}" height="200">
 							</div>					
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Profesión</label>
 								{!! Form::text('profesion',$usuario->profesion,['class'=>"form-control",'placeholder'=>"Ingrese la profesión",'required']) !!}
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Pais</label>
 								{!! Form::select('idPais', $paises,$direccion_usuario->idPais,['class'=>"form-control",'placeholder'=>"Ingrese el pais de residencia",'required','id'=>"paises", 'onchange'=>"sacarRegionPorPais(this.value)"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Región</label>
 								{!! Form::select('idRegion', $regiones,$direccion_usuario->idRegion,['class'=>"form-control",'placeholder'=>"Seleccione una region",'required','id'=>"select_regiones", 'onchange'=>"sacarProvinciaPorRegion(this.value)"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Provincia</label>
 								{!! Form::select('idProvincia', $provincias,$direccion_usuario->idProvincia,['class'=>"form-control",'placeholder'=>"Seleccione una provincia",'required','id'=>"select_provincias", 'onchange'=>"sacarComunaPorProvincia(this.value)"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Comuna</label>
 								{!! Form::select('idComuna', $comunas,$direccion_usuario->idComuna,['class'=>"form-control",'placeholder'=>"Seleccione una comuna",'required','id'=>"select_comunas"]) !!}
 
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Dirección 1</label>
 								{!! Form::text('direccion1',$direccion_usuario->direccion1,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','id'=>"txtDireccion"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Número</label>
 								{!! Form::text('direccion2',$direccion_usuario->direccion2,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','id'=>"txtNumero"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Código postal</label>
 								{!! Form::text('codigoPostal',$direccion_usuario->codigoPostal,['class'=>"form-control",'placeholder'=>"Ingrese el código postal",'required']) !!}
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div id="map" style="width: 100%; height: 300px"></div>
 							<br>
 						</div>
-						<div class="col-6">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Latitud</label>
 								{!! Form::text('latitud',$direccion_usuario->latitud,['class'=>"form-control",'required','id'=>"latitud"]) !!}
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Longitud</label>
 								{!! Form::text('longitud',$direccion_usuario->longitud,['class'=>"form-control",'required','id'=>"longitud"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Idioma</label>
 								{!! Form::select('idIdioma', $idiomas,$usuario->idIdioma,['class'=>"form-control",'placeholder'=>"Ingrese el idioma",'required']) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Persona</label>
 								{!! Form::select('idTipoPersona', $tipos_personas,$usuario->idTipoPersona,['class'=>"form-control",'placeholder'=>"Ingrese tipo persona",'required']) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Usuario</label>
 								{!! Form::select('idTipoUsuario', $tipos_usuarios,$usuario->idTipoUsuario,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
 								
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Télefono</label>
-								{!! Form::number('numero',$telefono->numero,['class'=>"form-control",'required','placeholder'=>"9 87654321"]) !!}
-
-							</div>
-						</div>
-						<div class="col-6">
-							<div class="form-group">
-								<label>Tipo de Télefono</label>
-								{!! Form::select('idTipoTelefono', $tipos_telefonos,$telefono->idTipoTelefono,['class'=>"form-control",'placeholder'=>"Ingrese tipo de telefono",'required']) !!}
-
 							</div>
 						</div>
 					</div>

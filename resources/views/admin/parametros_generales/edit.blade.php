@@ -12,13 +12,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label for="">Nombre parametro general</label>
                             {!!Form::text('nombreParametroGeneral',$parametro_general->nombreParametroGeneral,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label for="">Valor parametro general</label>
                             {!!Form::text('valorParametroGeneral',$parametro_general->valorParametroGeneral,['class'=>"form-control", 'placeholder'=>"Ingrese un valor..." , 'required'])!!}

@@ -14,77 +14,77 @@ Crear Proyecto
         	@csrf
 				<div class="card-body">
 					<div class="row">
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Nombre</label>
 								{!!Form::text('nombreProyecto',null,['class'=>"form-control", 'placeholder'=>"Ingrese nombre del proyecto" , 'required'])!!}
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Portada</label>
 								<input type="file" required name="fotoPortada" class="form-control" onchange="onFileSelected(event)">
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<img id="myimage" height="200">
 							</div>					
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Pais</label>
 								{!! Form::select('idPais', $paises,null,['class'=>"form-control",'placeholder'=>"Seleccione pais",'required','id'=>"paises", 'onchange'=>"sacarRegionPorPais(this.value)"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Región</label>
 								{!! Form::select('idRegion', $regiones,null,['class'=>"form-control",'placeholder'=>"Seleccione una region",'required','id'=>"select_regiones", 'onchange'=>"sacarProvinciaPorRegion(this.value)"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Provincia</label>
 								{!! Form::select('idProvincia', $provincias,null,['class'=>"form-control",'placeholder'=>"Seleccione una provincia",'required','id'=>"select_provincias", 'onchange'=>"sacarComunaPorProvincia(this.value)"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Comuna</label>
 								{!! Form::select('idComuna', $comunas,null,['class'=>"form-control",'placeholder'=>"Seleccione una comuna",'required','id'=>"select_comunas"]) !!}
 
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Dirección</label>
 								{!! Form::text('direccion',null,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','id'=>"txtDireccion"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Número</label>
 								{!! Form::text('numeracionProyecto',null,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','id'=>"txtNumero"]) !!}
 							</div>
 						</div>
-						<div class="col-4">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Código postal</label>
 								{!! Form::text('codigoPostal',null,['class'=>"form-control",'placeholder'=>"Ingrese el código postal",'required']) !!}
 							</div>
 						</div>
-						<div class="col-12">
+						<div class="col-lg-12">
 							<div id="map" style="width: 100%; height: 300px"></div>
 							<br>
 						</div>
-						<div class="col-6">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Latitud</label>
 								{!! Form::text('latitud',null,['class'=>"form-control",'required','id'=>"latitud"]) !!}
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Longitud</label>
 								{!! Form::text('longitud',null,['class'=>"form-control",'required','id'=>"longitud"]) !!}

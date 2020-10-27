@@ -80,6 +80,7 @@ Usuarios
                                 <div class="dropdown-menu dropdown-menu">
                                 	<a href="{{ asset('napalm/usuarios/editar') }}/{{ $usuario->idUsuario }}" class="dropdown-item btn btn-info">Editar</a>
 	                    			@include('admin.usuarios.destroy')
+	                    			<a href="{{ asset('napalm/usuarios/telefonos') }}/{{ $usuario->idUsuario }}" class="dropdown-item btn btn-info">Telefonos</a>
                                 </div>
                             </div>
 					      </td>

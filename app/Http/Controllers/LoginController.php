@@ -9,7 +9,11 @@ use Session;
 use App\Usuario;
 use App\Avatar;
 use Illuminate\Support\Facades\Crypt;
-
+use App\Helpers\Mensajeria;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LoginController extends Controller
 {
@@ -86,4 +90,27 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+    public function reenviarSMS(Request $request) {
+
+        try {
+            if ($request->ajax()) {
+                $numero = Crypt::decrypt($request->numero);
+                $usuario = Usuario::where('numero', $numero)->firstOrFail();
+
+                $enviar = Mensajeria::sendSMS();
+                $enviar['cliente']->messages->create('+56' . $numero,
+                    [
+                        'from' => $enviar['numero'],
+                        'body' => 'Para activar tu cuenta isbast haz clic en el siguiente link ' . asset('/api/activarCuentaSMS?tsms=') . $usuario->idUsuario
+                    ]);
+
+                return response()->json(['status' => true, 'message' => 'SMS enviado correctamente'], 200);
+            }
+
+        } catch (DecryptException $e) {
+            toastr()->error('Numero incorrecto');
+            return response()->json(['status' => false, 'message' => 'No se envio el SMS o error de numero'], 401);
+        }
+    }
+
 }

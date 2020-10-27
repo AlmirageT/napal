@@ -18,6 +18,9 @@ use DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Telefono;
 use App\TipoTelefono;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsuarioController extends Controller
 {
@@ -39,10 +42,8 @@ class UsuarioController extends Controller
         $regiones = Region::pluck('nombreRegion','idRegion');
         $provincias = Provincia::pluck('nombreProvincia','idProvincia');
         $comunas = Comuna::pluck('nombreComuna','idComuna');
-        $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
-        $tipos_telefonos = TipoTelefono::pluck('nombreTipoTelefono','idTipoTelefono');
 
-    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','tipos_telefonos'));
+    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas'));
     }
     protected function curls($request)
     {
@@ -124,18 +125,24 @@ class UsuarioController extends Controller
                 $direccionUsuario->poi = $geoHash[0]->geoHash;
                 $direccionUsuario->save();
 
-                $telefono = new Telefono();
-                $telefono->idUsuario = $usuario->idUsuario;
-                $telefono->numero = $request->numero;
-                $telefono->idTipoTelefono = $request->idTipoTelefono;
-                $telefono->save();
-
                 toastr()->success('Agregado Correctamente', 'El usuario: '.$request->nombre.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::to('napalm/usuarios');
-        } catch (Exception $e) {
+        } catch (ModelNotFoundException $e) {
+            toastr()->warning('No autorizado');
             DB::rollback();
-            toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
+            return back();
+        } catch (QueryException $e) {
+            toastr()->warning('Ha ocurrido un error, favor intente nuevamente' . $e->getMessage());
+            DB::rollback();
+            return back();
+        } catch (DecryptException $e) {
+            toastr()->info('Ocurrio un error al intentar acceder al recurso solicitado');
+            DB::rollback();
+            return back();
+        } catch (Exception $e) {
+            DB::rollback();         
+            toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
     }
@@ -151,9 +158,8 @@ class UsuarioController extends Controller
         $comunas = Comuna::pluck('nombreComuna','idComuna');
         $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
         $direccion_usuario = DireccionUsuario::where('idUsuario',$idUsuario)->first();
-        $tipos_telefonos = TipoTelefono::pluck('nombreTipoTelefono','idTipoTelefono');
-        $telefono = Telefono::where('idUsuario',$idUsuario)->first(); 
-        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','direccion_usuario','tipos_telefonos','telefono'));
+        
+        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','direccion_usuario'));
     }
     public function update(Request $request, $idUsuario)
     {
@@ -202,18 +208,24 @@ class UsuarioController extends Controller
                 $direccionUsuario->poi = $geoHash[0]->geoHash;
                 $direccionUsuario->save();
 
-                $telefono = Telefono::where('idUsuario',$idUsuario)->first();
-                $telefono->idUsuario = $idUsuario;
-                $telefono->numero = $request->numero;
-                $telefono->idTipoTelefono = $request->idTipoTelefono;
-                $telefono->save();
-
                 toastr()->success('Actualizado Correctamente', 'El usuario: '.$request->nombre.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::to('napalm/usuarios');
-        } catch (Exception $e) {
+        } catch (ModelNotFoundException $e) {
+            toastr()->warning('No autorizado');
             DB::rollback();
-            toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
+            return back();
+        } catch (QueryException $e) {
+            toastr()->warning('Ha ocurrido un error, favor intente nuevamente' . $e->getMessage());
+            DB::rollback();
+            return back();
+        } catch (DecryptException $e) {
+            toastr()->info('Ocurrio un error al intentar acceder al recurso solicitado');
+            DB::rollback();
+            return back();
+        } catch (Exception $e) {
+            DB::rollback();         
+            toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
     }
@@ -228,9 +240,22 @@ class UsuarioController extends Controller
             }
             $usuario->delete();
             return redirect::back();
+        } catch (ModelNotFoundException $e) {
+            toastr()->warning('No autorizado');
+            DB::rollback();
+            return back();
+        } catch (QueryException $e) {
+            toastr()->warning('Ha ocurrido un error, favor intente nuevamente' . $e->getMessage());
+            DB::rollback();
+            return back();
+        } catch (DecryptException $e) {
+            toastr()->info('Ocurrio un error al intentar acceder al recurso solicitado');
+            DB::rollback();
+            return back();
         } catch (Exception $e) {
-            toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
-            return redirect::back();      
+            DB::rollback();         
+            toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
+            return redirect::back();
         }
     }
 }

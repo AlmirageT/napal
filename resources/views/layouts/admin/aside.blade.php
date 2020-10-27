@@ -6,7 +6,7 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu Administrador</li>
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="{{ asset('napalm/home') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i><!--</i><span class="badge badge-pill badge-info float-right">03</span>-->
                         <span>Dashboard</span>
                     </a>
@@ -43,9 +43,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/propiedades') }}"><i class="bx bx-home-alt"></i> Propiedades</a></li>
                     </ul>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bx-store-alt"></i> Tienda</a></li>
-                    </ul>
+                   {{--  <ul class="sub-menu" aria-expanded="false">
+                                                                                                    <li><a href=""><i class="bx bx-store-alt"></i> Tienda</a></li>
+                                                                                                </ul> --}}
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -92,16 +92,28 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-newspaper"></i>
-                        <span>Fidelizador</span>
+                        <span>Transacciones</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="far fa-newspaper"></i> Noticias</a></li>
+                        <li><a href="{{ asset('napalm/ingresos') }}"><i class="far fa-newspaper"></i> Ingresos</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="fas fa-align-justify"></i>Testimonios</a></li>
+                        <li><a href="{{ asset('napalm/egresos') }}"><i class="fas fa-align-justify"></i> Egresos</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/destinos-egresos') }}"><i class="fas fa-align-justify"></i> Destinos Egresos</a></li>
                     </ul>
                 </li>
                 <!--Link a vista parametros generales. -->
+                {{-- <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-help-circle"></i>
+                        <span>Documentos</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/subir-documentos') }}"><i class="bx bxs-home"></i> Subir Documento</a></li>
+                    </ul>
+                </li> --}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-book"></i>
@@ -115,25 +127,23 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-city"></i>
-                        <span>Comunas</span>
+                        <span>Ubicación</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bxs-city"></i> Paises</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bxs-city"></i> Regiones</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href=""><i class="bx bxs-city"></i> Provincias</a></li>
+                    </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href=""><i class="bx bxs-city"></i> Comunas</a></li>
                     </ul>
                 </li>
                 <!--Link a vista Configuracion -> notarias, empresas -->
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-help-circle"></i>
-                        <span>Configuracion</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bxs-home"></i> Notarias</a></li>
-                    </ul>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="far fa-building"></i>Empresas</a></li>
-                    </ul>
-                </li>
+                
 
                 <!--Link Empresas -->
                 

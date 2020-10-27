@@ -10,6 +10,9 @@ use App\Provincia;
 use App\Region;
 use App\Proyecto;
 use DB;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProyectoController extends Controller
 {
@@ -49,11 +52,23 @@ class ProyectoController extends Controller
 	            toastr()->success('Agregado Correctamente', 'El proyecto: '.$request->nombreProyecto.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::to('napalm/proyectos');
-    	} catch (Exception $e) {
+    	} catch (ModelNotFoundException $e) {
+            toastr()->warning('No autorizado');
             DB::rollback();
-            toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
+            return back();
+        } catch (QueryException $e) {
+            toastr()->warning('Ha ocurrido un error, favor intente nuevamente' . $e->getMessage());
+            DB::rollback();
+            return back();
+        } catch (DecryptException $e) {
+            toastr()->info('Ocurrio un error al intentar acceder al recurso solicitado');
+            DB::rollback();
+            return back();
+        } catch (Exception $e) {
+            DB::rollback();         
+            toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
-    	}
+        }
     }
     public function edit($idProyecto)
     {
@@ -90,9 +105,21 @@ class ProyectoController extends Controller
                 toastr()->success('Actualizado Correctamente', 'El proyecto: '.$request->nombreProyecto.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::to('napalm/proyectos');
-        } catch (Exception $e) {
+        } catch (ModelNotFoundException $e) {
+            toastr()->warning('No autorizado');
             DB::rollback();
-            toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
+            return back();
+        } catch (QueryException $e) {
+            toastr()->warning('Ha ocurrido un error, favor intente nuevamente' . $e->getMessage());
+            DB::rollback();
+            return back();
+        } catch (DecryptException $e) {
+            toastr()->info('Ocurrio un error al intentar acceder al recurso solicitado');
+            DB::rollback();
+            return back();
+        } catch (Exception $e) {
+            DB::rollback();         
+            toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
     }
@@ -108,10 +135,22 @@ class ProyectoController extends Controller
 	            $proyecto->delete();
     		DB::commit();
             return redirect::to('napalm/proyectos');
-    	} catch (Exception $e) {
-    		DB::rollback();
-    		toastr()->error('Ha surgido un error inesperado', $e, ['timeOut' => 9000]);
+    	} catch (ModelNotFoundException $e) {
+            toastr()->warning('No autorizado');
+            DB::rollback();
+            return back();
+        } catch (QueryException $e) {
+            toastr()->warning('Ha ocurrido un error, favor intente nuevamente' . $e->getMessage());
+            DB::rollback();
+            return back();
+        } catch (DecryptException $e) {
+            toastr()->info('Ocurrio un error al intentar acceder al recurso solicitado');
+            DB::rollback();
+            return back();
+        } catch (Exception $e) {
+            DB::rollback();         
+            toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
-    	}
+        }
     }
 }

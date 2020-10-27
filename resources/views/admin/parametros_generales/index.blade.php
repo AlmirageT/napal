@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-Estados
+Parametros Generales
 @endsection
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@ Estados
 		<div class="card-header">
 			<div class="row">
 				<div class="col-12" align="center">
-					<h3>Estados</h3> 
+					<h3>Parametros Generales</h3> 
 				</div>
 			</div>
 			@include('admin.parametros_generales.create')
