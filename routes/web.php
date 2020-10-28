@@ -88,6 +88,17 @@ Route::post('buscador-prueba','BusquedaController@busqueda_ingresos');
 Route::post('buscador-egresos','BusquedaController@busqueda_egresos');
 //busqueda en tiempo real para datatabla de destino degresos
 Route::post('buscador-destinos-egresos','BusquedaController@busqueda_destino_egreso');
+//ubicaciones
+//paises
+Route::get('napalm/paises','PaisController@index');
+//regiones
+Route::get('napalm/regiones','RegionController@index');
+//provincias
+Route::get('napalm/provincias','ProvinciaController@index');
+//comunas
+Route::get('napalm/comunas','ComunaController@index');
+//imagenes carrusel
+Route::get('napalm/imagenes-carrusel','ImagenesCarruselController@index');
 //maps
 Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
@@ -202,4 +213,28 @@ Route::resource('mantenedor-telefonos','TelefonoController');
 Route::delete('mantenedor-telefonos/{idTelefono}',array(
     'uses'=>'TelefonoController@destroy',
     'as'=>'mantenedor-telefonos.delete'
+));
+//crud paises
+Route::resource('mantenedor-paises','PaisController');
+Route::delete('mantenedor-paises/{idPais}',array(
+    'uses'=>'PaisController@destroy',
+    'as'=>'mantenedor-paises.delete'
+));
+//crud regiones
+Route::resource('mantenedor-regiones','RegionController');
+Route::delete('mantenedor-regiones/{idRegion}',array(
+    'uses'=>'RegionController@destroy',
+    'as'=>'mantenedor-regiones.delete'
+));
+//crud provincias
+Route::resource('mantenedor-provincias','ProvinciaController');
+Route::delete('mantenedor-provincias/{idProvincia}',array(
+    'uses'=>'ProvinciaController@destroy',
+    'as'=>'mantenedor-provincias.delete'
+));
+//crud comunas
+Route::resource('mantenedor-comunas','ComunaController');
+Route::delete('mantenedor-comunas/{idComuna}',array(
+    'uses'=>'ComunaController@destroy',
+    'as'=>'mantenedor-comunas.delete'
 ));

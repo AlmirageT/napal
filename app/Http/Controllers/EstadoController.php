@@ -18,6 +18,7 @@ class EstadoController extends Controller
     {
     	$estados = Estado::select('*')
     	->join('tipos_estados','estados.idTipoEstado','=','tipos_estados.idTipoEstado')
+        ->orderBy('estados.idEstado','DESC')
     	->get(); 
     	$tipos_estados = TipoEstado::pluck('nombreTipoEstado','idTipoEstado');
     	return view('admin.mantenedores.estado.index',compact('estados','tipos_estados'));

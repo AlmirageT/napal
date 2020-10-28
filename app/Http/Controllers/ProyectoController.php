@@ -23,6 +23,7 @@ class ProyectoController extends Controller
         ->join('regiones','proyectos.idRegion','=','regiones.idRegion')
         ->join('provincias','proyectos.idProvincia','=','provincias.idProvincia')
         ->join('comunas','proyectos.idComuna','=','comunas.idComuna')
+        ->orderBy('proyectos.idProyecto','DESC')
         ->get();
     	return view('admin.proyectos.index',compact('proyectos'));
     }

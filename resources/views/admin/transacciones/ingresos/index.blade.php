@@ -3,22 +3,20 @@
 Trx Ingresos
 @endsection
 @section('content')
-<div class="container">
-	<div class="card">
-		<div class="card-header">
-			<div class="row">
-				<div class="col-12" align="center">
-					<h3>Trx Ingresos</h3> 
-				</div>
-			</div>
-		</div>
-		<div class="card-body">
+<div class="row">
+	<div class="col-lg-12" align="center">
+		<h3>Trx Ingresos</h3> 
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="">
 			<div class="app-search d-none d-lg-block">
-                <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="Buscador..." id="caja_busqueda" onchange="buscar_datos(this.value)">
-                    <span class="bx bx-search-alt"></span>
-                </div>
-        	</div>
+		        <div class="position-relative">
+		            <input type="text" class="form-control" placeholder="Buscador..." id="caja_busqueda" onchange="buscar_datos(this.value)">
+		            <span class="bx bx-search-alt"></span>
+		        </div>
+			</div>
 			<div class="table-responsive">
 				<table class="table project-list-table table-nowrap table-centered table-borderless" id="datos">
 				  <thead>
@@ -51,13 +49,13 @@ Trx Ingresos
 					      <td>{{ $ingreso->nombreTipoMedioPago }}</td>
 					      <td>
 					      	<div class="dropdown">
-                                <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-horizontal font-size-18"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning">Ver Detalles</a>
-                                </div>
-                            </div>
+		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
+		                        </a>
+		                        <div class="dropdown-menu dropdown-menu">
+					      			<a href="{{ asset('napalm/ingresos/detalles') }}/{{ $ingreso->idTrxIngreso }}" class="dropdown-item btn btn-warning">Ver Detalles</a>
+		                        </div>
+		                    </div>
 					      </td>
 					    </tr>
 					@endforeach
@@ -65,9 +63,6 @@ Trx Ingresos
 				</table>
 				{{ $ingresos->links() }}
 			</div>
-		</div>
-		<div class="card-footer">
-			
 		</div>
 	</div>
 </div>

@@ -29,6 +29,7 @@ class DestinoEgresoController extends Controller
     	->join('estados','destinos_egresos.idEstado','=','estados.idEstado')
     	->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
     	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
+        ->join('monedas','trx_egresos.idMoneda','=','monedas.idMoneda')
     	->where('destinos_egresos.idDestinoEgreso',$idDestinoEgreso)
     	->first();
     	return view('admin.transacciones.destinos_egresos.factura',compact('destino_egreso'));

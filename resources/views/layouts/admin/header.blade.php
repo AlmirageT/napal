@@ -27,6 +27,7 @@
             </button>
 
             <!-- App Search-->
+            {{--  
             <form class="app-search d-none d-lg-block">
                 <div class="position-relative">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -174,10 +175,11 @@
                         <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle mr-1"></i> hola</a>
                 </div>
             </div>
+            --}}
         </div>
 
         <div class="d-flex">
-
+            {{--  
             <div class="dropdown d-inline-block d-lg-none ml-2">
                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -198,6 +200,7 @@
                     </form>
                 </div>
             </div>
+            --}}
 
             <!--<div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect"
@@ -285,7 +288,7 @@
                     <i class="bx bx-fullscreen"></i>
                 </button>
             </div>-->
-
+            {{--  
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -372,6 +375,7 @@
                     </div>
                 </div>
             </div>
+            --}}
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -394,11 +398,11 @@
                     </form>
                 </div>
             </div>
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="bx bx-cog bx-spin"></i>
-                </button>
-            </div>
+           {{-- <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                        <i class="bx bx-cog bx-spin"></i>
+                    </button>
+                </div> --}}
         </div>
     </div>
 </header>

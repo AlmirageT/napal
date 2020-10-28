@@ -39,6 +39,7 @@ class PropiedadController extends Controller
     	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
     	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
     	->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+        ->orderBy('propiedades.idPropiedad','DESC')
     	->get();
     	return view('admin.propiedades.index',compact('propiedades'));
     }

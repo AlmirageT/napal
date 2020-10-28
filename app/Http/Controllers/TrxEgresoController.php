@@ -21,6 +21,12 @@ class TrxEgresoController extends Controller
     }
     public function detalle($idTrxEgreso)
     {
-        # code...
+        $egreso = TrxEgresos::select('*')
+        ->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
+        ->join('monedas','trx_egresos.idMoneda','=','monedas.idMoneda')
+        ->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
+        ->where('trx_egresos.idTrxEgreso',$idTrxEgreso)
+        ->first();
+        return view('admin.transacciones.egresos.factura',compact('egreso'));
     }
 }

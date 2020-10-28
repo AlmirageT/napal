@@ -31,6 +31,7 @@ class UsuarioController extends Controller
         ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
         ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
         //->join('direcciones_usuarios','usuarios.idUsuario','=','direcciones_usuarios.idUsuario')
+        ->orderBy('usuarios.idUsuario','DESC')
         ->get();
     	return view('admin.usuarios.index',compact('usuarios'));
     }
@@ -42,8 +43,9 @@ class UsuarioController extends Controller
         $regiones = Region::pluck('nombreRegion','idRegion');
         $provincias = Provincia::pluck('nombreProvincia','idProvincia');
         $comunas = Comuna::pluck('nombreComuna','idComuna');
+        $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
 
-    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas'));
+    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios'));
     }
     protected function curls($request)
     {

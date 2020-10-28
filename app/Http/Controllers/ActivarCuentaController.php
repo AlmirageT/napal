@@ -7,8 +7,9 @@ use App\Usuario;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 use Validator;
+use App\Mail\TokenConfirmacion;
 
 class ActivarCuentaController extends Controller
 {

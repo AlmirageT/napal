@@ -9,6 +9,7 @@ class Comuna extends Model
     protected $table = 'comunas';
     protected $primaryKey = 'idComuna';
     protected $fillable = [
-    	'nombreComuna'
+    	'nombreComuna',
+    	'idProvincia'
     ];
 }

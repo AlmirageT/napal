@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use DB;
-use Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Crypt;
-use App\ParametroGeneral;
-use App\Helpers\Mensajeria;
-use App\Helpers\AvisosHelper;
-use Illuminate\Support\Facades\Mail;
-use App\Telefono;
-use App\Usuario;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Mail\TokenConfirmacion;
+use App\Helpers\Mensajeria;
+use App\ParametroGeneral;
+use App\Telefono;
+use App\Usuario;
+use Mail;
+use DB;
 
 class RegistroController extends Controller
 {
@@ -54,7 +53,6 @@ class RegistroController extends Controller
             $telefono->numero = $request->numero;
             $telefono->idTipoTelefono = 2;
             $telefono->save();
-
             $metodoActivacion = ParametroGeneral::where('nombreParametroGeneral', '=', 'METODO NOTIFICACION ACTIVACION CUENTA')->firstOrFail();
             if ($metodoActivacion->valorParametroGeneral == 1) { // 1 es por SMS; 2 es por correo
                 if ($nuevoUsuario->idUsuario) {
@@ -67,16 +65,17 @@ class RegistroController extends Controller
 
                     DB::commit();
 
-                    return view ('auth.envioToken', compact('request'));
+                    return view('auth.envioToken', compact('request'));
                 }
 
             } else { // sino es 2 (activacion por correo)
-                /*Mail::to($nuevoUsuario->correo)
-                        ->bcc('pauloberrios@gmail.com')
-                        ->send(new ActivarCuentaEmail($datosCorreo));*/
+                $url_token = asset('/api/activarCuentaSMS?tsms=').$nuevoUsuario->tokenCorto;
+                Mail::to($nuevoUsuario->correo)->send(new TokenConfirmacion($url_token,$nuevoUsuario));
                 toastr()->success('Active su cuenta mediante el correo enviado', "Se ha enviado un correo electronico a su email para activar su cuenta", ['positionClass' => 'toast-bottom-right']);
+                DB::commit();
+                
+                return view('auth.envioToken', compact('request'));
             }
-
             DB::commit();
             return redirect('/');
         } catch (QueryException $e) {

@@ -116,9 +116,15 @@ Actualizar Propiedad
 							<div class="form-group">
 								<label>Tiene Chat</label>
 								<br>
+								@if($propiedad->tieneChat == 1)
 								<input type="checkbox" id="switch4" switch="success" checked name="tieneChat" />
                                 <label for="switch4" data-on-label="Si"
                                         data-off-label="No"></label>
+                                @else
+                                <input type="checkbox" id="switch4" switch="success" name="tieneChat" />
+                                <label for="switch4" data-on-label="Si"
+                                        data-off-label="No"></label>
+                                @endif
 							</div>
 						</div>
 						<div class="col-4">

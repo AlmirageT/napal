@@ -116,6 +116,33 @@
                 </li> --}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-city"></i>
+                        <span>Ubicación</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/paises') }}"><i class="bx bxs-city"></i> Paises</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/regiones') }}"><i class="bx bxs-city"></i> Regiones</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/provincias') }}"><i class="bx bxs-city"></i> Provincias</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/comunas') }}"><i class="bx bxs-city"></i> Comunas</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bxs-city"></i>
+                        <span>Carrusel</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/imagenes-carrusel') }}"><i class="bx bxs-city"></i> Imagenes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-book"></i>
                         <span>Parametros Generales</span>
                     </a>
@@ -124,24 +151,7 @@
                     </ul>
                 </li>
                 <!--Link a vista Comunas. -->
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxs-city"></i>
-                        <span>Ubicación</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bxs-city"></i> Paises</a></li>
-                    </ul>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bxs-city"></i> Regiones</a></li>
-                    </ul>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bxs-city"></i> Provincias</a></li>
-                    </ul>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href=""><i class="bx bxs-city"></i> Comunas</a></li>
-                    </ul>
-                </li>
+                
                 <!--Link a vista Configuracion -> notarias, empresas -->
                 
 

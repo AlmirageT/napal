@@ -3,17 +3,15 @@
 Propiedades
 @endsection
 @section('content')
-<div class="container">
-	<div class="card">
-		<div class="card-header">
-			<div class="row">
-				<div class="col-12" align="center">
-					<h3>Propiedades</h3> 
-				</div>
-			</div>
-			<a href="{{ asset('napalm/propiedades/create') }}" class="btn btn-primary">Crear Propiedad</a>
-		</div>
-		<div class="card-body">
+<div class="row">
+	<div class="col-lg-12" align="center">
+		<h3>Propiedades</h3> 
+	</div>
+	<a href="{{ asset('napalm/propiedades/create') }}" class="btn btn-primary">Crear Propiedad</a>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="">
 			<div class="table-responsive">
 				<table class="table project-list-table table-nowrap table-centered table-borderless">
 				  <thead>
@@ -134,14 +132,6 @@ Propiedades
 				</table>
 			</div>
 		</div>
-		<div class="card-footer">
-			
-		</div>
 	</div>
 </div>
-@endsection
-@section('scripts')
-<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>    
 @endsection

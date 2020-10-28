@@ -23,6 +23,14 @@ class TrxIngresoController extends Controller
     }
     public function detalle($idTrxIngreso)
     {
-        # code...
+        $ingreso = TrxIngreso::select('*')
+        ->join('usuarios','trx_ingresos.idUsuario','=','usuarios.idUsuario')
+        ->join('monedas','trx_ingresos.idMoneda','=','monedas.idMoneda')
+        ->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
+        ->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
+        ->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
+        ->where('trx_ingresos.idTrxIngreso',$idTrxIngreso)
+        ->first();
+        return view('admin.transacciones.ingresos.factura',compact('ingreso'));
     }
 }

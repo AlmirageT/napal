@@ -60,7 +60,7 @@ class BusquedaController extends Controller
 	                                    <i class='mdi mdi-dots-horizontal font-size-18'></i>
 	                                </a>
 	                                <div class='dropdown-menu dropdown-menu'>
-						      			<a class='dropdown-item btn btn-warning'>Ver Detalles</a>
+						      			<a href='".asset('napalm/ingresos/detalles')."/".$ingreso->idTrxIngreso."' class='dropdown-item btn btn-warning'>Ver Detalles</a>
 	                                </div>
 	                            </div>
 						      </td>
@@ -118,7 +118,7 @@ class BusquedaController extends Controller
                                     <i class='mdi mdi-dots-horizontal font-size-18'></i>
                                 </a>
                                 <div class='dropdown-menu dropdown-menu'>
-					      			<a class='dropdown-item btn btn-warning'>Ver Detalles</a>
+					      			<a href='".asset('napalm/egresos/detalles')."/".$egreso->idTrxEgreso."' class='dropdown-item btn btn-warning'>Ver Detalles</a>
                                 </div>
                             </div>
 					      </td>
@@ -187,7 +187,7 @@ class BusquedaController extends Controller
                                     <i class='mdi mdi-dots-horizontal font-size-18'></i>
                                 </a>
                                 <div class='dropdown-menu dropdown-menu'>
-					      			<a class='dropdown-item btn btn-warning'>Ver Detalles</a>
+					      			<a href='".asset('napalm/destinos-egresos/detalles')."/".$destino_egreso->idTrxEgreso."' class='dropdown-item btn btn-warning'>Ver Detalles</a>
                                 </div>
                             </div>
 					      </td>
