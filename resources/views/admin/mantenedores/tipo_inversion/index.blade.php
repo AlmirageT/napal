@@ -22,17 +22,17 @@ Tipos Inversiones
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($tipos_inversiones as $tipo_inversion)
+				  	@foreach($tiposInversiones as $tipoInversion)
 					    <tr>
-					      <td>{{ $tipo_inversion->idTipoInversion }}</td>
-					      <td>{{ $tipo_inversion->nombreTipoInversion }}</td>
+					      <td>{{ $tipoInversion->idTipoInversion }}</td>
+					      <td>{{ $tipoInversion->nombreTipoInversion }}</td>
 					      <td>
 					      	<div class="dropdown">
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
 		                        <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_inversion->idTipoInversion }}">Editar</a>
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipoInversion->idTipoInversion }}">Editar</a>
 
 		                			@include('admin.mantenedores.tipo_inversion.destroy')
 		                        </div>

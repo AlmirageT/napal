@@ -14,15 +14,15 @@ class TipoDocumentoController extends Controller
 {
     public function index()
     {
-    	$tipos_documentos = TipoDocumento::all();
-    	return view('admin.mantenedores.tipo_documento.index',compact('tipos_documentos'));
+    	$tiposDocumentos = TipoDocumento::all();
+    	return view('admin.mantenedores.tipo_documento.index',compact('tiposDocumentos'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$tipo_documento = new TipoDocumento($request->all());
-            	$tipo_documento->save();
+            	$tipoDocumento = new TipoDocumento($request->all());
+            	$tipoDocumento->save();
                 toastr()->success('Agregado Correctamente', 'El tipo de documento: '.$request->nombreTipoDocumento.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class TipoDocumentoController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$tipo_documento = TipoDocumento::find($idTipoDocumento);
-	            $tipo_documento->fill($request->all());
-	            $tipo_documento->save();
+	    		$tipoDocumento = TipoDocumento::find($idTipoDocumento);
+	            $tipoDocumento->fill($request->all());
+	            $tipoDocumento->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de documento: '.$request->nombreTipoDocumento.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class TipoDocumentoController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$tipo_documento = TipoDocumento::find($idTipoDocumento);
-	            toastr()->success('Eliminado Correctamente', 'El tipo de documento: '.$tipo_documento->nombreTipoDocumento.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $tipo_documento->delete();
+    			$tipoDocumento = TipoDocumento::find($idTipoDocumento);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de documento: '.$tipoDocumento->nombreTipoDocumento.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $tipoDocumento->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

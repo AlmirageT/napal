@@ -22,7 +22,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Tipo estado</label>
-                            {!! Form::select('idTipoEstado', $tipos_estados,null,['class'=>"form-control",'placeholder'=>"Ingrese el tipo estado",'required']) !!}
+                            {!! Form::select('idTipoEstado', $tiposEstados,null,['class'=>"form-control",'placeholder'=>"Ingrese el tipo estado",'required']) !!}
                         </div>
                     </div>
                 </div>

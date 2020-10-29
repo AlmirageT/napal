@@ -1,7 +1,7 @@
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipo_inversion->idTipoInversion}}" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipoInversion->idTipoInversion}}" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			{!! Form::open(['route' => ['mantenedor-tipos_inversiones.update',$tipo_inversion->idTipoInversion], 'method' => 'PUT']) !!}
+			{!! Form::open(['route' => ['mantenedor-tipos_inversiones.update',$tipoInversion->idTipoInversion], 'method' => 'PUT']) !!}
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     Editar Tipo Inversión
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Nombre Tipo Inversión</label>
-                            {!!Form::text('nombreTipoInversion',$tipo_inversion->nombreTipoInversion,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                            {!!Form::text('nombreTipoInversion',$tipoInversion->nombreTipoInversion,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
                 </div>

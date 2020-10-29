@@ -22,17 +22,17 @@ Tipos Documentos
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($tipos_documentos as $tipo_documento)
+				  	@foreach($tiposDocumentos as $tipoDocumento)
 					    <tr>
-					      <td>{{ $tipo_documento->idTipoDocumento }}</td>
-					      <td>{{ $tipo_documento->nombreTipoDocumento }}</td>
+					      <td>{{ $tipoDocumento->idTipoDocumento }}</td>
+					      <td>{{ $tipoDocumento->nombreTipoDocumento }}</td>
 					      <td>
 					      	<div class="dropdown">
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
 		                        <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_documento->idTipoDocumento }}">Editar</a>
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipoDocumento->idTipoDocumento }}">Editar</a>
 		                			@include('admin.mantenedores.tipo_documento.destroy')
 		                        </div>
 		                    </div>

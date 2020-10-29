@@ -16,91 +16,91 @@ Detalle Destino Egreso
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Nombre Usuario</label>
-						{!!Form::text('nombre',$destino_egreso->nombre,['class'=>"form-control", 'placeholder'=>"Ingrese sus nombres",'required','disabled'])!!}
+						{!!Form::text('nombre',$destinoEgreso->nombre,['class'=>"form-control", 'placeholder'=>"Ingrese sus nombres",'required','disabled'])!!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Apellido Usuario</label>
-						{!! Form::text('apellido',$destino_egreso->apellido,['class'=>"form-control", 'placeholder'=>"Ingrese sus apellidos", 'required','disabled']) !!}
+						{!! Form::text('apellido',$destinoEgreso->apellido,['class'=>"form-control", 'placeholder'=>"Ingrese sus apellidos", 'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Correo</label>
-						{!! Form::email('correo',$destino_egreso->correo,['class'=>"form-control", 'placeholder'=>"ejemplo@ejemplo.com", 'required','disabled']) !!}
+						{!! Form::email('correo',$destinoEgreso->correo,['class'=>"form-control", 'placeholder'=>"ejemplo@ejemplo.com", 'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label>Rut</label>
-						{!! Form::text('rut',$destino_egreso->rut,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
+						{!! Form::text('rut',$destinoEgreso->rut,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label>Monto</label>
-						{!! Form::text('monto',number_format($destino_egreso->monto,0,',','.'),['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
+						{!! Form::text('monto',number_format($destinoEgreso->monto,0,',','.'),['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label>Moneda</label>
-						{!! Form::text('moneda',$destino_egreso->nombreMoneda,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
+						{!! Form::text('moneda',$destinoEgreso->nombreMoneda,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label>ITAC</label>
-						{!! Form::text('itac',$destino_egreso->itac,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
+						{!! Form::text('itac',$destinoEgreso->itac,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>WebClient</label>
-						{!! Form::text('webClient',$destino_egreso->webClient,['class'=>"form-control",'placeholder'=>"Ingrese la profesión",'required','disabled']) !!}
+						{!! Form::text('webClient',$destinoEgreso->webClient,['class'=>"form-control",'placeholder'=>"Ingrese la profesión",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Tipo Pago</label>
-						{!! Form::text('nombreTipoMedioPago',$destino_egreso->nombreTipoMedioPago,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','required','disabled']) !!}
+						{!! Form::text('nombreTipoMedioPago',$destinoEgreso->nombreTipoMedioPago,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Estado</label>
-						{!! Form::text('nombreEstado',$destino_egreso->nombreEstado,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','disabled']) !!}
+						{!! Form::text('nombreEstado',$destinoEgreso->nombreEstado,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="form-group">
 						<label>Nombre Banco</label>
-						{!! Form::text('nombreBanco',$destino_egreso->nombreBanco,['class'=>"form-control",'placeholder'=>"Ingrese el código postal",'required','disabled']) !!}
+						{!! Form::text('nombreBanco',$destinoEgreso->nombreBanco,['class'=>"form-control",'placeholder'=>"Ingrese el código postal",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Nombre Destinatario</label>
-						{!! Form::text('nombreDestinatario',$destino_egreso->nombreDestinatario,['class'=>"form-control",'required','disabled']) !!}
+						{!! Form::text('nombreDestinatario',$destinoEgreso->nombreDestinatario,['class'=>"form-control",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Código Swift</label>
-						{!! Form::text('codigoSwift',$destino_egreso->codigoSwift,['class'=>"form-control",'required','disabled']) !!}
+						{!! Form::text('codigoSwift',$destinoEgreso->codigoSwift,['class'=>"form-control",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label>Numero Cuenta</label>
-						{!! Form::text('numeroCuenta',$destino_egreso->numeroCuenta,['class'=>"form-control",'required','disabled']) !!}
+						{!! Form::text('numeroCuenta',$destinoEgreso->numeroCuenta,['class'=>"form-control",'required','disabled']) !!}
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="form-group">
 						<label>Notas</label>
-						<textarea disabled class="form-control" name="notas">{{ $destino_egreso->notas }}</textarea>
+						<textarea disabled class="form-control" name="notas">{{ $destinoEgreso->notas }}</textarea>
 					</div>
 				</div>
 			</div>

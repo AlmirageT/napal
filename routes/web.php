@@ -238,3 +238,9 @@ Route::delete('mantenedor-comunas/{idComuna}',array(
     'uses'=>'ComunaController@destroy',
     'as'=>'mantenedor-comunas.delete'
 ));
+//crud carrusel
+Route::resource('mantenedor-carrusel','ImagenesCarruselController');
+Route::delete('mantenedor-carrusel/{idImagenCarrusel}',array(
+    'uses'=>'ImagenesCarruselController@destroy',
+    'as'=>'mantenedor-carrusel.delete'
+));

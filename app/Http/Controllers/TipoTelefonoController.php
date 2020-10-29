@@ -14,15 +14,15 @@ class TipoTelefonoController extends Controller
 {
     public function index()
     {
-    	$tipos_telefonos = TipoTelefono::all();
-    	return view('admin.mantenedores.tipo_telefono.index',compact('tipos_telefonos'));
+    	$tiposTelefonos = TipoTelefono::all();
+    	return view('admin.mantenedores.tipo_telefono.index',compact('tiposTelefonos'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$tipo_telefono = new TipoTelefono($request->all());
-            	$tipo_telefono->save();
+            	$tipoTelefono = new TipoTelefono($request->all());
+            	$tipoTelefono->save();
                 toastr()->success('Agregado Correctamente', 'El tipo de telefono: '.$request->nombreTipoTelefono.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class TipoTelefonoController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$tipo_telefono = TipoTelefono::find($idTipoTelefono);
-	            $tipo_telefono->fill($request->all());
-	            $tipo_telefono->save();
+	    		$tipoTelefono = TipoTelefono::find($idTipoTelefono);
+	            $tipoTelefono->fill($request->all());
+	            $tipoTelefono->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de telefono: '.$request->nombreTipoTelefono.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class TipoTelefonoController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$tipo_telefono = TipoTelefono::find($idTipoTelefono);
-	            toastr()->success('Eliminado Correctamente', 'El tipo de telefono: '.$tipo_telefono->nombreTipoTelefono.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $tipo_telefono->delete();
+    			$tipoTelefono = TipoTelefono::find($idTipoTelefono);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de telefono: '.$tipoTelefono->nombreTipoTelefono.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $tipoTelefono->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

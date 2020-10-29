@@ -20,7 +20,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Tipo estado</label>
-                            {!! Form::select('idTipoEstado', $tipos_estados,$estado->idTipoEstado,['class'=>"form-control",'placeholder'=>"Ingrese el tipo estado",'required']) !!}
+                            {!! Form::select('idTipoEstado', $tiposEstados,$estado->idTipoEstado,['class'=>"form-control",'placeholder'=>"Ingrese el tipo estado",'required']) !!}
                         </div>
                     </div>
                 </div>

@@ -14,15 +14,15 @@ class ParametroGeneralController extends Controller
 {
     public function index()
     {
-    	$parametros_generales = ParametroGeneral::all();
-    	return view('admin.parametros_generales.index',compact('parametros_generales'));
+    	$parametrosGenerales = ParametroGeneral::all();
+    	return view('admin.parametros_generales.index',compact('parametrosGenerales'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$parametro_general = new ParametroGeneral($request->all());
-            	$parametro_general->save();
+            	$parametroGeneral = new ParametroGeneral($request->all());
+            	$parametroGeneral->save();
                 toastr()->success('Agregado Correctamente', 'El parametro general: '.$request->nombreParametroGeneral.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class ParametroGeneralController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$parametro_general = ParametroGeneral::find($idParametroGeneral);
-	            $parametro_general->fill($request->all());
-	            $parametro_general->save();
+	    		$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
+	            $parametroGeneral->fill($request->all());
+	            $parametroGeneral->save();
                 toastr()->success('Agregado Correctamente', 'El parametro general: '.$request->nombreParametroGeneral.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class ParametroGeneralController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$parametro_general = ParametroGeneral::find($idParametroGeneral);
-	            toastr()->success('Eliminado Correctamente', 'El parametro general: '.$parametro_general->nombreParametroGeneral.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $parametro_general->delete();
+    			$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
+	            toastr()->success('Eliminado Correctamente', 'El parametro general: '.$parametroGeneral->nombreParametroGeneral.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $parametroGeneral->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

@@ -94,7 +94,7 @@ Crear Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Tipo Invesión</label>
-								{!! Form::select('idTipoInversion', $tipo_inversion,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de inversion"]) !!}
+								{!! Form::select('idTipoInversion', $tipoInversion,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de inversion"]) !!}
 							</div>
 						</div>
 						
@@ -108,7 +108,7 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Flexibilidad</label>
-								{!! Form::select('idTipoFlexibilidad', $tipo_flexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad"]) !!}
+								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad"]) !!}
 							</div>
 						</div>
 						
@@ -124,13 +124,13 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Calidad</label>
-								{!! Form::select('idTipoCalidad', $tipo_calidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad"]) !!}
+								{!! Form::select('idTipoCalidad', $tipoCalidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo de Credito</label>
-								{!! Form::select('idTipoCredito', $tipo_credito,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de credito"]) !!}
+								{!! Form::select('idTipoCredito', $tipoCredito,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de credito"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -175,16 +175,25 @@ Crear Propiedad
 								{!! Form::text('rentabilidadTotal',null,['class'=>"form-control",'required']) !!}
 							</div>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Estado</label>
 								{!! Form::select('idEstado', $estados,null,['class'=>"form-control",'placeholder'=>"Seleccione un estado de la propiedad"]) !!}
 							</div>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Usuario</label>
 								{!! Form::select('idUsuario', $usuarios,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un usuario",'required']) !!}
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label>Propiedad Destacada</label>
+								<br>
+								<input type="checkbox" id="switch5" switch="success" checked name="destacadoPropiedad" />
+                                <label for="switch5" data-on-label="Si"
+                                        data-off-label="No"></label>
 							</div>
 						</div>
 						<div class="col-lg-12">

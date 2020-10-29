@@ -21,7 +21,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Tipo Télefono</label>
-                            {!!Form::select('idTipoTelefono',$tipos_telefonos,$telefono->idTipoTelefono,['class'=>"form-control", 'placeholder'=>"Ingrese el tipo de télefono" , 'required'])!!}
+                            {!!Form::select('idTipoTelefono',$tiposTelefonos,$telefono->idTipoTelefono,['class'=>"form-control", 'placeholder'=>"Ingrese el tipo de télefono" , 'required'])!!}
                         </div>
                     </div>
                 </div>

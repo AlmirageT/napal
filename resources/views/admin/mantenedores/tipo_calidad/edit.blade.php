@@ -1,7 +1,7 @@
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipo_calidad->idTipoCalidad}}" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipoCalidad->idTipoCalidad}}" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			{!! Form::open(['route' => ['mantenedor-tipos_calidades.update',$tipo_calidad->idTipoCalidad], 'method' => 'PUT']) !!}
+			{!! Form::open(['route' => ['mantenedor-tipos_calidades.update',$tipoCalidad->idTipoCalidad], 'method' => 'PUT']) !!}
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     Editar Tipo Calidad
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Nombre Tipo Calidad</label>
-                            {!!Form::text('nombreTipoCalidad',$tipo_calidad->nombreTipoCalidad,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                            {!!Form::text('nombreTipoCalidad',$tipoCalidad->nombreTipoCalidad,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
                 </div>

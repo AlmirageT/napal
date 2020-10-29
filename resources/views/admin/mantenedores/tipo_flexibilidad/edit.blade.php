@@ -1,7 +1,7 @@
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipo_flexibilidad->idTipoFlexibilidad}}" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipoFlexibilidad->idTipoFlexibilidad}}" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			{!! Form::open(['route' => ['mantenedor-tipos_flexibilidades.update',$tipo_flexibilidad->idTipoFlexibilidad], 'method' => 'PUT']) !!}
+			{!! Form::open(['route' => ['mantenedor-tipos_flexibilidades.update',$tipoFlexibilidad->idTipoFlexibilidad], 'method' => 'PUT']) !!}
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     Editar Tipo Flexibilidad
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Nombre Tipo Flexibilidad</label>
-                            {!!Form::text('nombreTipoFlexibilidad',$tipo_flexibilidad->nombreTipoFlexibilidad,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                            {!!Form::text('nombreTipoFlexibilidad',$tipoFlexibilidad->nombreTipoFlexibilidad,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
                 </div>

@@ -14,15 +14,15 @@ class TipoFlexibilidadController extends Controller
 {
     public function index()
     {
-    	$tipos_flexibilidades = TipoFlexibilidad::all();
-    	return view('admin.mantenedores.tipo_flexibilidad.index',compact('tipos_flexibilidades'));
+    	$tiposFlexibilidades = TipoFlexibilidad::all();
+    	return view('admin.mantenedores.tipo_flexibilidad.index',compact('tiposFlexibilidades'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$tipo_flexibilidad = new TipoFlexibilidad($request->all());
-            	$tipo_flexibilidad->save();
+            	$tipoFlexibilidad = new TipoFlexibilidad($request->all());
+            	$tipoFlexibilidad->save();
                 toastr()->success('Agregado Correctamente', 'El tipo de flexibilidad: '.$request->nombreTipoFlexibilidad.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class TipoFlexibilidadController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$tipo_flexibilidad = TipoFlexibilidad::find($idTipoFlexibilidad);
-	            $tipo_flexibilidad->fill($request->all());
-	            $tipo_flexibilidad->save();
+	    		$tipoFlexibilidad = TipoFlexibilidad::find($idTipoFlexibilidad);
+	            $tipoFlexibilidad->fill($request->all());
+	            $tipoFlexibilidad->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de flexibilidad: '.$request->nombreTipoFlexibilidad.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class TipoFlexibilidadController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$tipo_flexibilidad = TipoFlexibilidad::find($idTipoFlexibilidad);
-	            toastr()->success('Eliminado Correctamente', 'El tipo de flexibilidad: '.$tipo_flexibilidad->nombreTipoFlexibilidad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $tipo_flexibilidad->delete();
+    			$tipoFlexibilidad = TipoFlexibilidad::find($idTipoFlexibilidad);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de flexibilidad: '.$tipoFlexibilidad->nombreTipoFlexibilidad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $tipoFlexibilidad->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

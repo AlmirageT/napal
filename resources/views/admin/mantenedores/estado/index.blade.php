@@ -50,32 +50,3 @@ Estados
 	</div>
 </div>
 @endsection
-@section('scripts')
-  <script>
-      $(document).ready( function () {
-        $('#table_id').DataTable({
-          "pageLength": 25,
-          language:
-            {
-              "decimal": "",
-              "emptyTable": "No hay información",
-              "info": "Mostrando _END_ de _TOTAL_ Entradas",
-              "infoEmpty": "No existen registros",
-              "infoPostFix": "",
-              "thousands": ",",
-              "lengthMenu": "Mostrar _MENU_ Entradas",
-              "loadingRecords": "Cargando...",
-              "processing": "Procesando...",
-              "search": "Ingrese cualquier texto:",
-              "zeroRecords": "Sin resultados encontrados",
-              "paginate": {
-                  "first": "Primero",
-                  "last": "Ultimo",
-                  "next": "Siguiente",
-                  "previous": "Anterior"
-            }
-          }
-        });
-      });
-  </script>
-@endsection

@@ -70,44 +70,44 @@ Crear Usuario
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Pais</label>
-								{!! Form::select('idPais', $paises,$direccion_usuario->idPais,['class'=>"form-control",'placeholder'=>"Ingrese el pais de residencia",'required','id'=>"paises", 'onchange'=>"sacarRegionPorPais(this.value)"]) !!}
+								{!! Form::select('idPais', $paises,$direccionUsuario->idPais,['class'=>"form-control",'placeholder'=>"Ingrese el pais de residencia",'required','id'=>"paises", 'onchange'=>"sacarRegionPorPais(this.value)"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Región</label>
-								{!! Form::select('idRegion', $regiones,$direccion_usuario->idRegion,['class'=>"form-control",'placeholder'=>"Seleccione una region",'required','id'=>"select_regiones", 'onchange'=>"sacarProvinciaPorRegion(this.value)"]) !!}
+								{!! Form::select('idRegion', $regiones,$direccionUsuario->idRegion,['class'=>"form-control",'placeholder'=>"Seleccione una region",'required','id'=>"select_regiones", 'onchange'=>"sacarProvinciaPorRegion(this.value)"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Provincia</label>
-								{!! Form::select('idProvincia', $provincias,$direccion_usuario->idProvincia,['class'=>"form-control",'placeholder'=>"Seleccione una provincia",'required','id'=>"select_provincias", 'onchange'=>"sacarComunaPorProvincia(this.value)"]) !!}
+								{!! Form::select('idProvincia', $provincias,$direccionUsuario->idProvincia,['class'=>"form-control",'placeholder'=>"Seleccione una provincia",'required','id'=>"select_provincias", 'onchange'=>"sacarComunaPorProvincia(this.value)"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Comuna</label>
-								{!! Form::select('idComuna', $comunas,$direccion_usuario->idComuna,['class'=>"form-control",'placeholder'=>"Seleccione una comuna",'required','id'=>"select_comunas"]) !!}
+								{!! Form::select('idComuna', $comunas,$direccionUsuario->idComuna,['class'=>"form-control",'placeholder'=>"Seleccione una comuna",'required','id'=>"select_comunas"]) !!}
 
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Dirección 1</label>
-								{!! Form::text('direccion1',$direccion_usuario->direccion1,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','id'=>"txtDireccion"]) !!}
+								{!! Form::text('direccion1',$direccionUsuario->direccion1,['class'=>"form-control",'placeholder'=>"Ingrese la dirección",'required','id'=>"txtDireccion"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Número</label>
-								{!! Form::text('direccion2',$direccion_usuario->direccion2,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','id'=>"txtNumero"]) !!}
+								{!! Form::text('direccion2',$direccionUsuario->direccion2,['class'=>"form-control",'placeholder'=>"Ingrese numeración de su casa",'required','id'=>"txtNumero"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Código postal</label>
-								{!! Form::text('codigoPostal',$direccion_usuario->codigoPostal,['class'=>"form-control",'placeholder'=>"Ingrese el código postal",'required']) !!}
+								{!! Form::text('codigoPostal',$direccionUsuario->codigoPostal,['class'=>"form-control",'placeholder'=>"Ingrese el código postal",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -117,13 +117,13 @@ Crear Usuario
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Latitud</label>
-								{!! Form::text('latitud',$direccion_usuario->latitud,['class'=>"form-control",'required','id'=>"latitud"]) !!}
+								{!! Form::text('latitud',$direccionUsuario->latitud,['class'=>"form-control",'required','id'=>"latitud"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Longitud</label>
-								{!! Form::text('longitud',$direccion_usuario->longitud,['class'=>"form-control",'required','id'=>"longitud"]) !!}
+								{!! Form::text('longitud',$direccionUsuario->longitud,['class'=>"form-control",'required','id'=>"longitud"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -135,13 +135,13 @@ Crear Usuario
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Persona</label>
-								{!! Form::select('idTipoPersona', $tipos_personas,$usuario->idTipoPersona,['class'=>"form-control",'placeholder'=>"Ingrese tipo persona",'required']) !!}
+								{!! Form::select('idTipoPersona', $tiposPersonas,$usuario->idTipoPersona,['class'=>"form-control",'placeholder'=>"Ingrese tipo persona",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Usuario</label>
-								{!! Form::select('idTipoUsuario', $tipos_usuarios,$usuario->idTipoUsuario,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
+								{!! Form::select('idTipoUsuario', $tiposUsuarios,$usuario->idTipoUsuario,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
 								
 							</div>
 						</div>

@@ -11,7 +11,7 @@ class DestinoEgresoController extends Controller
 {
     public function index()
     {
-    	$destinos_egresos = DestinoEgreso::select('*')
+    	$destinosEgresos = DestinoEgreso::select('*')
     	->join('trx_egresos','destinos_egresos.idTrxEgreso','=','trx_egresos.idTrxEgreso')
     	->join('tipos_medios_pagos','destinos_egresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
     	->join('estados','destinos_egresos.idEstado','=','estados.idEstado')
@@ -19,11 +19,11 @@ class DestinoEgresoController extends Controller
     	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
     	->orderBy('destinos_egresos.idDestinoEgreso','DESC')
     	->paginate(10);
-    	return view('admin.transacciones.destinos_egresos.index',compact('destinos_egresos'));
+    	return view('admin.transacciones.destinos_egresos.index',compact('destinosEgresos'));
     }
     public function detalle($idDestinoEgreso)
     {
-    	$destino_egreso = DestinoEgreso::select('*')
+    	$destinoEgreso = DestinoEgreso::select('*')
     	->join('trx_egresos','destinos_egresos.idTrxEgreso','=','trx_egresos.idTrxEgreso')
     	->join('tipos_medios_pagos','destinos_egresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
     	->join('estados','destinos_egresos.idEstado','=','estados.idEstado')
@@ -32,6 +32,6 @@ class DestinoEgresoController extends Controller
         ->join('monedas','trx_egresos.idMoneda','=','monedas.idMoneda')
     	->where('destinos_egresos.idDestinoEgreso',$idDestinoEgreso)
     	->first();
-    	return view('admin.transacciones.destinos_egresos.factura',compact('destino_egreso'));
+    	return view('admin.transacciones.destinos_egresos.factura',compact('destinoEgreso'));
     }
 }

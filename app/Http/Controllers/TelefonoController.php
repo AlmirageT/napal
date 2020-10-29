@@ -21,8 +21,8 @@ class TelefonoController extends Controller
     	->where('telefonos.idUsuario',$idUsuario)
         ->orderBy('telefonos.idTelefono','DESC')
     	->get();
-    	$tipos_telefonos = TipoTelefono::pluck('nombreTipoTelefono','idTipoTelefono');
-    	return view('admin.telefonos.create',compact('telefonos','tipos_telefonos','idUsuario'));
+    	$tiposTelefonos = TipoTelefono::pluck('nombreTipoTelefono','idTipoTelefono');
+    	return view('admin.telefonos.create',compact('telefonos','tiposTelefonos','idUsuario'));
     }
     public function store(Request $request)
     {

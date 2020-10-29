@@ -38,28 +38,28 @@ Destinos Egresos
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($destinos_egresos as $destino_egreso)
+				  	@foreach($destinosEgresos as $destinoEgreso)
 					    <tr>
-					      <td>{{ $destino_egreso->idTrxEgreso }}</td>
-					      <td>${{ number_format($destino_egreso->monto,0,',','.') }}</td>
-					      <td>{{ $destino_egreso->nombreTipoMedioPago }}</td>
-					      <td>{{ $destino_egreso->nombre }} {{ $destino_egreso->apellido }}</td>
-					      <td>{{ $destino_egreso->rut }}</td>
-					      <td>{{ $destino_egreso->correo }}</td>
-					      <td>{{ $destino_egreso->numero }}</td>
-					      <td>{{ $destino_egreso->nombreEstado }}</td>
-					      <td>{{ $destino_egreso->nombreBanco }}</td>
-					      <td>{{ $destino_egreso->nombreDestinatario }}</td>
-					      <td>{{ $destino_egreso->codigoSwift }}</td>
-					      <td>{{ $destino_egreso->numeroCuenta }}</td>
-					      <td>{{ $destino_egreso->notas }}</td>
+					      <td>{{ $destinoEgreso->idTrxEgreso }}</td>
+					      <td>${{ number_format($destinoEgreso->monto,0,',','.') }}</td>
+					      <td>{{ $destinoEgreso->nombreTipoMedioPago }}</td>
+					      <td>{{ $destinoEgreso->nombre }} {{ $destinoEgreso->apellido }}</td>
+					      <td>{{ $destinoEgreso->rut }}</td>
+					      <td>{{ $destinoEgreso->correo }}</td>
+					      <td>{{ $destinoEgreso->numero }}</td>
+					      <td>{{ $destinoEgreso->nombreEstado }}</td>
+					      <td>{{ $destinoEgreso->nombreBanco }}</td>
+					      <td>{{ $destinoEgreso->nombreDestinatario }}</td>
+					      <td>{{ $destinoEgreso->codigoSwift }}</td>
+					      <td>{{ $destinoEgreso->numeroCuenta }}</td>
+					      <td>{{ $destinoEgreso->notas }}</td>
 					      <td>
 					      	<div class="dropdown">
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
 		                        <div class="dropdown-menu dropdown-menu">
-					      			<a href="{{ asset('napalm/destinos-egresos/detalles') }}/{{ $destino_egreso->idTrxEgreso }}" class="dropdown-item btn btn-warning">Ver Detalles</a>
+					      			<a href="{{ asset('napalm/destinos-egresos/detalles') }}/{{ $destinoEgreso->idTrxEgreso }}" class="dropdown-item btn btn-warning">Ver Detalles</a>
 		                        </div>
 		                    </div>
 					      </td>
@@ -67,7 +67,7 @@ Destinos Egresos
 					@endforeach
 				  </tbody>
 				</table>
-				{{ $destinos_egresos->links() }}
+				{{ $destinosEgresos->links() }}
 			</div>
 		</div>
 	</div>

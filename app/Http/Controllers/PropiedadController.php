@@ -52,12 +52,12 @@ class PropiedadController extends Controller
         $comunas = Comuna::pluck('nombreComuna','idComuna');
         $estados = Estado::where('idTipoEstado',2)->pluck('nombreEstado','idEstado');
         $monedas = Moneda::pluck('nombreMoneda','idMoneda');
-        $tipo_credito = TipoCredito::pluck('nombreTipoCredito','idTipoCredito');
-        $tipo_calidad = TipoCalidad::pluck('nombreTipoCalidad','idTipoCalidad');
-        $tipo_flexibilidad = TipoFlexibilidad::pluck('nombreTipoFlexibilidad','idTipoFlexibilidad');
+        $tipoCredito = TipoCredito::pluck('nombreTipoCredito','idTipoCredito');
+        $tipoCalidad = TipoCalidad::pluck('nombreTipoCalidad','idTipoCalidad');
+        $tipoFlexibilidad = TipoFlexibilidad::pluck('nombreTipoFlexibilidad','idTipoFlexibilidad');
         $proyecto = Proyecto::pluck('nombreProyecto','idProyecto');
-        $tipo_inversion = TipoInversion::pluck('nombreTipoInversion','idTipoInversion');
-    	return view('admin.propiedades.create',compact('paises','regiones','provincias','comunas','usuarios','estados','monedas','tipo_credito','tipo_calidad','tipo_flexibilidad','proyecto','tipo_inversion'));
+        $tipoInversion = TipoInversion::pluck('nombreTipoInversion','idTipoInversion');
+    	return view('admin.propiedades.create',compact('paises','regiones','provincias','comunas','usuarios','estados','monedas','tipoCredito','tipoCalidad','tipoFlexibilidad','proyecto','tipoInversion'));
     }
     public function store(Request $request)
     {
@@ -78,6 +78,11 @@ class PropiedadController extends Controller
             	}else{
             		$propiedad->tieneChat = 0;
             	}
+                if ($request->destacadoPropiedad == "on") {
+                    $propiedad->destacadoPropiedad = 1;
+                }else{
+                    $propiedad->destacadoPropiedad = 0;
+                }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
 	            $propiedad->poi = $geoHash[0]->geoHash;
 	            $propiedad->save();
@@ -112,27 +117,27 @@ class PropiedadController extends Controller
         $comunas = Comuna::pluck('nombreComuna','idComuna');
         $estados = Estado::where('idTipoEstado',2)->pluck('nombreEstado','idEstado');
         $monedas = Moneda::pluck('nombreMoneda','idMoneda');
-        $tipo_credito = TipoCredito::pluck('nombreTipoCredito','idTipoCredito');
-        $tipo_calidad = TipoCalidad::pluck('nombreTipoCalidad','idTipoCalidad');
-        $tipo_flexibilidad = TipoFlexibilidad::pluck('nombreTipoFlexibilidad','idTipoFlexibilidad');
+        $tipoCredito = TipoCredito::pluck('nombreTipoCredito','idTipoCredito');
+        $tipoCalidad = TipoCalidad::pluck('nombreTipoCalidad','idTipoCalidad');
+        $tipoFlexibilidad = TipoFlexibilidad::pluck('nombreTipoFlexibilidad','idTipoFlexibilidad');
         $proyecto = Proyecto::pluck('nombreProyecto','idProyecto');
-        $tipo_inversion = TipoInversion::pluck('nombreTipoInversion','idTipoInversion');
-        return view('admin.propiedades.edit',compact('propiedad','usuarios','paises','regiones','provincias','comunas','estados','monedas','tipo_credito','tipo_calidad','tipo_flexibilidad','proyecto','tipo_inversion'));
+        $tipoInversion = TipoInversion::pluck('nombreTipoInversion','idTipoInversion');
+        return view('admin.propiedades.edit',compact('propiedad','usuarios','paises','regiones','provincias','comunas','estados','monedas','tipoCredito','tipoCalidad','tipoFlexibilidad','proyecto','tipoInversion'));
     }
     public function update(Request $request, $idPropiedad)
     {
     	try {
             DB::beginTransaction();
             	$imgName = null;
+            	$propiedad = Propiedad::find($idPropiedad);
 	            if($request->file('fotoPrincipal')){
+                    if ($propiedad->fotoPrincipal != null) {
+                        unlink($propiedad->fotoPrincipal);
+                    }
 	                $imagen = $request->file('fotoPrincipal');
 	                $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
 	                $imagen->move('assets/images/propiedades/',$imgName);
 	            }
-            	$propiedad = Propiedad::find($idPropiedad);
-            	if ($propiedad->fotoPrincipal != null) {
-                    unlink($propiedad->fotoPrincipal);
-            	}
             	$propiedad->fill($request->all());
             	if ($imgName != null) {
             		$propiedad->fotoPrincipal = 'assets/images/propiedades/'.$imgName;
@@ -142,6 +147,11 @@ class PropiedadController extends Controller
             	}else{
             		$propiedad->tieneChat = 0;
             	}
+                if ($request->destacadoPropiedad == "on") {
+                    $propiedad->destacadoPropiedad = 1;
+                }else{
+                    $propiedad->destacadoPropiedad = 0;
+                }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
 	            $propiedad->poi = $geoHash[0]->geoHash;
 	            $propiedad->save();

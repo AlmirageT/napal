@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use App\Avatar;
 use App\Idioma;
 use App\TipoPersona;
@@ -14,13 +19,9 @@ use App\Provincia;
 use App\Region;
 use App\TipoUsuario;
 use App\DireccionUsuario;
-use DB;
-use Illuminate\Support\Facades\Crypt;
 use App\Telefono;
 use App\TipoTelefono;
-use Illuminate\Database\QueryException;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use DB;
 
 class UsuarioController extends Controller
 {
@@ -38,14 +39,14 @@ class UsuarioController extends Controller
     public function create()
     {
         $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
-        $tipos_personas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
+        $tiposPersonas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
         $paises = Pais::pluck('nombrePais','idPais');
         $regiones = Region::pluck('nombreRegion','idRegion');
         $provincias = Provincia::pluck('nombreProvincia','idProvincia');
         $comunas = Comuna::pluck('nombreComuna','idComuna');
-        $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
+        $tiposUsuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
 
-    	return view('admin.usuarios.create',compact('idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios'));
+    	return view('admin.usuarios.create',compact('idiomas','tiposPersonas','paises','regiones','provincias','comunas','tiposUsuarios'));
     }
     protected function curls($request)
     {
@@ -80,6 +81,16 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required|unique:posts|max:255',
+                'body' => 'required'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect('post/create')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
             DB::beginTransaction();
                 $id_avatar = null;
                 //guardar imagenes
@@ -153,15 +164,15 @@ class UsuarioController extends Controller
         $usuario = Usuario::find($idUsuario);
         $avatar = Avatar::find($usuario->idAvatar);
         $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
-        $tipos_personas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
+        $tiposPersonas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
         $paises = Pais::pluck('nombrePais','idPais');
         $regiones = Region::pluck('nombreRegion','idRegion');
         $provincias = Provincia::pluck('nombreProvincia','idProvincia');
         $comunas = Comuna::pluck('nombreComuna','idComuna');
-        $tipos_usuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
-        $direccion_usuario = DireccionUsuario::where('idUsuario',$idUsuario)->first();
+        $tiposUsuarios = TipoUsuario::pluck('nombreTipoUsuario','idTipoUsuario');
+        $direccionUsuario = DireccionUsuario::where('idUsuario',$idUsuario)->first();
         
-        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tipos_personas','paises','regiones','provincias','comunas','tipos_usuarios','direccion_usuario'));
+        return view('admin.usuarios.edit',compact('usuario','avatar','idiomas','tiposPersonas','paises','regiones','provincias','comunas','tiposUsuarios','direccionUsuario'));
     }
     public function update(Request $request, $idUsuario)
     {

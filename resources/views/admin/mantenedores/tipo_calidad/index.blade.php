@@ -22,17 +22,17 @@ Tipos Calidades
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($tipos_calidades as $tipo_calidad)
+				  	@foreach($tiposCalidades as $tipoCalidad)
 					    <tr>
-					      <td>{{ $tipo_calidad->idTipoCalidad }}</td>
-					      <td>{{ $tipo_calidad->nombreTipoCalidad }}</td>
+					      <td>{{ $tipoCalidad->idTipoCalidad }}</td>
+					      <td>{{ $tipoCalidad->nombreTipoCalidad }}</td>
 					      <td>
 					      	<div class="dropdown">
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
 		                        <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_calidad->idTipoCalidad }}">Editar</a>
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipoCalidad->idTipoCalidad }}">Editar</a>
 		                			@include('admin.mantenedores.tipo_calidad.destroy')
 		                        </div>
 		                    </div>

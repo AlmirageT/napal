@@ -14,15 +14,15 @@ class TipoCalidadController extends Controller
 {
     public function index()
     {
-    	$tipos_calidades = TipoCalidad::all();
-    	return view('admin.mantenedores.tipo_calidad.index',compact('tipos_calidades'));
+    	$tiposCalidades = TipoCalidad::all();
+    	return view('admin.mantenedores.tipo_calidad.index',compact('tiposCalidades'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$tipo_calidad = new TipoCalidad($request->all());
-            	$tipo_calidad->save();
+            	$tipoCalidad = new TipoCalidad($request->all());
+            	$tipoCalidad->save();
                 toastr()->success('Agregado Correctamente', 'El tipo de calidad: '.$request->nombreTipoCalidad.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class TipoCalidadController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$tipo_calidad = TipoCalidad::find($idTipoCalidad);
-	            $tipo_calidad->fill($request->all());
-	            $tipo_calidad->save();
+	    		$tipoCalidad = TipoCalidad::find($idTipoCalidad);
+	            $tipoCalidad->fill($request->all());
+	            $tipoCalidad->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de calidad: '.$request->nombreTipoCalidad.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class TipoCalidadController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$tipo_calidad = TipoCalidad::find($idTipoCalidad);
-	            toastr()->success('Eliminado Correctamente', 'El tipo de calidad: '.$tipo_calidad->nombreTipoCalidad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $tipo_calidad->delete();
+    			$tipoCalidad = TipoCalidad::find($idTipoCalidad);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de calidad: '.$tipoCalidad->nombreTipoCalidad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $tipoCalidad->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

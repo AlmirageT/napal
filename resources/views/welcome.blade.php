@@ -4,254 +4,117 @@
 
 <!-- Banner start -->
 <div class="banner" id="banner">
-    <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item banner-max-height active">
-                <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        <div class="text-center">
-                            <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                            <p data-animation="animated fadeInUp delay-10s">
-                                This is real estate website template based on Bootstrap 4 framework.
-                            </p>
-                            <a href="index.html" class="btn btn-white">Read More</a>
+    @if(count($imagenesWeb) > 0)
+        <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item banner-max-height active">
+                    <img class="d-block w-100" src="{{ asset($imagenesWeb->shift()->rutaImagenCarrusel) }}" alt="banner-1">
+                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-content container">
+                            <div class="text-center">
+                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                <p data-animation="animated fadeInUp delay-10s">
+                                    This is real estate website template based on Bootstrap 4 framework.
+                                </p>
+                                <a href="index.html" class="btn btn-white">Read More</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item banner-max-height">
-                <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        <div class="text-right">
-                            <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                            <p data-animation="animated fadeInUp delay-10s">
-                                This is real estate website template based on Bootstrap 4 framework.
-                            </p>
-                            <a href="index.html" class="btn btn-white">Read More</a>
+                @foreach($imagenesWeb as $imagenWeb)
+                    <div class="carousel-item banner-max-height">
+                        <img class="d-block w-100" src="{{ asset($imagenWeb->rutaImagenCarrusel) }}" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-right">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            <div class="carousel-item banner-max-height">
-                <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                    <div class="carousel-content container">
-                        <div class="text-left">
-                            <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                            <p data-animation="animated fadeInUp delay-10s">
-                                This is real estate website template based on Bootstrap 4 framework.
-                            </p>
-                            <a href="index.html" class="btn btn-white">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                <span class="slider-mover-left" aria-hidden="true">
+                    <i class="fa fa-angle-left"></i>
+                </span>
+            </a>
+            <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                <span class="slider-mover-right" aria-hidden="true">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
         </div>
-        <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
-            <span class="slider-mover-left" aria-hidden="true">
-                <i class="fa fa-angle-left"></i>
-            </span>
-        </a>
-        <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
-            <span class="slider-mover-right" aria-hidden="true">
-                <i class="fa fa-angle-right"></i>
-            </span>
-        </a>
-    </div>
+    @else
+        <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item banner-max-height active">
+                    <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-content container">
+                            <div class="text-center">
+                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                <p data-animation="animated fadeInUp delay-10s">
+                                    This is real estate website template based on Bootstrap 4 framework.
+                                </p>
+                                <a href="index.html" class="btn btn-white">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item banner-max-height">
+                    <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-content container">
+                            <div class="text-right">
+                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                <p data-animation="animated fadeInUp delay-10s">
+                                    This is real estate website template based on Bootstrap 4 framework.
+                                </p>
+                                <a href="index.html" class="btn btn-white">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item banner-max-height">
+                    <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-content container">
+                            <div class="text-left">
+                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                <p data-animation="animated fadeInUp delay-10s">
+                                    This is real estate website template based on Bootstrap 4 framework.
+                                </p>
+                                <a href="index.html" class="btn btn-white">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                <span class="slider-mover-left" aria-hidden="true">
+                    <i class="fa fa-angle-left"></i>
+                </span>
+            </a>
+            <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                <span class="slider-mover-right" aria-hidden="true">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    @endif
     <!-- Search Section start -->
-    <div class="search-section search-area-3 d-none d-xl-block d-lg-block" id="search-area-3">
-        <div class="container">
-            <div class="search-section-area ssa">
-                <div class="search-area-inner">
-                    <div class="search-contents">
-                        <form method="GET">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="area">
-                                            <option>Area</option>
-                                            <option>3000</option>
-                                            <option>2600</option>
-                                            <option>2200</option>
-                                            <option>1800</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="property-status">
-                                            <option>Property Status</option>
-                                            <option>For Sale</option>
-                                            <option>For Rent</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="property-types">
-                                            <option>Property Types</option>
-                                            <option>Apartments</option>
-                                            <option>Houses</option>
-                                            <option>Commercial</option>
-                                            <option>Garages</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="location">
-                                            <option>Location</option>
-                                            <option>United States</option>
-                                            <option>United Kingdom</option>
-                                            <option>American Samoa</option>
-                                            <option>Belgium</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="max-area">
-                                            <option>Max Area (Sq Ff)</option>
-                                            <option>2400</option>
-                                            <option>2800</option>
-                                            <option>3200</option>
-                                            <option>3600</option>
-                                            <option>4000</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="min-area">
-                                            <option>Min Area (Sq Ff)</option>
-                                            <option>2400</option>
-                                            <option>2800</option>
-                                            <option>3200</option>
-                                            <option>3600</option>
-                                            <option>4000</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="range-slider">
-                                        <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                    <div class="form-group">
-                                        <button class="search-button">Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Search Section end -->
 </div>
 <!-- banner end -->
 
 <!-- Search Section start -->
-<div class="search-section search-area-2 bg-grea d-lg-none d-xl-none">
-    <div class="container">
-        <div class="search-section-area">
-            <div class="search-area-inner">
-                <div class="search-contents">
-                    <form method="GET">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="area">
-                                        <option>Area</option>
-                                        <option>3000</option>
-                                        <option>2600</option>
-                                        <option>2200</option>
-                                        <option>1800</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-status">
-                                        <option>Property Status</option>
-                                        <option>For Sale</option>
-                                        <option>For Rent</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-types">
-                                        <option>Property Types</option>
-                                        <option>Apartments</option>
-                                        <option>Houses</option>
-                                        <option>Commercial</option>
-                                        <option>Garages</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="location">
-                                        <option>Location</option>
-                                        <option>United States</option>
-                                        <option>United Kingdom</option>
-                                        <option>American Samoa</option>
-                                        <option>Belgium</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="max-area">
-                                        <option>Max Area (Sq Ff)</option>
-                                        <option>2400</option>
-                                        <option>2800</option>
-                                        <option>3200</option>
-                                        <option>3600</option>
-                                        <option>4000</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="min-area">
-                                        <option>Min Area (Sq Ff)</option>
-                                        <option>2400</option>
-                                        <option>2800</option>
-                                        <option>3200</option>
-                                        <option>3600</option>
-                                        <option>4000</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                                <div class="form-group">
-                                    <button class="search-button">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Search Section end -->
 
 <!-- Featured Properties start -->
@@ -259,386 +122,95 @@
     <div class="container">
         <!-- Main title -->
         <div class="main-title">
-            <h1>Featured Properties</h1>
-            <p>Find Your Properties In Your City</p>
+            <h1>Diversifica todo lo que quieras desde solo $10.000</h1>
+            <p>Construye tu cartera de inversión basada en activos inmobiliarios</p>
         </div>
 
         <div class="slick-slider-area">
             <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                <div class="slick-slide-item">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <a href="properties-details.html" class="property-img">
+                @foreach($propiedades as $propiedad)
+                    @php
+                        $date1 = new DateTime($propiedad->fechaInicio);
+                        $date2 = new DateTime($propiedad->fechaFinalizacion);
+                        $diff = $date1->diff($date2);
+                    @endphp
+                    <div class="slick-slide-item">
+                        <div class="property-box">
+                            <div class="property-thumbnail">
                                 <div class="listing-badges">
-                                    <span class="featured">Featured</span>
+                                    @if($propiedad->idTipoFlexibilidad == 1)
+                                        <span class="featured">
+                                            Flexible
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="price-ratings-box">
                                     <p class="price">
-                                        $178,000
+                                        ${{ number_format($propiedad->precio,0,',','.') }}
                                     </p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
                                 </div>
 
                                 <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
-                                    </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
+                                            <img class="d-block w-100" src="{{ asset($propiedad->fotoPrincipal) }}" alt="properties">
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="properties-details.html">Modern Family Home</a>
-                            </h1>
-                            <div class="location">
-                                <a href="properties-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
                             </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <i class="flaticon-furniture"></i> 3 Bedrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i> 2 Bathrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-square"></i> Sq Ft:3400
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i> 1 Garage
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left days">
-                                <p><i class="flaticon-time"></i> 5 Days ago</p>
-                            </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <a href="properties-details.html" class="property-img">
-                                <div class="listing-badges">
-                                    <span class="featured">Featured</span>
+                            <div class="detail">
+                                <h1 class="title">
+                                    <a>{{ $propiedad->nombrePropiedad }}</a>
+                                </h1>
+                                <div class="location">
+                                    <a href="properties-details.html">
+                                        <i class="fa fa-map-marker"></i>{{ $propiedad->direccion1 }}, {{ $propiedad->nombreRegion }}
+                                    </a>
                                 </div>
-                                <div class="price-ratings-box">
-                                    <p class="price">
-                                        $178,000
-                                    </p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </div>
-                                <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="properties-details.html">Relaxing Apartment</a>
-                            </h1>
-                            <div class="location">
-                                <a href="properties-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <i class="flaticon-furniture"></i> 3 Bedrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i> 2 Bathrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-square"></i> Sq Ft:3400
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i> 1 Garage
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left days">
-                                <p><i class="flaticon-time"></i> 5 Days ago</p>
-                            </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <a href="properties-details.html" class="property-img">
-                                <div class="listing-time opening">For Sale</div>
-                                <div class="price-ratings-box">
-                                    <p class="price">
-                                        $178,000
-                                    </p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </div>
-                                <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="properties-details.html">Park Avenue</a>
-                            </h1>
-                            <div class="location">
-                                <a href="properties-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <i class="flaticon-furniture"></i> 3 Bedrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i> 2 Bathrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-square"></i> Sq Ft:3400
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i> 1 Garage
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left days">
-                                <p><i class="flaticon-time"></i> 5 Days ago</p>
-                            </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <a href="properties-details.html" class="property-img">
-                                <div class="listing-badges">
-                                    <span class="featured">Featured</span>
-                                </div>
-                                <div class="price-ratings-box">
-                                    <p class="price">
-                                        $178,000
-                                    </p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </div>
+                                <ul class="facilities-list clearfix">
+                                    <li>
+                                        <i class="flaticon-furniture"></i> 
+                                        @if($propiedad->habitaciones > 1)
+                                            {{ $propiedad->habitaciones }} Habitaciones
+                                        @else
+                                            {{ $propiedad->habitaciones }} Habitación
+                                        @endif
 
-                                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
-                                    </ol>
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-holidays"></i>
+                                        @if($propiedad->baños > 1)
+                                            {{ $propiedad->baños }} Baños
+                                        @else
+                                            {{ $propiedad->baños }} Baño
+                                        @endif
+                                    </li>
+                                </ul>
+                                <hr>
+                                    <div class="row">
+                                        <div class="col-lg-6" align="center">
+                                            <h4>%{{ $propiedad->rentabilidadAnual }}</h4>
+                                            <p>Rentabilidad Anual</p>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
+                                        <div class="col-lg-6" align="center">
+                                            <h4>%{{ $propiedad->rentabilidadTotal }}</h4>
+                                            <p>Rentabilidad Total</p>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                                        </div>
-                                    </div>
+                                    </div> 
+                                <hr>  
+                            </div>
+                            <div class="footer clearfix">
+                                <div class="pull-left days" align="center">
+                                    <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} dias </p>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="properties-details.html">Modern Family Home</a>
-                            </h1>
-                            <div class="location">
-                                <a href="properties-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
+                                <ul class="pull-right">
+                                    <li><a href="#"><i class="flaticon-favorite"></i></a></li>
+                                    <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
+                                </ul>
                             </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <i class="flaticon-furniture"></i> 3 Bedrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i> 2 Bathrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-square"></i> Sq Ft:3400
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i> 1 Garage
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left days">
-                                <p><i class="flaticon-time"></i> 5 Days ago</p>
-                            </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <a href="properties-details.html" class="property-img">
-                                <div class="listing-badges">
-                                    <span class="featured">Featured</span>
-                                </div>
-                                <div class="price-ratings-box">
-                                    <p class="price">
-                                        $178,000
-                                    </p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </div>
-                                <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="properties-details.html">Relaxing Apartment</a>
-                            </h1>
-                            <div class="location">
-                                <a href="properties-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <i class="flaticon-furniture"></i> 3 Bedrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i> 2 Bathrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-square"></i> Sq Ft:3400
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i> 1 Garage
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left days">
-                                <p><i class="flaticon-time"></i> 5 Days ago</p>
-                            </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <a href="properties-details.html" class="property-img">
-                                <div class="listing-time opening">For Sale</div>
-                                <div class="price-ratings-box">
-                                    <p class="price">
-                                        $178,000
-                                    </p>
-                                    <div class="ratings">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </div>
-                                <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                            </a>
-                        </div>
-                        <div class="detail">
-                            <h1 class="title">
-                                <a href="properties-details.html">Park Avenue</a>
-                            </h1>
-                            <div class="location">
-                                <a href="properties-details.html">
-                                    <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                </a>
-                            </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <i class="flaticon-furniture"></i> 3 Bedrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i> 2 Bathrooms
-                                </li>
-                                <li>
-                                    <i class="flaticon-square"></i> Sq Ft:3400
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i> 1 Garage
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer clearfix">
-                            <div class="pull-left days">
-                                <p><i class="flaticon-time"></i> 5 Days ago</p>
-                            </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="slick-prev slick-arrow-buton">
                 <i class="fa fa-angle-left"></i>

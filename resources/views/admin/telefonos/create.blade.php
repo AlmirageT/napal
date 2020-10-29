@@ -27,7 +27,7 @@ Crear Télefono
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label>Tipo Télefono</label>
-							{!!Form::select('idTipoTelefono',$tipos_telefonos,null,['class'=>"form-control", 'placeholder'=>"Ingrese el tipo de documento" , 'required'])!!}
+							{!!Form::select('idTipoTelefono',$tiposTelefonos,null,['class'=>"form-control", 'placeholder'=>"Ingrese el tipo de documento" , 'required'])!!}
 						</div>
 					</div>
 				</div>

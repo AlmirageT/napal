@@ -1,7 +1,7 @@
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$parametro_general->idParametroGeneral}}" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$parametroGeneral->idParametroGeneral}}" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			{!! Form::open(['route' => ['mantenedor-parametros-generales.update',$parametro_general->idParametroGeneral], 'method' => 'PUT']) !!}
+			{!! Form::open(['route' => ['mantenedor-parametros-generales.update',$parametroGeneral->idParametroGeneral], 'method' => 'PUT']) !!}
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     Editar Estado
@@ -15,13 +15,13 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="">Nombre parametro general</label>
-                            {!!Form::text('nombreParametroGeneral',$parametro_general->nombreParametroGeneral,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                            {!!Form::text('nombreParametroGeneral',$parametroGeneral->nombreParametroGeneral,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="">Valor parametro general</label>
-                            {!!Form::text('valorParametroGeneral',$parametro_general->valorParametroGeneral,['class'=>"form-control", 'placeholder'=>"Ingrese un valor..." , 'required'])!!}
+                            {!!Form::text('valorParametroGeneral',$parametroGeneral->valorParametroGeneral,['class'=>"form-control", 'placeholder'=>"Ingrese un valor..." , 'required'])!!}
 
                         </div>
                     </div>

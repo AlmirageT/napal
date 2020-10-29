@@ -1,7 +1,7 @@
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipo_credito->idTipoCredito}}" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipoCredito->idTipoCredito}}" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			{!! Form::open(['route' => ['mantenedor-tipos_creditos.update',$tipo_credito->idTipoCredito], 'method' => 'PUT']) !!}
+			{!! Form::open(['route' => ['mantenedor-tipos_creditos.update',$tipoCredito->idTipoCredito], 'method' => 'PUT']) !!}
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     Editar Tipo Crédito
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Nombre Tipo Crédito</label>
-                            {!!Form::text('nombreTipoCredito',$tipo_credito->nombreTipoCredito,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                            {!!Form::text('nombreTipoCredito',$tipoCredito->nombreTipoCredito,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
                 </div>

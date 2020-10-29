@@ -22,17 +22,17 @@ Tipos Flexibilidades
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($tipos_flexibilidades as $tipo_flexibilidad)
+				  	@foreach($tiposFlexibilidades as $tipoFlexibilidad)
 					    <tr>
-					      <td>{{ $tipo_flexibilidad->idTipoFlexibilidad }}</td>
-					      <td>{{ $tipo_flexibilidad->nombreTipoFlexibilidad }}</td>
+					      <td>{{ $tipoFlexibilidad->idTipoFlexibilidad }}</td>
+					      <td>{{ $tipoFlexibilidad->nombreTipoFlexibilidad }}</td>
 					      <td>
 					      	<div class="dropdown">
 	                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 	                                <i class="mdi mdi-dots-horizontal font-size-18"></i>
 	                            </a>
 	                            <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_flexibilidad->idTipoFlexibilidad }}">Editar</a>
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipoFlexibilidad->idTipoFlexibilidad }}">Editar</a>
 	                    			@include('admin.mantenedores.tipo_flexibilidad.destroy')
 	                            </div>
 	                        </div>

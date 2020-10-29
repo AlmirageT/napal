@@ -22,17 +22,17 @@ Tipos Usuarios
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($tipos_usuarios as $tipo_usuario)
+				  	@foreach($tiposUsuarios as $tipoUsuario)
 					    <tr>
-					      <td>{{ $tipo_usuario->idTipoUsuario }}</td>
-					      <td>{{ $tipo_usuario->nombreTipoUsuario }}</td>
+					      <td>{{ $tipoUsuario->idTipoUsuario }}</td>
+					      <td>{{ $tipoUsuario->nombreTipoUsuario }}</td>
 					      <td>
 					      	<div class="dropdown">
                                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                     <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_usuario->idTipoUsuario }}">Editar</a>
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipoUsuario->idTipoUsuario }}">Editar</a>
 	                    			@include('admin.mantenedores.tipo_usuario.destroy')
                                 </div>
                             </div>

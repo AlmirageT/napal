@@ -22,17 +22,17 @@ Tipos Créditos
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($tipos_creditos as $tipo_credito)
+				  	@foreach($tiposCreditos as $tipoCredito)
 					    <tr>
-					      <td>{{ $tipo_credito->idTipoCredito }}</td>
-					      <td>{{ $tipo_credito->nombreTipoCredito }}</td>
+					      <td>{{ $tipoCredito->idTipoCredito }}</td>
+					      <td>{{ $tipoCredito->nombreTipoCredito }}</td>
 					      <td>
 					      	<div class="dropdown">
                                 <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                     <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu">
-					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipo_credito->idTipoCredito }}">Editar</a>
+					      			<a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $tipoCredito->idTipoCredito }}">Editar</a>
 	                    			@include('admin.mantenedores.tipo_credito.destroy')
                                 </div>
                             </div>

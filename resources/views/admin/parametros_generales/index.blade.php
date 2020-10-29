@@ -23,18 +23,18 @@ Parametros Generales
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	@foreach($parametros_generales as $parametro_general)
+				  	@foreach($parametrosGenerales as $parametroGeneral)
 					    <tr>
-					      <td>{{ $parametro_general->idParametroGeneral }}</td>
-					      <td>{{ $parametro_general->nombreParametroGeneral }}</td>
-					      <td>{{ $parametro_general->valorParametroGeneral }}</td>
+					      <td>{{ $parametroGeneral->idParametroGeneral }}</td>
+					      <td>{{ $parametroGeneral->nombreParametroGeneral }}</td>
+					      <td>{{ $parametroGeneral->valorParametroGeneral }}</td>
 					      <td>
 					      	<div class="dropdown">
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
 		                        <div class="dropdown-menu dropdown-menu">
-		                            <a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $parametro_general->idParametroGeneral }}">Editar</a>
+		                            <a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $parametroGeneral->idParametroGeneral }}">Editar</a>
 		                            @include('admin.parametros_generales.destroy')
 		                        </div>
 		                    </div>

@@ -14,15 +14,15 @@ class TipoEstadoController extends Controller
 {
     public function index()
     {
-    	$tipos_estados = TipoEstado::all();
-    	return view('admin.mantenedores.tipo_estado.index',compact('tipos_estados'));
+    	$tiposEstados = TipoEstado::all();
+    	return view('admin.mantenedores.tipo_estado.index',compact('tiposEstados'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$tipo_estado = new TipoEstado($request->all());
-            	$tipo_estado->save();
+            	$tipoEstado = new TipoEstado($request->all());
+            	$tipoEstado->save();
                 toastr()->success('Agregado Correctamente', 'El tipo de estado: '.$request->nombreTipoEstado.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class TipoEstadoController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$tipo_estado = TipoEstado::find($idTipoEstado);
-	            $tipo_estado->fill($request->all());
-	            $tipo_estado->save();
+	    		$tipoEstado = TipoEstado::find($idTipoEstado);
+	            $tipoEstado->fill($request->all());
+	            $tipoEstado->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de estado: '.$request->nombreTipoEstado.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class TipoEstadoController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$tipo_estado = TipoEstado::find($idTipoEstado);
-	            toastr()->success('Eliminado Correctamente', 'El tipo de flexibilidad: '.$tipo_estado->nombreTipoEstado.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $tipo_estado->delete();
+    			$tipoEstado = TipoEstado::find($idTipoEstado);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de flexibilidad: '.$tipoEstado->nombreTipoEstado.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $tipoEstado->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

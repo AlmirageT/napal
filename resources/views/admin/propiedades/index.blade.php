@@ -50,6 +50,7 @@ Propiedades
 				      <th>Fecha Finalizacion</th>
 				      <th>Notas Internas</th>
 				      <th>Experto Asociado</th>
+				      <th>Propiedad Destacada</th>
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
@@ -112,6 +113,13 @@ Propiedades
 						      		Tiene un experto asociado
 						      	@else
 						      		no tiene experto asociado
+						      	@endif
+						      </td>
+						      <td>
+						      	@if($propiedad->destacadoPropiedad == 1)
+						      		Si
+						      	@else
+						      		No
 						      	@endif
 						      </td>
 						      <td>

@@ -14,15 +14,15 @@ class TipoCreditoController extends Controller
 {
     public function index()
     {
-    	$tipos_creditos = TipoCredito::all();
-    	return view('admin.mantenedores.tipo_credito.index',compact('tipos_creditos'));
+    	$tiposCreditos = TipoCredito::all();
+    	return view('admin.mantenedores.tipo_credito.index',compact('tiposCreditos'));
     }
     public function store(Request $request)
     {
     	try {
             DB::beginTransaction();
-            	$tipo_credito = new TipoCredito($request->all());
-            	$tipo_credito->save();
+            	$tipoCredito = new TipoCredito($request->all());
+            	$tipoCredito->save();
                 toastr()->success('Agregado Correctamente', 'El tipo de crédito: '.$request->nombreTipoCredito.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
@@ -48,9 +48,9 @@ class TipoCreditoController extends Controller
     {
     	try {
             DB::beginTransaction();
-	    		$tipo_credito = TipoCredito::find($idTipoCredito);
-	            $tipo_credito->fill($request->all());
-	            $tipo_credito->save();
+	    		$tipoCredito = TipoCredito::find($idTipoCredito);
+	            $tipoCredito->fill($request->all());
+	            $tipoCredito->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de crédito: '.$request->nombreTipoCredito.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
@@ -76,9 +76,9 @@ class TipoCreditoController extends Controller
     {
     	try {
     		DB::beginTransaction();
-    			$tipo_credito = TipoCredito::find($idTipoCredito);
-	            toastr()->success('Eliminado Correctamente', 'El tipo de crédito: '.$tipo_credito->nombreTipoCredito.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-	            $tipo_credito->delete();
+    			$tipoCredito = TipoCredito::find($idTipoCredito);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de crédito: '.$tipoCredito->nombreTipoCredito.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $tipoCredito->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

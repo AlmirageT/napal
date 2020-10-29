@@ -53,7 +53,7 @@ Crear Usuario
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Perfil</label>
-								<input type="file" name="avatar" class="form-control" required onchange="onFileSelected(event)">
+								<input type="file" name="avatar" class="form-control" required onchange="onFileSelected(event)" size="102400" id="imagen">
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -135,13 +135,13 @@ Crear Usuario
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Persona</label>
-								{!! Form::select('idTipoPersona', $tipos_personas,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo persona",'required']) !!}
+								{!! Form::select('idTipoPersona', $tiposPersonas,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo persona",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Usuario</label>
-								{!! Form::select('idTipoUsuario', $tipos_usuarios,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
+								{!! Form::select('idTipoUsuario', $tiposUsuarios,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo usuario",'required']) !!}
 								
 							</div>
 						</div>
@@ -160,17 +160,24 @@ Crear Usuario
 @endsection
 <script>
 	function onFileSelected(event) {
-	  var selectedFile = event.target.files[0];
-	  var reader = new FileReader();
+		var fileSize = $('#imagen')[0].files[0].size;
+	    var siezekiloByte = parseInt(fileSize / 1024);
+	    if (siezekiloByte >  $('#imagen').attr('size')) {
+	        alert("Imagen muy grande");
+	    }else{
+	    	var selectedFile = event.target.files[0];
+		  var reader = new FileReader();
 
-	  var imgtag = document.getElementById("myimage");
-	  imgtag.title = selectedFile.name;
+		  var imgtag = document.getElementById("myimage");
+		  imgtag.title = selectedFile.name;
 
-	  reader.onload = function(event) {
-	    imgtag.src = event.target.result;
-	  };
+		  reader.onload = function(event) {
+		    imgtag.src = event.target.result;
+		  };
 
-	  reader.readAsDataURL(selectedFile);
+		  reader.readAsDataURL(selectedFile);
+	    }
+	  
 	}
 	function formateaRut(rut) {
 	    var actual = rut.replace(/^0+/, "");
@@ -221,5 +228,6 @@ Crear Usuario
 			document.getElementById('select_comunas').innerHTML = comunas;
 		});
 	}
+
 </script>
 

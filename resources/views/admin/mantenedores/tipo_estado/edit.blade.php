@@ -1,7 +1,7 @@
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipo_estado->idTipoEstado}}" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="edit{{$tipoEstado->idTipoEstado}}" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-			{!! Form::open(['route' => ['mantenedor-tipos_estados.update',$tipo_estado->idTipoEstado], 'method' => 'PUT']) !!}
+			{!! Form::open(['route' => ['mantenedor-tipos_estados.update',$tipoEstado->idTipoEstado], 'method' => 'PUT']) !!}
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
                     Editar Tipo Estado
@@ -14,7 +14,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Nombre Tipo Estado</label>
-                            {!!Form::text('nombreTipoEstado',$tipo_estado->nombreTipoEstado,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                            {!!Form::text('nombreTipoEstado',$tipoEstado->nombreTipoEstado,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
                 </div>
