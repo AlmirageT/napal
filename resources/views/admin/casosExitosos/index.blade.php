@@ -1,3 +1,8 @@
+<script>
+    $(document).ready(function(){
+        $('.js-example-basic-multiple').select2({});
+    });
+</script>
 @extends('layouts.admin.app')
 @section('title')
 Casos Exitosos

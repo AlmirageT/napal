@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Documento;
 use App\TipoDocumento;
 use App\Propiedad;
@@ -39,6 +40,13 @@ class DocumentoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'documentoArchivo' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return redirect::to('napalm/subir-documentos/create/'.$request->idPropiedad);
+            }
     		DB::beginTransaction();
     			$ruta = null;
                 //guardar imagen

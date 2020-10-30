@@ -160,24 +160,14 @@ Crear Usuario
 @endsection
 <script>
 	function onFileSelected(event) {
-		var fileSize = $('#imagen')[0].files[0].size;
-	    var siezekiloByte = parseInt(fileSize / 1024);
-	    if (siezekiloByte >  $('#imagen').attr('size')) {
-	        alert("Imagen muy grande");
-	    }else{
-	    	var selectedFile = event.target.files[0];
-		  var reader = new FileReader();
-
-		  var imgtag = document.getElementById("myimage");
-		  imgtag.title = selectedFile.name;
-
-		  reader.onload = function(event) {
-		    imgtag.src = event.target.result;
-		  };
-
-		  reader.readAsDataURL(selectedFile);
-	    }
-	  
+	  var selectedFile = event.target.files[0];
+	  var reader = new FileReader();
+	  var imgtag = document.getElementById("myimage");
+	  imgtag.title = selectedFile.name;
+	  reader.onload = function(event) {
+	    imgtag.src = event.target.result;
+	  };
+	  reader.readAsDataURL(selectedFile);
 	}
 	function formateaRut(rut) {
 	    var actual = rut.replace(/^0+/, "");

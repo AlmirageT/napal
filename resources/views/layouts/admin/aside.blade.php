@@ -144,6 +144,15 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-book"></i>
+                        <span>Casos Exitosos</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/casos-exitosos') }}"><i class="bx bxs-book"></i> Casos Exitosos</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-book"></i>
                         <span>Parametros Generales</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">

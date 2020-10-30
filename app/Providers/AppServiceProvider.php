@@ -7,6 +7,8 @@ use App\ImagenCarrusel;
 use App\Propiedad;
 use Schema;
 use View;
+use Cache;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,20 +30,46 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $imagenesWeb = ImagenCarrusel::where('activoImagenCarrusel',1)->where('idTipoImagen',1)->get();
-        $propiedades = Propiedad::select('*')
-        ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
-        ->join('paises','propiedades.idPais','=','paises.idPais')
-        ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
-        ->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
-        ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
-        ->join('estados','propiedades.idEstado','=','estados.idEstado')
-        ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
-        ->orderBy('propiedades.idPropiedad','DESC')
-        ->where('propiedades.idEstado',4)
-        ->where('propiedades.destacadoPropiedad',1)
-        ->paginate(10);
+        if (cache::has('imagenesWeb')) {
+            $imagenesWeb = cache::get('imagenesWeb');
+        }else{
+           $imagenesWeb = cache::remember('imagenesWeb', 1*60, function(){
+                $cacheImagenesWeb = ImagenCarrusel::where('activoImagenCarrusel',1)->where('idTipoImagen',1)->get();
+                return $cacheImagenesWeb;
+            }); 
+        }
+
+        if (cache::has('imagenesMovil')) {
+            $imagenesMovil = cache::get('imagenesMovil');
+        }else{
+            $imagenesMovil = cache::remember('imagenesMovil', 1*60, function(){
+                $cacheImagenesMovil = ImagenCarrusel::where('activoImagenCarrusel',1)->where('idTipoImagen',2)->get();
+                return $cacheImagenesMovil;
+            });
+        }
+            
+        if (cache::has('propiedades')) {
+            $propiedades = cache::get('propiedades');
+        }else{
+            $propiedades = cache::remember('propiedades', 1*60, function(){
+                $cachePropiedades = Propiedad::select('*')
+                ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+                ->join('paises','propiedades.idPais','=','paises.idPais')
+                ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+                ->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+                ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+                ->join('estados','propiedades.idEstado','=','estados.idEstado')
+                ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+                ->orderBy('propiedades.idPropiedad','DESC')
+                ->where('propiedades.idEstado',4)
+                ->where('propiedades.destacadoPropiedad',1)
+                ->paginate(10);
+                return $cachePropiedades;
+            });
+        }
+
         View::share('imagenesWeb',$imagenesWeb);
         View::share('propiedades',$propiedades);
+        View::share('imagenesMovil',$imagenesMovil);
     }
 }

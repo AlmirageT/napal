@@ -7,7 +7,7 @@ Estados
 	<div class="col-lg-12" align="center">
 		<h3>Estados</h3> 
 	</div>
-	@include('admin.mantenedores.estado.create')
+	@include('admin.casosExitosos.create')
 </div>
 <div class="row">
 	<div class="col-lg-12">
@@ -35,12 +35,12 @@ Estados
 		                        </a>
 		                        <div class="dropdown-menu dropdown-menu">
 		                            <a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $estado->idEstado }}">Editar</a>
-		                            @include('admin.mantenedores.estado.destroy')
+		                            @include('admin.casosExitosos.destroy')
 		                        </div>
 		                    </div>
 					      		
 					      </td>
-		                    @include('admin.mantenedores.estado.edit')
+		                    @include('admin.casosExitosos.edit')
 					    </tr>
 					@endforeach
 				  </tbody>

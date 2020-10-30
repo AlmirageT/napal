@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Pais;
 use DB;
 
@@ -20,6 +21,13 @@ class PaisController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fotoPais' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
             	$ruta = null;
             	if($request->file('fotoPais')){
@@ -55,6 +63,13 @@ class PaisController extends Controller
     public function update(Request $request, $idPais)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fotoPais' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
 	    		$pais = Pais::find($idPais);
 	    		if ($request->file('fotoPais')) {

@@ -21,6 +21,7 @@ use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 
 class PropiedadController extends Controller
 {
@@ -62,7 +63,17 @@ class PropiedadController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fotoPrincipal' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
+                if (cache::has('propiedades')) {
+                    cache::forget('propiedades');
+                }
             	$imgName = null;
 	            if($request->file('fotoPrincipal')){
 	                $imagen = $request->file('fotoPrincipal');
@@ -127,7 +138,17 @@ class PropiedadController extends Controller
     public function update(Request $request, $idPropiedad)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fotoPrincipal' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
+                if (cache::has('propiedades')) {
+                    cache::forget('propiedades');
+                }
             	$imgName = null;
             	$propiedad = Propiedad::find($idPropiedad);
 	            if($request->file('fotoPrincipal')){
@@ -180,6 +201,9 @@ class PropiedadController extends Controller
     {
     	try {
     		DB::beginTransaction();
+                if (cache::has('propiedades')) {
+                    cache::forget('propiedades');
+                }
     			$propiedad = Propiedad::find($idPropiedad);
 	            toastr()->success('Eliminado Correctamente', 'La propiedad '.$propiedad->nombrePropiedad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
 	            if ($propiedad->fotoPrincipal != null) {

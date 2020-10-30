@@ -160,13 +160,13 @@ Actualizar Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Fecha Inicio</label>
-								{!! Form::date('fechaInicio',$propiedad->fechaInicio,['class'=>"form-control",'required']) !!}
+								{!! Form::date('fechaInicio',date('Y-m-d',strtotime($propiedad->fechaInicio)),['class'=>"form-control",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Fecha Finalización</label>
-								{!! Form::date('fechaFinalizacion',$propiedad->fechaFinalizacion,['class'=>"form-control",'required']) !!}
+								{!! Form::date('fechaFinalizacion',date('Y-m-d',strtotime($propiedad->fechaFinalizacion)),['class'=>"form-control",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">

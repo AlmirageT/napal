@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Mail;
 use Validator;
-use App\Mail\TokenConfirmacion;
+use App\Mail\BienvenidoEmail;
 
 class ActivarCuentaController extends Controller
 {
@@ -60,6 +60,7 @@ class ActivarCuentaController extends Controller
                     //$rut = Crypt::decrypt($request->t);
                     //$usuarioEncontrado = Usuario::where('rut', '=', $rut)->firstOrFail();
                     $usuarioEncontrado = Usuario::where('tokenCorto', $request->tsms)->firstOrFail();
+                    $nombre = $usuarioEncontrado->nombre;
                     if ($usuarioEncontrado) {
                         // detectando si la cuenta esta previamente activada
                         if ($usuarioEncontrado->activarCuenta == 1) {
@@ -70,8 +71,8 @@ class ActivarCuentaController extends Controller
                             $usuarioEncontrado->save();
                         }
                     }
-
-
+                    $url = asset('login');
+                    Mail::to($usuarioEncontrado->correo)->send(new BienvenidoEmail($url,$nombre)); // datosCorreo a $data en el mail
                     //Mail::to($usuarioEncontrado->correo)->send(new BienvenidoEmail($datosCorreo)); 
 
                     return redirect('notificacion/cuentaActivadaCorrectamente');

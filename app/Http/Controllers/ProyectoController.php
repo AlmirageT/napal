@@ -13,6 +13,7 @@ use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 
 class ProyectoController extends Controller
 {
@@ -38,6 +39,13 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fotoPortada' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
 	            $imgName = null;
 	            if($request->file('fotoPortada')){
@@ -83,6 +91,13 @@ class ProyectoController extends Controller
     public function update(Request $request, $idProyecto)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fotoPortada' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
                 $imgName = null;
 	            if($request->file('fotoPortada')){

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\ImagenCarrusel;
 use App\TipoImagen;
 use DB;
@@ -25,7 +26,20 @@ class ImagenesCarruselController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'rutaImagenCarrusel' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
+                if (cache::has('imagenesWeb')) {
+                    cache::forget('imagenesWeb');
+                }
+                if (cache::has('imagenesMovil')) {
+                    cache::forget('imagenesMovil');
+                }
             	$imagenCarrusel = new ImagenCarrusel();
             	if ($request->file('rutaImagenCarrusel')) {
             		$imagen = $request->file('rutaImagenCarrusel');
@@ -64,7 +78,20 @@ class ImagenesCarruselController extends Controller
     public function update(Request $request, $idImagenCarrusel)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'rutaImagenCarrusel' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
+                if (cache::has('imagenesWeb')) {
+                    cache::forget('imagenesWeb');
+                }
+                if (cache::has('imagenesMovil')) {
+                    cache::forget('imagenesMovil');
+                }
 	    		$imagenCarrusel = ImagenCarrusel::find($idImagenCarrusel);
 	    		if ($request->file('rutaImagenCarrusel')) {
 	    			if ($imagenCarrusel->rutaImagenCarrusel != null) {
@@ -107,6 +134,12 @@ class ImagenesCarruselController extends Controller
     {
     	try {
     		DB::beginTransaction();
+                if (cache::has('imagenesWeb')) {
+                    cache::forget('imagenesWeb');
+                }
+                if (cache::has('imagenesMovil')) {
+                    cache::forget('imagenesMovil');
+                }
     			$imagenCarrusel = ImagenCarrusel::find($idImagenCarrusel);
 	            toastr()->success('Eliminado Correctamente', 'La imagen ha sido agregada correctamente', ['timeOut' => 9000]);
 	            if ($imagenCarrusel->rutaImagenCarrusel != null) {

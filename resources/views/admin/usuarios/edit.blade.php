@@ -32,24 +32,13 @@ Crear Usuario
 								{!! Form::email('correo',$usuario->correo,['class'=>"form-control", 'placeholder'=>"ejemplo@ejemplo.com", 'required']) !!}
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Rut</label>
 								{!! Form::text('rut',$usuario->rut,['class'=>"form-control",'placeholder'=>"Ingrese su rut sin puntos ni guiones",'required','onchange'=>"formateaRut(this.value)", 'id'=>"rut"]) !!}
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label>Contraseña</label>
-								<input type="password" name="password" class="form-control" placeholder="*********" required>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label>Confirmar Contraseña</label>
-								<input type="password" name="confirm_password" class="form-control" placeholder="*********" required>
-							</div>
-						</div>
+						
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Perfil</label>

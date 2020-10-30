@@ -99,6 +99,8 @@ Route::get('napalm/provincias','ProvinciaController@index');
 Route::get('napalm/comunas','ComunaController@index');
 //imagenes carrusel
 Route::get('napalm/imagenes-carrusel','ImagenesCarruselController@index');
+//casos exitosos
+Route::get('napalm/casos-exitosos','CasoExitosoController@index');
 //maps
 Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
@@ -243,4 +245,10 @@ Route::resource('mantenedor-carrusel','ImagenesCarruselController');
 Route::delete('mantenedor-carrusel/{idImagenCarrusel}',array(
     'uses'=>'ImagenesCarruselController@destroy',
     'as'=>'mantenedor-carrusel.delete'
+));
+//crud casos exitosos
+Route::resource('mantenedor-casos-exitosos','CasoExitosoController');
+Route::delete('mantenedor-casos-exitosos/{idCasoExitoso}',array(
+    'uses'=>'CasoExitosoController@destroy',
+    'as'=>'mantenedor-casos-exitosos.delete'
 ));

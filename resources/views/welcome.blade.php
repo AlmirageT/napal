@@ -3,27 +3,78 @@
 <!-- Main header end -->
 
 <!-- Banner start -->
-<div class="banner" id="banner">
-    @if(count($imagenesWeb) > 0)
-        <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item banner-max-height active">
-                    <img class="d-block w-100" src="{{ asset($imagenesWeb->shift()->rutaImagenCarrusel) }}" alt="banner-1">
-                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                        <div class="carousel-content container">
-                            <div class="text-center">
-                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                                <p data-animation="animated fadeInUp delay-10s">
-                                    This is real estate website template based on Bootstrap 4 framework.
-                                </p>
-                                <a href="index.html" class="btn btn-white">Read More</a>
+{{--  
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  registrar
+</button>
+  @include('auth.register').d-block .d-sm-none
+  --}}
+<div class="d-none d-sm-block">
+    <div class="banner" id="banner">
+        @if(count($imagenesWeb) > 0)
+            <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item banner-max-height active">
+                        <img class="d-block w-100" src="{{ asset($imagenesWeb->shift()->rutaImagenCarrusel) }}" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-center">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @foreach($imagenesWeb as $imagenWeb)
+                        <div class="carousel-item banner-max-height">
+                            <img class="d-block w-100" src="{{ asset($imagenWeb->rutaImagenCarrusel) }}" alt="banner-1">
+                            <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                                <div class="carousel-content container">
+                                    <div class="text-right">
+                                        <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                        <p data-animation="animated fadeInUp delay-10s">
+                                            This is real estate website template based on Bootstrap 4 framework.
+                                        </p>
+                                        <a href="index.html" class="btn btn-white">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                @foreach($imagenesWeb as $imagenWeb)
+                <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                    <span class="slider-mover-left" aria-hidden="true">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                </a>
+                <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                    <span class="slider-mover-right" aria-hidden="true">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                </a>
+            </div>
+        @else
+            <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item banner-max-height active">
+                        <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-center">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="carousel-item banner-max-height">
-                        <img class="d-block w-100" src="{{ asset($imagenWeb->rutaImagenCarrusel) }}" alt="banner-1">
+                        <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-right">
@@ -36,80 +87,147 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    <div class="carousel-item banner-max-height">
+                        <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-left">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                    <span class="slider-mover-left" aria-hidden="true">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                </a>
+                <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                    <span class="slider-mover-right" aria-hidden="true">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
-                <span class="slider-mover-left" aria-hidden="true">
-                    <i class="fa fa-angle-left"></i>
-                </span>
-            </a>
-            <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
-                <span class="slider-mover-right" aria-hidden="true">
-                    <i class="fa fa-angle-right"></i>
-                </span>
-            </a>
-        </div>
-    @else
-        <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item banner-max-height active">
-                    <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                        <div class="carousel-content container">
-                            <div class="text-center">
-                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                                <p data-animation="animated fadeInUp delay-10s">
-                                    This is real estate website template based on Bootstrap 4 framework.
-                                </p>
-                                <a href="index.html" class="btn btn-white">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item banner-max-height">
-                    <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                        <div class="carousel-content container">
-                            <div class="text-right">
-                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                                <p data-animation="animated fadeInUp delay-10s">
-                                    This is real estate website template based on Bootstrap 4 framework.
-                                </p>
-                                <a href="index.html" class="btn btn-white">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item banner-max-height">
-                    <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                    <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
-                        <div class="carousel-content container">
-                            <div class="text-left">
-                                <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
-                                <p data-animation="animated fadeInUp delay-10s">
-                                    This is real estate website template based on Bootstrap 4 framework.
-                                </p>
-                                <a href="index.html" class="btn btn-white">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
-                <span class="slider-mover-left" aria-hidden="true">
-                    <i class="fa fa-angle-left"></i>
-                </span>
-            </a>
-            <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
-                <span class="slider-mover-right" aria-hidden="true">
-                    <i class="fa fa-angle-right"></i>
-                </span>
-            </a>
-        </div>
-    @endif
-    <!-- Search Section start -->
+        @endif
+        <!-- Search Section start -->
 
-    <!-- Search Section end -->
+        <!-- Search Section end -->
+    </div>
+</div>
+<div class="d-sm-none d-md-none d-lg-none d-xl-none">
+    <div class="banner" id="banner">
+        @if(count($imagenesMovil) > 0)
+            <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item banner-max-height active">
+                        <img class="d-block w-100" src="{{ asset($imagenesMovil->shift()->rutaImagenCarrusel) }}" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-center">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach($imagenesMovil as $imagenMovil)
+                        <div class="carousel-item banner-max-height">
+                            <img class="d-block w-100" src="{{ asset($imagenMovil->rutaImagenCarrusel) }}" alt="banner-1">
+                            <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                                <div class="carousel-content container">
+                                    <div class="text-right">
+                                        <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                        <p data-animation="animated fadeInUp delay-10s">
+                                            This is real estate website template based on Bootstrap 4 framework.
+                                        </p>
+                                        <a href="index.html" class="btn btn-white">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                    <span class="slider-mover-left" aria-hidden="true">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                </a>
+                <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                    <span class="slider-mover-right" aria-hidden="true">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                </a>
+            </div>
+        @else
+            <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item banner-max-height active">
+                        <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-center">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item banner-max-height">
+                        <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-right">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item banner-max-height">
+                        <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
+                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-content container">
+                                <div class="text-left">
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <p data-animation="animated fadeInUp delay-10s">
+                                        This is real estate website template based on Bootstrap 4 framework.
+                                    </p>
+                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                    <span class="slider-mover-left" aria-hidden="true">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                </a>
+                <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                    <span class="slider-mover-right" aria-hidden="true">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+                </a>
+            </div>
+        @endif
+        <!-- Search Section start -->
+
+        <!-- Search Section end -->
+    </div>
 </div>
 <!-- banner end -->
 

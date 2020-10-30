@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class BienvenidoEmail extends Mailable
+class TokenUsuarioPrivado extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $url;
-    protected $nombre;
+    protected $url_token;
+    protected $usuario;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($url,$nombre)
+    public function __construct($url_token, $usuario)
     {
-        $this->url = $url;
-        $this->nombre = $nombre;
+        $this->url_token = $url_token;
+        $this->usuario = $usuario;
     }
 
     /**
@@ -30,8 +30,8 @@ class BienvenidoEmail extends Mailable
      */
     public function build()
     {
-        $url = $this->url;
-        $nombre = $this->nombre;
-        return $this->subject('Cuenta Activada')->view('mail.bienvenidoEmail',compact('url','nombre'));
+		$token = $this->url_token;    	
+    	$nuevoUsuario = $this->usuario;
+        return $this->subject('Código de activación')->view('mail.mailConfirmacion',compact('token','nuevoUsuario'));
     }
 }

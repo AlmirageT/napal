@@ -9,6 +9,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use App\Mail\TokenUsuarioPrivado;
 use App\Avatar;
 use App\Idioma;
 use App\TipoPersona;
@@ -22,6 +23,7 @@ use App\DireccionUsuario;
 use App\Telefono;
 use App\TipoTelefono;
 use DB;
+use Mail;
 
 class UsuarioController extends Controller
 {
@@ -82,14 +84,11 @@ class UsuarioController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'title' => 'required|unique:posts|max:255',
-                'body' => 'required'
+                'avatar' => 'max:102400'
             ]);
-
             if ($validator->fails()) {
-                return redirect('post/create')
-                            ->withErrors($validator)
-                            ->withInput();
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
             }
             DB::beginTransaction();
                 $id_avatar = null;
@@ -137,6 +136,9 @@ class UsuarioController extends Controller
                 $geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
                 $direccionUsuario->poi = $geoHash[0]->geoHash;
                 $direccionUsuario->save();
+                
+                $url_token = asset('/api/activarCuentaSMS?tsms=').$usuario->tokenCorto;
+                Mail::to($usuario->correo)->send(new TokenUsuarioPrivado($url_token,$usuario));
 
                 toastr()->success('Agregado Correctamente', 'El usuario: '.$request->nombre.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
@@ -177,6 +179,13 @@ class UsuarioController extends Controller
     public function update(Request $request, $idUsuario)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'avatar' => 'max:102400'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('El archivo no puede pasar de los 100MB');
+                return back();
+            }
             DB::beginTransaction();
                 $id_avatar = null;
                 //guardar imagenes
@@ -197,9 +206,6 @@ class UsuarioController extends Controller
                 $usuario->correo = $request->correo;
                 if ($id_avatar != null) {
                     $usuario->idAvatar = $id_avatar;
-                }
-                if ($request->password != null) {
-                    $usuario->password = bcrypt($request->password);
                 }
                 $usuario->profesion = $request->profesion;
                 $usuario->idTipoPersona = $request->idTipoPersona;
