@@ -7,31 +7,27 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\CasoExitoso;
-use App\Propiedad;
+use App\RedSocial;
 use DB;
+use cache;
 
-class CasoExitosoController extends Controller
+class RedSocialController extends Controller
 {
     public function index()
-    {  	
-    	$casosExitosos = CasoExitoso::select('*')
-    	->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
-		->orderBy('casos_exitosos.idCasoExitoso','DESC')
-		->get();    
-		$propiedades = Propiedad::where('idEstado',6)->orWhere('idEstado',5)->pluck('nombrePropiedad','idPropiedad');
-    	return view('admin.casosExitosos.index',compact('casosExitosos','propiedades'));
+    {
+    	$redesSociales = RedSocial::all();
+    	return view('admin.redesSociales.index',compact('redesSociales'));
     }
     public function store(Request $request)
     {
     	try {
-            if (cache::has('casosExitosos')) {
-                cache::forget('casosExitosos');
-            }
             DB::beginTransaction();
-            	$casoExitoso = new CasoExitoso($request->all());
-            	$casoExitoso->save();
-                toastr()->success('Agregado Correctamente', 'Caso exitoso agregado correctamente', ['timeOut' => 9000]);
+            	if (cache::has('redesSociales')) {
+                    cache::forget('redesSociales');
+                }
+            	$redSocial = new RedSocial($request->all());
+            	$redSocial->save();
+                toastr()->success('Agregado Correctamente', 'La red social: '.$request->nombreRedSocial.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {
@@ -52,17 +48,17 @@ class CasoExitosoController extends Controller
             return redirect::back();
         }
     }
-    public function update(Request $request, $idCasoExitoso)
+    public function update(Request $request, $idCodigoPromocional)
     {
     	try {
-            if (cache::has('casosExitosos')) {
-                cache::forget('casosExitosos');
-            }
             DB::beginTransaction();
-	    		$casoExitoso = CasoExitoso::find($idCasoExitoso);
-	            $casoExitoso->fill($request->all());
-	            $casoExitoso->save();
-                toastr()->success('Actualizado Correctamente', 'Caso exitoso actualizado correctamente', ['timeOut' => 9000]);
+            	if (cache::has('redesSociales')) {
+                    cache::forget('redesSociales');
+                }
+	    		$redSocial = RedSocial::find($idCodigoPromocional);
+	            $redSocial->fill($request->all());
+	            $redSocial->save();
+                toastr()->success('Actualizado Correctamente', 'El tipo de estado: '.$request->nombreRedSocial.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
         	return redirect::back();
     	} catch (ModelNotFoundException $e) {
@@ -83,16 +79,16 @@ class CasoExitosoController extends Controller
             return redirect::back();
         }
     }
-    public function destroy($idCasoExitoso)
+    public function destroy($idCodigoPromocional)
     {
     	try {
-            if (cache::has('casosExitosos')) {
-                cache::forget('casosExitosos');
-            }
     		DB::beginTransaction();
-    			$casoExitoso = CasoExitoso::find($idCasoExitoso);
-	            toastr()->success('Eliminado Correctamente', 'El caso exitoso a sido eliminado correctamente', ['timeOut' => 9000]);
-	            $casoExitoso->delete();
+    			if (cache::has('redesSociales')) {
+                    cache::forget('redesSociales');
+                }
+    			$redSocial = RedSocial::find($idCodigoPromocional);
+	            toastr()->success('Eliminado Correctamente', 'El tipo de flexibilidad: '.$redSocial->nombreRedSocial.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+	            $redSocial->delete();
     		DB::commit();
             return redirect::back();
     	} catch (ModelNotFoundException $e) {

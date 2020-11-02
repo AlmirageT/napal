@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use DB;
-use Session;
-use App\Usuario;
-use App\Avatar;
 use Illuminate\Support\Facades\Crypt;
-use App\Helpers\Mensajeria;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Helpers\Mensajeria;
+use App\Usuario;
+use App\Avatar;
+use App\LogRegistro;
+use Session;
+use DB;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,7 @@ class LoginController extends Controller
     public function ingreso_session(Request $request)
     {
     	try {
+            DB::beginTransaction();
     		$correo = Usuario::where('correo', $request->correo)->firstOrFail();
     		if ($correo) {
 	    		$pass_decrytp = Crypt::decrypt($correo->password);
@@ -42,6 +44,10 @@ class LoginController extends Controller
 		            Session::put('apellido', $correo->apellido);
 		            Session::put('correo', $correo->correo);
 		            Session::put('rut', $correo->rut);
+                    LogRegistro::create([
+                        'idUsuario'=> $correo->idUsuario
+                    ]);
+
 		            if ($correo->idAvatar) {
 						$imgAvatar = Avatar::findOrFail($correo->idAvatar);
 		                Session::put('avatar', $imgAvatar->rutaAvatar);
@@ -52,27 +58,36 @@ class LoginController extends Controller
 		            if (Session::get('idTipoUsuario') == 3) {
 		                // usuarios internos
                 		toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
-
+                        DB::commit();
 		                return redirect::to('napalm/home');
 		            }
             		toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
+                    DB::commit();
         			return redirect::to('/');
 	    		}else{
             		toastr()->warning('Usuario y/o contraseña incorrecto');
+                    DB::rollback();
         			return redirect::to('/');
 	    		}
 	    	}
     		toastr()->warning('Usuario y/o contraseña incorrecto');
+            DB::rollback();
 			return redirect::to('/');
         } catch (QueryException $e) {
             // error conexion a BBDD
             toastr()->warning('Se ha producido un error interno. Favor intente nuevamente');
+            DB::rollback();
+
             return redirect('/');
         } catch (ModelNotFoundException $e) {
             toastr()->warning('Usuario y/o contraseña incorrecto');
+            DB::rollback();
+
             return redirect('/');
         } catch (Exception $e) {
             toastr()->warning('Se ha producido un error. Favor intente nuevamente');
+            DB::rollback();
+            
             return redirect('/');
         }
     }

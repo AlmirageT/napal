@@ -7,34 +7,27 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\CasoExitoso;
-use App\Propiedad;
+use App\Codigo;
 use DB;
 
-class CasoExitosoController extends Controller
+class CodigoController extends Controller
 {
     public function index()
-    {  	
-    	$casosExitosos = CasoExitoso::select('*')
-    	->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
-		->orderBy('casos_exitosos.idCasoExitoso','DESC')
-		->get();    
-		$propiedades = Propiedad::where('idEstado',6)->orWhere('idEstado',5)->pluck('nombrePropiedad','idPropiedad');
-    	return view('admin.casosExitosos.index',compact('casosExitosos','propiedades'));
+    {
+    	$codigos = Codigo::all();
+        return view('admin.codigosPromocionales.index',compact('codigos'));
     }
     public function store(Request $request)
     {
     	try {
-            if (cache::has('casosExitosos')) {
-                cache::forget('casosExitosos');
-            }
             DB::beginTransaction();
-            	$casoExitoso = new CasoExitoso($request->all());
-            	$casoExitoso->save();
-                toastr()->success('Agregado Correctamente', 'Caso exitoso agregado correctamente', ['timeOut' => 9000]);
+                $codigo = new Codigo($request->all());
+                $codigo->codigo = uniqid();
+                $codigo->save();
+                toastr()->success('Agregado Correctamente', 'El código: '.$codigo->codigo.' ha sido agregado correctamente', ['timeOut' => 9000]);
             DB::commit();
             return redirect::back();
-    	} catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
             return back();
@@ -52,20 +45,17 @@ class CasoExitosoController extends Controller
             return redirect::back();
         }
     }
-    public function update(Request $request, $idCasoExitoso)
+    public function update(Request $request, $idCodigo)
     {
     	try {
-            if (cache::has('casosExitosos')) {
-                cache::forget('casosExitosos');
-            }
             DB::beginTransaction();
-	    		$casoExitoso = CasoExitoso::find($idCasoExitoso);
-	            $casoExitoso->fill($request->all());
-	            $casoExitoso->save();
-                toastr()->success('Actualizado Correctamente', 'Caso exitoso actualizado correctamente', ['timeOut' => 9000]);
+                $codigo = Codigo::find($idCodigo);
+                $codigo->fill($request->all());
+                $codigo->save();
+                toastr()->success('Actualizado Correctamente', 'La fecha de vencimiento ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
-        	return redirect::back();
-    	} catch (ModelNotFoundException $e) {
+            return redirect::back();
+        } catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
             return back();
@@ -83,19 +73,16 @@ class CasoExitosoController extends Controller
             return redirect::back();
         }
     }
-    public function destroy($idCasoExitoso)
+    public function destroy($idCodigo)
     {
     	try {
-            if (cache::has('casosExitosos')) {
-                cache::forget('casosExitosos');
-            }
-    		DB::beginTransaction();
-    			$casoExitoso = CasoExitoso::find($idCasoExitoso);
-	            toastr()->success('Eliminado Correctamente', 'El caso exitoso a sido eliminado correctamente', ['timeOut' => 9000]);
-	            $casoExitoso->delete();
-    		DB::commit();
+            DB::beginTransaction();
+                $codigo = Codigo::find($idCodigo);
+                toastr()->success('Eliminado Correctamente', 'El código: '.$codigo->codigo.' ha sido eliminado correctamente', ['timeOut' => 9000]);
+                $codigo->delete();
+            DB::commit();
             return redirect::back();
-    	} catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
             return back();

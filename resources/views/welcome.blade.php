@@ -1,14 +1,79 @@
 @extends('layouts.public.app')
-@section('content')
-<!-- Main header end -->
+@section('css')
+<style type="text/css">
+    .separador-60 {
+        padding: 30px;
+        width: 10px;
+    }
+    #smartphone-display > div > img.ipad {
+        position: absolute;
+        z-index: 1;
+        width: 585px;
+    }
+    .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    #smartphone-display > div > img.iphone {
+        position: absolute;
+        top: 225px;
+        z-index: 2;
+        width: 460px;
+        right: -90px;
+    }
+    
+    img {
+        border: 0;
+      vertical-align: middle;
+    }
+    .img-responsive {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    div img.ipad {
+        position: absolute;
+        z-index: 1;
+        width: 585px;
+    }
+    #smartphone-display {
+        height: 720px;
+    }
+    .iphone-content {
+        width: 189px;
+        position: absolute;
+        right: 40px;
+        top: 236px;
+        height: 424px;
+        overflow: hidden;
+    }
+    .iphone-content > img {
+        width: 189px;
+        margin-top: 18px;
+    }
+    #ipad-content > img {
+        width: 100%;
+        margin-top: 22px;
+    }
+    #ipad-content {
+        width: 477px;
+        position: absolute;
+        right: 41px;
+        top: 68px;
+        height: 639px;
+        overflow: hidden;
+    }
+</style>
 
-<!-- Banner start -->
-{{--  
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  registrar
-</button>
-  @include('auth.register').d-block .d-sm-none
-  --}}
+@endsection
+@section('content')
+
 <div class="d-none d-sm-block">
     <div class="banner" id="banner">
         @if(count($imagenesWeb) > 0)
@@ -340,7 +405,309 @@
     </div>
 </div>
 <!-- Featured Properties end -->
+<div class="counters overview-bgi">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
+                <div class="media counter-box">
+                    <div class="media-left">
+                        <i class="flaticon-tag"></i>
+                    </div>
+                    <div class="media-body">
+                        <h1 class="counter">967</h1>
+                        <p>TIR MEDIA PLATAFORMA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
+                <div class="media counter-box">
+                    <div class="media-left">
+                        <i class="flaticon-business"></i>
+                    </div>
+                    <div class="media-body">
+                        <h1 class="counter">1276</h1>
+                        <p>CIFRA DE INVERSIÓN ACUMULADA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
+                <div class="media counter-box">
+                    <div class="media-left">
+                        <i class="flaticon-people"></i>
+                    </div>
+                    <div class="media-body">
+                        <h1 class="counter">396</h1>
+                        <p>RENDIMIENTO REPARTIDOS + DEVOLUCIÓN + DE CAPITAL + CCD</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
+                <div class="media counter-box">
+                    <div class="media-left">
+                        <i class="flaticon-people-1"></i>
+                    </div>
+                    <div class="media-body">
+                        <h1 class="counter">177</h1>
+                        <p>N° DE USUARIOS REGISTRADOS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<div class="container">
+    <div align="right">
+        <p>LOS VALORES NO SON SOLOS NUMEROS</p>
+    </div>
+    <div align="right" >
+        <a  href="{{ asset('estadisticas') }}">Ver Estadistica -></a>
+    </div>
+</div>
+<div class="our-team-2 content-area-3">
+    <br>
+    <br>
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Confianza</h1>
+            <p>Miles de usuarios ya han recogido sus beneficios.</p>
+        </div>
+        <div class="slick-slider-area">
+            <div class="row slick-carousel" data-slick='{"slidesToShow": 2, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+                @if(count($casosExitosos) > 0)
+                    @foreach($casosExitosos as $casoExitoso)
+                        <div class="slick-slide-item">
+                            <div class="row team-4">
+                                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
+                                    <div class="photo">
+                                        <img src="{{ asset($casoExitoso->fotoPrincipal) }}" alt="avatar-10" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
+                                    <div class="detail">
+                                        <h5>Propiedad</h5>
+                                        <h4>
+                                            <a href="">{{ $casoExitoso->nombrePropiedad }}</a>
+                                        </h4>
 
+                                        <div class="contact">
+                                            <ul>
+                                                <li>
+                                                    <span>Address:</span><a href="#"> {{ $casoExitoso->direccion1 }} {{ $casoExitoso->nombreRegion }}</a>
+                                                </li>
+                                                <li>
+                                                    <span>TIR estimada:</span><a href=""> %{{ $casoExitoso->rentabilidadAnual }}</a>
+                                                </li>
+                                                <li>
+                                                    <span>TIR Entregada:</span><a href=""> %{{ $casoExitoso->rentabilidadTotal }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="contact">
+                                            <a href="" class="btn btn-primary">Registrate</a>
+                                        </div>
+                                        {{--  
+                                        <ul class="social-list clearfix">
+                                            <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+                                        --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="slick-slide-item">
+                        <div class="row team-4">
+                            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
+                                <div class="photo">
+                                    <img src="http://placehold.it/224x268" alt="avatar-10" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
+                                <div class="detail">
+                                    <h5>Office Manager</h5>
+                                    <h4>
+                                        <a href="agent-detail.html">Karen Paran</a>
+                                    </h4>
+
+                                    <div class="contact">
+                                        <ul>
+                                            <li>
+                                                <span>Address:</span><a href="#"> 44 New Design Street,</a>
+                                            </li>
+                                            <li>
+                                                <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>
+                                            </li>
+                                            <li>
+                                                <span>Mobile:</span><a href="tel:+554XX-634-7071"> +55 4XX-634-7071</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="contact">
+                                        <a href="" class="btn btn-primary">Registrate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slick-slide-item">
+                        <div class="row team-4">
+                            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
+                                <div class="photo">
+                                    <img src="http://placehold.it/224x268" alt="avatar-10" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
+                                <div class="detail">
+                                    <h5>Office Manager</h5>
+                                    <h4>
+                                        <a href="agent-detail.html">Karen Paran</a>
+                                    </h4>
+
+                                    <div class="contact">
+                                        <ul>
+                                            <li>
+                                                <span>Address:</span><a href="#"> 44 New Design Street,</a>
+                                            </li>
+                                            <li>
+                                                <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>
+                                            </li>
+                                            <li>
+                                                <span>Mobile:</span><a href="tel:+554XX-634-7071"> +55 4XX-634-7071</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <ul class="social-list clearfix">
+                                        <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slick-slide-item">
+                        <div class="row team-4">
+                            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
+                                <div class="photo">
+                                    <img src="http://placehold.it/224x268" alt="avatar-10" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
+                                <div class="detail">
+                                    <h5>Office Manager</h5>
+                                    <h4>
+                                        <a href="agent-detail.html">Karen Paran</a>
+                                    </h4>
+
+                                    <div class="contact">
+                                        <ul>
+                                            <li>
+                                                <span>Address:</span><a href="#"> 44 New Design Street,</a>
+                                            </li>
+                                            <li>
+                                                <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>
+                                            </li>
+                                            <li>
+                                                <span>Mobile:</span><a href="tel:+554XX-634-7071"> +55 4XX-634-7071</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <ul class="social-list clearfix">
+                                        <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+            <div class="slick-prev slick-arrow-buton">
+                <i class="fa fa-angle-left"></i>
+            </div>
+            <div class="slick-next slick-arrow-buton">
+                <i class="fa fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="smartphone-animation" style="opacity: 1;">
+    <div class="separador-60"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-none d-sm-none d-md-block d-lg-block d-xl-block" id="smartphone-display">
+                <div>
+                    <img class="lazy img-responsive ipad" src="https://static.housers.com/assets/images/home/ipad.png" style="">
+                    <div class="ipad-content" id="ipad-content">
+                        <img class="lazy img-responsive" src="https://static.housers.com/assets/images/home/ipad_content_es.png" style="transform: translate(0%, 0%) translate3d(0px, 0px, 0px);">
+                    </div>
+                </div>
+                <div style="top: 135px; position: absolute; z-index: 2; left: 76px; width: 100%;">
+                    <img class="lazy img-responsive iphone" src="https://static.housers.com/assets/images/home/iphone.png" style="">
+                    <div class="iphone-content" id="iphone-content">
+                        <img class="lazy" src="https://static.housers.com/assets/images/home/iphone_content_es.png" style="transform: translate(0%, 0%) translate3d(0px, 0px, 0px);">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-xs-12">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-2 title-tech">
+                        <h2>Tecnología</h2>
+                        <p>Invierte en minutos y no en meses</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2 content-investment-tech">
+                        <div class="background-polygon polygon-triangle"></div>
+                        <div class="investment-title">Date de alta ahora</div>
+                        <div class="investment-text">Es gratis y sencillo.</div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1 content-investment-tech">
+                        <div class="background-polygon polygon-triangle"></div>
+                        <div class="investment-title ">Invierte de forma fácil y flexible</div>
+                        <div class="investment-text">Lo hacemos sencillo para ti, 100% online.</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2 content-investment-tech">
+                        <div class="background-polygon polygon-triangle"></div>
+                        <div class="investment-title">Gestiona desde tu área privada</div>
+                        <div class="investment-text">Sigue en tiempo real la evolución de tus inversiones.</div>
+                    </div>
+                    <div class="col-xs-12  col-sm-6 col-md-5 col-md-offset-1 content-investment-tech">
+                        <div class="background-polygon polygon-triangle"></div>
+                        <div class="investment-title">Diversifica sin límite</div>
+                        <div class="investment-text">Invierte donde quieras, como los grandes inversores.</div>
+                    </div>
+                </div>
+                <div class="separador-20"></div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a href="/es/como-funciona" class="btn btn-housers-orange btn-home-orange text-uppercase">¿Cómo funciona?</a>
+                    </div>
+                    <div class="separador-60 visible-xs visible-sm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
 <!-- Services 2 start -->
 <div class="services-2 content-area-5 bg-grea-3">
     <div class="container">
@@ -464,56 +831,7 @@
 <!-- Categories end-->
 
 <!-- Counters strat -->
-<div class="counters overview-bgi">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-tag"></i>
-                    </div>
-                    <div class="media-body">
-                        <h1 class="counter">967</h1>
-                        <p>Listings For Sale</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-business"></i>
-                    </div>
-                    <div class="media-body">
-                        <h1 class="counter">1276</h1>
-                        <p>Listings For Rent</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-people"></i>
-                    </div>
-                    <div class="media-body">
-                        <h1 class="counter">396</h1>
-                        <p>Agents</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
-                <div class="media counter-box">
-                    <div class="media-left">
-                        <i class="flaticon-people-1"></i>
-                    </div>
-                    <div class="media-body">
-                        <h1 class="counter">177</h1>
-                        <p>Brokers</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Counters end -->
 
 <!-- Our team 2 start -->

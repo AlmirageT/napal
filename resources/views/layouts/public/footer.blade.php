@@ -21,11 +21,11 @@
                     </ul>
 
                     <ul class="social-list clearfix">
-                        <li><a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="https://www.google.com/" class="google"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="https://cl.linkedin.com/" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="{{ $redesSociales->where('nombreRedSocial','Facebook')->pluck('rutaRedSocial')->first() }}" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{ $redesSociales->where('nombreRedSocial','Twitter')->pluck('rutaRedSocial')->first() }}" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{ $redesSociales->where('nombreRedSocial','Google')->pluck('rutaRedSocial')->first() }}" class="google"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="{{ $redesSociales->where('nombreRedSocial','Instagram')->pluck('rutaRedSocial')->first() }}" class="rss"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="{{ $redesSociales->where('nombreRedSocial','Linkedin')->pluck('rutaRedSocial')->first() }}" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>

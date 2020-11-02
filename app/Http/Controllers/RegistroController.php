@@ -9,19 +9,40 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Mail\TokenConfirmacion;
 use App\Helpers\Mensajeria;
 use App\ParametroGeneral;
+use App\CodigoPromocional;
 use App\Telefono;
 use App\Usuario;
+use App\Codigo;
 use Mail;
 use DB;
 
 class RegistroController extends Controller
 {
+    public function index()
+    {
+        return view('auth.register');
+    }
     public function store(Request $request)
     {
         try {
+            $validator = Validator::make($request->all(), [
+                'nombre'=> 'required',
+                'apellido'=> 'required',
+                'numero'=> 'required',
+                'correo'=> 'required',
+                'rut'=> 'required',
+                'password'=> 'required',
+                'condiciones'=>'required',
+                'g-recaptcha-response' => 'required|captcha',
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Verifique que no es un robot');
+                return back();
+            }
             DB::beginTransaction();
             if ($request->numero != null) {
                 $buscarTelefono = Telefono::where('numero', $request->numero)->first();
@@ -47,6 +68,27 @@ class RegistroController extends Controller
             $nuevoUsuario->save();
             $nuevoUsuario->token = encrypt($nuevoUsuario->idUsuario);
             $nuevoUsuario->save();
+            if ($request->codigoPromocional) {
+                $codigoPromocional = Codigo::where('codigo',$request->codigoPromocional)->first();
+                if ($codigoPromocional) {
+                    $fecha = date('Y-m-d',strtotime($codigoPromocional->fechaVencimiento));
+                    $hoy =date('Y-m-d');
+                    if ($hoy <= $fecha) {
+                        CodigoPromocional::create([
+                            'idCodigo' => $codigoPromocional->idCodigo,
+                            'idUsuario'=> $nuevoUsuario->idUsuario
+                        ]);
+                    }else{
+                        toastr()->warning('El codigo promocional que esta tratando de ingresar ya no es valido');
+                        DB::rollback();
+                        return back();
+                    }
+                }else{
+                    toastr()->warning('El codigo promocional que esta tratando de ingresar no existe, pruebe con uno valido');
+                    DB::rollback();
+                    return back();
+                }
+            }
 
             $telefono = new Telefono();
             $telefono->idUsuario = $nuevoUsuario->idUsuario;

@@ -10,19 +10,19 @@
             <div class="col-lg-6 col-md-4 col-sm-5">
                 <ul class="top-social-media pull-right">
                     <li>
-                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="{{ $redesSociales->where('nombreRedSocial','Facebook')->pluck('rutaRedSocial')->first() }}" class="facebook"><i class="fa fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="{{ $redesSociales->where('nombreRedSocial','Twitter')->pluck('rutaRedSocial')->first() }}" class="twitter"><i class="fa fa-twitter"></i></a>
                     </li>
                     <li>
-                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                        <a href="{{ $redesSociales->where('nombreRedSocial','Google')->pluck('rutaRedSocial')->first() }}" class="google"><i class="fa fa-google-plus"></i></a>
                     </li>
                     <li>
-                        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i> </a>
+                        <a href="{{ $redesSociales->where('nombreRedSocial','Linkedin')->pluck('rutaRedSocial')->first() }}" class="linkedin"><i class="fa fa-linkedin"></i> </a>
                     </li>
                     <li>
-                        <a href="#" class="rss"><i class="fa fa-instagram"></i></a>
+                        <a href="{{ $redesSociales->where('nombreRedSocial','Instagram')->pluck('rutaRedSocial')->first() }}" class="rss"><i class="fa fa-instagram"></i></a>
                     </li>
                 </ul>
             </div>
@@ -193,9 +193,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="submit-property.html" class="nav-link link-color"><i class="fa fa-plus"></i> Submit Property</a>
-                    </li>
+                    @if (Session::has('idUsuario') && Session::has('correo') && Session::has('rut'))
+                        <form action="{{ asset('logout') }}" method="post">
+                            @csrf
+                            <button class="btn btn-light nav-link link-color" type="submit"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i>Logout</button>
+                        </form>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ asset('login') }}" class="nav-link link-color">Acceder</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ asset('registro') }}" class="nav-link link-color"><i class="fa fa-plus"></i> Registrate</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a href="#full-page-search" class="nav-link link-color"><i class="fa fa-search"></i></a>
                     </li>

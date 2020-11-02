@@ -158,6 +158,12 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/parametros-generales') }}"><i class="bx bxs-book"></i> Parametros Generales</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/redes-sociales') }}"><i class="bx bxs-book"></i> Redes Sociales</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/codigos-promocionales') }}"><i class="bx bxs-book"></i> Códigos Promocionales</a></li>
+                    </ul>
                 </li>
                 <!--Link a vista Comunas. -->
                 

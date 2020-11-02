@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\ImagenCarrusel;
 use App\Propiedad;
+use App\CasoExitoso;
+use App\RedSocial;
 use Schema;
 use View;
 use Cache;
@@ -67,9 +69,31 @@ class AppServiceProvider extends ServiceProvider
                 return $cachePropiedades;
             });
         }
+        if (cache::has('casosExitosos')) {
+            $casosExitosos = cache::get('casosExitosos');
+        }else{
+            $casosExitosos = cache::remember('casosExitosos', 1*60, function(){
+                $cacheCasosExitosos = CasoExitoso::select('*')
+                ->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
+                ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+                ->paginate(6);
+                return $cacheCasosExitosos;
+            });
+        }
+
+        if (cache::has('redesSociales')) {
+            $redesSociales = cache::get('redesSociales');
+        }else{
+            $redesSociales = cache::remember('redesSociales', 1*60, function(){
+                $cacheRedesSociales = RedSocial::all();
+                return $cacheRedesSociales;
+            });
+        }
 
         View::share('imagenesWeb',$imagenesWeb);
         View::share('propiedades',$propiedades);
         View::share('imagenesMovil',$imagenesMovil);
+        View::share('casosExitosos',$casosExitosos);
+        View::share('redesSociales',$redesSociales);
     }
 }

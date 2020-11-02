@@ -23,6 +23,7 @@ Route::get('notificacion/cuentaNoEncontrada', 'ActivarCuentaController@cuentaNoE
 Route::get('notificacion/errorInterno', 'ActivarCuentaController@errorInterno');
 
 //registrarse como usuario
+Route::get('registro','RegistroController@index');
 Route::resource('registro', 'RegistroController');
 //login
 Route::get('login', 'LoginController@index');
@@ -108,6 +109,12 @@ Route::get('provincias/{idRegion}','UsuarioController@obtenerProvincias');
 Route::get('comunas/{idProvincia}','UsuarioController@obtenerComuna');
 //parametros generales
 Route::get('napalm/parametros-generales','ParametroGeneralController@index');
+//redes sociales
+Route::get('napalm/redes-sociales','RedSocialController@index');
+//codigos
+Route::get('napalm/codigos-promocionales','CodigoController@index');
+//estadisticas
+Route::get('estadisticas','PublicController@estadisitca');
 //crud usuarios
 Route::resource('mantenedor-usuarios','UsuarioController');
 Route::delete('mantenedor-usuarios/{idUsuario}',array(
@@ -251,4 +258,16 @@ Route::resource('mantenedor-casos-exitosos','CasoExitosoController');
 Route::delete('mantenedor-casos-exitosos/{idCasoExitoso}',array(
     'uses'=>'CasoExitosoController@destroy',
     'as'=>'mantenedor-casos-exitosos.delete'
+));
+//crud redes sociales
+Route::resource('mantenedor-redes-sociales','RedSocialController');
+Route::delete('mantenedor-redes-sociales/{idRedSocial}',array(
+    'uses'=>'RedSocialController@destroy',
+    'as'=>'mantenedor-redes-sociales.delete'
+));
+//crud codigos promocionales
+Route::resource('mantenedor-codigos','CodigoController');
+Route::delete('mantenedor-codigos/{idCodigo}',array(
+    'uses'=>'CodigoController@destroy',
+    'as'=>'mantenedor-codigos.delete'
 ));
