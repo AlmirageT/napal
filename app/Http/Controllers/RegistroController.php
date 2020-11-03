@@ -12,19 +12,29 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\TokenConfirmacion;
 use App\Helpers\Mensajeria;
-use App\ParametroGeneral;
+use App\CondicionServicio;
 use App\CodigoPromocional;
+use App\ParametroGeneral;
 use App\Telefono;
 use App\Usuario;
 use App\Codigo;
 use Mail;
+use Cache;
 use DB;
 
 class RegistroController extends Controller
 {
     public function index()
     {
-        return view('auth.register');
+        if (cache::has('condicionServicio')) {
+            $condicionServicio = cache::get('condicionServicio');
+        }else{
+           $condicionServicio = cache::remember('condicionServicio', 1*60, function(){
+                $cacheCondicionServicio =  CondicionServicio::first();
+                return $cacheCondicionServicio;
+            }); 
+        }
+        return view('auth.register',compact('condicionServicio'));
     }
     public function store(Request $request)
     {

@@ -343,6 +343,131 @@
     </div>
     <br>
 </div>
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12" align="center">
+            <h4><strong>Estado</strong> de proyectos <img src="https://static.housers.com/assets/images/icons/icon-info.png" class="info-icon" data-toggle="modal" data-target="#successRateModal"></h4>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered custom success">
+                    <tbody><tr>
+                        <th colspan="2">Tipo proyecto</th>
+                        <td>Ahorro</td>
+                        <td>Inversión</td>
+                        <td>Tipo fijo</td>
+                        <td>Tipo fijo (alquiler)</td>
+                        <td>Tipo fijo (inversión)</td>
+                        <td>Equity</td>
+                        <td>Totales</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Financiados</th>
+                        <td>29</td>
+                        <td>52</td>
+                        <td>147</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>59</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">No Financiados</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Cerrados</th>
+                        <td>10</td>
+                        <td>30</td>
+                        <td>28</td>
+                        <td>0</td>
+                        <td>4</td>
+                        <td>25</td>
+                        <td>97</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Incidencia finalización<br>proyecto</th>
+                        <td>0</td>
+                        <td>18</td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>31</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Préstamos reestructurados</th>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>24</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Recobro</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="4">Devolución<br>capital</th>
+                        <th>0% - 33%</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>34% - 66%</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>67% - 99%</th>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <th>100%</th>
+                        <td>10</td>
+                        <td>30</td>
+                        <td>28</td>
+                        <td>0</td>
+                        <td>4</td>
+                        <td>25</td>
+                        <td>97</td>
+                    </tr>
+                </tbody></table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 <div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -474,6 +599,30 @@
                     <p><b>Tir media objetivo:</b> Es la tasa interna de rentabilidad media prevista para los proyectos cerrados de esta modalidad en el momento de su publicación en la plataforma. Tiene en cuenta los rendimientos previstos y la duración prevista del proyecto. Se utiliza para evaluar, desde una perspectiva financiera, la rentabilidad de un proyecto y compararlo con otros tipos de inversión que hay en el mercado; viene siempre expresada en tanto por ciento.</p>
                     <p><b>Tir media conseguida:</b> Es la tasa interna de rentabilidad media de los proyectos de esta modalidad una vez cerrados. Tiene en cuenta los rendimientos entregados así como la duración final del proyecto. Se utiliza para evaluar, desde una perspectiva financiera, la rentabilidad de un proyecto y compararlo con otros tipos de inversión que hay en el mercado; viene siempre expresada en tanto por ciento.</p>
                     <p><b>Rendimientos y capital devuelto:</b> Los rendimientos son los dividendos devengados por la inversión y satisfechos por el promotor al inversor. El capital devuelto son las aportaciones devueltas por el promotor (sociedad) al inversor (socio).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="successRateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="exampleModalLabel"><strong>Estado</strong> de proyectos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="info-container">
+                    <p><strong>Tipo de proyecto</strong>: clasificación según tipología de proyecto.</p>
+                    <p><strong>Financiados</strong>: proyectos que han conseguido por lo menos el 90% del objetivo de financiación del proyecto.</p>
+                    <p><strong>No financiados</strong>: proyectos que no han conseguido llegar al 90% del objetivo de financiación dentro del plazo dado para invertir en el proyecto.</p>
+                    <p><strong>Cerrados</strong>: proyectos que han devuelto el principal de la inversión realizada por los inversores.</p>
+                    <p><strong>Incidencias finalización préstamo</strong>: proyectos que han sufrido un retraso en la devolución del préstamo sobre la previsión inicial o incumplida la propuesta de pago aprobada en Reunión de Prestamistas.</p>
+                    <p><strong>Préstamos reestructurados</strong>: proyectos que han sufrido un retraso en la devolución del préstamo en el plazo estimado inicialmente sobre los que el promotor ha presentado un calendario de pagos alternativo a los inversores y se ha aprobado en reunión de prestamistas.</p>
+                    <p><strong>Recobro</strong>: proyectos que se ha aprobado, mediante reunión de prestamistas, reclamar la deuda a través de una empresa especializada de recobro.</p>
+                    <p><strong>Devolución capital</strong>: clasifica los proyectos cerrados según el porcentaje de capital devuelto.</p>
                 </div>
             </div>
         </div>

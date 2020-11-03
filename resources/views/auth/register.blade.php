@@ -8,10 +8,10 @@ Registrarse
         <div class="row">
             <div class="col-lg-5">
                 <div class="form-content-box">
-                    <a href="index.html" class=" d-block d-sm-block d-md-block d-lg-none">
+                    <a class=" d-block d-sm-block d-md-block d-lg-none">
                         <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo">
                     </a>
-                    <a href="index.html">
+                    <a>
                         <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
@@ -38,20 +38,42 @@ Registrarse
                             <div class="form-group">
                               <input type="text" name="codigoPromocional" class="form-control" placeholder="Código promocional">
                             </div>
+                            <div class="form-group">
+                               {!! NoCaptcha::renderJs() !!}
+                               {!! NoCaptcha::display() !!}
+                            </div>
                             <div class="row">
                               <div class="col-lg-12 form-group">
                                   <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <input type="checkbox" id="condiciones" name="condiciones" required> &nbsp;&nbsp;
-                                        <label for="condiciones">Acepto las condiciones de servicios de NAPALM y los terminos y condiciones de ISBAST</label>
+                                        <label for="">Acepto las <a style="color: blue" onclick="condicionesServicios()">condiciones de servicios</a> de NAPALM y los terminos y condiciones de ISBAST</label>
                                     </div>
-                                    
                                   </div>
                               </div>
                             </div>
-                            <div class="form-group">
-                               {!! NoCaptcha::renderJs() !!}
-                               {!! NoCaptcha::display() !!}
+                            <div style="display: none" id="condiciones_servicios">
+                              <div class="row">
+                                <div class="col-lg-9">
+                                  <p><strong>Condiciones de uso de Housers:</strong></p>
+                                </div>
+                                <div class="col-lg-3">
+                                  <a style="color: blue" onclick="condicionesServicios();">x</a>
+                                </div>
+                                <div class="col-lg-12" align="left">
+                                  <ul>
+                                    <li type="square">
+                                      <a target="_blank" href="{{ asset('condiciones-servicios/documento') }}/{{ $condicionServicio->idCondicionServicio }}" style="color: blue">Términos y Condiciones Generales de la plataforma</a>
+                                    </li>
+                                    <li type="square">
+                                      <a target="_blank" href="" style="color: blue">Política de Privacidad</a>
+                                    </li>
+                                </ul>
+                                </div>
+                              </div>
+                                <br>
+                                <br>
+                              
                             </div>
                             <div class="form-group mb-0">
                                 <button type="submit" class="btn-md button-theme btn-block">Registrarse</button>
@@ -59,9 +81,9 @@ Registrarse
                         {!!Form::close()!!}
                     </div>
                     <div class="footer">
-                    <span>
-                        ¿Ya eres miembro? <a href="{{ asset('login') }}">Ingresa Aqui!</a>
-                    </span>
+                      <span>
+                          ¿Ya eres miembro? <a href="{{ asset('login') }}">Ingresa Aqui!</a>
+                      </span>
                     </div>
                 </div>
             </div>
@@ -148,6 +170,13 @@ Registrarse
           rutPuntos = rutPuntos + "-" + dv;
       }
       document.getElementById('rut').value = rutPuntos;
+  }
+  const condicionesServicios = () => {
+    if(document.getElementById('condiciones_servicios').style.display == "none"){
+      document.getElementById('condiciones_servicios').style.display = "block";
+    }else{
+      document.getElementById('condiciones_servicios').style.display = "none";
+    }
   }
 </script>
 @endsection

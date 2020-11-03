@@ -21,7 +21,8 @@ Route::get('notificacion/cuentaYaActivada', 'ActivarCuentaController@cuentaYaAct
 Route::get('notificacion/cuentaActivadaCorrectamente', 'ActivarCuentaController@cuentaActivadaCorrectamente');
 Route::get('notificacion/cuentaNoEncontrada', 'ActivarCuentaController@cuentaNoEncontrada');
 Route::get('notificacion/errorInterno', 'ActivarCuentaController@errorInterno');
-
+//estadisticas
+Route::get('estadisticas','PublicController@estadisitca');
 //registrarse como usuario
 Route::get('registro','RegistroController@index');
 Route::resource('registro', 'RegistroController');
@@ -29,92 +30,97 @@ Route::resource('registro', 'RegistroController');
 Route::get('login', 'LoginController@index');
 Route::post('ingreso-session','LoginController@ingreso_session');
 Route::post('logout', 'LoginController@logout');
+//rutas administrador
+Route::group(['prefix' => 'napalm'], function(){
+    Route::get('/','HomeController@home');
+    Route::get('home','HomeController@home');
+    //rutas vistas usuario admin
+    Route::get('usuarios', 'UsuarioController@index');
+    Route::get('usuarios/create', 'UsuarioController@create');
+    Route::get('usuarios/editar/{idUsuario}','UsuarioController@edit');
+    Route::get('usuarios/telefonos/{idUsuario}','TelefonoController@create');
+    //rutas vistas proyectos admin
+    Route::get('proyectos','ProyectoController@index');
+    Route::get('proyectos/create','ProyectoController@create');
+    Route::get('proyectos/editar/{idProyecto}','ProyectoController@edit');
+    //rutas vistas propiedades admin
+    Route::get('propiedades','PropiedadController@index');
+    Route::get('propiedades/create','PropiedadController@create');
+    Route::get('propiedades/editar/{idPropiedad}','PropiedadController@edit');
+    //mantenedores
+    //tipos usuarios
+    Route::get('tipos_usuarios','TipoUsuarioController@index');
+    //tipo telefonos
+    Route::get('tipos_telefonos','TipoTelefonoController@index');
+    //tipo personas
+    Route::get('tipos_personas','TipoPersonaController@index');
+    //tipo inversiones
+    Route::get('tipos_inversiones','TipoInversionController@index');
+    //tipo flexibilidad
+    Route::get('tipos_flexibilidades','TipoFlexibilidadController@index');
+    //tipo estados
+    Route::get('tipos_estados','TipoEstadoController@index');
+    //tipos documentos
+    Route::get('tipos-documentos','TipoDocumentoController@index');
+    //tipo credito
+    Route::get('tipos-creditos','TipoCreditoController@index');
+    //tipo calidades
+    Route::get('tipos-calidades','TipoCalidadController@index');
+    //Monedas
+    Route::get('monedas','MonedaController@index');
+    //idiomas
+    Route::get('idiomas','IdiomaController@index');
+    //estados
+    Route::get('estados','EstadoController@index');
+    //subir documentos
+    Route::get('subir-documentos/create/{idPropiedad}','DocumentoController@create');
+    //ver documento
+    Route::get('documentos/ver-documento/{idDocumento}','DocumentoController@ver_pdf');
+    //transacciones
+    //ingresos
+    Route::get('ingresos','TrxIngresoController@index');
+    Route::get('ingresos/detalles/{idTrxIngreso}','TrxIngresoController@detalle');
+    //egresos
+    Route::get('egresos','TrxEgresoController@index');
+    Route::get('egresos/detalles/{idTrxEgreso}','TrxEgresoController@detalle');
+    //destino egresos
+    Route::get('destinos-egresos','DestinoEgresoController@index');
+    Route::get('destinos-egresos/detalles/{idTrxEgreso}','DestinoEgresoController@detalle');
+    //ubicaciones
+    //paises
+    Route::get('paises','PaisController@index');
+    //regiones
+    Route::get('regiones','RegionController@index');
+    //provincias
+    Route::get('provincias','ProvinciaController@index');
+    //comunas
+    Route::get('comunas','ComunaController@index');
+    //imagenes carrusel
+    Route::get('imagenes-carrusel','ImagenesCarruselController@index');
+    //casos exitosos
+    Route::get('casos-exitosos','CasoExitosoController@index');
+    //parametros generales
+    Route::get('parametros-generales','ParametroGeneralController@index');
+    //redes sociales
+    Route::get('redes-sociales','RedSocialController@index');
+    //codigos
+    Route::get('codigos-promocionales','CodigoController@index');
+    //condiciones y servicios
+    Route::get('condiciones-servicios','CondicionServicioController@index');
+});
+Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 
-Route::get('napalm/home','HomeController@home');
-//rutas vistas usuario admin
-Route::get('napalm/usuarios', 'UsuarioController@index');
-Route::get('napalm/usuarios/create', 'UsuarioController@create');
-Route::get('napalm/usuarios/editar/{idUsuario}','UsuarioController@edit');
-Route::get('napalm/usuarios/telefonos/{idUsuario}','TelefonoController@create');
-//rutas vistas proyectos admin
-Route::get('napalm/proyectos','ProyectoController@index');
-Route::get('napalm/proyectos/create','ProyectoController@create');
-Route::get('napalm/proyectos/editar/{idProyecto}','ProyectoController@edit');
-//rutas vistas propiedades admin
-Route::get('napalm/propiedades','PropiedadController@index');
-Route::get('napalm/propiedades/create','PropiedadController@create');
-Route::get('napalm/propiedades/editar/{idPropiedad}','PropiedadController@edit');
-//mantenedores
-//tipos usuarios
-Route::get('napalm/tipos_usuarios','TipoUsuarioController@index');
-//tipo telefonos
-Route::get('napalm/tipos_telefonos','TipoTelefonoController@index');
-//tipo personas
-Route::get('napalm/tipos_personas','TipoPersonaController@index');
-//tipo inversiones
-Route::get('napalm/tipos_inversiones','TipoInversionController@index');
-//tipo flexibilidad
-Route::get('napalm/tipos_flexibilidades','TipoFlexibilidadController@index');
-//tipo estados
-Route::get('napalm/tipos_estados','TipoEstadoController@index');
-//tipos documentos
-Route::get('napalm/tipos-documentos','TipoDocumentoController@index');
-//tipo credito
-Route::get('napalm/tipos-creditos','TipoCreditoController@index');
-//tipo calidades
-Route::get('napalm/tipos-calidades','TipoCalidadController@index');
-//Monedas
-Route::get('napalm/monedas','MonedaController@index');
-//idiomas
-Route::get('napalm/idiomas','IdiomaController@index');
-//estados
-Route::get('napalm/estados','EstadoController@index');
-//subir documentos
-Route::get('napalm/subir-documentos/create/{idPropiedad}','DocumentoController@create');
-//ver documento
-Route::get('napalm/documentos/ver-documento/{idDocumento}','DocumentoController@ver_pdf');
-//transacciones
-//ingresos
-Route::get('napalm/ingresos','TrxIngresoController@index');
-Route::get('napalm/ingresos/detalles/{idTrxIngreso}','TrxIngresoController@detalle');
-//egresos
-Route::get('napalm/egresos','TrxEgresoController@index');
-Route::get('napalm/egresos/detalles/{idTrxEgreso}','TrxEgresoController@detalle');
-//destino egresos
-Route::get('napalm/destinos-egresos','DestinoEgresoController@index');
-Route::get('napalm/destinos-egresos/detalles/{idTrxEgreso}','DestinoEgresoController@detalle');
 //busqueda en tiempo real para datatable ingresos
 Route::post('buscador-prueba','BusquedaController@busqueda_ingresos');
 //busqueda en tiempo real para datatable de egresos
 Route::post('buscador-egresos','BusquedaController@busqueda_egresos');
 //busqueda en tiempo real para datatabla de destino degresos
 Route::post('buscador-destinos-egresos','BusquedaController@busqueda_destino_egreso');
-//ubicaciones
-//paises
-Route::get('napalm/paises','PaisController@index');
-//regiones
-Route::get('napalm/regiones','RegionController@index');
-//provincias
-Route::get('napalm/provincias','ProvinciaController@index');
-//comunas
-Route::get('napalm/comunas','ComunaController@index');
-//imagenes carrusel
-Route::get('napalm/imagenes-carrusel','ImagenesCarruselController@index');
-//casos exitosos
-Route::get('napalm/casos-exitosos','CasoExitosoController@index');
 //maps
 Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
 Route::get('provincias/{idRegion}','UsuarioController@obtenerProvincias');
 Route::get('comunas/{idProvincia}','UsuarioController@obtenerComuna');
-//parametros generales
-Route::get('napalm/parametros-generales','ParametroGeneralController@index');
-//redes sociales
-Route::get('napalm/redes-sociales','RedSocialController@index');
-//codigos
-Route::get('napalm/codigos-promocionales','CodigoController@index');
-//estadisticas
-Route::get('estadisticas','PublicController@estadisitca');
 //crud usuarios
 Route::resource('mantenedor-usuarios','UsuarioController');
 Route::delete('mantenedor-usuarios/{idUsuario}',array(
@@ -270,4 +276,10 @@ Route::resource('mantenedor-codigos','CodigoController');
 Route::delete('mantenedor-codigos/{idCodigo}',array(
     'uses'=>'CodigoController@destroy',
     'as'=>'mantenedor-codigos.delete'
+));
+//crud condiciones y servicios
+Route::resource('mantenedor-condiciones-servicios','CondicionServicioController');
+Route::delete('mantenedor-condiciones-servicios/{idCondicionServicio}',array(
+    'uses'=>'CondicionServicioController@destroy',
+    'as'=>'mantenedor-condiciones-servicios.delete'
 ));
