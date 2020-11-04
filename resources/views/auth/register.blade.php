@@ -66,7 +66,7 @@ Registrarse
                                       <a target="_blank" href="{{ asset('condiciones-servicios/documento') }}/{{ $condicionServicio->idCondicionServicio }}" style="color: blue">Términos y Condiciones Generales de la plataforma</a>
                                     </li>
                                     <li type="square">
-                                      <a target="_blank" href="" style="color: blue">Política de Privacidad</a>
+                                      <a target="_blank" href="{{ asset('politicas-privacidad') }}" style="color: blue">Política de Privacidad</a>
                                     </li>
                                 </ul>
                                 </div>

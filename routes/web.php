@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//politicas de privacidad
+Route::get('politicas-privacidad',function(){
+    return view('politicasPrivacidad');
+});
+//invierte
+Route::get('invierte','TiendaController@index');
 //reenvio de msj
 Route::post('/vaes', 'LoginController@reenviarSMS');
 //errores
@@ -109,7 +115,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('condiciones-servicios','CondicionServicioController@index');
 });
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
-
+//order by
+Route::get('ordenar-propiedades/{idEstado}','TiendaController@ordenarPropiedades');
 //busqueda en tiempo real para datatable ingresos
 Route::post('buscador-prueba','BusquedaController@busqueda_ingresos');
 //busqueda en tiempo real para datatable de egresos

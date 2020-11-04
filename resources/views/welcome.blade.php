@@ -1,5 +1,4 @@
 @extends('layouts.public.app')
-
 @section('content')
 <div class="d-none d-sm-block">
     <div class="banner" id="banner">
@@ -329,6 +328,9 @@
                 <i class="fa fa-angle-right"></i>
             </div>
         </div>
+    </div>
+    <div class="container" align="center">
+        <a href="{{ asset('invierte') }}" class="btn btn-primary">Invierte</a>
     </div>
 </div>
 <!-- Featured Properties end -->

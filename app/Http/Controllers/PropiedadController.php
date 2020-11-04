@@ -18,6 +18,7 @@ use App\Proyecto;
 use App\TipoInversion;
 use App\Propiedad;
 use DB;
+use Cache;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -73,6 +74,9 @@ class PropiedadController extends Controller
             DB::beginTransaction();
                 if (cache::has('propiedades')) {
                     cache::forget('propiedades');
+                }
+                if (cache::has('propiedadesTienda')) {
+                    cache::forget('propiedadesTienda');
                 }
             	$imgName = null;
 	            if($request->file('fotoPrincipal')){
@@ -149,6 +153,9 @@ class PropiedadController extends Controller
                 if (cache::has('propiedades')) {
                     cache::forget('propiedades');
                 }
+                if (cache::has('propiedadesTienda')) {
+                    cache::forget('propiedadesTienda');
+                }
             	$imgName = null;
             	$propiedad = Propiedad::find($idPropiedad);
 	            if($request->file('fotoPrincipal')){
@@ -203,6 +210,9 @@ class PropiedadController extends Controller
     		DB::beginTransaction();
                 if (cache::has('propiedades')) {
                     cache::forget('propiedades');
+                }
+                if (cache::has('propiedadesTienda')) {
+                    cache::forget('propiedadesTienda');
                 }
     			$propiedad = Propiedad::find($idPropiedad);
 	            toastr()->success('Eliminado Correctamente', 'La propiedad '.$propiedad->nombrePropiedad.' ha sido eliminado correctamente', ['timeOut' => 9000]);

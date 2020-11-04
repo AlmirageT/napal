@@ -26,9 +26,8 @@
     @toastr_css
 </head>
 <body>
-    <div class="page_loader"></div>
     @include('layouts.public.header')
-        @yield('content')
+    @yield('content')
     @include('layouts.public.footer')
     <div id="full-page-search">
         <button type="button" class="close">×</button>
