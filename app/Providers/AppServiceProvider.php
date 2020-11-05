@@ -49,7 +49,6 @@ class AppServiceProvider extends ServiceProvider
                 return $cacheImagenesMovil;
             });
         }
-            
         if (cache::has('propiedades')) {
             $propiedades = cache::get('propiedades');
         }else{
