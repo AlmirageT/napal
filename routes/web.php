@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('politicas-privacidad',function(){
     return view('politicasPrivacidad');
 });
+//detalle propiedades
+Route::get('detalle/{idPropiedad}','DetalleController@index');
 //invierte
 Route::get('invierte','TiendaController@index');
 //reenvio de msj
@@ -113,6 +115,10 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('codigos-promocionales','CodigoController@index');
     //condiciones y servicios
     Route::get('condiciones-servicios','CondicionServicioController@index');
+    //imagenes propiedades
+    Route::get('imagenes/{idPropiedad}/create','ImagenPropiedadController@index');
+    //imagenes plano propiedades
+    Route::get('planos/{idPropiedad}/create','FotoPlanoController@index');
 });
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by

@@ -127,10 +127,12 @@ Propiedades
 		                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                                <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                            </a>
-		                            <div class="dropdown-menu dropdown-menu">
+		                            <div class="dropdown-menu dropdown-menu-right">
 						      			<a href="{{ asset('napalm/propiedades/editar') }}/{{ $propiedad->idPropiedad }}" class="dropdown-item btn btn-info">Editar</a>
 		                    			@include('admin.propiedades.destroy')
 		                    			<a href="{{ asset('napalm/subir-documentos/create') }}/{{ $propiedad->idPropiedad }}" class="dropdown-item">Documentos</a>
+		                    			<a href="{{ asset('napalm/imagenes') }}/{{ $propiedad->idPropiedad }}/create" class="dropdown-item">Imagenes Propiedad</a>
+		                    			<a href="{{ asset('napalm/planos') }}/{{ $propiedad->idPropiedad }}/create" class="dropdown-item">Imagenes Planos</a>
 		                            </div>
 		                        </div>
 						      </td>

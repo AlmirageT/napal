@@ -269,7 +269,7 @@
                             </div>
                             <div class="detail">
                                 <h1 class="title">
-                                    <a>{{ $propiedad->nombrePropiedad }}</a>
+                                    <a href="{{ asset('detalle') }}/{{ $propiedad->idPropiedad }}">{{ $propiedad->nombrePropiedad }}</a>
                                 </h1>
                                 <div class="location">
                                     <a href="properties-details.html">

@@ -75,7 +75,7 @@ Usuarios
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
-		                        <div class="dropdown-menu dropdown-menu">
+		                        <div class="dropdown-menu dropdown-menu-right">
 		                        	<a href="{{ asset('napalm/usuarios/editar') }}/{{ $usuario->idUsuario }}" class="dropdown-item btn btn-info">Editar</a>
 		                			@include('admin.usuarios.destroy')
 		                			<a href="{{ asset('napalm/usuarios/telefonos') }}/{{ $usuario->idUsuario }}" class="dropdown-item btn btn-info">Telefonos</a>
