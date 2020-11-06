@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\ImagenCarrusel;
 use App\TipoImagen;
+use Image;
 use DB;
 
 class ImagenesCarruselController extends Controller
@@ -42,10 +43,28 @@ class ImagenesCarruselController extends Controller
                 }
             	$imagenCarrusel = new ImagenCarrusel();
             	if ($request->file('rutaImagenCarrusel')) {
-            		$imagen = $request->file('rutaImagenCarrusel');
-                    $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
-                    $imagen->move('assets/images/carrousel/',$imgName);
-                    $imagenCarrusel->rutaImagenCarrusel = 'assets/images/carrousel/'.$imgName;
+                    if ($request->idTipoImagen == 1) {
+                        # code...
+                		$imagen = $request->file('rutaImagenCarrusel');
+                        $img = Image::make($imagen);
+                        $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+                        $img->resize(1992, 1040, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $img->save('assets/images/carrousel/'.$imgName);
+                        $imagenCarrusel->rutaImagenCarrusel = 'assets/images/carrousel/'.$imgName;
+                    }else{
+                        $imagen = $request->file('rutaImagenCarrusel');
+                        $img = Image::make($imagen);
+                        $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+                        $img->resize(1000, 740, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $img->save('assets/images/carrousel/'.$imgName);
+                        $imagenCarrusel->rutaImagenCarrusel = 'assets/images/carrousel/'.$imgName;
+                    }
             	}
             	if ($request->activoImagenCarrusel == "on") {
             		$imagenCarrusel->activoImagenCarrusel = 1;
@@ -97,10 +116,28 @@ class ImagenesCarruselController extends Controller
 	    			if ($imagenCarrusel->rutaImagenCarrusel != null) {
                 		unlink($imagenCarrusel->rutaImagenCarrusel);
 	    			}
-            		$imagen = $request->file('rutaImagenCarrusel');
-                    $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
-                    $imagen->move('assets/images/carrousel/',$imgName);
-                    $imagenCarrusel->rutaImagenCarrusel = 'assets/images/carrousel/'.$imgName;
+            		if ($request->idTipoImagen == 1) {
+                        # code...
+                        $imagen = $request->file('rutaImagenCarrusel');
+                        $img = Image::make($imagen);
+                        $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+                        $img->resize(1992, 1040, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $img->save('assets/images/carrousel/'.$imgName);
+                        $imagenCarrusel->rutaImagenCarrusel = 'assets/images/carrousel/'.$imgName;
+                    }else{
+                        $imagen = $request->file('rutaImagenCarrusel');
+                        $img = Image::make($imagen);
+                        $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+                        $img->resize(1000, 740, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        });
+                        $img->save('assets/images/carrousel/'.$imgName);
+                        $imagenCarrusel->rutaImagenCarrusel = 'assets/images/carrousel/'.$imgName;
+                    }
             	}
             	if ($request->activoImagenCarrusel == "on") {
             		$imagenCarrusel->activoImagenCarrusel = 1;

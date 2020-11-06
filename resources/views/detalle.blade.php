@@ -8,52 +8,33 @@ Detalle Propiedad
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
+                @if(count($imagenesPropiedadesGrandes)>0)
                 <div id="propertiesDetailsSlider" class="carousel properties-details-sliders slide mb-40">
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
                         <div class="active item carousel-item" data-slide-number="0">
-                            <img src="http://placehold.it/730x486" class="img-fluid" alt="slider-properties">
+                            <img src="{{ asset($imagenesPropiedadesGrandes->shift()->imagenPropiedadGrande) }}" class="img-fluid" alt="slider-properties">
                         </div>
-                        <div class="item carousel-item" data-slide-number="1">
-                            <img src="http://placehold.it/730x486" class="img-fluid" alt="slider-properties">
-                        </div>
-                        <div class="item carousel-item" data-slide-number="2">
-                            <img src="http://placehold.it/730x486" class="img-fluid" alt="slider-properties">
-                        </div>
-                        <div class="item carousel-item" data-slide-number="4">
-                            <img src="http://placehold.it/730x486" class="img-fluid" alt="slider-properties">
-                        </div>
-                        <div class="item carousel-item" data-slide-number="5">
-                            <img src="http://placehold.it/730x486" class="img-fluid" alt="slider-properties">
-                        </div>
+                        @for ($i = 0; $i < count($imagenesPropiedadesGrandes); $i++)
+                            <div class="item carousel-item" data-slide-number="{{ $i+1 }}">
+                                <img src="{{ asset($imagenesPropiedadesGrandes[$i]->imagenPropiedadGrande) }}" class="img-fluid" alt="slider-properties">
+                            </div>
+                        @endfor
                     </div>
                     <!-- main slider carousel nav controls -->
                     <ul class="carousel-indicators smail-properties list-inline nav nav-justified">
                         <li class="list-inline-item active">
                             <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#propertiesDetailsSlider">
-                                <img src="http://placehold.it/146x97" class="img-fluid" alt="properties-small">
+                                <img src="{{ asset($imagenesPropiedadesPequeñas->shift()->imagenPropiedadPequeña) }}" class="img-fluid" alt="properties-small">
                             </a>
                         </li>
-                        <li class="list-inline-item">
-                            <a id="carousel-selector-1" data-slide-to="1" data-target="#propertiesDetailsSlider">
-                                <img src="http://placehold.it/146x97" class="img-fluid" alt="properties-small">
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a id="carousel-selector-2" data-slide-to="2" data-target="#propertiesDetailsSlider">
-                                <img src="http://placehold.it/146x97" class="img-fluid" alt="properties-small">
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a id="carousel-selector-3" data-slide-to="3" data-target="#propertiesDetailsSlider">
-                                <img src="http://placehold.it/146x97" class="img-fluid" alt="properties-small">
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a id="carousel-selector-4" data-slide-to="4" data-target="#propertiesDetailsSlider">
-                                <img src="http://placehold.it/146x97" class="img-fluid" alt="properties-small">
-                            </a>
-                        </li>
+                        @for ($i = 0; $i < count($imagenesPropiedadesPequeñas); $i++)
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-{{ $i+1 }}" data-slide-to="{{ $i+1 }}" data-target="#propertiesDetailsSlider">
+                                    <img src="{{ asset($imagenesPropiedadesPequeñas[$i]->imagenPropiedadPequeña) }}" class="img-fluid" alt="properties-small">
+                                </a>
+                            </li>
+                        @endfor
                     </ul>
                     <!-- main slider carousel items -->
                     <!-- Heading properties start -->
@@ -74,131 +55,45 @@ Detalle Propiedad
                     </div>
                     <!-- Heading properties end -->
                 </div>
+                @else
+                No tiene imagenes
+                @endif
                 <!-- Property meta start -->
                 <div class="property-meta mb-40">
                     <ul>
                         <li>
                             <i class="flaticon-furniture"></i>
-                            <p>3 Beds</p>
+                            <p>
+                                @if($propiedad->habitaciones > 1)
+                                    {{ $propiedad->habitaciones }} Habitaciones
+                                @else
+                                    {{ $propiedad->habitaciones }} Habitación
+                                @endif
+                            </p>
                         </li>
                         <li>
                             <i class="flaticon-holidays"></i>
-                            <p>1 Beths</p>
+                            <p>
+                                @if($propiedad->baños > 1)
+                                    {{ $propiedad->baños }} Baños
+                                @else
+                                    {{ $propiedad->baños }} Baño
+                                @endif
+                            </p>
                         </li>
                         <li>
                             <i class="flaticon-square"></i>
-                            <p>3,034 Sq Ft</p>
+                            <p>{{ $propiedad->mConstruido +  $propiedad->mSuperficie +  $propiedad->mTerraza }} m2</p>
                         </li>
+                        {{--  
                         <li>
                             <i class="flaticon-vehicle"></i>
                             <p>1 Garages</p>
                         </li>
+                        --}}
                     </ul>
                 </div>
                 <!-- Property meta end -->
-
-                <!-- Advanced search start -->
-                <div class="widget-2 advanced-search-2 d-lg-none d-xl-none">
-                    <h3 class="sidebar-title">Advanced Search</h3>
-                    <form method="GET">
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="all-status">
-                                <option>All Status</option>
-                                <option>For Sale</option>
-                                <option>For Rent</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="all-type">
-                                <option>All Type</option>
-                                <option>Apartments</option>
-                                <option>Houses</option>
-                                <option>Commercial</option>
-                                <option>Garages</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="commercial">
-                                <option>Commercial</option>
-                                <option>Residential</option>
-                                <option>Land</option>
-                                <option>Hotels</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="selectpicker search-fields" name="location">
-                                <option>location</option>
-                                <option>New York</option>
-                                <option>Bangladesh</option>
-                                <option>India</option>
-                                <option>Canada</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="bedrooms">
-                                        <option>Bedrooms</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="bathroom">
-                                        <option>Bathroom</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="balcony">
-                                        <option>Balcony</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="garage">
-                                        <option>Garage</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="range-slider">
-                            <label>Area</label>
-                            <div data-min="0" data-max="10000" data-min-name="min_area" data-max-name="max_area" data-unit="Sq ft" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="range-slider">
-                            <label>Price</label>
-                            <div data-min="0" data-max="150000"  data-min-name="min_price" data-max-name="max_price" data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="form-group mb-0">
-                            <button class="search-button">Search</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Advanced search end -->
 
                 <!-- Properties description start -->
                 <div class="properties-description mb-40">
@@ -212,7 +107,7 @@ Detalle Propiedad
                 <!-- Properties condition start -->
                 <div class="properties-condition mb-40">
                     <h3 class="heading-2">
-                        Condition
+                        Condiciones
                     </h3>
                     <div class="row">
                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -252,7 +147,7 @@ Detalle Propiedad
                 <!-- Properties amenities start -->
                 <div class="properties-amenities mb-40">
                     <h3 class="heading-2">
-                        Features
+                        Caracteristicas
                     </h3>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -318,7 +213,7 @@ Detalle Propiedad
 
                 <!-- Floor plans start -->
                 <div class="floor-plans mb-50">
-                    <h3 class="heading-2">Floor Plans</h3>
+                    <h3 class="heading-2">Planos</h3>
                     <table>
                         <tbody><tr>
                             <td><strong>Size</strong></td>
@@ -334,7 +229,11 @@ Detalle Propiedad
                         </tr>
                         </tbody>
                     </table>
-                    <img src="http://placehold.it/730x370" alt="floor-plans" class="img-fluid">
+                    @if(isset($imagenesPlanos))
+                    <img src="{{ asset($imagenesPlanos->fotoPlano) }}" alt="floor-plans" class="img-fluid">
+                    @else
+                    No tiene imagenes de planos
+                    @endif
                 </div>
                 <!-- Floor plans end -->
 
@@ -343,7 +242,11 @@ Detalle Propiedad
                     <h3 class="heading-2">
                         Video
                     </h3>
-                    <iframe src="https://www.youtube.com/embed/5e0LxrLSzok" allowfullscreen=""></iframe>
+                    @if($propiedad->urlVideo != null)
+                    <iframe src="{{ $propiedad->urlVideo }}" allowfullscreen=""></iframe>
+                    @else
+                    No tiene video asociado
+                    @endif
                 </div>
                 <!-- Inside properties end -->
                 <input type="hidden" id="paises" value="{{ $propiedad->nombrePais }}">
@@ -368,165 +271,126 @@ Detalle Propiedad
                 <div class="sidebar-left">
                     <!-- Advanced search start -->
                     <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
-                        <h3 class="sidebar-title">Advanced Search</h3>
-                        <form method="GET">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="all-status">
-                                    <option>All Status</option>
-                                    <option>For Sale</option>
-                                    <option>For Rent</option>
-                                </select>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p>{{ $propiedad->nombrePais }}</p>
                             </div>
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="all-type">
-                                    <option>All Type</option>
-                                    <option>Apartments</option>
-                                    <option>Houses</option>
-                                    <option>Commercial</option>
-                                    <option>Garages</option>
-                                </select>
+                            <div class="col-lg-6">
+                                <p>{{ $propiedad->cantidadSubPropiedad }} SubPropiedades</p>
                             </div>
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="commercial">
-                                    <option>Commercial</option>
-                                    <option>Residential</option>
-                                    <option>Land</option>
-                                    <option>Hotels</option>
-                                </select>
+                            <hr>
+                            <div class="col-lg-6">
+                                <p>ESTADO:</p>
                             </div>
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="location">
-                                    <option>location</option>
-                                    <option>New York</option>
-                                    <option>Bangladesh</option>
-                                    <option>India</option>
-                                    <option>Canada</option>
-                                </select>
+                            <div class="col-lg-6">
+                                <p>{{ $propiedad->nombreEstado }}</p>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="bedrooms">
-                                            <option>Bedrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="bathroom">
-                                            <option>Bathroom</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </div>
+                            <div class="col-lg-7">
+                                <p>$256.000 (25%)</p>
+                            </div>
+                            <div class="col-lg-5">
+                                <p>${{ number_format($propiedad->precio,0,',','.') }}</p>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <progress max="100" value="25" style="width: 95%;">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="balcony">
-                                            <option>Balcony</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields" name="garage">
-                                            <option>Garage</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="col-lg-8">
+                                <p>49 Inversores</p>
                             </div>
-
-                            <div class="range-slider">
-                                <label>Area</label>
-                                <div data-min="0" data-max="10000" data-min-name="min_area" data-max-name="max_area" data-unit="Sq ft" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                <div class="clearfix"></div>
+                            <div class="col-lg-4">
+                                <p>18 dias</p>
                             </div>
-
-                            <div class="range-slider">
-                                <label>Price</label>
-                                <div data-min="0" data-max="150000"  data-min-name="min_price" data-max-name="max_price" data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
-                                <div class="clearfix"></div>
+                            <div class="col-lg-6" align="center">
+                                <h4>%{{ $propiedad->rentabilidadAnual }}</h4>
+                                <p>Rentabilidad Anual</p>
                             </div>
-
-                            <a class="show-more-options" data-toggle="collapse" data-target="#options-content">
-                                <i class="fa fa-plus-circle"></i> Show More Options
-                            </a>
-                            <div id="options-content" class="collapse">
-                                <label class="margin-t-10">Features</label>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox1" type="checkbox">
-                                    <label for="checkbox1">
-                                        Free Parking
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox2" type="checkbox">
-                                    <label for="checkbox2">
-                                        Air Condition
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox3" type="checkbox">
-                                    <label for="checkbox3">
-                                        Places to seat
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox4" type="checkbox">
-                                    <label for="checkbox4">
-                                        Swimming Pool
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox5" type="checkbox">
-                                    <label for="checkbox5">
-                                        Laundry Room
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox6" type="checkbox">
-                                    <label for="checkbox6">
-                                        Window Covering
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox7" type="checkbox">
-                                    <label for="checkbox7">
-                                        Central Heating
-                                    </label>
-                                </div>
-                                <div class="checkbox checkbox-theme checkbox-circle">
-                                    <input id="checkbox8" type="checkbox">
-                                    <label for="checkbox8">
-                                        Alarm
-                                    </label>
-                                </div>
+                            <div class="col-lg-6" align="center">
+                                <h4>%{{ $propiedad->rentabilidadTotal }}</h4>
+                                <p>Rentabilidad Total</p>
                             </div>
-
-                            <div class="form-group mb-0">
-                                <button class="search-button">Search</button>
+                            <br>
+                            <div class="col-lg-6">
+                                <p>Quiero invertir</p>
                             </div>
-                        </form>
+                            <div class="col-lg-6">
+                              <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">$</div>
+                                </div>
+                                <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" onkeyup="format(this)" onchange="format(this)">
+                              </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group mb-0">
+                            <button class="search-button">Invierte</button>
+                        </div>
                     </div>
                     
                 </div>
+                <div class="sidebar-left">
+                    <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
+                        <div class="row">
+                            <div class="col-lg-12" align="center">
+                                <h4>Inicio Financiación</h4>
+                            </div>
+                            <div class="col-lg-12" align="center">
+                                @php
+                                    setlocale(LC_TIME, 'es_CL');
+                                    $monthNum  = date('m',strtotime($propiedad->fechaInicio));
+                                    $dia = date('d',strtotime($propiedad->fechaInicio));
+                                    $año = date('Y',strtotime($propiedad->fechaInicio));
+                                    $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                                    $monthName = strftime('%B', $dateObj->getTimestamp());
+                                    switch($monthName)
+                                    {   
+                                        case "January":
+                                        $monthNameSpanish = "Enero";
+                                        break;
+                                        case "February":
+                                        $monthNameSpanish = "Febrero";
+                                        break;
+                                        case "March":
+                                        $monthNameSpanish = "Marzo";
+                                        break;
+                                        case "April":
+                                        $monthNameSpanish = "Abril";
+                                        break;
+                                        case "May":
+                                        $monthNameSpanish = "Mayo";
+                                        break;
+                                        case "June":
+                                        $monthNameSpanish = "Junio";
+                                        break;
+                                        case "July":
+                                        $monthNameSpanish = "Julio";
+                                        break;
+                                        case "August":
+                                        $monthNameSpanish = "Agosto";
+                                        break;
+                                        case "September":
+                                        $monthNameSpanish = "Septiembre";
+                                        break;
+                                        case "October":
+                                        $monthNameSpanish = "Octubre";
+                                        break;
+                                        case "November":
+                                        $monthNameSpanish = "Noviembre";
+                                        break;
+                                        case "December":
+                                        $monthNameSpanish = "Diciembre";
+                                        break;
+                                    }
+                                @endphp 
+                                <p>{{ $dia }} de {{ $monthNameSpanish }} del {{ $año }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
         
         <!-- Similar Properties end -->
@@ -607,5 +471,19 @@ function initMap() {
         zoom: 17,
     });
 }
+</script>
+<script type="text/javascript">
+    function format(input)
+    {
+        var num = input.value.replace(/\./g,'');
+        if(!isNaN(num)){
+            num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+            num = num.split('').reverse().join('').replace(/^[\.]/,'');
+            input.value = num;
+        }else{ 
+            alert('Solo se permiten numeros');
+            input.value = input.value.replace(/[^\d\.]*/g,'');
+        }
+    }
 </script>
 @endsection

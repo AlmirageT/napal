@@ -8,6 +8,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Propiedad;
+use App\ImagenPropiedad;
+use App\FotoPlano;
 
 class DetalleController extends Controller
 {
@@ -24,7 +26,10 @@ class DetalleController extends Controller
                 ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
                 ->where('propiedades.idPropiedad',$idPropiedad)
                 ->firstOrFail();
-    		return view('detalle',compact('propiedad'));
+            $imagenesPropiedadesGrandes = ImagenPropiedad::where('idPropiedad',$idPropiedad)->get();
+            $imagenesPropiedadesPequeñas = ImagenPropiedad::where('idPropiedad',$idPropiedad)->get();
+            $imagenesPlanos = FotoPlano::where('idPropiedad',$idPropiedad)->first();
+    		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos'));
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');
             return redirect::to('/');

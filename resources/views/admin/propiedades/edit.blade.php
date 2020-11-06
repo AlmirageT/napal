@@ -151,10 +151,16 @@ Actualizar Propiedad
 								{!! Form::select('idMoneda', $monedas,$propiedad->idMoneda,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione una moneda"]) !!}
 							</div>
 						</div>
-						<div class="col-lg-12">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Plazo Meses</label>
 								{!! Form::number('plazoMeses',$propiedad->plazoMeses,['class'=>"form-control",'required']) !!}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>URL Video</label>
+								{!! Form::text('urlVideo',$propiedad->urlVideo,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">

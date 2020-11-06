@@ -3,8 +3,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-8 col-sm-7">
                 <div class="list-inline">
-                    <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>Need Support? 1-8X0-666-8X88</a>
-                    <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
+                    <a href="{{ asset('contacta-con-nosotros') }}"><i class="fa fa-envelope"></i>Contacta con nosotros</a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-4 col-sm-5">

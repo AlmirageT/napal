@@ -145,10 +145,16 @@ Crear Propiedad
 								{!! Form::select('idMoneda', $monedas,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione una moneda"]) !!}
 							</div>
 						</div>
-						<div class="col-lg-12">
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Plazo Meses</label>
 								{!! Form::number('plazoMeses',null,['class'=>"form-control",'required']) !!}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>URL Video</label>
+								{!! Form::text('urlVideo',null,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">

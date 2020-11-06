@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}" id="app-style" type="text/css" >
   <link rel="stylesheet" href="{{ asset('assets/css/icons.min.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" />
   @yield('css')
   @toastr_css
 </head>
@@ -87,6 +88,8 @@
   <script src="{{ asset('assets/js/app.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+
   @toastr_js
   @toastr_render
   @yield('scripts')

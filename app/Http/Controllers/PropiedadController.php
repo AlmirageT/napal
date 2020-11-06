@@ -18,6 +18,7 @@ use App\Proyecto;
 use App\TipoInversion;
 use App\Propiedad;
 use DB;
+use Image;
 use Cache;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -81,8 +82,14 @@ class PropiedadController extends Controller
             	$imgName = null;
 	            if($request->file('fotoPrincipal')){
 	                $imagen = $request->file('fotoPrincipal');
+                    $img = Image::make($imagen);
+                    
 	                $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
-	                $imagen->move('assets/images/propiedades/',$imgName);
+                    $img->resize(350, 233, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    $img->save('assets/images/propiedades/'.$imgName);
 	            }
             	$propiedad = new Propiedad($request->all());
             	if ($imgName != null) {
@@ -163,8 +170,14 @@ class PropiedadController extends Controller
                         unlink($propiedad->fotoPrincipal);
                     }
 	                $imagen = $request->file('fotoPrincipal');
-	                $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
-	                $imagen->move('assets/images/propiedades/',$imgName);
+	                $img = Image::make($imagen);
+                    
+                    $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+                    $img->resize(350, 233, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    $img->save('assets/images/propiedades/'.$imgName);
 	            }
             	$propiedad->fill($request->all());
             	if ($imgName != null) {

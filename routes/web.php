@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('politicas-privacidad',function(){
     return view('politicasPrivacidad');
 });
+Route::get('contacta-con-nosotros',function(){
+    return view('contactaNosotros');
+});
+
 //detalle propiedades
 Route::get('detalle/{idPropiedad}','DetalleController@index');
 //invierte
@@ -117,8 +121,12 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('condiciones-servicios','CondicionServicioController@index');
     //imagenes propiedades
     Route::get('imagenes/{idPropiedad}/create','ImagenPropiedadController@index');
+    //dropzone
+    Route::post('img-propiedad/{idPropiedad}','ImagenPropiedadController@dropzone');
     //imagenes plano propiedades
     Route::get('planos/{idPropiedad}/create','FotoPlanoController@index');
+    //dropzone planos
+    Route::post('img-planos/{idPropiedad}','FotoPlanoController@dropzone');
 });
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by

@@ -64,7 +64,8 @@ class AppServiceProvider extends ServiceProvider
                 ->orderBy('propiedades.idPropiedad','DESC')
                 ->where('propiedades.idEstado',4)
                 ->where('propiedades.destacadoPropiedad',1)
-                ->paginate(10);
+                ->take(10)
+                ->get();
                 return $cachePropiedades;
             });
         }
@@ -75,7 +76,8 @@ class AppServiceProvider extends ServiceProvider
                 $cacheCasosExitosos = CasoExitoso::select('*')
                 ->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
                 ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
-                ->paginate(6);
+                ->take(6)
+                ->get();
                 return $cacheCasosExitosos;
             });
         }

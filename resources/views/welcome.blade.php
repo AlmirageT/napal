@@ -295,6 +295,17 @@
                                         @endif
                                     </li>
                                 </ul>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>$250.000 (%25)</p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <progress max="100" value="25" style="width: 100%;">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p>80 inversores</p>
+                                    </div>
+                                </div>
                                 <hr>
                                     <div class="row">
                                         <div class="col-lg-6" align="center">
@@ -307,6 +318,11 @@
                                         </div>
                                     </div> 
                                 <hr>  
+                                <div class="row" align="center">
+                                    <div class="col-lg-12">
+                                        <a href="{{ asset('detalle') }}/{{ $propiedad->idPropiedad }}" class="btn btn-primary">Invierte</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="footer clearfix">
                                 <div class="pull-left days" align="center">
