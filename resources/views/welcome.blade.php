@@ -309,11 +309,11 @@
                                 <hr>
                                     <div class="row">
                                         <div class="col-lg-6" align="center">
-                                            <h4>%{{ $propiedad->rentabilidadAnual }}</h4>
+                                            <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
                                             <p>Rentabilidad Anual</p>
                                         </div>
                                         <div class="col-lg-6" align="center">
-                                            <h4>%{{ $propiedad->rentabilidadTotal }}</h4>
+                                            <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
                                             <p>Rentabilidad Total</p>
                                         </div>
                                     </div> 
@@ -661,11 +661,11 @@
 
         .aux {
             width: 466px;
-            margin-top: 305px;
+            margin-top: 668px;
             margin-left: 12px;
         }
         .aux-iphone{
-            margin-top: 400px;
+            margin-top: 880px;
             width: 192px;
         }
         @media only screen and (max-width: 1199px) {
@@ -679,8 +679,12 @@
             }
             .aux{
                 width: 414px;
-                margin-top: 255px;
+                margin-top: 550px;
                 margin-left: 96px;
+            }
+            .aux-iphone{
+                margin-top: 840px;
+                width: 192px;
             }
         }
     </style>
@@ -708,10 +712,10 @@
                 $(window).scroll(function() {
                     var scroll = $(window).scrollTop();
                     $(".aux").css({
-                        transform: 'translate(0%, -'+((scroll/10)/10)+'%) translate3d(0px, 0px, 0px)',
+                        transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
                     });
                     $(".aux-iphone").css({
-                        transform: 'translate(0%, -'+((scroll/10)/10)+'%) translate3d(0px, 0px, 0px)',
+                        transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
                     });
                   });
             </script>

@@ -14,6 +14,7 @@ class TrxIngreso extends Model
     	'idUsuario',
     	'idMoneda',
     	'idEstado',
-    	'idTipoMedioPago'
+    	'idTipoMedioPago',
+        'idPropiedad'
     ];
 }

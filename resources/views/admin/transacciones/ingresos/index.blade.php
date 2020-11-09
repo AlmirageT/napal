@@ -52,7 +52,7 @@ Trx Ingresos
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
 		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
 		                        </a>
-		                        <div class="dropdown-menu dropdown-menu">
+		                        <div class="dropdown-menu dropdown-menu-right">
 					      			<a href="{{ asset('napalm/ingresos/detalles') }}/{{ $ingreso->idTrxIngreso }}" class="dropdown-item btn btn-warning">Ver Detalles</a>
 		                        </div>
 		                    </div>

@@ -21,7 +21,11 @@ Route::get('politicas-privacidad',function(){
 Route::get('contacta-con-nosotros',function(){
     return view('contactaNosotros');
 });
-
+//ruta para prueba de envio de mail por x tiempo de finalizacion
+//Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
+//Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
+//contacta con nosotros
+Route::post('enviar-solicitud','ContactaConNosotrosController@enviarCorreo');
 //detalle propiedades
 Route::get('detalle/{idPropiedad}','DetalleController@index');
 //invierte

@@ -303,11 +303,11 @@ Detalle Propiedad
                                 <p>18 dias</p>
                             </div>
                             <div class="col-lg-6" align="center">
-                                <h4>%{{ $propiedad->rentabilidadAnual }}</h4>
+                                <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
                                 <p>Rentabilidad Anual</p>
                             </div>
                             <div class="col-lg-6" align="center">
-                                <h4>%{{ $propiedad->rentabilidadTotal }}</h4>
+                                <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
                                 <p>Rentabilidad Total</p>
                             </div>
                             <br>

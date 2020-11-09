@@ -84,10 +84,29 @@ class UsuarioController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'avatar' => 'max:102400'
+                'avatar' => 'required|max:102400',
+                'nombre'=>'required',
+                'apellido'=>'required',
+                'correo'=>'required|email',
+                'rut'=>'required',
+                'password'=>'required',
+                'confirm_password'=>'required',
+                'profesion'=>'required',
+                'idPais'=>'required',
+                'idRegion'=>'required',
+                'idProvincia'=>'required',
+                'idComuna'=>'required',
+                'direccion1'=>'required',
+                'direccion2'=>'required',
+                'codigoPostal'=>'required',
+                'latitud'=>'required',
+                'longitud'=>'required',
+                'idIdioma'=>'required',
+                'idTipoPersona'=>'required',
+                'idTipoUsuario'=>'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('No debe dejar campos en blanco');
                 return back();
             }
             DB::beginTransaction();

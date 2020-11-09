@@ -15,31 +15,38 @@
 		</div>
 	</div>
 	<div class="card">
-		<form>
+		<form action="{{ asset('enviar-solicitud') }}" method="POST">
+			@csrf
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label>Nombre y apellidos</label>
-							<input type="text" name="nombre" class="form-control">
+							<input type="text" name="nombre" required class="form-control">
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label>Tu email</label>
-							<input type="email" name="email" class="form-control">
+							<input type="email" name="email" required class="form-control">
 						</div>
 					</div>
 					<div class="col-lg-8">
 						<label>Escoge tu asunto</label>
-						<select class="form-control">
-							<option>Seleccione</option>
+						<select class="form-control" name="asunto" required>
+							<option value="">Seleccione</option>
+							<option value="Solicitud Informacion">Solicitud de información general</option>
+							<option value="Registrarse">Quiero Registrarme</option>
+							<option value="Usuario Consulta">Soy usuario y tengo consultas</option>
+							<option value="Problemas Al Intentar Ingresar">Problemas al intentar ingresar a mi area de inversor</option>
+							<option value="Soy Promotor">Soy promotor</option>
+							<option value="Otro Asunto">Otro asunto</option>
 						</select>
 					<br>
 					</div>
 					<div class="col-lg-12">
 						<label>Tu mensaje</label>
-						<textarea class="form-control"></textarea>
+						<textarea class="form-control" required name="mensaje"></textarea>
 						<br>
 					</div>
 					<div class="col-lg-12">
@@ -60,7 +67,7 @@
 		          </div>
 		        </div>
 		        <div class="form-group" align="center">
-		        	<button class="btn btn-danger">Enviar</button>
+		        	<button class="btn btn-danger" type="submit">Enviar</button>
 		        </div>
 		    </div>
 	    </form>
