@@ -11,12 +11,6 @@ Trx Ingresos
 <div class="row">
 	<div class="col-lg-12">
 		<div class="">
-			<div class="app-search d-none d-lg-block">
-		        <div class="position-relative">
-		            <input type="text" class="form-control" placeholder="Buscador..." id="caja_busqueda" onchange="buscar_datos(this.value)">
-		            <span class="bx bx-search-alt"></span>
-		        </div>
-			</div>
 			<div class="table-responsive">
 				<table class="table project-list-table table-nowrap table-centered table-borderless" id="datos">
 				  <thead>
@@ -34,34 +28,7 @@ Trx Ingresos
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				  	@foreach($ingresos as $ingreso)
-					    <tr>
-					      <td>{{ $ingreso->idTrxIngreso }}</td>
-					      <td>${{ number_format($ingreso->monto,0,',','.') }}</td>
-					      <td>{{ $ingreso->webClient }}</td>
-					      <td>{{ $ingreso->nombre }} {{ $ingreso->apellido }}</td>
-					      <td>{{ $ingreso->rut }}</td>
-					      <td>{{ $ingreso->correo }}</td>
-					      <td>{{ $ingreso->numero }}</td>
-					      <td>{{ $ingreso->nombreMoneda }}</td>
-					      <td>{{ $ingreso->nombreEstado }}</td>
-					      <td>{{ $ingreso->nombreTipoMedioPago }}</td>
-					      <td>
-					      	<div class="dropdown">
-		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
-		                        </a>
-		                        <div class="dropdown-menu dropdown-menu-right">
-					      			<a href="{{ asset('napalm/ingresos/detalles') }}/{{ $ingreso->idTrxIngreso }}" class="dropdown-item btn btn-warning">Ver Detalles</a>
-		                        </div>
-		                    </div>
-					      </td>
-					    </tr>
-					@endforeach
-				  </tbody>
 				</table>
-				{{ $ingresos->links() }}
 			</div>
 		</div>
 	</div>
@@ -69,33 +36,48 @@ Trx Ingresos
 @endsection
 @section('scripts')
 <script>
-
-function buscar_datos(consulta){
-	$.ajax({
-		url: '{{ asset('buscador-prueba') }}' ,
-		type: 'POST',
-		headers: {
-			'X-CSRF-TOKEN': '{{ csrf_token() }}'
-		},
-		dataType: 'html',
-		data: {consulta: consulta},
-	})
-	.done(function(respuesta){
-		$("#datos").html(respuesta);
-	})
-	.fail(function(){
-		console.log("error");
+$(document).ready(function () {
+	$('#datos').DataTable({
+		"processing": true,
+		"serverSide": true,
+		"ajax":{
+		"url": "{{ asset('datatable-ingresos') }}",
+		"dataType": "json",
+		"type": "POST",
+		"data":{ _token: "{{csrf_token()}}"}
+	},
+		"columns": [
+			{ "data": "idTrxIngreso" },
+			{ "data": "monto" },
+			{ "data": "webClient" },
+			{ "data": "nombre" },
+			{ "data": "rut" },
+			{ "data": "correo" },
+			{ "data": "numero" },
+			{ "data": "nombreEstado" },
+			{ "data": "nombreTipoMedioPago" },
+			{ "data": "options" }
+		],
+		language: {
+			"decimal": "",
+			"emptyTable": "No hay información",
+			"info": "Mostrando _END_ de _TOTAL_ Entradas",
+			"infoEmpty": "No existen registros",
+			"infoPostFix": "",
+			"thousands": ",",
+			"lengthMenu": "Mostrar _MENU_ Entradas",
+			"loadingRecords": "Cargando...",
+			"processing": "Procesando...",
+			"search": "Buscar:",
+			"zeroRecords": "Sin resultados encontrados",
+			"paginate": {
+			"first": "Primero",
+			"last": "Ultimo",
+			"next": "Siguiente",
+			"previous": "Anterior"
+		}
+	},
 	});
-}
-
-
-$(document).on('keyup','#caja_busqueda', function(){
-	var valor = $(this).val();
-	if (valor != "") {
-		buscar_datos(valor);
-	}else{
-		buscar_datos();
-	}
 });
 </script>
 @endsection

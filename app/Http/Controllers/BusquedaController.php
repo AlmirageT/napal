@@ -198,4 +198,105 @@ class BusquedaController extends Controller
     	}
     	return $tabla;
     }
+    public function tablaIngresos(Request $request)
+    {
+    	$columns = array(
+			0=> 'idTrxIngreso',
+			1=> 'monto',
+			2=> 'webClient',
+			3=> 'nombre',
+			4=> 'rut',
+			5=> 'correo',
+			6=> 'numero',
+			7=> 'nombreEstado',
+			8=> 'nombreTipoMedioPago',
+			9=> 'options'
+		);
+		$totalData = TrxIngreso::all()->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+		$order = $columns[$request->input('order.0.column')];
+		$dir = $request->input('order.0.dir');
+
+		if(empty($request->input('search.value')))
+		{
+			$ingresos = TrxIngreso::select('*')
+		    	->join('usuarios','trx_ingresos.idUsuario','=','usuarios.idUsuario')
+		    	->join('monedas','trx_ingresos.idMoneda','=','monedas.idMoneda')
+		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
+		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
+		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$ingresos = TrxIngreso::select('*')
+		    	->join('usuarios','trx_ingresos.idUsuario','=','usuarios.idUsuario')
+		    	->join('monedas','trx_ingresos.idMoneda','=','monedas.idMoneda')
+		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
+		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
+		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
+				->where(function($query) use ($search){
+					$query->where('usuarios.nombre', 'LIKE',"%{$search}%")
+			    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
+			    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
+			    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
+			    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+				})
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+
+			$totalFiltered = TrxIngreso::select('*')
+		    	->join('usuarios','trx_ingresos.idUsuario','=','usuarios.idUsuario')
+		    	->join('monedas','trx_ingresos.idMoneda','=','monedas.idMoneda')
+		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
+		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
+		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
+				->where(function($query) use ($search){
+					$query->where('usuarios.nombre', 'LIKE',"%{$search}%")
+				    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
+				    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
+				    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
+				    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+					})
+					->count();
+		}
+
+		$data = array();
+		if(!empty($ingresos)){
+			foreach ($ingresos as $ingreso){
+				$nestedData['idTrxIngreso'] = $ingreso->idTrxIngreso;
+				$nestedData['monto'] ="$".number_format($ingreso->monto,0,',','.');
+				$nestedData['webClient'] = $ingreso->webClient;
+				$nestedData['nombre'] = $ingreso->nombre;
+				$nestedData['rut'] = $ingreso->rut;
+				$nestedData['correo'] = $ingreso->correo;
+				$nestedData['numero'] = $ingreso->numero;
+				$nestedData['nombreEstado'] = $ingreso->nombreEstado;
+				$nestedData['nombreTipoMedioPago'] = $ingreso->nombreTipoMedioPago;
+				$nestedData['options'] = "<div class='dropdown'>
+	                                <a href='#' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+	                                    <i class='mdi mdi-dots-horizontal font-size-18'></i>
+	                                </a>
+	                                <div class='dropdown-menu dropdown-menu'>
+						      			<a href='".asset('napalm/ingresos/detalles')."/".$ingreso->idTrxIngreso."' class='dropdown-item btn btn-warning'>Ver Detalles</a>
+	                                </div>
+	                            </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
 }

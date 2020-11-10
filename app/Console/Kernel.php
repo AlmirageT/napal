@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('App\Http\Controllers\MensajeriaController@correoUsuariosQueNoHanInvertido')->dailyAt('1:00');
-        $schedule->call('App\Http\Controllers\MensajeriaController@corrreoUsuariosQueHanInvertido')->dailyAt('1:00');
+        $schedule->call('App\Http\Controllers\MensajeriaController@correoUsuariosQueNoHanInvertido')->weeklyOn(1,'1:00');
+        $schedule->call('App\Http\Controllers\MensajeriaController@corrreoUsuariosQueHanInvertido')->weeklyOn(1,'1:00');
     }
 
     /**

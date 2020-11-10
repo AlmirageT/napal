@@ -297,7 +297,7 @@
                                 </ul>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <p>$250.000 (%25)</p>
+                                        <p>$250.000 (25%)</p>
                                     </div>
                                     <div class="col-lg-12">
                                         <progress max="100" value="25" style="width: 100%;">
@@ -326,7 +326,7 @@
                             </div>
                             <div class="footer clearfix">
                                 <div class="pull-left days" align="center">
-                                    <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} dias </p>
+                                    <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} días </p>
                                 </div>
                                 <ul class="pull-right">
                                     <li><a href="#"><i class="flaticon-favorite"></i></a></li>
@@ -439,13 +439,13 @@
                                         <div class="contact">
                                             <ul>
                                                 <li>
-                                                    <span>Address:</span><a href="#"> {{ $casoExitoso->direccion1 }} {{ $casoExitoso->nombreRegion }}</a>
+                                                    <span>Dirección:</span><a href="#"> {{ $casoExitoso->direccion1 }}, {{ $casoExitoso->nombreRegion }}</a>
                                                 </li>
                                                 <li>
-                                                    <span>TIR estimada:</span><a href=""> %{{ $casoExitoso->rentabilidadAnual }}</a>
+                                                    <span>TIR estimada:</span><a href=""> {{ $casoExitoso->rentabilidadAnual }}%</a>
                                                 </li>
                                                 <li>
-                                                    <span>TIR Entregada:</span><a href=""> %{{ $casoExitoso->rentabilidadTotal }}</a>
+                                                    <span>TIR Entregada:</span><a href=""> {{ $casoExitoso->rentabilidadTotal }}%</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -483,7 +483,7 @@
                                     <div class="contact">
                                         <ul>
                                             <li>
-                                                <span>Address:</span><a href="#"> 44 New Design Street,</a>
+                                                <span>Direccion:</span><a href="#"> 44 New Design Street,</a>
                                             </li>
                                             <li>
                                                 <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>

@@ -47,6 +47,11 @@ class Propiedad extends Model
     	'idExpertoAsociado',
         'idRegion',
         'destacadoPropiedad',
-        'urlVideo'
+        'urlVideo',
+        'oportunidad',
+        'invertir',
+        'ubicacion',
+        'proyecto',
+        'promotor'
     ];
 }

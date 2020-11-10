@@ -259,6 +259,36 @@ Actualizar Propiedad
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
+								<label>Oportunidad</label>
+								<textarea class="form-control summernote" name="oportunidad" >{{ $propiedad->oportunidad }}</textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Invertir</label>
+								<textarea class="form-control summernote" name="invertir" >{{ $propiedad->invertir }}</textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Ubicación</label>
+								<textarea class="form-control summernote" name="ubicacion" >{{ $propiedad->ubicacion }}</textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Proyecto</label>
+								<textarea class="form-control summernote" name="proyecto" >{{ $propiedad->proyecto }}</textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Promotor</label>
+								<textarea class="form-control summernote" name="promotor" >{{ $propiedad->promotor }}</textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
 								<label>Notas Internas</label>
 								<textarea class="form-control summernote" name="notasInternas">{{ $propiedad->notasInternas }}</textarea>
 							</div>

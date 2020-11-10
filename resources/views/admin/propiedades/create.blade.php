@@ -247,6 +247,36 @@ Crear Propiedad
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
+								<label>Oportunidad</label>
+								<textarea class="form-control summernote" name="oportunidad" ></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Invertir</label>
+								<textarea class="form-control summernote" name="invertir" ></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Ubicación</label>
+								<textarea class="form-control summernote" name="ubicacion" ></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Proyecto</label>
+								<textarea class="form-control summernote" name="proyecto" ></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Promotor</label>
+								<textarea class="form-control summernote" name="promotor" ></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
 								<label>Notas Internas</label>
 								<textarea class="form-control summernote" name="notasInternas"></textarea>
 							</div>

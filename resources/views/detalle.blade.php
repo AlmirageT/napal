@@ -21,6 +21,37 @@ Detalle Propiedad
                             </div>
                         @endfor
                     </div>
+                    {{--  
+                    <style type="text/css">
+                        .footer-properties{
+                            background-color: rgba(0, 0, 0, 0.5);
+                            margin-top: -84px;
+                            margin-left: 15px;
+                            margin-right: 15px;
+                        }
+                        
+                    </style>
+                    <div class="d-none d-sm-block" style="background-color: rgba(0, 0, 0, 0.5)">
+                        <div class="footer-properties">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <h3>{{ $propiedad->nombrePropiedad }}</h3>
+                                        <p><i class="far fa-comment-dots" style="font-size: 48px;"></i></p>
+                                    </div>
+                                    <div class="pull-right">
+                                        <h3>
+                                            <span class="text-right">${{ number_format($propiedad->precio,0,',','.') }}</span>
+                                        </h3>
+                                        @if($propiedad->idTipoFlexibilidad == 1)
+                                            <span class="text-right">Flexible</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    --}}
                     <!-- main slider carousel nav controls -->
                     <ul class="carousel-indicators smail-properties list-inline nav nav-justified">
                         <li class="list-inline-item active">
@@ -49,10 +80,14 @@ Detalle Propiedad
                                     <h3>
                                         <span class="text-right">${{ number_format($propiedad->precio,0,',','.') }}</span>
                                     </h3>
+                                    @if($propiedad->idTipoFlexibilidad == 1)
+                                        <span class="text-right">Flexible</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Heading properties end -->
                 </div>
                 @else
@@ -94,178 +129,40 @@ Detalle Propiedad
                     </ul>
                 </div>
                 <!-- Property meta end -->
-
+                <style type="text/css">
+                    .nav-tabs .nav-item{
+                        width: 242px;
+                        text-align:center;
+                    }
+                    @media only screen and (max-width: 1199px) {
+                        .nav-tabs .nav-item{
+                            width: 600px;
+                            text-align:center;
+                        }
+                    }
+                </style>
                 <!-- Properties description start -->
                 <div class="properties-description mb-40">
-                    <h3 class="heading-2">
-                        Descripción
-                    </h3>
-                    {!! $propiedad->descripcion !!}
-                </div>
-                <!-- Properties description end -->
-
-                <!-- Properties condition start -->
-                <div class="properties-condition mb-40">
-                    <h3 class="heading-2">
-                        Condiciones
-                    </h3>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <ul class="condition">
-                                <li>
-                                    <i class="flaticon-furniture"></i>2 Bedroom
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays"></i>Bathroom
-                                </li>
-                            </ul>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-descripcion-tab" data-toggle="tab" href="#nav-descripcion" role="tab" aria-controls="nav-descripcion" aria-selected="true">Descripción</a>
+                            <a class="nav-item nav-link" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="false">Información Financiera</a>
+                            <a class="nav-item nav-link" id="nav-documentacion-tab" data-toggle="tab" href="#nav-documentacion" role="tab" aria-controls="nav-documentacion" aria-selected="false">Documentación</a>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <ul class="condition">
-                                <li>
-                                    <i class="flaticon-square"></i>4800 sq ft
-                                </li>
-                                <li>
-                                    <i class="flaticon-monitor"></i>TV Lounge
-                                </li>
-                            </ul>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-descripcion" role="tabpanel" aria-labelledby="nav-descripcion-tab">
+                            @include('navTab.descripcion')
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <ul class="condition">
-                                <li>
-                                    <i class="flaticon-vehicle"></i>1 Garage
-                                </li>
-                                <li>
-                                    <i class="flaticon-window"></i>Balcony
-                                </li>
-                            </ul>
+                        <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                            @include('navTab.info')
+                        </div>
+                        <div class="tab-pane fade" id="nav-documentacion" role="tabpanel" aria-labelledby="nav-documentacion-tab">
+                                @include('navTab.documentacion')
                         </div>
                     </div>
                 </div>
-                <!-- Properties condition end -->
 
-                <!-- Properties amenities start -->
-                <div class="properties-amenities mb-40">
-                    <h3 class="heading-2">
-                        Caracteristicas
-                    </h3>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <ul class="amenities">
-                                <li>
-                                    <i class="flaticon-technology"></i>Air conditioning
-                                </li>
-                                <li>
-                                    <i class="flaticon-window"></i>Balcony
-                                </li>
-                                <li>
-                                    <i class="flaticon-beach"></i>Pool
-                                </li>
-                                <li>
-                                    <i class="flaticon-holidays-1"></i>Room service
-                                </li>
-                                <li>
-                                    <i class="flaticon-people-2"></i>Gym
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <ul class="amenities">
-                                <li>
-                                    <i class="flaticon-connection"></i>Wifi
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i>Parking
-                                </li>
-                                <li>
-                                    <i class="flaticon-furniture"></i>Double Bed
-                                </li>
-                                <li>
-                                    <i class="flaticon-comedy"></i>Home Theater
-                                </li>
-                                <li>
-                                    <i class="flaticon-technology-3"></i>Electric
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <ul class="amenities">
-                                <li>
-                                    <i class="flaticon-technology-1"></i>Telephone
-                                </li>
-                                <li>
-                                    <i class="flaticon-people-3"></i>Jacuzzi
-                                </li>
-                                <li>
-                                    <i class="flaticon-clock"></i>Alarm
-                                </li>
-                                <li>
-                                    <i class="flaticon-vehicle"></i>Garage
-                                </li>
-                                <li>
-                                    <i class="flaticon-lock"></i>Security
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Properties amenities end -->
-
-                <!-- Floor plans start -->
-                <div class="floor-plans mb-50">
-                    <h3 class="heading-2">Planos</h3>
-                    <table>
-                        <tbody><tr>
-                            <td><strong>Size</strong></td>
-                            <td><strong>Rooms</strong></td>
-                            <td><strong>Bathrooms</strong></td>
-                            <td><strong>Garage</strong></td>
-                        </tr>
-                        <tr>
-                            <td>1600</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>1</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    @if(isset($imagenesPlanos))
-                    <img src="{{ asset($imagenesPlanos->fotoPlano) }}" alt="floor-plans" class="img-fluid">
-                    @else
-                    No tiene imagenes de planos
-                    @endif
-                </div>
-                <!-- Floor plans end -->
-
-                <!-- Inside properties start -->
-                <div class="inside-properties mb-50">
-                    <h3 class="heading-2">
-                        Video
-                    </h3>
-                    @if($propiedad->urlVideo != null)
-                    <iframe src="{{ $propiedad->urlVideo }}" allowfullscreen=""></iframe>
-                    @else
-                    No tiene video asociado
-                    @endif
-                </div>
-                <!-- Inside properties end -->
-                <input type="hidden" id="paises" value="{{ $propiedad->nombrePais }}">
-                <input type="hidden" id="select_regiones" value="{{ $propiedad->nombreRegion }}">
-                <input type="hidden" id="select_provincias" value="{{ $propiedad->nombreProvincia }}">
-                <input type="hidden" id="select_comunas" value="{{ $propiedad->nombreComuna }}">
-                <input type="hidden" id="txtDireccion" value="{{ $propiedad->direccion1 }}">
-                <input type="hidden" id="txtNumero" value="{{ $propiedad->direccion2 }}">
-                <!-- Location start -->
-                <div class="location mb-50">
-                    <div class="map">
-                        <h3 class="heading-2">Ubicación</h3>
-                        <div class="col-lg-12">
-                            <div id="map" style="width: 100%; height: 300px"></div>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-                <!-- Location end -->
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar-left">
@@ -319,7 +216,7 @@ Detalle Propiedad
                                 <div class="input-group-prepend">
                                   <div class="input-group-text">$</div>
                                 </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" onkeyup="format(this)" onchange="format(this)">
+                                <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" maxlength="8" onkeyup="format(this)" onchange="format(this)">
                               </div>
                             </div>
                         </div>
@@ -396,6 +293,7 @@ Detalle Propiedad
         <!-- Similar Properties end -->
     </div>
 </div>
+
 @endsection
 @section('scripts')
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g&callback=initMap" async defer></script>

@@ -21,6 +21,7 @@ Route::get('politicas-privacidad',function(){
 Route::get('contacta-con-nosotros',function(){
     return view('contactaNosotros');
 });
+Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');

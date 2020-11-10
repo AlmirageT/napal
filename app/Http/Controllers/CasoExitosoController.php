@@ -9,6 +9,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\CasoExitoso;
 use App\Propiedad;
+use Cache;
 use DB;
 
 class CasoExitosoController extends Controller
