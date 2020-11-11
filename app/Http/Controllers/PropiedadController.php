@@ -29,22 +29,7 @@ class PropiedadController extends Controller
 {
     public function index()
     {
-    	$propiedades = Propiedad::select('*')
-    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
-    	->join('paises','propiedades.idPais','=','paises.idPais')
-    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
-    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
-    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
-    	->join('estados','propiedades.idEstado','=','estados.idEstado')
-    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
-    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
-    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
-    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
-    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
-    	->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
-        ->orderBy('propiedades.idPropiedad','DESC')
-    	->get();
-    	return view('admin.propiedades.index',compact('propiedades'));
+    	return view('admin.propiedades.index');
     }
     public function create()
     {
@@ -106,6 +91,15 @@ class PropiedadController extends Controller
                     $propiedad->destacadoPropiedad = 0;
                 }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
+                $linkMapa = "https://maps.googleapis.com/maps/api/staticmap?center=".$request->latitud.",".$request->longitud."&zoom=17&size=350x233&markers=color:blue%7Clabel:S%7C".$request->latitud.",".$request->longitud."&key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g";
+                $mapa = Image::make($linkMapa);
+                $mapa->resize(350, 233, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $mapaNombre = uniqid();
+                $mapa->save('assets/images/propiedades/'.$mapaNombre);
+                $propiedad->fotoMapa = 'assets/images/propiedades/'.$mapaNombre;
 	            $propiedad->poi = $geoHash[0]->geoHash;
 	            $propiedad->save();
 	            toastr()->success('Agregado Correctamente', 'La propiedad: '.$request->nombrePropiedad.' ha sido agregado correctamente', ['timeOut' => 9000]);
@@ -194,6 +188,18 @@ class PropiedadController extends Controller
                     $propiedad->destacadoPropiedad = 0;
                 }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
+                if ($propiedad->fotoMapa != null) {
+                    unlink($propiedad->fotoMapa);
+                }
+                $linkMapa = "https://maps.googleapis.com/maps/api/staticmap?center=".$request->latitud.",".$request->longitud."&zoom=17&size=350x233&markers=color:blue%7Clabel:S%7C".$request->latitud.",".$request->longitud."&key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g";
+                $mapa = Image::make($linkMapa);
+                $mapa->resize(350, 233, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $mapaNombre = uniqid();
+                $mapa->save('assets/images/propiedades/'.$mapaNombre);
+                $propiedad->fotoMapa = 'assets/images/propiedades/'.$mapaNombre;
 	            $propiedad->poi = $geoHash[0]->geoHash;
 	            $propiedad->save();
 	            toastr()->success('Actualizado Correctamente', 'La propiedad: '.$request->nombrePropiedad.' ha sido actualizado correctamente', ['timeOut' => 9000]);
@@ -232,6 +238,9 @@ class PropiedadController extends Controller
 	            if ($propiedad->fotoPrincipal != null) {
 	                unlink($propiedad->fotoPrincipal);
 	            }
+                if ($propiedad->fotoMapa != null) {
+                    unlink($propiedad->fotoMapa);
+                }
 	            $propiedad->delete();
     		DB::commit();
             return redirect::to('napalm/propiedades');

@@ -21,7 +21,15 @@ Route::get('politicas-privacidad',function(){
 Route::get('contacta-con-nosotros',function(){
     return view('contactaNosotros');
 });
+//datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
+Route::post('datatable-egresos','BusquedaController@tablaEgresos');
+Route::post('datatable-destinos-egresos','BusquedaController@tablaDestinoEgreso');
+Route::post('datatable-usuarios','BusquedaController@tablaUsuario');
+Route::post('datatable-proyectos','BusquedaController@tablaProyecto');
+Route::post('datatable-propiedades','BusquedaController@tablaPropiedad');
+Route::post('datatable-casos-exitosos','BusquedaController@tablaCasosExitosos');
+Route::post('datatable-comunas','BusquedaController@tablaComunas');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -149,22 +157,13 @@ Route::get('provincias/{idRegion}','UsuarioController@obtenerProvincias');
 Route::get('comunas/{idProvincia}','UsuarioController@obtenerComuna');
 //crud usuarios
 Route::resource('mantenedor-usuarios','UsuarioController');
-Route::delete('mantenedor-usuarios/{idUsuario}',array(
-    'uses'=>'UsuarioController@destroy',
-    'as'=>'mantenedor-usuarios.delete'
-));
+Route::get('napalm/usuarios/delete/{idUsuario}','UsuarioController@destroy');
 //crud proyectos
 Route::resource('mantenedor-proyectos','ProyectoController');
-Route::delete('mantenedor-proyectos/{idProyecto}',array(
-    'uses'=>'ProyectoController@destroy',
-    'as'=>'mantenedor-proyectos.delete'
-));
+Route::get('napalm/proyectos/destroy/{idProyecto}','ProyectoController@destroy');
 //crud propiedades
 Route::resource('mantenedor-propiedades','PropiedadController');
-Route::delete('mantenedor-propiedades/{idProyecto}',array(
-    'uses'=>'PropiedadController@destroy',
-    'as'=>'mantenedor-propiedades.delete'
-));
+Route::get('napalm/propiedades/destroy/{idPropiedad}','PropiedadController@destroy');
 //crud tipos usuarios
 Route::resource('mantenedor-tipos_usuarios','TipoUsuarioController');
 Route::delete('mantenedor-tipos_usuarios/{idTipoUsuario}',array(

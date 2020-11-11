@@ -11,13 +11,7 @@ class TrxEgresoController extends Controller
 {
     public function index()
     {
-    	$egresos = TrxEgresos::select('*')
-    	->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
-    	->join('monedas','trx_egresos.idMoneda','=','monedas.idMoneda')
-    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-    	->orderBy('trx_egresos.idTrxEgreso','DESC')
-    	->paginate(10);
-    	return view('admin.transacciones.egresos.index',compact('egresos'));
+    	return view('admin.transacciones.egresos.index');
     }
     public function detalle($idTrxEgreso)
     {

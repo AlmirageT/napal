@@ -22,7 +22,6 @@ Trx Ingresos
 				      <th>Rut</th>
 				      <th>Correo</th>
 				      <th>Télefono</th>
-				      <th>Moneda</th>
 				      <th>Estado</th>
 				      <th>Medio Pago</th>
 				      <th>Acciones</th>

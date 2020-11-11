@@ -237,17 +237,17 @@
 
         <div class="slick-slider-area">
             <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                @foreach($propiedades as $propiedad)
+                @for ($i = 0; $i < count($propiedades); $i++)
                     @php
-                        $date1 = new DateTime($propiedad->fechaInicio);
-                        $date2 = new DateTime($propiedad->fechaFinalizacion);
+                        $date1 = new DateTime($propiedades[$i]->fechaInicio);
+                        $date2 = new DateTime($propiedades[$i]->fechaFinalizacion);
                         $diff = $date1->diff($date2);
                     @endphp
                     <div class="slick-slide-item">
                         <div class="property-box">
                             <div class="property-thumbnail">
                                 <div class="listing-badges">
-                                    @if($propiedad->idTipoFlexibilidad == 1)
+                                    @if($propiedades[$i]->idTipoFlexibilidad == 1)
                                         <span class="featured">
                                             Flexible
                                         </span>
@@ -255,43 +255,50 @@
                                 </div>
                                 <div class="price-ratings-box">
                                     <p class="price">
-                                        ${{ number_format($propiedad->precio,0,',','.') }}
+                                        ${{ number_format($propiedades[$i]->precio,0,',','.') }}
                                     </p>
                                 </div>
 
-                                <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+                                <div id="carouselExampleIndicators{{ $i+1 }}" class="carousel slide">
+                                    <ol class="carousel-indicators" >
+                                        <li data-target="#carouselExampleIndicators{{ $i+1 }}" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators{{ $i+1 }}" data-slide-to="1"></li>
+                                    </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{ asset($propiedad->fotoPrincipal) }}" alt="properties">
+                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="properties" height="233" width="350">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="properties" height="233" width="350">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="detail">
                                 <h1 class="title">
-                                    <a href="{{ asset('detalle') }}/{{ $propiedad->idPropiedad }}">{{ $propiedad->nombrePropiedad }}</a>
+                                    <a href="{{ asset('detalle') }}/{{ $propiedades[$i]->idPropiedad }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
                                 </h1>
                                 <div class="location">
-                                    <a href="properties-details.html">
-                                        <i class="fa fa-map-marker"></i>{{ $propiedad->direccion1 }}, {{ $propiedad->nombreRegion }}
+                                    <a href="">
+                                        <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ $propiedades[$i]->nombreRegion }}
                                     </a>
                                 </div>
                                 <ul class="facilities-list clearfix">
                                     <li>
                                         <i class="flaticon-furniture"></i> 
-                                        @if($propiedad->habitaciones > 1)
-                                            {{ $propiedad->habitaciones }} Habitaciones
+                                        @if($propiedades[$i]->habitaciones > 1)
+                                            {{ $propiedades[$i]->habitaciones }} Habitaciones
                                         @else
-                                            {{ $propiedad->habitaciones }} Habitación
+                                            {{ $propiedades[$i]->habitaciones }} Habitación
                                         @endif
 
                                     </li>
                                     <li>
                                         <i class="flaticon-holidays"></i>
-                                        @if($propiedad->baños > 1)
-                                            {{ $propiedad->baños }} Baños
+                                        @if($propiedades[$i]->baños > 1)
+                                            {{ $propiedades[$i]->baños }} Baños
                                         @else
-                                            {{ $propiedad->baños }} Baño
+                                            {{ $propiedades[$i]->baños }} Baño
                                         @endif
                                     </li>
                                 </ul>
@@ -309,18 +316,18 @@
                                 <hr>
                                     <div class="row">
                                         <div class="col-lg-6" align="center">
-                                            <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
+                                            <h4>{{ $propiedades[$i]->rentabilidadAnual }}%</h4>
                                             <p>Rentabilidad Anual</p>
                                         </div>
                                         <div class="col-lg-6" align="center">
-                                            <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
+                                            <h4>{{ $propiedades[$i]->rentabilidadTotal }}%</h4>
                                             <p>Rentabilidad Total</p>
                                         </div>
                                     </div> 
                                 <hr>  
                                 <div class="row" align="center">
                                     <div class="col-lg-12">
-                                        <a href="{{ asset('detalle') }}/{{ $propiedad->idPropiedad }}" class="btn btn-primary">Invierte</a>
+                                        <a href="{{ asset('detalle') }}/{{ $propiedades[$i]->idPropiedad }}" class="btn btn-primary">Invierte</a>
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +342,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endfor
             </div>
             <div class="slick-prev slick-arrow-buton">
                 <i class="fa fa-angle-left"></i>

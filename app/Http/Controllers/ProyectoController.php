@@ -19,14 +19,7 @@ class ProyectoController extends Controller
 {
     public function index()
     {
-    	$proyectos = Proyecto::select('*')
-        ->join('paises','proyectos.idPais','=','paises.idPais')
-        ->join('regiones','proyectos.idRegion','=','regiones.idRegion')
-        ->join('provincias','proyectos.idProvincia','=','provincias.idProvincia')
-        ->join('comunas','proyectos.idComuna','=','comunas.idComuna')
-        ->orderBy('proyectos.idProyecto','DESC')
-        ->get();
-    	return view('admin.proyectos.index',compact('proyectos'));
+    	return view('admin.proyectos.index');
     }
     public function create()
     {

@@ -29,14 +29,7 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = Usuario::select('*')
-        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
-        //->join('direcciones_usuarios','usuarios.idUsuario','=','direcciones_usuarios.idUsuario')
-        ->orderBy('usuarios.idUsuario','DESC')
-        ->get();
-    	return view('admin.usuarios.index',compact('usuarios'));
+    	return view('admin.usuarios.index');
     }
     public function create()
     {

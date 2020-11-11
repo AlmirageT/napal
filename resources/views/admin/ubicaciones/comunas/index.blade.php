@@ -9,11 +9,12 @@ Comunas
 	</div>
 	@include('admin.ubicaciones.comunas.create')
 </div>
+<br>
 <div class="row">
 	<div class="col-lg-12">
 		<div class="">
 			<div class="table-responsive">
-				<table class="table project-list-table table-nowrap table-centered table-borderless">
+				<table class="table project-list-table table-nowrap table-centered table-borderless" id="datos">
 				  <thead>
 				    <tr>
 			          <th>ID</th>
@@ -24,34 +25,52 @@ Comunas
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				  	@foreach($comunas as $comuna)
-					    <tr>
-					      <td>{{ $comuna->idComuna }}</td>
-					      <td>{{ $comuna->nombreComuna }}</td>
-					      <td>{{ $comuna->nombreProvincia }}</td>
-					      <td>{{ $comuna->nombreRegion }}</td>
-					      <td>{{ $comuna->nombrePais }}</td>
-					      <td>
-					      	<div class="dropdown">
-		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-		                            <i class="mdi mdi-dots-horizontal font-size-18"></i>
-		                        </a>
-		                        <div class="dropdown-menu dropdown-menu">
-		                            <a class="dropdown-item btn btn-warning" data-toggle="modal" data-target="#edit{{ $comuna->idComuna }}">Editar</a>
-		                            @include('admin.ubicaciones.comunas.destroy')
-		                        </div>
-		                    </div>
-					      		
-					      </td>
-		                    @include('admin.ubicaciones.comunas.edit')
-					    </tr>
-					@endforeach
-				  </tbody>
 				</table>
 			</div>
-			{{ $comunas->links() }}
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+<script>
+$(document).ready(function () {
+	$('#datos').DataTable({
+		"processing": true,
+		"serverSide": true,
+		"ajax":{
+		"url": "{{ asset('datatable-comunas') }}",
+		"dataType": "json",
+		"type": "POST",
+		"data":{ _token: "{{csrf_token()}}"}
+	},
+		"columns": [
+			{ "data": "idComuna" },
+			{ "data": "nombreComuna" },
+			{ "data": "nombreProvincia" },
+			{ "data": "nombreRegion" },
+			{ "data": "nombrePais" },
+			{ "data": "options" }
+		],
+		language: {
+			"decimal": "",
+			"emptyTable": "No hay información",
+			"info": "Mostrando _END_ de _TOTAL_ Entradas",
+			"infoEmpty": "No existen registros",
+			"infoPostFix": "",
+			"thousands": ",",
+			"lengthMenu": "Mostrar _MENU_ Entradas",
+			"loadingRecords": "Cargando...",
+			"processing": "Procesando...",
+			"search": "Buscar:",
+			"zeroRecords": "Sin resultados encontrados",
+			"paginate": {
+			"first": "Primero",
+			"last": "Ultimo",
+			"next": "Siguiente",
+			"previous": "Anterior"
+		}
+	},
+	});
+});
+</script>
 @endsection

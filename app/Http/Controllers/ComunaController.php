@@ -16,17 +16,11 @@ use DB;
 class ComunaController extends Controller
 {
     public function index()
-    {  	
-    	$comunas = Comuna::select('*')
-    	->join('provincias','comunas.idProvincia','=','provincias.idProvincia')
-		->join('regiones','provincias.idRegion','=','regiones.idRegion')
-		->join('paises','regiones.idPais','=','paises.idPais')
-		->orderBy('comunas.idComuna','DESC')
-		->paginate(10);    
+    {  	   
 		$provincias = Provincia::pluck('nombreProvincia','idProvincia');
     	$regiones = Region::pluck('nombreRegion','idRegion');
     	$paises = Pais::pluck('nombrePais','idPais');
-    	return view('admin.ubicaciones.comunas.index',compact('provincias','regiones','paises','comunas'));
+    	return view('admin.ubicaciones.comunas.index',compact('provincias','regiones','paises'));
     }
     public function store(Request $request)
     {

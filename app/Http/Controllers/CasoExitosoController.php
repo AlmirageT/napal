@@ -16,12 +16,8 @@ class CasoExitosoController extends Controller
 {
     public function index()
     {  	
-    	$casosExitosos = CasoExitoso::select('*')
-    	->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
-		->orderBy('casos_exitosos.idCasoExitoso','DESC')
-		->get();    
 		$propiedades = Propiedad::where('idEstado',6)->orWhere('idEstado',5)->pluck('nombrePropiedad','idPropiedad');
-    	return view('admin.casosExitosos.index',compact('casosExitosos','propiedades'));
+    	return view('admin.casosExitosos.index',compact('propiedades'));
     }
     public function store(Request $request)
     {
