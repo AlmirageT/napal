@@ -51,6 +51,19 @@ class ComunaController extends Controller
             return redirect::back();
         }
     }
+    public function edit($idComuna)
+    {
+        $comuna = Comuna::select('*')
+                ->join('provincias','comunas.idProvincia','=','provincias.idProvincia')
+                ->join('regiones','provincias.idRegion','=','regiones.idRegion')
+                ->join('paises','regiones.idPais','=','paises.idPais')
+                ->where('comunas.idComuna',$idComuna)
+                ->first();
+        $provincias = Provincia::pluck('nombreProvincia','idProvincia');
+        $regiones = Region::pluck('nombreRegion','idRegion');
+        $paises = Pais::pluck('nombrePais','idPais');
+        return view('admin.ubicaciones.comunas.edit',compact('provincias','regiones','paises','comuna'));
+    }
     public function update(Request $request, $idComuna)
     {
     	try {

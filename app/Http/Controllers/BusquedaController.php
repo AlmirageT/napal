@@ -12,6 +12,7 @@ use App\Proyecto;
 use App\Propiedad;
 use App\CasoExitoso;
 use App\Comuna;
+use App\Provincia;
 
 class BusquedaController extends Controller
 {
@@ -57,11 +58,11 @@ class BusquedaController extends Controller
 		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
 		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-				->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$search."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -73,11 +74,11 @@ class BusquedaController extends Controller
 		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
 		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-				->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+				->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$search."' IN BOOLEAN MODE)")
 				->count();
 		}
 
@@ -350,11 +351,10 @@ class BusquedaController extends Controller
 		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
 		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
 		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
-		    	->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -364,11 +364,10 @@ class BusquedaController extends Controller
 		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
 		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
 		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
-		    	->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
 				->count();
 		}
 
@@ -717,8 +716,8 @@ class BusquedaController extends Controller
 		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
 		                        </a>
 		                        <div class='dropdown-menu dropdown-menu'>
-		                            <a class='dropdown-item btn btn-warning' data-toggle='modal' data-target='#edit{{ $casoExitoso->idCasoExitoso }}'>Editar</a>
-		                            @include('admin.casosExitosos.destroy')
+		                            <a href='".asset('napalm/edit-casos-exitoso')."/".$casoExitoso->idCasoExitoso."' class='dropdown-item'>Editar</a>
+		                            <a href='".asset('napalm/casos-exitosos/destroy')."/".$casoExitoso->idCasoExitoso."' class='dropdown-item'>Eliminar</a>
 		                        </div>
 		                    </div>";
 				$data[] = $nestedData;
@@ -792,9 +791,80 @@ class BusquedaController extends Controller
 		                        <a href='#' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
 		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
 		                        </a>
+		                        <div class='dropdown-menu dropdown-menu-right'>
+		                            <a class='dropdown-item' href='".asset('napalm/edit-comuna')."/".$comuna->idComuna."'>Editar</a>
+		                            <a class='dropdown-item' href='".asset('napalm/destroy-comuna')."/".$comuna->idComuna."'>Eliminar</a>
+		                        </div>
+		                    </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+    public function tablaProvincias(Request $request)
+    {
+    	$columns = array(
+			0=> 'idProvincia',
+			1=> 'nombreProvincia',
+			2=> 'nombreRegion',
+			3=> 'nombrePais',
+			5=> 'options'
+		);
+		$totalData = Provincia::all()->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+		$order = $columns[$request->input('order.0.column')];
+		$dir = $request->input('order.0.dir');
+
+		if(empty($request->input('search.value')))
+		{
+			$provincias = Provincia::select('*')
+				->join('regiones','provincias.idRegion','=','regiones.idRegion')
+				->join('paises','regiones.idPais','=','paises.idPais')
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$provincias = Provincia::select('*')
+				->join('regiones','provincias.idRegion','=','regiones.idRegion')
+				->join('paises','regiones.idPais','=','paises.idPais')
+		    	->where('provincias.nombreProvincia', 'LIKE',"%{$search}%")
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+
+			$totalFiltered = Provincia::select('*')
+				->join('regiones','provincias.idRegion','=','regiones.idRegion')
+				->join('paises','regiones.idPais','=','paises.idPais')
+		    	->where('provincias.nombreProvincia', 'LIKE',"%{$search}%")
+				->count();
+		}
+
+		$data = array();
+		if(!empty($provincias)){
+			foreach ($provincias as $provincia){
+				$nestedData['idProvincia'] = $provincia->idProvincia;
+				$nestedData['nombreProvincia'] = $provincia->nombreProvincia;
+				$nestedData['nombreRegion'] = $provincia->nombreRegion;
+				$nestedData['nombrePais'] = $provincia->nombrePais;
+				$nestedData['options'] = "<div class='dropdown'>
+		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                        </a>
 		                        <div class='dropdown-menu dropdown-menu'>
-		                            <a class='dropdown-item btn btn-warning' data-toggle='modal' data-target='#edit{{ $comuna->idComuna }}'>Editar</a>
-		                            @include('admin.ubicaciones.comunas.destroy')
+		                            <a class='dropdown-item' href='".asset('napalm/edit-provincia')."/".$provincia->idProvincia."'>Editar</a>
+		                            <a class='dropdown-item' href='".asset('napalm/destroy-provincia')."/".$provincia->idProvincia."'>Eliminar</a>
 		                        </div>
 		                    </div>";
 				$data[] = $nestedData;

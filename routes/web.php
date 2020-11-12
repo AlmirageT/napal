@@ -30,6 +30,7 @@ Route::post('datatable-proyectos','BusquedaController@tablaProyecto');
 Route::post('datatable-propiedades','BusquedaController@tablaPropiedad');
 Route::post('datatable-casos-exitosos','BusquedaController@tablaCasosExitosos');
 Route::post('datatable-comunas','BusquedaController@tablaComunas');
+Route::post('datatable-provincias','BusquedaController@tablaProvincias');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -118,12 +119,15 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('regiones','RegionController@index');
     //provincias
     Route::get('provincias','ProvinciaController@index');
+    Route::get('edit-provincia/{idProvincia}','ProvinciaController@edit');
     //comunas
     Route::get('comunas','ComunaController@index');
+    Route::get('edit-comuna/{idComuna}','ComunaController@edit');
     //imagenes carrusel
     Route::get('imagenes-carrusel','ImagenesCarruselController@index');
     //casos exitosos
     Route::get('casos-exitosos','CasoExitosoController@index');
+    Route::get('edit-casos-exitoso/{idCasoExitoso}','CasoExitosoController@edit');
     //parametros generales
     Route::get('parametros-generales','ParametroGeneralController@index');
     //redes sociales
@@ -268,16 +272,10 @@ Route::delete('mantenedor-regiones/{idRegion}',array(
 ));
 //crud provincias
 Route::resource('mantenedor-provincias','ProvinciaController');
-Route::delete('mantenedor-provincias/{idProvincia}',array(
-    'uses'=>'ProvinciaController@destroy',
-    'as'=>'mantenedor-provincias.delete'
-));
+Route::get('napalm/destroy-provincia/{idProvincia}','ProvinciaController@destroy');
 //crud comunas
 Route::resource('mantenedor-comunas','ComunaController');
-Route::delete('mantenedor-comunas/{idComuna}',array(
-    'uses'=>'ComunaController@destroy',
-    'as'=>'mantenedor-comunas.delete'
-));
+Route::get('napalm/destroy-comuna/{idComuna}','ComunaController@destroy');
 //crud carrusel
 Route::resource('mantenedor-carrusel','ImagenesCarruselController');
 Route::delete('mantenedor-carrusel/{idImagenCarrusel}',array(
@@ -286,10 +284,7 @@ Route::delete('mantenedor-carrusel/{idImagenCarrusel}',array(
 ));
 //crud casos exitosos
 Route::resource('mantenedor-casos-exitosos','CasoExitosoController');
-Route::delete('mantenedor-casos-exitosos/{idCasoExitoso}',array(
-    'uses'=>'CasoExitosoController@destroy',
-    'as'=>'mantenedor-casos-exitosos.delete'
-));
+Route::get('napalm/casos-exitosos/destroy/{idCasoExitoso}','CasoExitosoController@destroy');
 //crud redes sociales
 Route::resource('mantenedor-redes-sociales','RedSocialController');
 Route::delete('mantenedor-redes-sociales/{idRedSocial}',array(

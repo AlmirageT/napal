@@ -49,6 +49,12 @@ class CasoExitosoController extends Controller
             return redirect::back();
         }
     }
+    public function edit($idCasoExitoso)
+    {
+        $casoExitoso = CasoExitoso::find($idCasoExitoso);
+        $propiedades = Propiedad::where('idEstado',6)->orWhere('idEstado',5)->pluck('nombrePropiedad','idPropiedad'); 
+        return view('admin.casosExitosos.edit',compact('casoExitoso','propiedades'));
+    }
     public function update(Request $request, $idCasoExitoso)
     {
     	try {
@@ -61,7 +67,7 @@ class CasoExitosoController extends Controller
 	            $casoExitoso->save();
                 toastr()->success('Actualizado Correctamente', 'Caso exitoso actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
-        	return redirect::back();
+        	return redirect::to('napalm/casos-exitosos');
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();

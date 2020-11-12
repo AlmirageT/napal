@@ -26,6 +26,7 @@
     @toastr_css
 </head>
 <body>
+    <div class="page_loader"></div>
     @include('layouts.public.header')
     @yield('content')
     @include('layouts.public.footer')

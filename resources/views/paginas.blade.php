@@ -21,7 +21,7 @@
                     <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ asset($propiedadTienda->fotoPrincipal) }}" alt="properties">
+                                <img class="d-block w-100" src="{{ asset($propiedadTienda->fotoPrincipal) }}" alt="properties" height="233" width="350">
                             </div>
                         </div>
                     </div>

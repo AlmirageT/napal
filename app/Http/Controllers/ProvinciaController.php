@@ -15,15 +15,10 @@ use DB;
 class ProvinciaController extends Controller
 {
     public function index()
-    {  	
-    	$provincias = Provincia::select('*')
-		->join('regiones','provincias.idRegion','=','regiones.idRegion')
-		->join('paises','regiones.idPais','=','paises.idPais')
-		->orderBy('provincias.idProvincia','DESC')
-		->paginate(10);    
+    {  	  
     	$regiones = Region::pluck('nombreRegion','idRegion');
     	$paises = Pais::pluck('nombrePais','idPais');
-    	return view('admin.ubicaciones.provincias.index',compact('provincias','regiones','paises'));
+    	return view('admin.ubicaciones.provincias.index',compact('regiones','paises'));
     }
     public function store(Request $request)
     {
@@ -53,6 +48,17 @@ class ProvinciaController extends Controller
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
+    }
+    public function edit($idProvincia)
+    {
+        $provincia = Provincia::select('*')
+                ->join('regiones','provincias.idRegion','=','regiones.idRegion')
+                ->join('paises','regiones.idPais','=','paises.idPais')
+                ->where('provincias.idProvincia',$idProvincia)
+                ->first();
+        $regiones = Region::pluck('nombreRegion','idRegion');
+        $paises = Pais::pluck('nombrePais','idPais');
+        return view('admin.ubicaciones.provincias.edit',compact('regiones','paises','provincia'));
     }
     public function update(Request $request, $idProvincia)
     {

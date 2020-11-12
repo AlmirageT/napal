@@ -220,13 +220,7 @@
         <!-- Search Section end -->
     </div>
 </div>
-<!-- banner end -->
 
-<!-- Search Section start -->
-
-<!-- Search Section end -->
-
-<!-- Featured Properties start -->
 <div class="featured-properties content-area-9">
     <div class="container">
         <!-- Main title -->
@@ -258,18 +252,17 @@
                                         ${{ number_format($propiedades[$i]->precio,0,',','.') }}
                                     </p>
                                 </div>
-
-                                <div id="carouselExampleIndicators{{ $i+1 }}" class="carousel slide">
-                                    <ol class="carousel-indicators" >
-                                        <li data-target="#carouselExampleIndicators{{ $i+1 }}" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators{{ $i+1 }}" data-slide-to="1"></li>
+                                <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators{{ $i}}" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators{{ $i}}" data-slide-to="1"></li>
                                     </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="properties" height="233" width="350">
+                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="properties" height="233" width="350">
+                                          <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="Second slide" height="233" width="350">
                                         </div>
                                     </div>
                                 </div>
@@ -405,15 +398,15 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
+            
 <div class="container">
     <div align="right">
         <p>LOS VALORES NO SON SOLOS NUMEROS</p>
     </div>
     <div align="right" >
-        <a  href="{{ asset('estadisticas') }}">Ver Estadistica -></a>
+        <a href="{{ asset('estadisticas') }}" class="btn btn-white">Ver Estadisticas</a>
     </div>
 </div>
 <div class="our-team-2 content-area-3">

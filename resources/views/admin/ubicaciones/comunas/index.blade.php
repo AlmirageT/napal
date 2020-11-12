@@ -21,7 +21,7 @@ Comunas
 				      <th>Nombre</th>
 				      <th>Provincia</th>
 				      <th>Región</th>
-				      <th>Comuna</th>
+				      <th>Pais</th>
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
