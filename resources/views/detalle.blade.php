@@ -167,65 +167,67 @@ Detalle Propiedad
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar-left">
                     <!-- Advanced search start -->
-                    <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <p>{{ $propiedad->nombrePais }}</p>
-                            </div>
-                            <div class="col-lg-6">
-                                <p>{{ $propiedad->cantidadSubPropiedad }} SubPropiedades</p>
-                            </div>
-                            <hr>
-                            <div class="col-lg-6">
-                                <p>ESTADO:</p>
-                            </div>
-                            <div class="col-lg-6">
-                                <p>{{ $propiedad->nombreEstado }}</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <p>$256.000 (25%)</p>
-                            </div>
-                            <div class="col-lg-5">
-                                <p>${{ number_format($propiedad->precio,0,',','.') }}</p>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <progress max="100" value="25" style="width: 95%;">
+                    <form action="{{ asset('invierte-propiedad') }}/{{ $propiedad->idPropiedad }}" method="POST">
+                        @csrf
+                        <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p>{{ $propiedad->nombrePais }}</p>
                                 </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <p>49 Inversores</p>
-                            </div>
-                            <div class="col-lg-4">
-                                <p>18 dias</p>
-                            </div>
-                            <div class="col-lg-6" align="center">
-                                <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
-                                <p>Rentabilidad Anual</p>
-                            </div>
-                            <div class="col-lg-6" align="center">
-                                <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
-                                <p>Rentabilidad Total</p>
+                                <div class="col-lg-6">
+                                    <p>{{ $propiedad->cantidadSubPropiedad }} SubPropiedades</p>
+                                </div>
+                                <hr>
+                                <div class="col-lg-6">
+                                    <p>ESTADO:</p>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>{{ $propiedad->nombreEstado }}</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <p>$256.000 (25%)</p>
+                                </div>
+                                <div class="col-lg-5">
+                                    <p>${{ number_format($propiedad->precio,0,',','.') }}</p>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <progress max="100" value="25" style="width: 95%;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p>49 Inversores</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p>18 dias</p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
+                                    <p>Rentabilidad Anual</p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
+                                    <p>Rentabilidad Total</p>
+                                </div>
+                                <br>
+                                <div class="col-lg-6">
+                                    <p>Quiero invertir</p>
+                                </div>
+                                <div class="col-lg-6">
+                                  <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" maxlength="8" onkeyup="format(this)" onchange="format(this)" required>
+                                  </div>
+                                </div>
                             </div>
                             <br>
-                            <div class="col-lg-6">
-                                <p>Quiero invertir</p>
-                            </div>
-                            <div class="col-lg-6">
-                              <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">$</div>
-                                </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" maxlength="8" onkeyup="format(this)" onchange="format(this)">
-                              </div>
+                            <div class="form-group mb-0">
+                                <button class="search-button">Invierte</button>
                             </div>
                         </div>
-                        <br>
-                        <div class="form-group mb-0">
-                            <button class="search-button">Invierte</button>
-                        </div>
-                    </div>
-                    
+                    </form>
                 </div>
                 <div class="sidebar-left">
                     <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">

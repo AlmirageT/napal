@@ -38,6 +38,12 @@ Route::post('datatable-provincias','BusquedaController@tablaProvincias');
 Route::post('enviar-solicitud','ContactaConNosotrosController@enviarCorreo');
 //detalle propiedades
 Route::get('detalle/{idPropiedad}','DetalleController@index');
+Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');
+Route::post('verificacion-pago','InvierteController@verificarDatos');
+//link mientras no haya funcionamiento con sistema transbank
+Route::get('exito',function (){
+   return view('exito'); 
+});
 //invierte
 Route::get('invierte','TiendaController@index');
 //reenvio de msj

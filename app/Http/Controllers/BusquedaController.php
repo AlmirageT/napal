@@ -52,17 +52,19 @@ class BusquedaController extends Controller
 				->get();
 		}else{
 			$search = $request->input('search.value');
+			$caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+			$sinCaracteres = str_replace($caracteresEspeciales, " ", $search);
 			$ingresos = TrxIngreso::select('*')
 		    	->join('usuarios','trx_ingresos.idUsuario','=','usuarios.idUsuario')
 		    	->join('monedas','trx_ingresos.idMoneda','=','monedas.idMoneda')
 		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
 		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -74,11 +76,11 @@ class BusquedaController extends Controller
 		    	->join('estados','trx_ingresos.idEstado','=','estados.idEstado')
 		    	->join('tipos_medios_pagos','trx_ingresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-				->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$search."' IN BOOLEAN MODE)")
+				->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->count();
 		}
 
@@ -146,15 +148,17 @@ class BusquedaController extends Controller
 				->get();
 		}else{
 			$search = $request->input('search.value');
+			$caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+			$sinCaracteres = str_replace($caracteresEspeciales, " ", $search);
 			$egresos = TrxEgresos::select('*')
 		    	->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
 		    	->join('monedas','trx_egresos.idMoneda','=','monedas.idMoneda')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-		    	->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -164,11 +168,11 @@ class BusquedaController extends Controller
 		    	->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
 		    	->join('monedas','trx_egresos.idMoneda','=','monedas.idMoneda')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-		    	->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->count();
 		}
 
@@ -242,17 +246,19 @@ class BusquedaController extends Controller
 				->get();
 		}else{
 			$search = $request->input('search.value');
+			$caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+			$sinCaracteres = str_replace($caracteresEspeciales, " ", $search);
 			$destinosEgresos = DestinoEgreso::select('*')
 		    	->join('trx_egresos','destinos_egresos.idTrxEgreso','=','trx_egresos.idTrxEgreso')
 		    	->join('tipos_medios_pagos','destinos_egresos.idTipoMedioPago','=','tipos_medios_pagos.idTipoMedioPago')
 		    	->join('estados','destinos_egresos.idEstado','=','estados.idEstado')
 		    	->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-		    	->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -264,11 +270,11 @@ class BusquedaController extends Controller
 		    	->join('estados','destinos_egresos.idEstado','=','estados.idEstado')
 		    	->join('usuarios','trx_egresos.idUsuario','=','usuarios.idUsuario')
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
-		    	->where('usuarios.nombre', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.apellido', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.rut', 'LIKE',"%{$search}%")
-		    	->orWhere('usuarios.correo', 'LIKE',"%{$search}%")
-		    	->orWhere('telefonos.numero', 'LIKE',"%{$search}%")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->count();
 		}
 
@@ -347,14 +353,16 @@ class BusquedaController extends Controller
 				->get();
 		}else{
 			$search = $request->input('search.value');
+			$caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+			$sinCaracteres = str_replace($caracteresEspeciales, " ", $search);
 			$usuarios = Usuario::select('*')
 		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
 		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
 		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
-		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -364,10 +372,10 @@ class BusquedaController extends Controller
 		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
 		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
 		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
-		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$search."' IN BOOLEAN MODE)")
-		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$search."' IN BOOLEAN MODE)")
+		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
+		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->count();
 		}
 
