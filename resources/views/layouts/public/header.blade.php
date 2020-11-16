@@ -47,11 +47,11 @@
                                 Dashboard
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="index.html">Dashboard</a></li>
-                                <li><a class="dropdown-item" href="index-2.html">Invierte</a></li>
-                                <li><a class="dropdown-item" href="index-3.html">Mis inversiones</a></li>
-                                <li><a class="dropdown-item" href="index-4.html">Mi cuenta</a></li>
-                                <li><a class="dropdown-item" href="index-5.html">Documentos e informes</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard') }}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard/oportunidades') }}">Invierte</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard/mis-inversiones') }}">Mis inversiones</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard/mi-cuenta') }}">Mi cuenta</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard/documentos-informes') }}">Documentos e informes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">

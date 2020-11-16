@@ -21,6 +21,13 @@ Route::get('politicas-privacidad',function(){
 Route::get('contacta-con-nosotros',function(){
     return view('contactaNosotros');
 });
+Route::group(['prefix'=>'dashboard'],function(){
+    Route::view('/','public.dashboard');
+    Route::get('oportunidades','TiendaController@index');
+    Route::view('mis-inversiones','public.misInversiones');
+    Route::view('mi-cuenta','public.miCuenta');  
+    Route::view('documentos-informes','public.documentosInformes');  
+});
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
 Route::post('datatable-egresos','BusquedaController@tablaEgresos');
