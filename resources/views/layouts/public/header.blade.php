@@ -55,8 +55,8 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link-color" href="#">
-                                Mi datos
+                            <a class="nav-link link-color" href="{{ asset('dashboard/mis-datos') }}">
+                                Mis datos
                             </a>
                         </li>
                         <li class="nav-item">

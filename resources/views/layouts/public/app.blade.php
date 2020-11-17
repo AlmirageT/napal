@@ -61,6 +61,7 @@
     <script  src="{{ asset('js_public/ie10-viewport-bug-workaround.js') }}"></script>
     <script  src="{{ asset('js_public/ie10-viewport-bug-workaround.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+    
     @toastr_js
     @toastr_render
     @yield('scripts')

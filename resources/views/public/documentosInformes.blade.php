@@ -69,62 +69,70 @@ Documentos e Informes
 								Términos y condiciones generales
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Reglamento para la defensa del cliente
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Manual del inversor
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Términos y condiciones Lemonway
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Folleto informativo de tarifas máximas
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Condiciones de uso
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Q&A Inversores Internacionales
 								<br>
 							</a>
-							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
+							<hr>
+							
 						</div>
 						<div class="col-lg-6">
 							<a >
 								<img src="https://static.housers.com/img/documentos-informes/ic_acrobat.svg" class="h-widget__sm h--margin-right-10"> &nbsp;
-								Términos y condiciones generales
+								Política de privacidad
 								<br>
 							</a>
+							<hr>
 							<p>Son las condiciones básicas que acepta el comprador conforme al funcionamiento de la plataforma. Al acceder, el usuario, adquiere una serie de derechos y obligaciones, con objeto de garantizar el adecuado disfrute de los servicios y contenidos que se encuentran en la web y que Housers pone a su disposición gratuitamente.</p>
 						</div>
 					</div>

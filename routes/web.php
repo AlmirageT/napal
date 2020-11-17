@@ -21,12 +21,15 @@ Route::get('politicas-privacidad',function(){
 Route::get('contacta-con-nosotros',function(){
     return view('contactaNosotros');
 });
+//paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'],function(){
     Route::view('/','public.dashboard');
     Route::get('oportunidades','TiendaController@index');
     Route::view('mis-inversiones','public.misInversiones');
     Route::view('mi-cuenta','public.miCuenta');  
-    Route::view('documentos-informes','public.documentosInformes');  
+    Route::view('documentos-informes','public.documentosInformes');
+    Route::view('mis-datos','public.miDatos');  
+    Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');

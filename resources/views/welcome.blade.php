@@ -220,7 +220,6 @@
         <!-- Search Section end -->
     </div>
 </div>
-
 <div class="featured-properties content-area-9">
     <div class="container">
         <!-- Main title -->
@@ -409,6 +408,7 @@
         <a href="{{ asset('estadisticas') }}" class="btn btn-white">Ver Estadisticas</a>
     </div>
 </div>
+
 <div class="our-team-2 content-area-3">
     <br>
     <br>

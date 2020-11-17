@@ -58,11 +58,11 @@
                 <hr>
                     <div class="row">
                         <div class="col-lg-6" align="center">
-                            <h4>%{{ $propiedadTienda->rentabilidadAnual }}</h4>
+                            <h4>{{ $propiedadTienda->rentabilidadAnual }}%</h4>
                             <p>Rentabilidad Anual</p>
                         </div>
                         <div class="col-lg-6" align="center">
-                            <h4>%{{ $propiedadTienda->rentabilidadTotal }}</h4>
+                            <h4>{{ $propiedadTienda->rentabilidadTotal }}%</h4>
                             <p>Rentabilidad Total</p>
                         </div>
                     </div> 
