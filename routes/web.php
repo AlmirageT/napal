@@ -30,6 +30,7 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::view('documentos-informes','public.documentosInformes');
     Route::view('mis-datos','public.miDatos');  
     Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
+    Route::view('mis-datos/mis-promociones','public.misPromociones');
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -46,6 +47,7 @@ Route::post('datatable-provincias','BusquedaController@tablaProvincias');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
 //contacta con nosotros
 Route::post('enviar-solicitud','ContactaConNosotrosController@enviarCorreo');
+Route::get('ver-documento/{ver_pdf}','DocumentoController@ver_pdf');
 //detalle propiedades
 Route::get('detalle/{idPropiedad}','DetalleController@index');
 Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');

@@ -49,7 +49,7 @@ Documentos e Informes
 						</div>
 						<div class="col-lg-12">
 							<br>
-							<button class="btn btn-info" style="width: 100%"><small>VER PROMOCIONES</small></button>
+							<a href="{{ asset('dashboard/mis-datos/mis-promociones') }}" class="btn btn-info" style="width: 100%"><small>VER PROMOCIONES</small></a>
 						</div>
 					</div>
 				</div>

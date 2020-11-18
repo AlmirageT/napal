@@ -1,4 +1,9 @@
 @extends('layouts.public.app')
+<style type="text/css">
+	.card{
+		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+	}
+</style>
 @section('title')
 Dashborad
 @endsection
@@ -63,7 +68,7 @@ Dashborad
 			<br>
 		</div>
 		<div class="col-lg-4">
-			<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
+			<div class="card" >
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-12" align="center">
@@ -105,7 +110,7 @@ Dashborad
 			<br>
 		</div>
 		<div class="col-lg-4">
-			<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
+			<div class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-12" align="center">
@@ -152,7 +157,7 @@ Dashborad
 			<br>
 		</div>
 		<div class="col-lg-4">
-			<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
+			<div class="card" >
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-12" align="center">
@@ -191,6 +196,104 @@ Dashborad
 				</div>
 			</div>
 		</div>
+		{{-- VISTAS PARA CUANDO HACES UNA INVERSION O MAS DE UNA --}}
+
+		<div class="col-lg-12">
+			<br>
+			<h4>Tus proyectos: situación general</h4>
+			<br>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<a>
+								<img src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-proyectos.svg">&nbsp;
+								Proyectos (2) <!-- cantidad de propiedades que se han invertido -->
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<a>
+								<img src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-desglose-proyectos.svg">&nbsp;
+								Desglose de proyectos
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<a>
+								<img src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-estado-proyectos.svg">&nbsp;
+								Estado de proyectos (2) <!-- cantidad de propiedades que se han invertido -->
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<br>
+			<br>
+			<h4>Tus proyectos: datos financieros</h4>
+			<br>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<a>
+								<img class="smaller" src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-proyectos-finalizados.svg">&nbsp;
+								Proyectos finalizados: 0 <!-- cantidad de propiedades que se han invertido -->
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<a>
+								<img class="smaller" src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-proyectos-activos.svg">&nbsp;
+								Proyectos activos: 2
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<a>
+								<img class="smaller" src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-operaciones-ccd.svg">&nbsp;
+								Operaciones CCD <!-- cantidad de propiedades que se han invertido -->
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+		<br>
 </div>
 @endsection

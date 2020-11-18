@@ -37,7 +37,6 @@
     }
     
 </style>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="card-body pt-8 p-md-12 p-5">
     <div class="contenedor-datos">
         <div class="box">
@@ -106,8 +105,9 @@
     <h3 class="heading-2">
     	Inversión Diaria
     </h3>
-    		<div id="chart_div"></div>
+		<div id="chart_div"></div>
 </div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);

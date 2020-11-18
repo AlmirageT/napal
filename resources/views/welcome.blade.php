@@ -240,28 +240,39 @@
                         <div class="property-box">
                             <div class="property-thumbnail">
                                 <div class="listing-badges">
-                                    @if($propiedades[$i]->idTipoFlexibilidad == 1)
-                                        <span class="featured">
-                                            Flexible
-                                        </span>
-                                    @endif
+                                    <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
+                                        Flexible
+                                    </span>
+                                    <script type="text/javascript">
+                                        const pruebaId = (idPropiedad, valor) =>{
+                                            idUno = 'carouselExampleIndicators'+valor;
+                                            idDos = 'carouselExampleIndicatorss'+valor;
+                                            if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
+                                                document.getElementById(idUno).style.display = 'block';
+                                                document.getElementById(idDos).style.display = 'none';
+                                            }else{
+                                                document.getElementById(idUno).style.display = 'none';
+                                                document.getElementById(idDos).style.display = 'block';
+                                            }
+                                        }
+                                    </script>
                                 </div>
                                 <div class="price-ratings-box">
                                     <p class="price">
                                         ${{ number_format($propiedades[$i]->precio,0,',','.') }}
                                     </p>
                                 </div>
-                                <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators{{ $i}}" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExampleIndicators{{ $i}}" data-slide-to="1"></li>
-                                    </ol>
+                                <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
                                         </div>
-                                        <div class="carousel-item">
-                                          <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="Second slide" height="233" width="350">
+                                    </div>
+                                </div>
+                                <div id="carouselExampleIndicatorss{{ $i}}" class="carousel slide" data-ride="" style="display: none">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
                                         </div>
                                     </div>
                                 </div>
@@ -426,7 +437,7 @@
                             <div class="row team-4">
                                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
                                     <div class="photo">
-                                        <img src="{{ asset($casoExitoso->fotoPrincipal) }}" alt="avatar-10" class="img-fluid">
+                                        <img src="{{ asset($casoExitoso->fotoPrincipal) }}" alt="avatar-10" height="268" width="224">
                                     </div>
                                 </div>
                                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">

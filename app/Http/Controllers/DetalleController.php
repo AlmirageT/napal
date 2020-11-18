@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Propiedad;
 use App\ImagenPropiedad;
 use App\FotoPlano;
+use App\Documento;
 
 class DetalleController extends Controller
 {
@@ -29,7 +30,8 @@ class DetalleController extends Controller
             $imagenesPropiedadesGrandes = ImagenPropiedad::where('idPropiedad',$idPropiedad)->get();
             $imagenesPropiedadesPequeñas = ImagenPropiedad::where('idPropiedad',$idPropiedad)->get();
             $imagenesPlanos = FotoPlano::where('idPropiedad',$idPropiedad)->first();
-    		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos'));
+            $documentos = Documento::where('idPropiedad',$idPropiedad)->get();
+    		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos'));
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');
             return redirect::to('/');
