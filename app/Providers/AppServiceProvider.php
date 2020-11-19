@@ -7,6 +7,7 @@ use App\ImagenCarrusel;
 use App\Propiedad;
 use App\CasoExitoso;
 use App\RedSocial;
+use App\MisionEmpresa;
 use Schema;
 use View;
 use Cache;
@@ -64,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
                 ->orderBy('propiedades.idPropiedad','DESC')
                 ->where('propiedades.idEstado',4)
                 ->where('propiedades.destacadoPropiedad',1)
-                ->take(10)
+                ->take(6)
                 ->get();
                 return $cachePropiedades;
             });
@@ -91,10 +92,20 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
+        if (cache::has('misionEmpresa')) {
+            $misionEmpresa = cache::get('misionEmpresa');
+        }else{
+            $misionEmpresa = cache::remember('misionEmpresa',1*60, function(){
+                $cacheMisionEmpresa = MisionEmpresa::first();
+                return $cacheMisionEmpresa;
+            });
+        }
+
         View::share('imagenesWeb',$imagenesWeb);
         View::share('propiedades',$propiedades);
         View::share('imagenesMovil',$imagenesMovil);
         View::share('casosExitosos',$casosExitosos);
         View::share('redesSociales',$redesSociales);
+        View::share('misionEmpresa',$misionEmpresa);
     }
 }

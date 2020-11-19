@@ -167,7 +167,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/condiciones-servicios') }}"><i class="bx bxs-book"></i> Condiciones y Servicios</a></li>
                     </ul>
-                    
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/mision-empresa') }}"><i class="bx bxs-book"></i> Misión Empresa</a></li>
+                    </ul>
                 </li>
                 <!--Link a vista Comunas. -->
                 

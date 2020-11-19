@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\ImagenCarrusel;
 use App\TipoImagen;
+use Cache;
 use Image;
 use DB;
 
@@ -71,7 +72,9 @@ class ImagenesCarruselController extends Controller
             	}else{
             		$imagenCarrusel->activoImagenCarrusel = 0;
             	}
-            	$imagenCarrusel->idTipoImagen = $request->idTipoImagen;
+                $imagenCarrusel->idTipoImagen = $request->idTipoImagen;
+                $imagenCarrusel->tituloImagenCarrusel = $request->tituloImagenCarrusel;
+            	$imagenCarrusel->subTituloImagenCarrusel = $request->subTituloImagenCarrusel;
             	$imagenCarrusel->save();
                 toastr()->success('Agregado Correctamente', 'La imagen ha sido agregada correctamente', ['timeOut' => 9000]);
             DB::commit();
@@ -145,6 +148,8 @@ class ImagenesCarruselController extends Controller
             		$imagenCarrusel->activoImagenCarrusel = 0;
             	}
             	$imagenCarrusel->idTipoImagen = $request->idTipoImagen;
+                $imagenCarrusel->tituloImagenCarrusel = $request->tituloImagenCarrusel;
+                $imagenCarrusel->subTituloImagenCarrusel = $request->subTituloImagenCarrusel;
 	            $imagenCarrusel->save();
                 toastr()->success('Actualizado Correctamente', 'La imagen ha sido agregada correctamente', ['timeOut' => 9000]);
             DB::commit();

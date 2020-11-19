@@ -3,18 +3,27 @@
 <div class="d-none d-sm-block">
     <div class="banner" id="banner">
         @if(count($imagenesWeb) > 0)
+        @php
+            $imagenUno = $imagenesWeb->shift();
+        @endphp
             <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
-                        <img class="d-block w-100" src="{{ asset($imagenesWeb->shift()->rutaImagenCarrusel) }}" alt="banner-1">
+                        <img class="d-block w-100" src="{{ asset($imagenUno->rutaImagenCarrusel) }}" alt="banner-1">
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">
+                                        @if($imagenUno->tituloImagenCarrusel != null)
+                                            {{ $imagenUno->tituloImagenCarrusel }}
+                                        @endif
+                                    </h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        @if($imagenUno->subTituloImagenCarrusel != null)
+                                            {{ $imagenUno->subTituloImagenCarrusel }}
+                                        @endif
                                     </p>
-                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                    {{-- <a href="index.html" class="btn btn-white">Read More</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -25,9 +34,15 @@
                             <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                                 <div class="carousel-content container">
                                     <div class="text-right">
-                                        <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                        <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">
+                                            @if($imagenWeb->tituloImagenCarrusel != null)
+                                                {{ $imagenWeb->tituloImagenCarrusel }}
+                                            @endif
+                                        </h3>
                                         <p data-animation="animated fadeInUp delay-10s">
-                                            This is real estate website template based on Bootstrap 4 framework.
+                                            @if($imagenWeb->subTituloImagenCarrusel != null)
+                                                {{ $imagenWeb->subTituloImagenCarrusel }}
+                                            @endif
                                         </p>
                                         <a href="index.html" class="btn btn-white">Read More</a>
                                     </div>
@@ -220,6 +235,21 @@
         <!-- Search Section end -->
     </div>
 </div>
+    <br>
+    <br>
+    
+<div class="counters overview-bgi">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                <h5 style="color: #fff;">{!! $misionEmpresa->textoMisionEmpresa !!}</h5>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="featured-properties content-area-9">
     <div class="container">
         <!-- Main title -->
@@ -413,7 +443,8 @@
             
 <div class="container">
     <div align="right">
-        <p>LOS VALORES NO SON SOLOS NUMEROS</p>
+        <br>
+        <h4>LOS VALORES NO SON SOLOS NUMEROS</h4>
     </div>
     <div align="right" >
         <a href="{{ asset('estadisticas') }}" class="btn btn-white">Ver Estadisticas</a>
@@ -442,12 +473,13 @@
                                 </div>
                                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
                                     <div class="detail">
-                                        <h5>Propiedad</h5>
-                                        <h4>
-                                            <a href="">{{ $casoExitoso->nombrePropiedad }}</a>
-                                        </h4>
+                                        <h4>Caso de Exito</h4>
+                                        <h3>
+                                           {{ $casoExitoso->nombrePropiedad }}
+                                        </h3>
 
                                         <div class="contact">
+
                                             <ul>
                                                 <li>
                                                     <span>Dirección:</span><a href="#"> {{ $casoExitoso->direccion1 }}, {{ $casoExitoso->nombreRegion }}</a>
@@ -460,9 +492,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="contact">
-                                            <a href="{{ asset('registro') }}" class="btn btn-primary">Registrate</a>
-                                        </div>
+                                        
                                         {{--  
                                         <ul class="social-list clearfix">
                                             <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
@@ -475,7 +505,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach        
                 @else
                     <div class="slick-slide-item">
                         <div class="row team-4">
@@ -596,6 +626,9 @@
             <div class="slick-next slick-arrow-buton">
                 <i class="fa fa-angle-right"></i>
             </div>
+        </div>
+        <div class="contact" align="center">
+            <a href="{{ asset('registro') }}" class="btn btn-primary">Registrate</a>
         </div>
     </div>
 </div>
@@ -777,451 +810,30 @@
     <br>
     <br>
 </div>
-
+<style type="text/css">
+    .latimagen{
+        height: 100%;
+        width: 100%;
+    }
+</style>
 <!-- Services 2 start -->
 <div class="services-2 content-area-5 bg-grea-3">
     <div class="container">
         <!-- Main title -->
-        <div class="main-title">
-            <h1>What are you looking for?</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac tortor.</p>
-        </div>
-        <div class="row wow">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 wow fadeInLeft delay-04s">
-                <div class="service-info-5">
-                    <i class="flaticon-apartment"></i>
-                    <h4>Apartments</h4>
-                    <p>Lorem ipsum dolor sit amet, consectur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 wow fadeInLeft delay-04s">
-                <div class="service-info-5">
-                    <i class="flaticon-internet"></i>
-                    <h4>Houses</h4>
-                    <p>Lorem ipsum dolor sit amet, consectur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 wow fadeInRight delay-04s">
-                <div class="service-info-5">
-                    <i class="flaticon-vehicle"></i>
-                    <h4>Garages</h4>
-                    <p>Lorem ipsum dolor sit amet, consectur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 wow fadeInRight delay-04s">
-                <div class="service-info-5">
-                    <i class="flaticon-coins"></i>
-                    <h4>Commercial</h4>
-                    <p>Lorem ipsum dolor sit amet, consectur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
-                </div>
-            </div>
-        </div>
-        <div class="text-center read-more-2">
-            <a href="services-1.html" class="btn-white">Read More</a>
-        </div>
-    </div>
-</div>
-<!-- Services 2 end -->
-
-<!-- Categories strat -->
-<div class="categories content-area-8">
-    <div class="container">
-        <!-- Main title -->
-        <div class="main-title">
-            <h1>Most Popular Places</h1>
-            <p>Find Property In Your City</p>
-        </div>
-
-        <div class="row wow">
-            <div class="col-lg-7 col-md-12 col-sm-12">
-                <div class="row">
-                    <div class="col-sm-6 wow fadeInLeft delay-04s col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-1-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Apartment</a>
-                                        </h3>
-                                        <a href="properties-list-rightside.html" class="category-subtitle">14 Properties</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 wow fadeInLeft delay-04s col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-2-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">House</a>
-                                        </h3>
-                                        <a href="properties-list-rightside.html" class="category-subtitle">98 Properties</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 wow fadeInUp delay-04s col-pad">
-                        <div class="category">
-                            <div class="category_bg_box cat-3-bg">
-                                <div class="category-overlay">
-                                    <div class="category-content">
-                                        <h3 class="category-title">
-                                            <a href="#">Villa</a>
-                                        </h3>
-                                        <a href="properties-list-rightside.html" class="category-subtitle">98 Properties</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 col-md-12 col-sm-12 wow fadeInRight delay-04s col-pad d-none d-xl-block d-lg-block">
-                <div class="category">
-                    <div class="category_bg_box category_long_bg cat-4-bg">
-                        <div class="category-overlay">
-                            <div class="category-content">
-                                <h3 class="category-title">
-                                    <a href="#">Farm</a>
-                                </h3>
-                                <a href="properties-list-rightside.html" class="category-subtitle">12 Properties</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Categories end-->
-
-<!-- Counters strat -->
-
-<!-- Counters end -->
-
-<!-- Our team 2 start -->
-<div class="our-team-2 content-area">
-    <div class="container">
-        <!-- Main title -->
-        <div class="main-title">
-            <h1>Our Agent</h1>
-            <p>Meet out small team that make those great products.</p>
-        </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInLeft delay-04s">
-                <div class="team-1">
-                    <div class="team-photo">
-                        <a href="#">
-                            <img src="http://placehold.it/255x212" alt="agent-2" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="team-details">
-                        <h5><a href="#">Martin Smith</a></h5>
-                        <h6>Web Developer</h6>
-                        <ul class="social-list clearfix">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5" align="left">
+                <h1>Únicos, la primera plataforma pan-europea de inversión inmobiliaria.</h1>
+                <p>España, Italia y Portugal a un solo clic. <br>Empieza ya, pon tu dinero a trabajar. <br></p>
+                <div align="center">
+                    <a href="{{ asset('invierte') }}" class="btn btn-danger"><small>INVIERTE</small></a>
                 </div>
+                <br>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 wow fadeInLeft delay-04s">
-                <div class="team-1">
-                    <div class="team-photo">
-                        <a href="#">
-                            <img src="http://placehold.it/255x212" alt="agent-2" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="team-details">
-                        <h5><a href="#">John Pitarshon</a></h5>
-                        <h6>Creative Director</h6>
-                        <ul class="social-list clearfix">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 d-none d-xl-block d-lg-block wow fadeInRight delay-04s">
-                <div class="team-1">
-                    <div class="team-photo">
-                        <a href="#">
-                            <img src="http://placehold.it/255x212" alt="agent-2" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="team-details">
-                        <h5><a href="#">Maria Blank</a></h5>
-                        <h6>Office Manager</h6>
-                        <ul class="social-list clearfix">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 d-none d-xl-block d-lg-block wow fadeInRight delay-04s">
-                <div class="team-1">
-                    <div class="team-photo">
-                        <a href="#">
-                            <img src="http://placehold.it/255x212" alt="agent-2" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="team-details">
-                        <h5><a href="#">Karen Paran</a></h5>
-                        <h6>Support Manager</h6>
-                        <ul class="social-list clearfix">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                <img src="{{ asset('img/mapa/latinoamerica.png') }}" class="latimagen">
             </div>
         </div>
     </div>
 </div>
-<!-- Our team 2 end -->
 
-<!-- Testimonial 3 start -->
-<div class="testimonial-3">
-    <div class="container">
-        <div class="main-title">
-            <h1>Our Testimonial</h1>
-        </div>
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 2, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
-                        </div>
-                        <div class="media">
-                            <a href="#">
-                                <img src="http://placehold.it/50x50" alt="testimonial-avatar" class="img-fluid">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    Eliane Perei
-                                </h5>
-                                <h6>Web Developer</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
-                        </div>
-                        <div class="media">
-                            <a href="#">
-                                <img src="http://placehold.it/50x50" alt="testimonial-avatar" class="img-fluid">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    Maria Blank
-                                </h5>
-                                <h6>Office Manager</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
-                        </div>
-                        <div class="media">
-                            <a href="#">
-                                <img src="http://placehold.it/50x50" alt="testimonial-avatar" class="img-fluid">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    Karen Paran
-                                </h5>
-                                <h6>Support Manager</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slick-slide-item">
-                    <div class="testimonial-inner">
-                        <div class="content-box">
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-full"></i>
-                            </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
-                        </div>
-                        <div class="media">
-                            <a href="#">
-                                <img src="http://placehold.it/50x50" alt="testimonial-avatar" class="img-fluid">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    John Pitarshon
-                                </h5>
-                                <h6>Creative Director</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Testimonial 3 end -->
-
-<!-- Blog start -->
-<div class="blog content-area">
-    <div class="container">
-        <!-- Main title -->
-        <div class="main-title">
-            <h1>Latest news</h1>
-            <p>Check out some recent news posts.</p>
-        </div>
-        <div class="row wow fadeInUp delay-04s">
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-1">
-                    <div class="blog-photo">
-                        <img src="http://placehold.it/350x194" alt="blog" class="img-fluid">
-                        <div class="profile-user">
-                            <img src="http://placehold.it/45x45" alt="user">
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">Antony</a></strong>
-                                </li>
-                                <li class="mr-0"><span>Feb 31, 2018</span></li>
-                                <li class="float-right mr-0"><a href="#"><i class="flaticon-interface"></i></a>15</li>
-                                <li class="float-right"><a href="#"><i class="flaticon-time"></i></a>5k</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-single-sidebar-right.html">Buying a Best House</a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-1">
-                    <div class="blog-photo">
-                        <img src="http://placehold.it/350x194" alt="blog" class="img-fluid">
-                        <div class="profile-user">
-                            <img src="http://placehold.it/45x45" alt="user">
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">Teseira</a></strong>
-                                </li>
-                                <li class="mr-0"><span>May 31, 2017</span></li>
-                                <li class="float-right mr-0"><a href="#"><i class="flaticon-interface"></i></a>15</li>
-                                <li class="float-right"><a href="#"><i class="flaticon-time"></i></a>5k</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-single-sidebar-right.html">Selling Your Real House</a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 d-none d-xl-block d-lg-block">
-                <div class="blog-1">
-                    <div class="blog-photo">
-                        <img src="http://placehold.it/350x194" alt="blog" class="img-fluid">
-                        <div class="profile-user">
-                            <img src="http://placehold.it/45x45" alt="user">
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <div class="post-meta clearfix">
-                            <ul>
-                                <li>
-                                    <strong><a href="#">John Doe</a></strong>
-                                </li>
-                                <li class="mr-0"><span>May 31, 2017</span></li>
-                                <li class="float-right mr-0"><a href="#"><i class="flaticon-interface"></i></a>15</li>
-                                <li class="float-right"><a href="#"><i class="flaticon-time"></i></a>5k</li>
-                            </ul>
-                        </div>
-                        <h3>
-                            <a href="blog-single-sidebar-right.html">Find Your Dream Real Estate</a>
-                        </h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Blog end -->
-
-<!-- Partners strat -->
-<div class="partners">
-    <div class="container">
-        <h4>Brands $ Partners</h4>
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 5, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 3}}, {"breakpoint": 768,"settings":{"slidesToShow": 2}}]}'>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-                <div class="slick-slide-item"><img src="http://placehold.it/180x80" alt="brand" class="img-fluid"></div>
-            </div>
-            <div class="slick-prev slick-arrow-buton">
-                <i class="fa fa-angle-left"></i>
-            </div>
-            <div class="slick-next slick-arrow-buton">
-                <i class="fa fa-angle-right"></i>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

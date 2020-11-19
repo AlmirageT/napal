@@ -163,6 +163,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('planos/{idPropiedad}/create','FotoPlanoController@index');
     //dropzone planos
     Route::post('img-planos/{idPropiedad}','FotoPlanoController@dropzone');
+    //mision empresa
+    Route::get('mision-empresa','MisionEmpresaController@index');
 });
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by
@@ -321,4 +323,10 @@ Route::resource('mantenedor-condiciones-servicios','CondicionServicioController'
 Route::delete('mantenedor-condiciones-servicios/{idCondicionServicio}',array(
     'uses'=>'CondicionServicioController@destroy',
     'as'=>'mantenedor-condiciones-servicios.delete'
+));
+//crud mision de la empresa
+Route::resource('mantenedor-mision-empresa','MisionEmpresaController');
+Route::delete('mantenedor-mision-empresa/{idMisionEmpresa}',array(
+    'uses'=>'MisionEmpresaController@destroy',
+    'as'=>'mantenedor-mision-empresa.delete'
 ));

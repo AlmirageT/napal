@@ -14,7 +14,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Foto Carrusel</label>
-                            <input type="file" name="rutaImagenCarrusel" class="form-control" required onchange="FileSelected(event)">
+                            <input type="file" name="rutaImagenCarrusel" class="form-control" onchange="FileSelected(event)">
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -41,6 +41,18 @@
                         <div class="form-group">
                             <label>Tipo Imagen</label>
                             {!! Form::select('idTipoImagen', $tiposImagenes,$imagenCarrusel->idTipoImagen,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de imagen",'required']) !!}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Titulo</label>
+                            {!! Form::text('tituloImagenCarrusel',$imagenCarrusel->tituloImagenCarrusel,['class'=>"form-control",'placeholder'=>"Titulo"]) !!}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>SubTitulo</label>
+                            {!! Form::text('subTituloImagenCarrusel',$imagenCarrusel->subTituloImagenCarrusel,['class'=>"form-control",'placeholder'=>"SubTitulo"]) !!}
                         </div>
                     </div>
                 </div>
