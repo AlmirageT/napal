@@ -100,7 +100,7 @@ Mi cuenta
 						</div>
 						<div class="col-lg-12">
 							<br>
-							<a class="btn btn-light" style="width: 100%;"><small>VER MOVIMIENTOS</small></a>
+							<a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-light" style="width: 100%;"><small>VER MOVIMIENTOS</small></a>
 						</div>
 					</div>
 				</div>
@@ -279,8 +279,8 @@ Mi cuenta
 						  </thead>
 						  <tbody>
 						  	<tr>
-						  		<th><small>SIN RESULTADOS</small></th>
-						  	</tr>
+								<td colspan="5" style="text-align: center !important;">No hay resultados</td>
+							</tr>
 						  </tbody>
 						</table>
 						<br>
