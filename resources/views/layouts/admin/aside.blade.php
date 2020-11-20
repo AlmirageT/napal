@@ -49,6 +49,15 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-user"></i>
+                        <span>Faqs</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/faqs') }}"><i class="bx bxs-user-detail"></i> Faqs</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-home"></i>
                         <span>Mantenedores</span>
                     </a>
@@ -87,6 +96,9 @@
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/estados') }}"><i class="bx bx-store-alt"></i>Estado</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipos-faqs') }}"><i class="bx bx-store-alt"></i>Tipo Faq</a></li>
                     </ul>
                 </li>
                 <li>

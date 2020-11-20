@@ -15,12 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 //politicas de privacidad
-Route::get('politicas-privacidad',function(){
-    return view('politicasPrivacidad');
-});
-Route::get('contacta-con-nosotros',function(){
-    return view('contactaNosotros');
-});
+Route::view('politicas-privacidad','politicasPrivacidad');
+//contacta con nosotros
+Route::view('contacta-con-nosotros','contactaNosotros');
+//como funciona
+Route::view('como-funciona','public.comoFunciona');
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'],function(){
     Route::view('/','public.dashboard');
@@ -111,6 +110,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('tipos-creditos','TipoCreditoController@index');
     //tipo calidades
     Route::get('tipos-calidades','TipoCalidadController@index');
+    //tipo faq
+    Route::get('tipos-faqs','TipoFaqController@index');
     //Monedas
     Route::get('monedas','MonedaController@index');
     //idiomas
@@ -165,6 +166,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::post('img-planos/{idPropiedad}','FotoPlanoController@dropzone');
     //mision empresa
     Route::get('mision-empresa','MisionEmpresaController@index');
+    //faq
+    Route::get('faqs','FaqController@index');
 });
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by
@@ -329,4 +332,16 @@ Route::resource('mantenedor-mision-empresa','MisionEmpresaController');
 Route::delete('mantenedor-mision-empresa/{idMisionEmpresa}',array(
     'uses'=>'MisionEmpresaController@destroy',
     'as'=>'mantenedor-mision-empresa.delete'
+));
+//crud tipo faq
+Route::resource('mantenedor-tipos-faqs','TipoFaqController');
+Route::delete('mantenedor-tipos-faqs/{idTipoFaq}',array(
+    'uses'=>'TipoFaqController@destroy',
+    'as'=>'mantenedor-tipos-faqs.delete'
+));
+//crud faq
+Route::resource('mantenedor-faqs','FaqController');
+Route::delete('mantenedor-faqs/{idFaq}',array(
+    'uses'=>'FaqController@destroy',
+    'as'=>'mantenedor-faqs.delete'
 ));
