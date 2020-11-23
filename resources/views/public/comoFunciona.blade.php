@@ -356,7 +356,7 @@
 				</div>
 				<div class="col-lg-12" align="center">
 					<br>
-					<button class="btn btn-danger"><small>VER TODOS LOS FAQ'S</small></button>
+					<a href="{{ asset('preguntas-frecuentes') }}" class="btn btn-danger"><small>VER TODOS LOS FAQ'S</small></a>
 				</div>
 				<div class="col-lg-12">
 					<br>
@@ -365,17 +365,29 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-lg-12" align="center"><h4>¿Quieres saber más?</h4><br><br></div>
-								<div class="col-lg-3">
-									<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-manual-inversor-es.svg" alt="Manual del inversor">
+								<div class="col-lg-3" align="center">
+									<a>
+										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-manual-inversor-es.svg" alt="Manual del inversor">
+										<h5>Manual del inversor</h5>
+									</a>
 								</div>
 								<div class="col-lg-3">
-									<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-espana-es.svg" alt="Evolución del Mercado Inmobiliario en España">
+									<a>
+										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-espana-es.svg" alt="Evolución del Mercado Inmobiliario en España">
+										<h5>Evolución del Mercado Inmobiliario en España</h5>
+									</a>
 								</div>
 								<div class="col-lg-3">
-									<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-italia-es.svg" alt="Evolución del Mercado Inmobiliario en Italia">
+									<a>
+										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-italia-es.svg" alt="Evolución del Mercado Inmobiliario en Italia">
+										<h5>Evolución del Mercado Inmobiliario en Italia</h5>
+									</a>
 								</div>
 								<div class="col-lg-3">
-									<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-portugal-es.svg" alt="Evolución del Mercado Inmobiliario en Portugal">
+									<a>
+										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-portugal-es.svg" alt="Evolución del Mercado Inmobiliario en Portugal">
+										<h5>Evolución del Mercado Inmobiliario en Portugal</h5>
+									</a>
 								</div>
 							</div>
 						</div>

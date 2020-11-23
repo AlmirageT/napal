@@ -13,6 +13,7 @@ use DB;
 
 class FaqController extends Controller
 {
+    //paginas administrador
     public function index()
     {
     	$faqs = Faq::select('*')
@@ -102,5 +103,14 @@ class FaqController extends Controller
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
+    }
+    //paginas publicas
+    public function preguntasFrecuentes()
+    {
+        $faqs = Faq::all();
+        $tiposFaqs = Faq::select('*')
+                ->join('tipos_faqs','faqs.idTipoFaq','=','tipos_faqs.idTipoFaq')
+                ->get();
+        return view('public.faq', compact('faqs','tiposFaqs'));
     }
 }

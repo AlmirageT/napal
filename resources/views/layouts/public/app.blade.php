@@ -22,11 +22,44 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
     <link rel="stylesheet" type="text/css" href="{{ asset('css_public/ie10-viewport-bug-workaround.css') }}">
     <script  src="{{ asset('js_public/ie-emulation-modes-warning.js') }}"></script>
+    <script src="https://kit.fontawesome.com/9987974c2b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css_public/btn.css') }}">
+    <link rel="stylesheet" href="{{ asset('css_public/btn-tablets.css') }}">
+    <link rel="stylesheet" href="{{ asset('css_public/btn-mobile.css') }}">
     @yield('css')
     @toastr_css
 </head>
 <body>
     <div class="page_loader"></div>
+    <!-- BOTÓN RRSS -->
+    <div class="contenedor">
+        <input type="checkbox" id="btn-share">
+        <div class="rrss">
+           <a href="#"><i class="fab fa-facebook-f"></i></a>
+           <a href="#"><i class="fab fa-youtube"></i></a>
+           <a href="#"><i class="fab fa-instagram"></i></a>
+           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="btn-share">
+           <label for="btn-share">   <i class="fas fa-share-alt icon-share"></i></label>
+        </div>
+    </div>
+    
+    
+     <!-- BOTÓN CONTACTO -->
+    <div class="contenedor-contacto">
+        <div class="btn-contact">
+           <label for="btn-contact"><i class="far fa-comment-dots icon-contact"></i></label>
+        </div>
+        <input type="checkbox" id="btn-contact">
+        <div class="contact">
+           <a target="_blank" href="#"><i class="fas fa-video"></i></a>
+           <a target="_blank" href="#"><i class="far fa-calendar-alt"></i></a>
+           <a target="_blank" href="#"><i class="fab fa-whatsapp"></i></a>
+           <a target="_blank" href="#"><i class="far fa-comment-alt"></i></a>
+        </div>
+    </div>
+    
     @include('layouts.public.header')
     @yield('content')
     @include('layouts.public.footer')

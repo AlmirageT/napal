@@ -11,15 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 //politicas de privacidad
 Route::view('politicas-privacidad','politicasPrivacidad');
 //contacta con nosotros
 Route::view('contacta-con-nosotros','contactaNosotros');
 //como funciona
 Route::view('como-funciona','public.comoFunciona');
+//faq's
+Route::get('preguntas-frecuentes','FaqController@preguntasFrecuentes');
+//financiate
+Route::view('financiacion-empresas','public.financiacion');
+//quienes somos
+Route::view('quienes-somos','public.quienesSomos');
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'],function(){
     Route::view('/','public.dashboard');

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\TokenUsuarioPrivado;
+use App\Actions\VerificarRutAction;
 use App\Avatar;
 use App\Idioma;
 use App\TipoPersona;
@@ -114,11 +115,22 @@ class UsuarioController extends Controller
                     ]);
                     $id_avatar = $id->idAvatar;
                 }
+                $rut = $request->rut;
+                $caracteresEspeciales = array(".");
+                $rutSinCaracteres = str_replace($caracteresEspeciales, "", $rut);
+
+                $VerificarRutAction = new VerificarRutAction();
+                $rutVerificado = $VerificarRutAction->execute($rutSinCaracteres);
+                if ($rutVerificado == false) {
+                    toastr()->warning('El rut que ingreso es invalido, ingreso uno nuevo');
+                    DB::rollback();
+                    return back();
+                }
                 //guardar usuario
                 $usuario = new Usuario();
                 $usuario->nombre = $request->nombre;
                 $usuario->apellido = $request->apellido;
-                $usuario->rut = $request->rut;
+                $usuario->rut = $rutSinCaracteres;
                 $usuario->correo = $request->correo;
                 $usuario->idAvatar = $id_avatar;
                 $usuario->password = Crypt::encrypt($request->password);
@@ -210,11 +222,22 @@ class UsuarioController extends Controller
                     ]);
                     $id_avatar = $idAvatar_create->idAvatar;
                 }
+                $rut = $request->rut;
+                $caracteresEspeciales = array(".");
+                $rutSinCaracteres = str_replace($caracteresEspeciales, "", $rut);
+                
+                $VerificarRutAction = new VerificarRutAction();
+                $rutVerificado = $VerificarRutAction->execute($rutSinCaracteres);
+                if ($rutVerificado == false) {
+                    toastr()->warning('El rut que ingreso es invalido, ingreso uno nuevo');
+                    DB::rollback();
+                    return back();
+                }
                 //guardar usuario
                 $usuario = Usuario::find($idUsuario);
                 $usuario->nombre = $request->nombre;
                 $usuario->apellido = $request->apellido;
-                $usuario->rut = $request->rut;
+                $usuario->rut = $rutSinCaracteres;
                 $usuario->correo = $request->correo;
                 if ($id_avatar != null) {
                     $usuario->idAvatar = $id_avatar;

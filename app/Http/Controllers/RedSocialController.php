@@ -9,7 +9,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\RedSocial;
 use DB;
-use cache;
+use Cache;
 
 class RedSocialController extends Controller
 {
