@@ -63,7 +63,7 @@ class LoginController extends Controller
 		            }
             		toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
                     DB::commit();
-        			return redirect::to('/');
+        			return redirect::to('dashboard');
 	    		}else{
             		toastr()->warning('Usuario y/o contraseña incorrecto');
                     DB::rollback();

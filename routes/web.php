@@ -35,6 +35,7 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
     Route::view('mis-datos/mis-promociones','public.misPromociones');
     Route::view('mi-cuenta/movimientos','public.misMovimientos');
+    Route::view('mi-inversion/detalle','public.miInversionDetalle');
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -173,6 +174,9 @@ Route::group(['prefix' => 'napalm'], function(){
     //faq
     Route::get('faqs','FaqController@index');
 });
+//quieres saber mas
+Route::get('saber-mas','CondicionServicioController@saberMas');
+//condiciones y servicios pdf de register
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by
 Route::get('ordenar-propiedades/{idEstado}','TiendaController@ordenarPropiedades');

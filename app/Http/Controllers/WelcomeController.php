@@ -8,6 +8,7 @@ use App\Propiedad;
 use App\CasoExitoso;
 use App\RedSocial;
 use App\MisionEmpresa;
+use App\ParametroGeneral;
 use Cache;
 
 class WelcomeController extends Controller
@@ -35,6 +36,7 @@ class WelcomeController extends Controller
             $propiedades = cache::get('propiedades');
         }else{
             $propiedades = cache::remember('propiedades', 1*60, function(){
+                $cantidadPropiedades = ParametroGeneral::where('nombreParametroGeneral','PROPIEDADES A MOSTRAR')->first();
                 $cachePropiedades = Propiedad::select('*')
                 ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
                 ->join('paises','propiedades.idPais','=','paises.idPais')
@@ -46,7 +48,7 @@ class WelcomeController extends Controller
                 ->orderBy('propiedades.idPropiedad','DESC')
                 ->where('propiedades.idEstado',4)
                 ->where('propiedades.destacadoPropiedad',1)
-                ->take(6)
+                ->take($cantidadPropiedades->valorParametroGeneral)
                 ->get();
                 return $cachePropiedades;
             });

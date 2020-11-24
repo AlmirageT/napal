@@ -31,6 +31,17 @@ class CondicionServicioController extends Controller
                'Content-Disposition' => 'inline; filename="'.$filename.'"'
         ]);
     }
+    public function saberMas()
+    {
+        $condicionServicio = CondicionServicio::where('nombrePDFCondicionServicio','SABER MAS')->first();
+        $filename = $condicionServicio->nombrePDFCondicionServicio;
+        $path = $condicionServicio->rutaCondicionServicio;
+
+        return Response::make(file_get_contents($path), 200, [
+               'Content-Type' => 'application/pdf',
+               'Content-Disposition' => 'inline; filename="'.$filename.'"'
+        ]);
+    }
     public function store(Request $request)
     {
     	try {

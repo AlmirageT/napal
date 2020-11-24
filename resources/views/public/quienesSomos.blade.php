@@ -7,8 +7,16 @@
 		margin-left: 610px;
 		z-index: 1;
 	}
-
-
+	.contenedor-mosaico {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        left: 0;
+        right: 0,
+    }
+    .img {
+        width: 25%;
+    }
 </style>
 @endsection
 @section('content')
@@ -74,5 +82,122 @@
 			<img class="lazy img-responsive" alt="Equipo" src="https://static.housers.com/assets/images/quienes-somos/team-lines.svg" style="">
 		</div>
 	</div>
+</div>
+<div class="contenedor-mosaico">
+    <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+      <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+        <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+        <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+      <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+        <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+               <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+      <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+        <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+                     <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+      <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+        <img src="{{ asset('img/img.jpg') }}" class="img" alt="">
+<br>    
+<br>    
+</div>
+<div>
+	<br>    
+	<br>    
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12" align="center"><h3>Houser's Team</h3><br><br></div>
+		</div>
+	</div>
+	<img class="lazy img-responsive main" alt="Equipo" src="https://static.housers.com/assets/images/quienes-somos/housers-team.jpg" style="width: 100%; height: 100%">
+	<br>
+</div>
+<div class="container">
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-lg-6">
+			<br>
+			<br>
+			<div class="row">
+				<div class="col-lg-12"><h4>¿En qué creemos?</h4><br><br><br><br></div>
+				<div class="col-lg-12">
+					<div class="row" align="center">
+						<div class="col-lg-4">
+							<img class="lazy img-responsive" alt="Seguridad" src="https://static.housers.com/assets/images/quienes-somos/seguridad.svg" style="">
+							<p>Seguridad</p>
+						</div>
+						<div class="col-lg-4">
+							<img class="lazy img-responsive" alt="Justicia" src="https://static.housers.com/assets/images/quienes-somos/justicia.svg" style="">
+							<p>Justicia</p>
+						</div>
+						<div class="col-lg-4">
+							<img class="lazy img-responsive" alt="Facilidad" src="https://static.housers.com/assets/images/quienes-somos/facilidad.svg" style="">
+							<p>Facilidad</p>
+							<br>
+						</div>
+						<div class="col-lg-12">
+							<br>
+							<br>
+						</div>
+						<div class="col-lg-6">
+							<img class="lazy img-responsive" alt="Transparencia" src="https://static.housers.com/assets/images/quienes-somos/transparencia.svg" style="">
+							<p>Transparencia</p>
+							<br>
+						</div>
+						<div class="col-lg-6">
+							<img class="lazy img-responsive" alt="Calidad" src="https://static.housers.com/assets/images/quienes-somos/calidad.svg" style="">
+							<p>Calidad</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<br>
+			<br>
+			<div class="row">
+				<div class="col-lg-12"><h4>Manifiesto</h4><br><br></div>
+				<div class="col-lg-12">
+					<p>1 La entidad de pago que trabaja con nosotros, Lemon Way, está autorizada por el Banco de España.</p>
+				</div>
+				<div class="col-lg-12">
+					<p>2 Creemos que todo el mundo debe poder invertir, por eso lo hacemos posible a partir de 50€.</p>
+				</div>
+				<div class="col-lg-12">
+					<p>3 Ponemos a tu disposición toda la información sobre tus inversiones, asegurando la máxima transparencia.</p>
+				</div>
+				<div class="col-lg-12">
+					<p>4 Los proyectos publicados son cuidadosamente seleccionados por nuestros expertos inmobiliarios en las ciudades europeas con mayor proyección.</p>
+				</div>
+				<div class="col-lg-12">
+					<p>5 Un equipo de expertos financieros externos a Housers se encargará de analizar el riesgo de cada operación gracias a un sistema específico de scoring.</p>
+				</div>
+				<div class="col-lg-12">
+					<p>6 Lo hacemos fácil y sencillo. Pudiendo empezar a invertir cuando y donde quieras a través de nuestra plataforma.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12" align="center">
+			<br>
+			<br>
+            <a href="{{ asset('registro') }}" class="btn btn-danger"><small>Registrate</small></a>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-lg-12" align="center">
+			<h3>¿Quieres saber mas?</h3>	
+			<br>
+			<br>
+		</div>
+		<div class="col-lg-12" align="center">
+			<a target="_blank" href="{{ asset('saber-mas') }}" class="btn btn-danger"><small style="color: white">QUIERES SABER MÁS</small></a>
+			<br>
+
+		</div>
+	</div>
+			<br>
+			<br>
+
 </div>
 @endsection
