@@ -72,6 +72,46 @@
   left: 50%;
   top: calc(50% - 3px);
 }
+
+
+.primera-seccion{
+  margin-top: -160px;
+}
+.tercera-seccion{
+  margin-left: 3px;
+  height: 440px;
+}
+.cuarta-seccion{
+  height: 271px;
+}
+.quinta-seccion{
+  margin-left: 3px;
+}
+.content{
+  margin-top: -440px;
+}
+.content-uno{
+  margin-left: 200px;
+}
+.content-cuatro{
+  margin-right: 10%;
+  margin-top: -272px;
+}
+{{-- 
+@media only screen and (max-width: 376px) {
+    .movil-h{
+      margin-right: -45px;
+      margin-left: 48px;
+    }
+    .movil-p{
+      margin-right: -101px;
+    }
+    .movil-a{
+      margin-top: 458px;
+      margin-left: -120px;
+    }
+
+} --}}
 </style>
 @endsection
 @section('content')
@@ -80,15 +120,19 @@
     <h2 class="pb-3 pt-2 border-bottom mb-5" align="center">Todo lo que tienes que saber <br> para empezar a ahorrar con Housers</h2>
     <!--first section-->
     <div class="row align-items-center how-it-works d-flex">
-      <div class="col-2 text-center bottom d-inline-flex justify-content-center align-items-center" style="margin-top: -160px;">
+      <div class="col-2 text-center bottom d-inline-flex justify-content-center align-items-center primera-seccion" >
         <div class="circle font-weight-bold">1</div>
       </div>
       <div class="col-6">
-        <h5>Registrate Gratis</h5>
-        <p>Este paso te permitirá acceder a toda la información disponible sobre nuestras oportunidades.</p>
-        <p>¡Es totalmente gratuito y sólo te llevará unos segundos!</p>
-        <a href="{{ asset('registro') }}" class="btn btn-danger"><small>REGISTRATE GRATIS</small></a>
-        <br>
+        <div class="row">
+          <div class="col-lg-12">
+            <h5 class="movil-h">Registrate Gratis</h5>
+            <p class="movil-p">Este paso te permitirá acceder a toda la información disponible sobre nuestras oportunidades.</p>
+            <p class="movil-p">¡Es totalmente gratuito y sólo te llevará unos segundos!</p>
+            <a href="{{ asset('registro') }}" class="btn btn-danger movil-a"><small>REGISTRATE GRATIS</small></a>
+            <br>
+          </div>
+        </div>
       </div>
       <div class="col-4">
       	<img id="paso1" data-src="https://static.housers.com/assets/images/how-it-works/paso1.gif" src="https://static.housers.com/assets/images/how-it-works/paso1.gif" class="img-responsive">
@@ -134,34 +178,39 @@
     </div>
     <!--third section-->
     <div class="row align-items-center how-it-works d-flex">
-      <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center" align="center" style="margin-left: 3px;">
+      <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center tercera-seccion" align="center" >
         <div class="circle font-weight-bold">3</div>
       </div>
-      <div class="col-6">
-        <h5>Quiero empezar a Invertir </h5>
-        <p>Con tu cuenta Housers activada ya puedes empezar a invertir. 
-        	<br>
-        	<strong>Tienes dos opciones: </strong>
-        	<br>
-        	<br>
-        	<strong>MEDIANTE TRANSFERENCIA:</strong>
-        	<br>
-        	<br>
-			Ten en cuenta que el dinero que transfieres a tu Cuenta Housers para invertir en las oportunidades tardará un par de días en estar disponible. Para ello utilizamos los servicios de Lemonway, entidad de pago especializada en proveer servicios de pago seguro. 
-        </p>
-      </div>
-      <div class="col-2">
-      	<img id="paso3-2" data-src="https://static.housers.com/assets/images/how-it-works/paso3-2.gif" src="https://static.housers.com/assets/images/how-it-works/paso3-2.gif" class="img-responsive padding-top-20">
-      </div>
-      <div class="col-5" align="right">
-      	<img id="paso3-1a" data-src="https://static.housers.com/assets/images/how-it-works/paso3-1.gif" src="https://static.housers.com/assets/images/how-it-works/paso3-1.gif" class="img-responsive">
-      </div>
-      <div class="col-5">
-      	<p>
-      		<strong>¡Más rápido!</strong><br>
-			<strong>INVERSIÓN DIRECTA CON TARJETA DE CRÉDITO:</strong> de esta forma podrás invertir directamente en las oportunidades que te gusten sin necesidad de esperar. 
-      	</p>
-        <a href="{{ asset('registro') }}" class="btn btn-danger"><small>REGISTRATE GRATIS</small></a>
+      
+      <div class="col-lg-12 content" >
+        <div class="row">
+          <div class="col-6 content-uno" >
+            <h5>Quiero empezar a Invertir </h5>
+            <p>Con tu cuenta Housers activada ya puedes empezar a invertir. 
+              <br>
+              <strong>Tienes dos opciones: </strong>
+              <br>
+              <br>
+              <strong>MEDIANTE TRANSFERENCIA:</strong>
+              <br>
+              <br>
+          Ten en cuenta que el dinero que transfieres a tu Cuenta Housers para invertir en las oportunidades tardará un par de días en estar disponible. Para ello utilizamos los servicios de Lemonway, entidad de pago especializada en proveer servicios de pago seguro. 
+            </p>
+          </div>
+          <div class="col-2">
+          	<img id="paso3-2" data-src="https://static.housers.com/assets/images/how-it-works/paso3-2.gif" src="https://static.housers.com/assets/images/how-it-works/paso3-2.gif" class="img-responsive padding-top-20">
+          </div>
+          <div class="col-5" align="right">
+          	<img id="paso3-1a" data-src="https://static.housers.com/assets/images/how-it-works/paso3-1.gif" src="https://static.housers.com/assets/images/how-it-works/paso3-1.gif" class="img-responsive">
+          </div>
+          <div class="col-5">
+          	<p>
+          		<strong>¡Más rápido!</strong><br>
+    			<strong>INVERSIÓN DIRECTA CON TARJETA DE CRÉDITO:</strong> de esta forma podrás invertir directamente en las oportunidades que te gusten sin necesidad de esperar. 
+          	</p>
+            <a href="{{ asset('registro') }}" class="btn btn-danger"><small>REGISTRATE GRATIS</small></a>
+          </div>
+        </div>
       </div>
     </div>
     <!--path between 3-4-->
@@ -178,17 +227,15 @@
     </div>
     <!--cuarta section-->
     <div class="row align-items-center justify-content-end how-it-works d-flex">
-
-      <div class="col-8 text-center">
-        <h5>Invierte en diferentes tipos de Oportunidades</h5>
-        <p>Conoce los diferentes tipos de oportunidades que tenemos en Housers, elige las que más se ajusten a ti y diversifica tanto como puedas. </p>
-      </div>
-
-      <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+      <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center cuarta-seccion" >
         <div class="circle font-weight-bold">4</div>
       </div>
-      <div class="col-lg-12">
+      <div class="col-lg-12 content-cuatro" >
       	<div class="row">
+          <div class="col-12 text-center">
+            <h5>Invierte en diferentes tipos de Oportunidades</h5>
+            <p>Conoce los diferentes tipos de oportunidades que tenemos en Housers, elige las que más se ajusten a ti y diversifica tanto como puedas. </p>
+          </div>
       		<div class="col-4" align="center">
 	      		<a>
 	    			<img id="paso4-1" data-src="https://static.housers.com/assets/images/how-it-works/paso4-1.gif" src="https://static.housers.com/assets/images/how-it-works/paso4-1.gif" class="img-responsive">
@@ -196,13 +243,7 @@
 	    			<strong>Ahorro</strong>
 	    			<br>
 	    			Inversión en inmuebles para explotación vía alquiler y posterior venta
-	    			<br>
 	    		</a>
-	    		<br>
-	    		<ul>
-				  <li>Inversiones a largo plazo (5 a 10 años) con ingresos mensuales. <br></li>
-				  <li>Ganas todos los meses la parte de alquiler proporcional a tu inversión. El valor de tu inversion cambia con la revalorización del inmueble. <strong> Cuando quieras, podrás poner a la venta tu inversión en el canal de comunicación habilitado por los promotores.</strong></li>
-				</ul>
 	    	</div>
 	    	<div class="col-4" align="center">
 	    		<a>
@@ -211,15 +252,7 @@
 	    			<strong>Inversión</strong>
 	    			<br>
 	    			Inversión en rehabilitación o construcción de inmuebles para su venta
-	    			<br>
 	    		</a>
-	    		<br>
-	    		<ul>
-	    			<li>Inversiones planteadas entre 12 – 24 meses.</li>
-	    			<li>Se recibe el capital y el beneficio de la inversión una vez alcanzada la revalorización objetivo fijada al inicio del proyecto.</li>
-	    			<li>Sin ingresos mensuales (alquiler).</li>
-	    			<li><strong>Cuando quieras, podrás poner a la venta tu inversión en el canal de comunicación habilitado por los promotores. </strong></li>
-	    		</ul>
 	    	</div>
 	    	<div class="col-4" align="center">
 	    		<a>
@@ -227,15 +260,7 @@
 		    		<strong>Tipo Fijo</strong>
 		    		<br>
 		    		Inversión en préstamos a promotores para obra nueva
-		    		<br>
 		    	</a>
-		    	<ul>
-		    		<li>Inversiones planteadas entre 12 - 36 meses. </li>
-		    		<li>Independiente a la venta.</li>
-		    		<li>Se comienza a recibir ingresos desde el primer mes.</li>
-		    		<li>El capital se devuelve al final del periodo.</li>
-		    		<li><strong>Cuando quieras, podrás poner a la venta tu inversión en el canal de comunicación habilitado por los promotores.</strong></li>
-		    	</ul>
 	    	</div>
       	</div>
       </div>
@@ -255,13 +280,18 @@
     </div>
     <!--quinta section-->
     <div class="row align-items-center how-it-works d-flex">
-      <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center" style="margin-left: 3px;">
+      <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center quinta-seccion">
         <div class="circle font-weight-bold">5</div>
       </div>
       <div class="col-6">
         <h5>Gestiona y saca el máximo partido a tus inversiones </h5>
         <br>
-        <p><strong>En tu área privada podrás seguir la evolución de tus ahorros así como las actualizaciones que van surgiendo en las oportunidades.</strong> <br><br> Tu sólo preocúpate de elegir, lo demás, te lo damos todo hecho. Recuerda siempre que diversificar es probablemente uno de los factores más importantes a la hora de invertir. Invierte en diferentes ciudades, barrios, tipologías de inmuebles y tipos de oportunidades. En Housers te lo ponemos fácil. </p>
+        <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
         <a href="{{ asset('registro') }}" class="btn btn-danger"><small>REGISTRATE GRATIS</small></a>
       </div>
       <div class="col-3" align="center">
@@ -319,6 +349,8 @@
 							</div>
 						</div>
 					</div>
+          <br>
+
 				</div>
 				<div class="col-lg-4">
 					<div class="card">
@@ -336,6 +368,8 @@
 							</div>
 						</div>
 					</div>
+          <br>
+
 				</div>
 				<div class="col-lg-4">
 					<div class="card">
@@ -353,6 +387,7 @@
 							</div>
 						</div>
 					</div>
+          <br>
 				</div>
 				<div class="col-lg-12" align="center">
 					<br>
@@ -371,19 +406,19 @@
 										<h5>Manual del inversor</h5>
 									</a>
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-3" align="center">
 									<a>
 										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-espana-es.svg" alt="Evolución del Mercado Inmobiliario en España">
 										<h5>Evolución del Mercado Inmobiliario en España</h5>
 									</a>
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-3" align="center">
 									<a>
 										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-italia-es.svg" alt="Evolución del Mercado Inmobiliario en Italia">
 										<h5>Evolución del Mercado Inmobiliario en Italia</h5>
 									</a>
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-3" align="center">
 									<a>
 										<img class="img-responsive center-img" src="https://static.housers.com/assets/images/how-it-works/housers-informe-portugal-es.svg" alt="Evolución del Mercado Inmobiliario en Portugal">
 										<h5>Evolución del Mercado Inmobiliario en Portugal</h5>

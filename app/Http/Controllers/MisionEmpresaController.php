@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\MisionEmpresa;
 use Cache;
 use DB;
@@ -21,6 +22,13 @@ class MisionEmpresaController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'textoMisionEmpresa' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
             	$misionEmpresa = new MisionEmpresa($request->all());
             	$misionEmpresa->save();
@@ -48,6 +56,13 @@ class MisionEmpresaController extends Controller
     public function update(Request $request, $idMisionEmpresa)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'textoMisionEmpresa' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
 	    		$misionEmpresa = MisionEmpresa::find($idMisionEmpresa);
 	            $misionEmpresa->fill($request->all());

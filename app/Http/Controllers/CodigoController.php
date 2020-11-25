@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Codigo;
 use DB;
 
@@ -20,6 +21,13 @@ class CodigoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fechaVencimiento'=>'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No debe dejar campos en blanco');
+                return back();
+            }
             DB::beginTransaction();
                 $codigo = new Codigo($request->all());
                 $codigo->codigo = uniqid();
@@ -48,6 +56,13 @@ class CodigoController extends Controller
     public function update(Request $request, $idCodigo)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'fechaVencimiento'=>'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No debe dejar campos en blanco');
+                return back();
+            }
             DB::beginTransaction();
                 $codigo = Codigo::find($idCodigo);
                 $codigo->fill($request->all());

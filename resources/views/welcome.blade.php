@@ -2,7 +2,6 @@
 @section('title','Bienvenido')
 @section('css')
   <style>
-        
         .box {
             width: 100%;
             height: auto;
@@ -641,7 +640,7 @@
                             <div class="row team-4">
                                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
                                     <div class="photo">
-                                        <img src="{{ asset($casoExitoso->fotoPrincipal) }}" alt="avatar-10" height="268" width="224">
+                                        <img src="{{ asset($casoExitoso->imagenCasoExito) }}" alt="avatar-10" height="268" width="224">
                                     </div>
                                 </div>
                                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">

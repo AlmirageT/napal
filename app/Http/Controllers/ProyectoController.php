@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Pais;
 use App\Comuna;
 use App\Provincia;
 use App\Region;
 use App\Proyecto;
 use DB;
-use Illuminate\Database\QueryException;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Validator;
 
 class ProyectoController extends Controller
 {
@@ -33,10 +33,20 @@ class ProyectoController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPortada' => 'max:102400'
+                'fotoPortada' => 'required|max:102400',
+                'nombreProyecto' => 'required',
+                'idPais' => 'required',
+                'idRegion' => 'required',
+                'idProvincia' => 'required',
+                'idComuna' => 'required',
+                'direccion' => 'required',
+                'numeracionProyecto' => 'required',
+                'codigoPostal' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('El archivo no puede pasar de los 100MB, los datos no puede venir vacios');
                 return back();
             }
             DB::beginTransaction();
@@ -85,10 +95,20 @@ class ProyectoController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPortada' => 'max:102400'
+                'fotoPortada' => 'required|max:102400',
+                'nombreProyecto' => 'required',
+                'idPais' => 'required',
+                'idRegion' => 'required',
+                'idProvincia' => 'required',
+                'idComuna' => 'required',
+                'direccion' => 'required',
+                'numeracionProyecto' => 'required',
+                'codigoPostal' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('El archivo no puede pasar de los 100MB, los datos no puede venir vacios');
                 return back();
             }
             DB::beginTransaction();

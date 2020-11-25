@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Pais;
 use App\Comuna;
 use App\Provincia;
@@ -20,10 +24,6 @@ use App\Propiedad;
 use DB;
 use Image;
 use Cache;
-use Illuminate\Database\QueryException;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Validator;
 
 class PropiedadController extends Controller
 {
@@ -51,10 +51,43 @@ class PropiedadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPrincipal' => 'max:102400'
+                'fotoPrincipal' => 'max:102400',
+                'nombrePropiedad' => 'required',
+                'idPais' => 'required',
+                'idRegion' => 'required',
+                'idProvincia' => 'required',
+                'idComuna' => 'required',
+                'direccion1' => 'required',
+                'direccion2' => 'required',
+                'codigoPostal' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required',
+                'idTipoInversion' => 'required',
+                'idProyecto' => 'required',
+                'idTipoFlexibilidad' => 'required',
+                'tieneChat' => 'required',
+                'idTipoCalidad' => 'required',
+                'idTipoCredito' => 'required',
+                'precio' => 'required',
+                'idMoneda' => 'required',
+                'plazoMeses' => 'required',
+                'fechaInicio' => 'required',
+                'fechaFinalizacion' => 'required',
+                'rentabilidadAnual' => 'required',
+                'rentabilidadTotal' => 'required',
+                'idEstado' => 'required',
+                'idUsuario' => 'required',
+                'destacadoPropiedad' => 'required',
+                'descripcion' => 'required',
+                'mConstruido' => 'required',
+                'mSuperficie' => 'required',
+                'mTerraza' => 'required',
+                'cantidadSubPropiedad' => 'required',
+                'habitaciones' => 'required',
+                'baños' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('El archivo no puede pasar de los 100MB, no debe dejar los datos vacios');
                 return back();
             }
             DB::beginTransaction();
@@ -144,10 +177,43 @@ class PropiedadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPrincipal' => 'max:102400'
+                'fotoPrincipal' => 'max:102400',
+                'nombrePropiedad' => 'required',
+                'idPais' => 'required',
+                'idRegion' => 'required',
+                'idProvincia' => 'required',
+                'idComuna' => 'required',
+                'direccion1' => 'required',
+                'direccion2' => 'required',
+                'codigoPostal' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required',
+                'idTipoInversion' => 'required',
+                'idProyecto' => 'required',
+                'idTipoFlexibilidad' => 'required',
+                'tieneChat' => 'required',
+                'idTipoCalidad' => 'required',
+                'idTipoCredito' => 'required',
+                'precio' => 'required',
+                'idMoneda' => 'required',
+                'plazoMeses' => 'required',
+                'fechaInicio' => 'required',
+                'fechaFinalizacion' => 'required',
+                'rentabilidadAnual' => 'required',
+                'rentabilidadTotal' => 'required',
+                'idEstado' => 'required',
+                'idUsuario' => 'required',
+                'destacadoPropiedad' => 'required',
+                'descripcion' => 'required',
+                'mConstruido' => 'required',
+                'mSuperficie' => 'required',
+                'mTerraza' => 'required',
+                'cantidadSubPropiedad' => 'required',
+                'habitaciones' => 'required',
+                'baños' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('El archivo no puede pasar de los 100MB, no debe dejar los datos vacios');
                 return back();
             }
             DB::beginTransaction();

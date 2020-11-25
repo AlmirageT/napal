@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Estado;
-use App\TipoEstado;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoEstado;
+use App\Estado;
 use Session;
+use DB;
 
 class EstadoController extends Controller
 {
@@ -26,10 +27,18 @@ class EstadoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreEstado' => 'required',
+                'idTipoEstado' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
             	$estado = new Estado($request->all());
             	$estado->save();
-                toastr()->success('Agregado Correctamente', 'El estado: '.$request->nombreEstado.' ha sido agregado correctamente', ['timeOut' => 9000]);
+                toastr()->success('Agregado Correctamente', 'El estado: '.$request->nombreEstado.' ha sido agregado correctamente', ['timeOut' => 5000]);
             DB::commit();
             return redirect::back();
     	}catch (ModelNotFoundException $e) {
@@ -53,6 +62,14 @@ class EstadoController extends Controller
     public function update(Request $request, $idEstado)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreEstado' => 'required',
+                'idTipoEstado' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
 	    		$estado = Estado::find($idEstado);
 	            $estado->fill($request->all());

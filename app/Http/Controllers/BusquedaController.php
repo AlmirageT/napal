@@ -680,7 +680,8 @@ class BusquedaController extends Controller
     	$columns = array(
 			0=> 'idCasoExitoso',
 			1=> 'nombrePropiedad',
-			2=> 'options'
+			2=> 'imagenCasoExito',
+			3=> 'options'
 		);
 		$totalData = CasoExitoso::all()->count();
 		$totalFiltered = $totalData;
@@ -719,6 +720,11 @@ class BusquedaController extends Controller
 			foreach ($casosExitosos as $casoExitoso){
 				$nestedData['idCasoExitoso'] = $casoExitoso->idCasoExitoso;
 				$nestedData['nombrePropiedad'] = $casoExitoso->nombrePropiedad;
+				if ($casoExitoso->imagenCasoExito != null) {
+					$nestedData['imagenCasoExito'] = "<img src='".asset($casoExitoso->imagenCasoExito)."' width='100' height='100'>";
+				}else{
+					$nestedData['imagenCasoExito'] = "No tiene imagen";
+				}
 				$nestedData['options'] = "<div class='dropdown'>
 		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
 		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>

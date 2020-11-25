@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoCalidad;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoCalidad;
+use DB;
 
 class TipoCalidadController extends Controller
 {
@@ -20,6 +21,13 @@ class TipoCalidadController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoCalidad' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoCalidad = new TipoCalidad($request->all());
             	$tipoCalidad->save();
@@ -47,6 +55,13 @@ class TipoCalidadController extends Controller
     public function update(Request $request, $idTipoCalidad)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoCalidad' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoCalidad = TipoCalidad::find($idTipoCalidad);
 	            $tipoCalidad->fill($request->all());

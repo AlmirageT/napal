@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Idioma;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\Idioma;
+use DB;
 
 class IdiomaController extends Controller
 {
@@ -20,6 +21,13 @@ class IdiomaController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreIdioma' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
             	$idioma = new Idioma($request->all());
             	$idioma->save();
@@ -47,6 +55,13 @@ class IdiomaController extends Controller
     public function update(Request $request, $idIdioma)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreIdioma' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
 	    		$idioma = Idioma::find($idIdioma);
 	            $idioma->fill($request->all());

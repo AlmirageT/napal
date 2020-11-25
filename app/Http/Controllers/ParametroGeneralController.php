@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use DB;
-use App\ParametroGeneral;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\ParametroGeneral;
+use DB;
 
 class ParametroGeneralController extends Controller
 {
@@ -20,6 +21,14 @@ class ParametroGeneralController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreParametroGeneral' => 'required',
+                'valorParametroGeneral' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$parametroGeneral = new ParametroGeneral($request->all());
             	$parametroGeneral->save();
@@ -47,6 +56,14 @@ class ParametroGeneralController extends Controller
     public function update(Request $request, $idParametroGeneral)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreParametroGeneral' => 'required',
+                'valorParametroGeneral' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
 	            $parametroGeneral->fill($request->all());

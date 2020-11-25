@@ -11,7 +11,6 @@ Crear Usuario
 			</div>
 		</div>
         {!!Form::open(['route' => 'mantenedor-usuarios.store', 'method' => 'POST','files'=>true])!!}
-        	@csrf
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-4">

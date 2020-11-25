@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Moneda;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\Moneda;
+use DB;
 
 class MonedaController extends Controller
 {
@@ -20,6 +21,14 @@ class MonedaController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreMoneda' => 'required',
+                'itac' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
             	$moneda = new Moneda($request->all());
             	$moneda->save();
@@ -47,6 +56,14 @@ class MonedaController extends Controller
     public function update(Request $request, $idMoneda)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreMoneda' => 'required',
+                'itac' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
 	    		$moneda = Moneda::find($idMoneda);
 	            $moneda->fill($request->all());

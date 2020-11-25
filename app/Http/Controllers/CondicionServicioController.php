@@ -46,7 +46,8 @@ class CondicionServicioController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'rutaCondicionServicio' => 'max:102400'
+                'rutaCondicionServicio' => 'required|max:102400',
+                'nombrePDFCondicionServicio' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');
@@ -93,7 +94,8 @@ class CondicionServicioController extends Controller
 	            cache::forget('condicionServicio');
 	        }
             $validator = Validator::make($request->all(), [
-                'rutaCondicionServicio' => 'max:102400'
+                'rutaCondicionServicio' => 'required|max:102400',
+                'nombrePDFCondicionServicio' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');

@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoEstado;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoEstado;
+use DB;
 
 class TipoEstadoController extends Controller
 {
@@ -20,6 +21,13 @@ class TipoEstadoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoEstado' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoEstado = new TipoEstado($request->all());
             	$tipoEstado->save();
@@ -47,6 +55,13 @@ class TipoEstadoController extends Controller
     public function update(Request $request, $idTipoEstado)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoEstado' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoEstado = TipoEstado::find($idTipoEstado);
 	            $tipoEstado->fill($request->all());

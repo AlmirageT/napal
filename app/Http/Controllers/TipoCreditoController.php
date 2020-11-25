@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoCredito;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoCredito;
+use DB;
 
 class TipoCreditoController extends Controller
 {
@@ -20,6 +21,13 @@ class TipoCreditoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoCredito' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoCredito = new TipoCredito($request->all());
             	$tipoCredito->save();
@@ -47,6 +55,13 @@ class TipoCreditoController extends Controller
     public function update(Request $request, $idTipoCredito)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoCredito' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoCredito = TipoCredito::find($idTipoCredito);
 	            $tipoCredito->fill($request->all());

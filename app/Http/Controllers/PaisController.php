@@ -22,7 +22,8 @@ class PaisController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPais' => 'max:102400'
+                'fotoPais' => 'max:102400',
+                'nombrePais' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');
@@ -64,7 +65,8 @@ class PaisController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPais' => 'max:102400'
+                'fotoPais' => 'max:102400',
+                'nombrePais' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');

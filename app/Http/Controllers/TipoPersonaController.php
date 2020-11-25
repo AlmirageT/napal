@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\TipoPersona;
 use DB;
 
@@ -20,6 +21,13 @@ class TipoPersonaController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoPersona' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoPersona = new TipoPersona($request->all());
             	$tipoPersona->save();
@@ -47,6 +55,13 @@ class TipoPersonaController extends Controller
     public function update(Request $request, $idTipoPersona)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoPersona' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoPersona = TipoPersona::find($idTipoPersona);
 	            $tipoPersona->fill($request->all());

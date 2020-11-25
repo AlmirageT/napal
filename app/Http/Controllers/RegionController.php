@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Pais;
 use App\Region;
 use DB;
@@ -25,6 +26,15 @@ class RegionController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreRegion' => 'required',
+                'ordinalRegion' => 'required',
+                'idPais' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$region = new Region($request->all());
             	$region->save();
@@ -52,6 +62,15 @@ class RegionController extends Controller
     public function update(Request $request, $idRegion)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreRegion' => 'required',
+                'ordinalRegion' => 'required',
+                'idPais' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$region = Region::find($idRegion);
 	            $region->fill($request->all());

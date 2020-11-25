@@ -41,7 +41,11 @@ class DocumentoController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'documentoArchivo' => 'max:102400'
+                'documentoArchivo' => 'required|max:102400',
+                'idPropiedad' => 'required',
+                'nombreDocumento' => 'required',
+                'idTipoDocumento' => 'required',
+                'notas' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');

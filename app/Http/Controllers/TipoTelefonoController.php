@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoTelefono;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoTelefono;
+use DB;
 
 class TipoTelefonoController extends Controller
 {
@@ -20,6 +21,13 @@ class TipoTelefonoController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoTelefono' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoTelefono = new TipoTelefono($request->all());
             	$tipoTelefono->save();
@@ -47,6 +55,13 @@ class TipoTelefonoController extends Controller
     public function update(Request $request, $idTipoTelefono)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoTelefono' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoTelefono = TipoTelefono::find($idTipoTelefono);
 	            $tipoTelefono->fill($request->all());

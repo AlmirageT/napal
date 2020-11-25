@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\RedSocial;
-use DB;
 use Cache;
+use DB;
 
 class RedSocialController extends Controller
 {
@@ -21,6 +22,14 @@ class RedSocialController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreRedSocial' => 'required',
+                'rutaRedSocial' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	if (cache::has('redesSociales')) {
                     cache::forget('redesSociales');
@@ -51,6 +60,14 @@ class RedSocialController extends Controller
     public function update(Request $request, $idCodigoPromocional)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreRedSocial' => 'required',
+                'rutaRedSocial' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	if (cache::has('redesSociales')) {
                     cache::forget('redesSociales');

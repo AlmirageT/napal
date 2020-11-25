@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoFlexibilidad;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoFlexibilidad;
+use DB;
 
 class TipoFlexibilidadController extends Controller
 {
@@ -20,6 +21,13 @@ class TipoFlexibilidadController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoFlexibilidad' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoFlexibilidad = new TipoFlexibilidad($request->all());
             	$tipoFlexibilidad->save();
@@ -47,6 +55,13 @@ class TipoFlexibilidadController extends Controller
     public function update(Request $request, $idTipoFlexibilidad)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoFlexibilidad' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoFlexibilidad = TipoFlexibilidad::find($idTipoFlexibilidad);
 	            $tipoFlexibilidad->fill($request->all());

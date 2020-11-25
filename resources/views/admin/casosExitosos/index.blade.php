@@ -19,6 +19,7 @@ Casos Exitosos
 				    <tr>
 			          <th>ID</th>
 				      <th>Propiedad</th>
+				      <th>Imagen</th>
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
@@ -43,6 +44,7 @@ $(document).ready(function () {
 		"columns": [
 			{ "data": "idCasoExitoso" },
 			{ "data": "nombrePropiedad" },
+			{ "data": "imagenCasoExito" },
 			{ "data": "options" }
 		],
 		language: {

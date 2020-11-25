@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Helpers\Mensajeria;
 use App\Usuario;
 use App\Avatar;
@@ -28,6 +29,14 @@ class LoginController extends Controller
     public function ingreso_session(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'correo' => 'required',
+                'password' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
     		$correo = Usuario::where('correo', $request->correo)->firstOrFail();
     		if ($correo) {

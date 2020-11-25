@@ -21,53 +21,54 @@
                 <div class="col-lg-12">
                     <p>En Housers te ayudamos a encontrar financiación a través de nuestra plataforma.</p>
                 </div>
-                <div class="col-lg-2" align="center">
+                <div class="col-lg-2 col-sm-2" align="center">
                     1
                     <br>
                 </div>
-                <div class="col-lg-10" align="left">
+                <div class="col-lg-10 col-sm-9" align="left">
                     <h6>Envíanos tu proyecto.</h6>
                     <br>
                 </div>
-                <div class="col-lg-2" align="center">
+                <div class="col-lg-2 col-sm-2" align="center">
                     2
                     <br>
 
                 </div>
-                <div class="col-lg-10" align="left">
+                <div class="col-lg-10 col-sm-9" align="left">
                     <h6>Nuestros analistas de proyectos lo valorarán.</h6>
                     <br>
 
                 </div>
-                <div class="col-lg-2" align="center">
+                <div class="col-lg-2 col-sm-2" align="center">
                     3
                     <br>
 
                 </div>
-                <div class="col-lg-10" align="left">
+                <div class="col-lg-10 col-sm-9" align="left">
                     <h6>Se le asignará un scoring a partir de un análisis financiero realizado por una empresa externa.</h6>
                     <br>
 
                 </div>
-                <div class="col-lg-2" align="center">
+                <div class="col-lg-2 col-sm-2" align="center">
                     4
                     <br>
 
                 </div>
-                <div class="col-lg-10" align="left">
+                <div class="col-lg-10 col-sm-9" align="left">
                     <h6>Se publicará en Housers y se comunicará a nuestros inversores.</h6>
 
                 </div>
-                <div class="col-lg-12" align="left" >
+                <div class="col-lg-12 " align="left" >
                     <br>
                     <h4>En Housers nos encargamos de la gestión de tu proyecto con nuestros inversores.</h4>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 d-none d-md-none d-lg-block">
             <img src="https://static.housers.com/assets/images/financiate/housers-financiacion-agil-para-empresas.jpg" class="img-responsive centered-img">
         </div>
         <div class="col-lg-12" align="center">
+            <br>
             <a href="mailto:pauloberrios@gmail.com" class="btn btn-danger"><small>FINÁNCIATE</small></a>
         </div>
     </div>
@@ -184,45 +185,63 @@
                 <br>
                 <br>
             </div>
+            
             <div class="col-lg-12">
-               <div class="row">
-                   <div class="col-lg-3" align="center">
-                        <div class="circle">
-                            <br>
-                            <br>
-                            <img src="https://static.housers.com/assets/images/financiate/housers-handshake-01.svg" class="img-responsive centered-img">
-                            <p><br>Más de 265 proyectos <br> financiados con éxito.</p>
+                    <div class="slick-slider-area" >
+                        <div class="row slick-carousel" data-slick='{"autoplay":true,"slidesToShow": 4, "responsive":[{"breakpoint": 1200,"settings":{"slidesToShow": 3}}, {"breakpoint": 992,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+                            <div class="slick-slide-item">
+                                <div class="row">
+                                    <div class="col-lg-12" align="center">
+                                        <div class="circle" >
+                                            <br>
+                                            <br>
+                                            <img src="https://static.housers.com/assets/images/financiate/housers-handshake-01.svg" class="img-responsive centered-img">
+                                            <p><br>Más de 265 proyectos <br> financiados con éxito.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slick-slide-item">
+                                <div class="row">
+                                    <div class="col-lg-12" align="center">
+                                        <div class="circle" >
+                                            <br>
+                                            <br>
+                                            <img src="https://static.housers.com/assets/images/financiate/housers-monyebag-02.svg" class="img-responsive centered-img">
+                                            <p><br> 110 millones de euros <br> prestados a empresas por <br> nuestros inversores.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slick-slide-item">
+                                <div class="row">
+                                    <div class="col-lg-12" align="center">
+                                        <div class="circle" >
+                                            <br>
+                                            <br>
+                                            <img src="https://static.housers.com/assets/images/financiate/housers-users-03.svg" class="img-responsive centered-img">
+                                            <p><br>Más de 118.000 usuarios que <br> pueden financiar proyectos.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slick-slide-item">
+                                <div class="row">
+                                    <div class="col-lg-12" align="center">
+                                        <div class="circle" >
+                                            <br>
+                                            <br>
+                                            <img src="https://static.housers.com/assets/images/financiate/housers-megaphone-04.svg" class="img-responsive centered-img">
+                                            <p> <br> Máxima difusión de tu <br> proyecto a través de nuestros <br> canales informativos.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3" align="center">
-                        <div class="circle">
-                            <br>
-                            <br>
-                            <img src="https://static.housers.com/assets/images/financiate/housers-monyebag-02.svg" class="img-responsive centered-img">
-                            <p><br> 110 millones de euros <br> prestados a empresas por <br> nuestros inversores.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3" align="center">
-                        <div class="circle">
-                            <br>
-                            <br>
-                            <img src="https://static.housers.com/assets/images/financiate/housers-users-03.svg" class="img-responsive centered-img">
-                            <p><br>Más de 118.000 usuarios que <br> pueden financiar proyectos.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3" align="center">
-                        <div class="circle">
-                            <br>
-                            <br>
-                            <img src="https://static.housers.com/assets/images/financiate/housers-megaphone-04.svg" class="img-responsive centered-img">
-                            <p> <br> Máxima difusión de tu <br> proyecto a través de nuestros <br> canales informativos.</p>
-                        </div>
-                    </div>
-               </div>
-               <br> 
-               <br> 
             </div>
             <div class="col-lg-12" align="center">
+                <br>
                 <a href="mailto:pauloberrios@gmail.com" class="btn btn-danger"><small>FINÁNCIATE</small></a>
                 <br>
                 <br>
@@ -297,6 +316,8 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
@@ -330,6 +351,8 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
@@ -345,6 +368,8 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
@@ -360,6 +385,8 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+
                 </div>
             </div>
             <br>
@@ -371,7 +398,7 @@
         </div>
     </div>
 </div>
-<div style="background-color: #eee;">
+<div style="background-color: #eee;" class="d-none d-lg-block">
     <div class="container">
         <div class="row">
             <div class="col-lg-12" align="center">
@@ -394,6 +421,35 @@
                 <img src="https://static.housers.com/assets/images/financiate/housers-quiero-financiar-mi-proyecto.png" class="img-responsive centered-img">
             </div>
             <div class="col-lg-12" align="center">
+                <a href="mailto:pauloberrios@gmail.com" class="btn btn-danger"><small>FINÁNCIATE</small></a>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="background-color: #eee;" class="d-block d-sm-block d-md-block d-lg-none">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" align="center">
+                <br>
+                <br>
+                <h2>Quiero financiar mi proyecto.</h2>
+                <br>
+            </div>
+            <div class="col-sm-12" align="center">
+                <img src="https://static.housers.com/assets/images/financiate/housers-promotor-certificado.svg" >
+            </div>
+            <div class="col-sm-12">
+                <h5>Envía un mail a pauloberrios@gmail.com, incluyendo esta información:</h5>
+                <br>
+                <p><i class="fa fa-check"></i> Datos de identificación: nombre, empresa, dirección, CIF y correo electrónico.</p>
+                <p><i class="fa fa-check"></i> Currículum vitae.</p>
+                <p><i class="fa fa-check"></i> Información técnica.</p>
+            </div>
+
+            <div class="col-sm-12" align="center">
                 <a href="mailto:pauloberrios@gmail.com" class="btn btn-danger"><small>FINÁNCIATE</small></a>
                 <br>
                 <br>
