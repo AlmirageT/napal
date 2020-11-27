@@ -17,13 +17,68 @@
     .img {
         width: 25%;
     }
+
+@media only screen and (min-width:320px) and (max-width: 767px) {
+	.img {
+        width: 50%;
+    }
+    .triangulo-animado-texto{
+		margin-top: -180px;
+		margin-left: 40px;
+		z-index: 1;
+	}
+	.higherP{
+		font-size: 18px;
+	}
+	.triangle{
+		height: 306px;
+		width: 336px;
+	}
+	.imagen-reunion{
+		margin-left: -15px;
+	}
+	
+
+}
+@media only screen and (min-width:320px) and (max-width: 575px) {
+	#seguridad{
+		margin-left: -123px;
+	}
+	#justicia{
+		margin-top: -97px;
+	}
+	#facilidad{
+		margin-left: 210px;
+		margin-top: -98px;
+	}
+	#transparencia{
+		margin-left: -66px;
+	}
+	#calidad{
+		margin-left: 115px;
+		margin-top: -122px;
+	}
+}
+@media only screen and (min-width:768px) and (max-width: 991px) {
+    .triangulo-animado-texto{
+		margin-top: -180px;
+		margin-left: 40px;
+		z-index: 1;
+	}
+	.higherP{
+		margin-left: 250px;
+	}
+	.lowerP{
+		margin-left: 252px;
+	}
+}
 </style>
 @endsection
 @section('content')
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12" align="center">
-			<svg width="422px" height="405px" viewBox="0 0 422 405" version="1.1" xmlns="http://www.w3.org/2000/svg">
+			<svg width="422px" height="405px" class="triangle" viewBox="0 0 422 405" version="1.1" xmlns="http://www.w3.org/2000/svg">
 		        <defs>
 		            <linearGradient x1="80.5096495%" y1="25.6038567%" x2="6.69326106%" y2="43.3414189%" id="linearGradient-1">
 		                <stop stop-color="#ADE4E2" offset="0%"></stop>
@@ -79,7 +134,7 @@
 			<br>
 			<br>
 			<br>
-			<img class="lazy img-responsive" alt="Equipo" src="https://static.housers.com/assets/images/quienes-somos/team-lines.svg" style="">
+			<img class="lazy img-responsive imagen-reunion" alt="Equipo" src="https://static.housers.com/assets/images/quienes-somos/team-lines.svg" style="">
 		</div>
 	</div>
 </div>
@@ -119,31 +174,31 @@
 			<br>
 			<div class="row">
 				<div class="col-lg-12"><h4>¿En qué creemos?</h4><br><br><br><br></div>
-				<div class="col-lg-12">
+				<div class="col-lg-12 col-sm-12">
 					<div class="row" align="center">
-						<div class="col-lg-4">
-							<img class="lazy img-responsive" alt="Seguridad" src="https://static.housers.com/assets/images/quienes-somos/seguridad.svg" style="">
+						<div class="col-lg-4 col-sm-4" id="seguridad">
+							<img class="lazy img-responsive" alt="Seguridad"  src="https://static.housers.com/assets/images/quienes-somos/seguridad.svg" style="">
 							<p>Seguridad</p>
 						</div>
-						<div class="col-lg-4">
-							<img class="lazy img-responsive" alt="Justicia" src="https://static.housers.com/assets/images/quienes-somos/justicia.svg" style="">
+						<div class="col-lg-4 col-sm-4" id="justicia">
+							<img class="lazy img-responsive" alt="Justicia"  src="https://static.housers.com/assets/images/quienes-somos/justicia.svg" style="">
 							<p>Justicia</p>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-4 col-sm-4" id="facilidad">
 							<img class="lazy img-responsive" alt="Facilidad" src="https://static.housers.com/assets/images/quienes-somos/facilidad.svg" style="">
 							<p>Facilidad</p>
 							<br>
 						</div>
-						<div class="col-lg-12">
+						<div class="col-lg-12 col-sm-12">
 							<br>
 							<br>
 						</div>
-						<div class="col-lg-6">
-							<img class="lazy img-responsive" alt="Transparencia" src="https://static.housers.com/assets/images/quienes-somos/transparencia.svg" style="">
+						<div class="col-lg-6 col-sm-6" id="transparencia">
+							<img class="lazy img-responsive" alt="Transparencia"  src="https://static.housers.com/assets/images/quienes-somos/transparencia.svg" style="">
 							<p>Transparencia</p>
 							<br>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-6 col-sm-6" id="calidad">
 							<img class="lazy img-responsive" alt="Calidad" src="https://static.housers.com/assets/images/quienes-somos/calidad.svg" style="">
 							<p>Calidad</p>
 						</div>

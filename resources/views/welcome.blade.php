@@ -816,8 +816,13 @@
                 <i class="fa fa-angle-right"></i>
             </div>
         </div>
-        <div class="contact" align="center">
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12" align="center">
             <a href="{{ asset('registro') }}" class="btn btn-primary">Registrate</a>
+            <br>
         </div>
     </div>
 </div>
