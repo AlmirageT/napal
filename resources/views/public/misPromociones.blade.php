@@ -47,7 +47,7 @@
 							<p style="color: #fff;"><small>Tu confianza tiene recompensa. <br>Invita a tantos amigos como quieras a formar parte de la comunidad Housers y os beneficiáis los dos.</small></p>
 							<br>
 						</div>
-						<div class="col-lg-12" align="center"><button class="btn btn-info"><small>INVITA A UN AMIGO</small></button></div>
+						<div class="col-lg-12" align="center"><a href="{{ asset('dashboard/promo-amigo') }}" class="btn btn-info"><small>INVITA A UN AMIGO</small></a></div>
 					</div>
 				</div>
 			</div>

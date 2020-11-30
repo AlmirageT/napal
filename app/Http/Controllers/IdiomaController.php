@@ -9,12 +9,23 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\Idioma;
+use Session;
 use DB;
 
 class IdiomaController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$idiomas = Idioma::all();
     	return view('admin.mantenedores.idioma.index',compact('idiomas'));
     }

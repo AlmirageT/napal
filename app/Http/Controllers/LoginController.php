@@ -81,7 +81,7 @@ class LoginController extends Controller
 	    	}
     		toastr()->warning('Usuario y/o contraseña incorrecto');
             DB::rollback();
-			return redirect::to('/');
+			return back();
         } catch (QueryException $e) {
             // error conexion a BBDD
             toastr()->warning('Se ha producido un error interno. Favor intente nuevamente');

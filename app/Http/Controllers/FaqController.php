@@ -8,8 +8,9 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
-use App\Faq;
 use App\TipoFaq;
+use App\Faq;
+use Session;
 use DB;
 
 class FaqController extends Controller
@@ -17,6 +18,16 @@ class FaqController extends Controller
     //paginas administrador
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$faqs = Faq::select('*')
     			->join('tipos_faqs','faqs.idTipoFaq','=','tipos_faqs.idTipoFaq')
     			->get();

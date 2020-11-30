@@ -21,18 +21,39 @@ use App\TipoFlexibilidad;
 use App\Proyecto;
 use App\TipoInversion;
 use App\Propiedad;
-use DB;
 use Image;
 use Cache;
+use Session;
+use DB;
 
 class PropiedadController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	return view('admin.propiedades.index');
     }
     public function create()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$usuarios = Usuario::pluck('nombre','idUsuario');
     	$paises = Pais::pluck('nombrePais','idPais');
         $regiones = Region::pluck('nombreRegion','idRegion');
@@ -158,6 +179,16 @@ class PropiedadController extends Controller
     }
     public function edit($idPropiedad)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$propiedad = Propiedad::find($idPropiedad);
     	$usuarios = Usuario::pluck('nombre','idUsuario');
     	$paises = Pais::pluck('nombrePais','idPais');

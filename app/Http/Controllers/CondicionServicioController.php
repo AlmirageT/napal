@@ -9,14 +9,25 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\CondicionServicio;
+use Session;
 use Response;
-use DB;
 use Cache;
+use DB;
 
 class CondicionServicioController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$condicionesServicios = CondicionServicio::all();
     	return view('admin.condicionServicio.index',compact('condicionesServicios'));
     }

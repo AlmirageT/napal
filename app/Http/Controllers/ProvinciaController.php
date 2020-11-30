@@ -11,12 +11,23 @@ use Illuminate\Support\Facades\Validator;
 use App\Provincia;
 use App\Region;
 use App\Pais;
+use Session;
 use DB;
 
 class ProvinciaController extends Controller
 {
     public function index()
-    {  	  
+    {  	
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }  
     	$regiones = Region::pluck('nombreRegion','idRegion');
     	$paises = Pais::pluck('nombrePais','idPais');
     	return view('admin.ubicaciones.provincias.index',compact('regiones','paises'));
@@ -60,6 +71,16 @@ class ProvinciaController extends Controller
     }
     public function edit($idProvincia)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
         $provincia = Provincia::select('*')
                 ->join('regiones','provincias.idRegion','=','regiones.idRegion')
                 ->join('paises','regiones.idPais','=','paises.idPais')

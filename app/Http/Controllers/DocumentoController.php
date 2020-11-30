@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Documento;
 use App\TipoDocumento;
 use App\Propiedad;
-use DB;
 use Response;
+use Session;
+use DB;
 
 class DocumentoController extends Controller
 {
@@ -29,6 +30,16 @@ class DocumentoController extends Controller
     }
     public function create($idPropiedad)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
         $documentos = Documento::select('*')
         ->join('tipos_documentos','documentos.idTipoDocumento','=','tipos_documentos.idTipoDocumento')
         ->join('propiedades','documentos.idPropiedad','=','propiedades.idPropiedad')

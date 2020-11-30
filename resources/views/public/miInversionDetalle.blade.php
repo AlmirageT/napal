@@ -4,10 +4,39 @@ Detalle Mi Inversión
 @endsection
 @section('css')
 <style type="text/css">
+
 	.slick-slider-area{
 		margin-right: 15px;
 		margin-left: 10px;
 	}
+@media only screen and (min-width:992px) and (max-width: 1110px) {
+    .contenedor-barra{
+        width: 100%;
+        justify-content: flex-end;
+        margin: 60px 0;
+        
+    }
+    
+    .lista-botones{
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        
+    }
+    
+    .lista-botones li a{
+        text-decoration: none;
+        color: #333;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .lista-botones li a:hover{
+        color: gray;
+    }
+}
+@media only screen and (min-width:1111px) and (max-width:1342px){ 
     .contenedor-barra{
         width: 95%;
         justify-content: flex-end;
@@ -33,6 +62,88 @@ Detalle Mi Inversión
     .lista-botones li a:hover{
         color: gray;
     }
+}
+@media only screen and (min-width:1343px) and (max-width:1620px){ 
+    .contenedor-barra{
+        width: 95%;
+        justify-content: flex-end;
+        margin: 60px 0;
+        
+    }
+    
+    .lista-botones{
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        width: 95%;
+        
+    }
+    
+    .lista-botones li a{
+        text-decoration: none;
+        color: #333;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .lista-botones li a:hover{
+        color: gray;
+    }
+}
+@media only screen and (min-width:1620px) and (max-width:1755px){ 
+    .contenedor-barra{
+        width: 87%;
+        justify-content: flex-end;
+        margin: 60px 0;
+        
+    }
+    
+    .lista-botones{
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        width: 95%;
+        
+    }
+    
+    .lista-botones li a{
+        text-decoration: none;
+        color: #333;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .lista-botones li a:hover{
+        color: gray;
+    }
+}
+@media only screen and (min-width:1756px) and (max-width:1920px){ 
+    .contenedor-barra{
+        width: 84%;
+        justify-content: flex-end;
+        margin: 60px 0;
+        
+    }
+    
+    .lista-botones{
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        width: 95%;
+        
+    }
+    
+    .lista-botones li a{
+        text-decoration: none;
+        color: #333;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .lista-botones li a:hover{
+        color: gray;
+    }
+}
     .contenedor-tabla {
         background-color: #FAFAFA;
     }
@@ -58,6 +169,25 @@ Detalle Mi Inversión
     td, th {
         border: 1px solid #CCCBCB;
         padding: 65px;
+    }
+    @media only screen and (min-width:320px) and (max-width: 991px) {
+        .responsive-ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+        }
+        .responsive-li .rensposive-a{
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        .responsive-li .rensposive-a:hover {
+            background-color: #555;
+            color: white;
+        }
     }
 </style>
 @endsection
@@ -111,23 +241,39 @@ Detalle Mi Inversión
         </div>
         
     </div>
-    <nav class="contenedor-barra">
-        <ul class="lista-botones">
-           <li> <a href="#">DETALLES FINANCIACIÓN</a> </li>
-           <span>|</span>
-           <li> <a href="#">EVOLUCIÓN PROYECTO</a> </li>
-            <span>|</span>
-           <li> <a href="#">TU POSICIÓN</a> </li>
-            <span>|</span>
-           <li> <a href="#">INGRESOS</a> </li>
-            <span>|</span>
-           <li> <a href="#">PROMOCIONES</a> </li>
-            <span>|</span>
-           <li> <a href="#">MOVIMIENTOS</a> </li>
-            <span>|</span>
-           <li> <a href="#">DOCUMENTOS</a> </li>
-        </ul>
-    </nav>
+    <div class="d-none d-sm-none d-md-none d-lg-block">
+        <nav class="contenedor-barra">
+            <ul class="lista-botones">
+               <li> <a href="#">DETALLES FINANCIACIÓN</a> </li>
+               <span>|</span>
+               <li> <a href="#">EVOLUCIÓN PROYECTO</a> </li>
+                <span>|</span>
+               <li> <a href="#">TU POSICIÓN</a> </li>
+                <span>|</span>
+               <li> <a href="#">INGRESOS</a> </li>
+                <span>|</span>
+               <li> <a href="#">PROMOCIONES</a> </li>
+                <span>|</span>
+               <li> <a href="#">MOVIMIENTOS</a> </li>
+                <span>|</span>
+               <li> <a href="#">DOCUMENTOS</a> </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="d-block d-sm-block d-lg-none" align="center">
+        <nav class="">
+            <ul class="responsive-ul">
+               <li class="responsive-li"> <a href="#" class="rensposive-a">DETALLES FINANCIACIÓN</a></li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">EVOLUCIÓN PROYECTO</a> </li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">TU POSICIÓN</a> </li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">INGRESOS</a> </li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">PROMOCIONES</a> </li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">MOVIMIENTOS</a> </li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">DOCUMENTOS</a> </li>
+            </ul>
+        </nav>
+        <br>
+    </div>
 </div>
 <div class="container">
     <div class="row">
@@ -319,7 +465,7 @@ Detalle Mi Inversión
                             </tbody>
                         </table>
                         <div align="center">
-                            <a href="" class="btn btn-primary"><small>VER TODOS</small></a>
+                            <a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-primary"><small>VER TODOS</small></a>
                         </div>
                     </div>
                 </div>

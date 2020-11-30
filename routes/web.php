@@ -36,6 +36,7 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::view('mis-datos/mis-promociones','public.misPromociones');
     Route::view('mi-cuenta/movimientos','public.misMovimientos');
     Route::view('mi-inversion/detalle','public.miInversionDetalle');
+    Route::view('promo-amigo','public.invitaUnAmigo');
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');

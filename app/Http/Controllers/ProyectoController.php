@@ -13,16 +13,37 @@ use App\Comuna;
 use App\Provincia;
 use App\Region;
 use App\Proyecto;
+use Session;
 use DB;
 
 class ProyectoController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	return view('admin.proyectos.index');
     }
     public function create()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$paises = Pais::pluck('nombrePais','idPais');
         $regiones = Region::pluck('nombreRegion','idRegion');
         $provincias = Provincia::pluck('nombreProvincia','idProvincia');
@@ -84,6 +105,16 @@ class ProyectoController extends Controller
     }
     public function edit($idProyecto)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	$proyecto = Proyecto::find($idProyecto);
     	$paises = Pais::pluck('nombrePais','idPais');
         $regiones = Region::pluck('nombreRegion','idRegion');

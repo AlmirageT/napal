@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\CasoExitoso;
 use App\Propiedad;
+use Session;
 use Image;
 use Cache;
 use DB;
@@ -18,6 +19,16 @@ class CasoExitosoController extends Controller
 {
     public function index()
     {  	
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
 		$propiedades = Propiedad::where('idEstado',6)->orWhere('idEstado',5)->pluck('nombrePropiedad','idPropiedad');
     	return view('admin.casosExitosos.index',compact('propiedades'));
     }
@@ -72,6 +83,16 @@ class CasoExitosoController extends Controller
     }
     public function edit($idCasoExitoso)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
         $casoExitoso = CasoExitoso::find($idCasoExitoso);
         $propiedades = Propiedad::where('idEstado',6)->orWhere('idEstado',5)->pluck('nombrePropiedad','idPropiedad'); 
         return view('admin.casosExitosos.edit',compact('casoExitoso','propiedades'));

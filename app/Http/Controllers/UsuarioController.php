@@ -23,17 +23,38 @@ use App\TipoUsuario;
 use App\DireccionUsuario;
 use App\Telefono;
 use App\TipoTelefono;
-use DB;
+use Session;
 use Mail;
+use DB;
 
 class UsuarioController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
     	return view('admin.usuarios.index');
     }
     public function create()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
         $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
         $tiposPersonas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
         $paises = Pais::pluck('nombrePais','idPais');
@@ -187,6 +208,16 @@ class UsuarioController extends Controller
     }
     public function edit($idUsuario)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                toastr()->info('No tiene permiso para entrar a esta pagina');
+                return abort(401);
+            }
+        }
         $usuario = Usuario::find($idUsuario);
         $avatar = Avatar::find($usuario->idAvatar);
         $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
