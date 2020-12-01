@@ -105,6 +105,7 @@ Mi cuenta
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-4">
 			<div class="card" >
@@ -116,11 +117,13 @@ Mi cuenta
 						</div>
 						<div class="col-lg-12">
 							<br>
-							<a class="btn btn-primary" style="width: 100%;color: #fff;"><small>VER CUENTAS</small></a>
+							<a href="{{ asset('dashboard/mi-cuenta/cuentas-bancarias') }}" class="btn btn-primary" style="width: 100%;color: #fff;"><small>VER CUENTAS</small></a>
 						</div>						
 					</div>
 				</div>
 			</div>
+			<br>
+
 		</div>
 		<div class="col-lg-4">
 			<div class="card" style="background-color: #13294A">
@@ -132,14 +135,14 @@ Mi cuenta
 							<br>
 							<p style="color: #fff;">Ingresar fondos</p>
 							<br>
-							<a class="btn btn-primary" style="color: #fff;width: 100%;"><small>INGRESAR</small></a>
+							<a href="{{ asset('dashboard/mi-cuenta/ingresos') }}" class="btn btn-primary" style="color: #fff;width: 100%;"><small>INGRESAR</small></a>
 						</div>
 						<div class="col-lg-6 img-2" align="center">
 							<img src="https://static.housers.com/assets/images/icons/dashboard/icon-retirar-white.svg" style="display: block; margin: 0 auto;">
 							<br>
 							<p style="color: #fff;">Retirar fondos</p>
 							<br>
-							<a class="btn btn-primary" style="color: #fff;width: 100%;"><small>RETIRAR</small></a>
+							<a href="{{ asset('dashboard/mi-cuenta/retiros') }}" class="btn btn-primary" style="color: #fff;width: 100%;"><small>RETIRAR</small></a>
 						</div>
 					</div>
 				</div>
@@ -202,6 +205,8 @@ Mi cuenta
 					</div>
 				</div>
 			</div>
+			<br>
+
 		</div>
 		<div class="col-lg-6">
 			<div class="card">
@@ -257,6 +262,8 @@ Mi cuenta
 					</div>
 				</div>
 			</div>
+			<br>
+
 		<br>
 		<br>
 		</div>
@@ -290,6 +297,8 @@ Mi cuenta
 					</div>
 				</div>
 			</div>
+			<br>
+			
 		</div>
 	</div>
 	<br>

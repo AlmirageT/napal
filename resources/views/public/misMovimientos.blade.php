@@ -1,10 +1,10 @@
 @extends('layouts.public.app')
 @section('title')
-Mi cuenta
+Mis Movimientos
 @endsection
 <style type="text/css">
 	.card{
-		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);"
+		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 	}
 </style>
 @section('content')

@@ -25,7 +25,7 @@ Route::view('financiacion-empresas','public.financiacion');
 //quienes somos
 Route::view('quienes-somos','public.quienesSomos');
 //paginas dashboard usuario
-Route::group(['prefix'=>'dashboard'],function(){
+Route::group(['prefix'=>'dashboard'], function(){
     Route::view('/','public.dashboard');
     Route::get('oportunidades','TiendaController@index');
     Route::view('mis-inversiones','public.misInversiones');
@@ -37,6 +37,10 @@ Route::group(['prefix'=>'dashboard'],function(){
     Route::view('mi-cuenta/movimientos','public.misMovimientos');
     Route::view('mi-inversion/detalle','public.miInversionDetalle');
     Route::view('promo-amigo','public.invitaUnAmigo');
+    Route::view('mi-cuenta/cuentas-bancarias','public.cuentasAsociadas');
+    Route::view('mi-cuenta/cuentas-bancarias/nueva','public.añadirCuentaBancaria');
+    Route::view('mi-cuenta/ingresos','public.ingresos');
+    Route::view('mi-cuenta/retiros','public.retiros');
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -59,9 +63,7 @@ Route::get('detalle/{idPropiedad}','DetalleController@index');
 Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');
 Route::post('verificacion-pago','InvierteController@verificarDatos');
 //link mientras no haya funcionamiento con sistema transbank
-Route::get('exito',function (){
-   return view('exito'); 
-});
+Route::view('exito','exito');
 //invierte
 Route::get('invierte','TiendaController@index');
 //reenvio de msj

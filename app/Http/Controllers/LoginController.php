@@ -45,7 +45,7 @@ class LoginController extends Controller
 	    			if ($correo->activarCuenta == 0) {
 		                // cuenta aun no activada
 		                toastr()->info('Su cuenta aún no ha sido activada. Active su cuenta mediante el link enviado');
-		                return redirect('/');
+		                 return redirect::back();
 		            }
 		            Session::put('idUsuario', $correo->idUsuario);
 		            Session::put('idTipoUsuario', $correo->idTipoUsuario);
@@ -76,7 +76,7 @@ class LoginController extends Controller
 	    		}else{
             		toastr()->warning('Usuario y/o contraseña incorrecto');
                     DB::rollback();
-        			return redirect::to('/');
+        			 return redirect::back();
 	    		}
 	    	}
     		toastr()->warning('Usuario y/o contraseña incorrecto');

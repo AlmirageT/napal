@@ -61,8 +61,9 @@ Dashborad
 				</div>
 			</div>
 			<br>
-			<br>
 		</div>
+			<br>
+
 		<div class="col-lg-12">
 			<h3>Inversión, beneficios y saldo disponible</h3>
 			<br>
@@ -102,7 +103,7 @@ Dashborad
 							<p>$0</p>
 						</div>
 						<div class="col-lg-12" align="center">
-							<button class="btn btn-primary">Mis inversiones</button>
+							<a href="{{ asset('dashboard/mis-inversiones') }}" class="btn btn-primary">Mis inversiones</a>
 						</div>
 					</div>
 				</div>
@@ -149,7 +150,7 @@ Dashborad
 							<p>$0</p>
 						</div>
 						<div class="col-lg-12" align="center">
-							<button class="btn btn-primary">Mis promociones</button>
+							<a href="{{ asset('dashboard/mis-datos/mis-promociones') }}" class="btn btn-primary">Mis promociones</a>
 						</div>
 					</div>
 				</div>
@@ -190,11 +191,12 @@ Dashborad
 							<p>$0</p>
 						</div>
 						<div class="col-lg-12" align="center">
-							<button class="btn btn-primary">Mi cuenta housers</button>
+							<a href="{{ asset('dashboard/mi-cuenta') }}" class="btn btn-primary">Mi cuenta housers</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		{{-- VISTAS PARA CUANDO HACES UNA INVERSION O MAS DE UNA --}}
 
@@ -220,6 +222,7 @@ Dashborad
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-4">
 			<div class="card">
@@ -279,6 +282,7 @@ Dashborad
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-4">
 			<div class="card">
@@ -299,6 +303,7 @@ Dashborad
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-12">
 			<br>
@@ -378,6 +383,7 @@ Dashborad
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-4">
 			<div class="card">
@@ -448,6 +454,7 @@ Dashborad
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-4">
 			<div class="card">
@@ -527,6 +534,7 @@ Dashborad
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 	</div>
 		<br>

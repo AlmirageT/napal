@@ -33,6 +33,7 @@
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-7">
 			<div class="card" style="background-color: #13294A">
@@ -51,6 +52,7 @@
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<div class="col-lg-12">
 			<br>
@@ -58,7 +60,7 @@
 			<br>
 			<div class="card">
 				<div class="card-body">
-					<div class="table table-reponsive">
+					<div class="table-responsive">
 						<table class="table">
 							<thead>
 								<tr>
@@ -78,7 +80,7 @@
 					</div>
 					<br>
 					<div align="center"><br><h6>PROMOCIÓN INVITA A UN AMIGO</h6><br><br></div>
-					<div class="table table-responsive">
+					<div class="table-responsive">
 						<table class="table">
 							<thead>
 								<tr>
