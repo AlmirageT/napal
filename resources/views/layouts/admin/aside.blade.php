@@ -89,6 +89,9 @@
                         <li><a href="{{ asset('napalm/tipos-calidades') }}"><i class="bx bx-store-alt"></i>Tipo de Calidad</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipos-medio-pago') }}"><i class="bx bx-store-alt"></i>Tipo Medio de Pago</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/monedas') }}"><i class="bx bx-store-alt"></i>Moneda</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">

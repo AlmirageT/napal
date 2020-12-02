@@ -30,7 +30,7 @@ Confirmar Inversion
     
     .datos1{
         margin: auto;
-        width: 32%;
+        width: 40%;
         height: 120px;
         border: 1px solid grey;
         border-bottom: none;

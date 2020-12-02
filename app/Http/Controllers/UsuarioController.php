@@ -104,8 +104,7 @@ class UsuarioController extends Controller
                 'apellido'=>'required',
                 'correo'=>'required|email',
                 'rut'=>'required',
-                'password'=>'required',
-                'confirm_password'=>'required',
+                'password'=>'required_with:confirm_password|same:confirm_password',
                 'profesion'=>'required',
                 'idPais'=>'required',
                 'idRegion'=>'required',
@@ -121,7 +120,7 @@ class UsuarioController extends Controller
                 'idTipoUsuario'=>'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('No debe dejar campos en blanco');
+                toastr()->info('No debe dejar campos en blanco, las contraseñas deben ser iguales, la imagen debe pesar menos de 100 mb');
                 return back();
             }
             DB::beginTransaction();

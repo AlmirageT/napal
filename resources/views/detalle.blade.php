@@ -4,6 +4,24 @@ Detalle Propiedad
 @endsection
 @section('content')
 <!-- Properties details page start -->
+@php
+    $date1 = new DateTime($propiedad->fechaInicio);
+    $date2 = new DateTime($propiedad->fechaFinalizacion);
+    $diff = $date1->diff($date2);
+@endphp
+@php
+    $suma = 0;
+    $porcentaje = 0;
+    $catidadInversores = count($ingresos);
+    foreach($ingresos as $ingreso){
+        $suma = $suma + $ingreso->monto;
+        if($suma>0){
+            $porcentaje = ($suma*100)/$propiedad->precio;
+        }else{
+            $porcentaje = 0;
+        }
+    }
+@endphp
 <div class="properties-details-page content-area">
     <div class="container">
         <div class="row">
@@ -185,21 +203,25 @@ Detalle Propiedad
                                     <p>{{ $propiedad->nombreEstado }}</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <p>$256.000 (25%)</p>
+                                    <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
                                 </div>
                                 <div class="col-lg-5">
                                     <p>${{ number_format($propiedad->precio,0,',','.') }}</p>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <progress max="100" value="25" style="width: 95%;">
+                                        <progress max="100" value="{{ round($porcentaje) }}" style="width: 95%;">
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
-                                    <p>49 Inversores</p>
+                                <div class="col-lg-7">
+                                    <p>{{  $catidadInversores  }} Inversores</p>
                                 </div>
-                                <div class="col-lg-4">
-                                    <p>18 dias</p>
+                                <div class="col-lg-5">
+                                    @if($diff->days>0)
+                                        <p>Plazo: {!! $diff->days !!} días </p>
+                                    @else
+                                        <p>Finalizado </p>
+                                    @endif
                                 </div>
                                 <div class="col-lg-6" align="center">
                                     <h4>{{ $propiedad->rentabilidadAnual }}%</h4>

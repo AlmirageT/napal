@@ -42,21 +42,23 @@
         <br>
         Planos
     </h3>
-    <table class="table table-border">
-        <tbody><tr>
-            <td><strong>Size</strong></td>
-            <td><strong>Rooms</strong></td>
-            <td><strong>Bathrooms</strong></td>
-            <td><strong>Garage</strong></td>
-        </tr>
-        <tr>
-            <td>1600</td>
-            <td>3</td>
-            <td>2</td>
-            <td>1</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-border">
+            <tbody><tr>
+                <td><strong>Size</strong></td>
+                <td><strong>Rooms</strong></td>
+                <td><strong>Bathrooms</strong></td>
+                <td><strong>Garage</strong></td>
+            </tr>
+            <tr>
+                <td>1600</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     @if(isset($imagenesPlanos))
     <img src="{{ asset($imagenesPlanos->fotoPlano) }}" alt="floor-plans" class="img-fluid">
     <br>

@@ -11,6 +11,7 @@ use App\Propiedad;
 use App\ImagenPropiedad;
 use App\FotoPlano;
 use App\Documento;
+use App\TrxIngreso;
 
 class DetalleController extends Controller
 {
@@ -31,7 +32,8 @@ class DetalleController extends Controller
             $imagenesPropiedadesPequeñas = ImagenPropiedad::where('idPropiedad',$idPropiedad)->get();
             $imagenesPlanos = FotoPlano::where('idPropiedad',$idPropiedad)->first();
             $documentos = Documento::where('idPropiedad',$idPropiedad)->get();
-    		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos'));
+            $ingresos = TrxIngreso::where('idPropiedad',$idPropiedad)->get();
+    		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos'));
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');
             return redirect::to('/');

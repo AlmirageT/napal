@@ -28,6 +28,9 @@ Route::view('quienes-somos','public.quienesSomos');
 Route::group(['prefix'=>'dashboard'], function(){
     Route::view('/','public.dashboard');
     Route::get('oportunidades','TiendaController@index');
+    Route::get('oportunidades/financiado','TiendaController@financiado');
+    Route::get('oportunidades/cerrado','TiendaController@cerrado');
+    Route::get('oportunidades/no-financiado','TiendaController@no_financiado');
     Route::view('mis-inversiones','public.misInversiones');
     Route::view('mi-cuenta','public.miCuenta');  
     Route::view('documentos-informes','public.documentosInformes');
@@ -66,6 +69,10 @@ Route::post('verificacion-pago','InvierteController@verificarDatos');
 Route::view('exito','exito');
 //invierte
 Route::get('invierte','TiendaController@index');
+Route::get('invierte/financiado','TiendaController@financiado');
+Route::get('invierte/cerrado','TiendaController@cerrado');
+Route::get('invierte/no-financiado','TiendaController@no_financiado');
+
 //reenvio de msj
 Route::post('/vaes', 'LoginController@reenviarSMS');
 //errores
@@ -140,6 +147,8 @@ Route::group(['prefix' => 'napalm'], function(){
     //destino egresos
     Route::get('destinos-egresos','DestinoEgresoController@index');
     Route::get('destinos-egresos/detalles/{idTrxEgreso}','DestinoEgresoController@detalle');
+    //tipo medios de pago
+    Route::get('tipos-medio-pago','TipoMedioPagoController@index');
     //ubicaciones
     //paises
     Route::get('paises','PaisController@index');
@@ -182,7 +191,7 @@ Route::get('saber-mas','CondicionServicioController@saberMas');
 //condiciones y servicios pdf de register
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by
-Route::get('ordenar-propiedades/{idEstado}','TiendaController@ordenarPropiedades');
+//Route::get('ordenar-propiedades/{idEstado}','TiendaController@ordenarPropiedades');
 //busqueda en tiempo real para datatable ingresos
 Route::post('buscador-prueba','BusquedaController@busqueda_ingresos');
 //busqueda en tiempo real para datatable de egresos
@@ -355,4 +364,10 @@ Route::resource('mantenedor-faqs','FaqController');
 Route::delete('mantenedor-faqs/{idFaq}',array(
     'uses'=>'FaqController@destroy',
     'as'=>'mantenedor-faqs.delete'
+));
+//crud medios de pago
+Route::resource('mantenedor-tipos-medios-pagos','TipoMedioPagoController');
+Route::delete('mantenedor-tipos-medios-pagos/{idTipoMedioPago}',array(
+    'uses'=>'TipoMedioPagoController@destroy',
+    'as'=>'mantenedor-tipos-medios-pagos.delete'
 ));

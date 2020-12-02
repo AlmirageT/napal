@@ -9,6 +9,7 @@ use App\CasoExitoso;
 use App\RedSocial;
 use App\MisionEmpresa;
 use App\ParametroGeneral;
+use App\TrxIngreso;
 use Cache;
 
 class WelcomeController extends Controller
@@ -76,6 +77,8 @@ class WelcomeController extends Controller
             });
         }
 
-        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos'));
+        $ingresos = TrxIngreso::all();
+
+        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos'));
     }
 }

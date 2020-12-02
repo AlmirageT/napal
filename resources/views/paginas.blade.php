@@ -1,5 +1,24 @@
 @if(count($propiedadesTienda)>0)
     @for ($i = 0; $i < count($propiedadesTienda) ; $i++)
+    @php
+        $date1 = new DateTime($propiedadesTienda[$i]->fechaInicio);
+        $date2 = new DateTime($propiedadesTienda[$i]->fechaFinalizacion);
+        $diff = $date1->diff($date2);
+    @endphp
+    @php
+        $suma = 0;
+        $porcentaje = 0;
+        $datos = $ingresos->where('idPropiedad',$propiedadesTienda[$i]->idPropiedad);
+        $catidadInversores = count($ingresos->where('idPropiedad',$propiedadesTienda[$i]->idPropiedad));
+        foreach($datos as $dato){
+            $suma = $suma + $dato->monto;
+            if($suma>0){
+                $porcentaje = ($suma*100)/$propiedadesTienda[$i]->precio;
+            }else{
+                $porcentaje = 0;
+            }
+        }
+    @endphp
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="property-box">
             <div class="property-thumbnail">
@@ -74,6 +93,27 @@
                         @endif
                     </li>
                 </ul>
+                @if($propiedadesTienda[$i]->idEstado == 4)
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
+                        </div>
+                        <div class="col-lg-12">
+                            @if($catidadInversores>1)
+                                <p>{{ $catidadInversores }} inversores</p>
+                            @else
+                                @if($catidadInversores==0)
+                                    <p>{{ $catidadInversores }} inversores</p>
+                                @else
+                                    <p>{{ $catidadInversores }} inversor</p>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                @endif
                 <hr>
                     <div class="row">
                         <div class="col-lg-6" align="center">
@@ -89,7 +129,11 @@
             </div>
             <div class="footer clearfix">
                 <div class="pull-left days">
-                    <p><i class="flaticon-time"></i> 5 Days ago</p>
+                    @if($diff->days>0)
+                        <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} días </p>
+                    @else
+                        <p><i class="flaticon-time"></i>Finalizado </p>
+                    @endif
                 </div>
                 <ul class="pull-right">
                     <li><a href="#"><i class="flaticon-favorite"></i></a></li>

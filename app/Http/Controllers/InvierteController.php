@@ -31,7 +31,15 @@ class InvierteController extends Controller
             DB::beginTransaction();
             $caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
 			$sinCaracteres = str_replace($caracteresEspeciales, "", $request->valorInvertir);
-
+            TrxIngreso::create([
+                'monto' => $sinCaracteres,
+                'webClient' => $_SERVER['HTTP_USER_AGENT'],
+                'idUsuario' => Session::get('idUsuario'),
+                'idMoneda' => 1,
+                'idEstado' => 1,
+                'idTipoMedioPago' => 1,
+                'idPropiedad' => $idPropiedad
+            ]);
             DB::commit();
             return view('confirmar');
         } catch (ModelNotFoundException $e) {
