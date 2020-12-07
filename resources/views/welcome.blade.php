@@ -306,7 +306,7 @@
     <div class="container">
         <!-- Main title -->
         <div class="main-title">
-            <h1>Diversifica todo lo que quieras desde solo $10.000</h1>
+            <h1>Diversifica todo lo que quieras desde solo ${{ number_format($valorInicio->valorParametroGeneral,0,',','.') }}</h1>
             <p>Construye tu cartera de inversión basada en activos inmobiliarios</p>
         </div>
         <div class="row">
@@ -361,6 +361,7 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +408,7 @@
                                 <div class="col-lg-12">
                                     <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     @if($catidadInversores>1)
                                         <p>{{ $catidadInversores }} inversores</p>
                                     @else
@@ -416,6 +417,13 @@
                                         @else
                                             <p>{{ $catidadInversores }} inversor</p>
                                         @endif
+                                    @endif
+                                </div>
+                                <div class="col-lg-6" align="right">
+                                    @if($diff->days>0)
+                                        <p> {!! $diff->days !!} días </p>
+                                    @else
+                                        <p>Finalizado </p>
                                     @endif
                                 </div>
                             </div>
@@ -439,11 +447,7 @@
                         </div>
                         <div class="footer clearfix">
                             <div class="pull-left days" align="center">
-                                @if($diff->days>0)
-                                    <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} días </p>
-                                @else
-                                    <p><i class="flaticon-time"></i>Finalizado </p>
-                                @endif
+                                <p><i class="flaticon-time"></i>Plazo: {{ $propiedades[$i]->plazoMeses }} meses </p>
                             </div>
                             <ul class="pull-right">
                                 <li><a href="#"><i class="flaticon-favorite"></i></a></li>
@@ -453,6 +457,10 @@
                     </div>
                 </div>
             @endfor
+        </div>
+        <div class="caja-porcentaje">
+            <div class="obten"><small>OBTÉN HASTA UN</small></div>
+            <div class="porcentaje">14.75%</div>
         </div>
 {{--  
         <div class="slick-slider-area">

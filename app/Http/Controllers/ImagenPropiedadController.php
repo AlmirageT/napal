@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ImagenPropiedad;
+use App\Propiedad;
 use Image;
 use Session;
 
@@ -25,12 +26,26 @@ class ImagenPropiedadController extends Controller
     }
     public function dropzone(Request $request,$idPropiedad)
     {
+        $propiedad = Propiedad::select('*')
+        ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+        ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+        ->where('propiedades.idPropiedad',$idPropiedad)
+        ->firstOrFail();
+        $direccionMinuscula = strtolower($propiedad->direccion1);
+        $direccionGuion = str_replace(" ", "-", $direccionMinuscula);
+
+        $comunaMinuscula = strtolower($propiedad->nombreComuna);
+        $comunaGuion = str_replace(" ", "-", $comunaMinuscula);
+
+        $regionMinuscula = strtolower($propiedad->nombreRegion);
+        $regionGuion = str_replace(" ", "-", $regionMinuscula);
+
         if($request->file('file')){
 
             $imagen = $request->file('file');
 			$img = Image::make($imagen);
 
-            $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
+            $imgName = uniqid().'-'.$direccionGuion.'-'.$comunaGuion.'-'.$regionGuion.'.'.$imagen->getClientOriginalExtension();
 			$img->resize(730, 486, function ($constraint) {
 				$constraint->aspectRatio();
 				$constraint->upsize();
@@ -39,7 +54,7 @@ class ImagenPropiedadController extends Controller
             //imagen pequeña
             $imagenDos = $request->file('file');
             $imgDos = Image::make($imagenDos);
-            $imgNameDos = uniqid().'.'.$imagen->getClientOriginalExtension();
+            $imgNameDos = uniqid().'-'.$direccionGuion.'-'.$comunaGuion.'-'.$regionGuion.'.'.$imagen->getClientOriginalExtension();
             $imgDos->resize(146, 97, function ($constraint) {
 				$constraint->aspectRatio();
 				$constraint->upsize();

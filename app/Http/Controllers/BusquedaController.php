@@ -656,7 +656,7 @@ class BusquedaController extends Controller
 		                            <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
 		                                <i class='mdi mdi-dots-horizontal font-size-18'></i>
 		                            </a>
-		                            <div class='dropdown-menu dropdown-menu-right'>
+		                            <div class='dropdown-menu dropdown-menu-center'>
 						      			<a href='".asset('napalm/propiedades/editar')."/".$propiedad->idPropiedad."' class='dropdown-item btn btn-info'>Editar</a>
 		                    			<a href='".asset('napalm/subir-documentos/create')."/".$propiedad->idPropiedad."' class='dropdown-item'>Documentos</a>
 		                    			<a href='".asset('napalm/propiedades/destroy')."/".$propiedad->idPropiedad."' class='dropdown-item'>Eliminar</a>

@@ -78,7 +78,8 @@ class WelcomeController extends Controller
         }
 
         $ingresos = TrxIngreso::all();
-
-        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos'));
+        $valorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+        
+        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio'));
     }
 }

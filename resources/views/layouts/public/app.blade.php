@@ -26,11 +26,56 @@
     <link rel="stylesheet" href="{{ asset('css_public/btn.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/btn-tablets.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/btn-mobile.css') }}">
+    <style type="text/css">
+        .loader-page {
+            position: fixed;
+            z-index: 25000;
+            background: rgb(255, 255, 255);
+            left: 0px;
+            top: 0px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition:all .3s ease;
+          }
+          .loader-page::before {
+            content: "";
+            position: absolute;
+            border: 2px solid rgb(50, 150, 176);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border-left: 2px solid rgba(50, 150, 176,0);
+            border-top: 2px solid rgba(50, 150, 176,0);
+            animation: rotarload 1s linear infinite;
+            transform: rotate(0deg);
+          }
+          @keyframes rotarload {
+              0%   {transform: rotate(0deg)}
+              100% {transform: rotate(360deg)}
+          }
+          .loader-page::after {
+            content: "";
+            position: absolute;
+            border: 2px solid rgba(50, 150, 176,.5);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border-left: 2px solid rgba(50, 150, 176, 0);
+            border-top: 2px solid rgba(50, 150, 176, 0);
+            animation: rotarload 1s ease-out infinite;
+            transform: rotate(0deg);
+          }
+    </style>
     @yield('css')
     @toastr_css
 </head>
-<body>
-    <div class="page_loader"></div>
+<body >
+    <div class="loader-page"></div>
     <!-- BOTÓN RRSS -->
     <div class="contenedor">
         <input type="checkbox" id="btn-share">
@@ -94,7 +139,13 @@
     <script  src="{{ asset('js_public/ie10-viewport-bug-workaround.js') }}"></script>
     <script  src="{{ asset('js_public/ie10-viewport-bug-workaround.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-    
+    <script type="text/javascript">
+        $(window).on('load', function () {
+              setTimeout(function () {
+            $(".loader-page").css({visibility:"hidden",opacity:"0"})
+          }, 2000);
+        });
+    </script>
     @toastr_js
     @toastr_render
     @yield('scripts')

@@ -101,7 +101,7 @@
                         <div class="col-lg-12">
                             <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             @if($catidadInversores>1)
                                 <p>{{ $catidadInversores }} inversores</p>
                             @else
@@ -111,6 +111,9 @@
                                     <p>{{ $catidadInversores }} inversor</p>
                                 @endif
                             @endif
+                        </div>
+                        <div class="col-lg-6" align="right">
+                            <p>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </p>
                         </div>
                     </div>
                 @endif
