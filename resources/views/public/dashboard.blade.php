@@ -12,7 +12,11 @@ Dashborad
 <div class="container">
 	<div class="row">
 		<div class="col-lg-7">
-			<h3>Bienvenid@ Usuari@</h3>
+			@if(Session::has('nombre'))
+				<h3>Bienvenid@ {{ Session::get('nombre') }} {{ Session::get('apellido') }}</h3>
+			@else
+				<h3>Bienvenid@ Usuari@</h3>
+			@endif
 		<br>
 		<br>
 		</div>
@@ -212,7 +216,7 @@ Dashborad
 						<div class="col-lg-12">
 							<a>
 								<img src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-proyectos.svg">&nbsp;
-								Proyectos (2) <!-- cantidad de propiedades que se han invertido -->
+								Proyectos ({{ count($arrayIdPropiedadSinDuplicar[0]) }}) <!-- cantidad de propiedades que se han invertido -->
 							</a>
 						</div>
 						<div class="col-lg-12">
@@ -241,7 +245,7 @@ Dashborad
 									<p>Invertidos</p>
 								</div>
 								<div class="col-lg-6" align="right">
-									<p>2</p>
+									<p>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</p>
 								</div>
 								<div class="col-lg-6" align="left">
 									<p>En financiación</p>
@@ -291,7 +295,7 @@ Dashborad
 						<div class="col-lg-12">
 							<a>
 								<img src="https://static.housers.com/assets/images/new-dashboard-2020/housers-ico-estado-proyectos.svg">&nbsp;
-								Estado de proyectos (2) <!-- cantidad de propiedades que se han invertido -->
+								Estado de proyectos ({{ count($arrayIdPropiedadSinDuplicar[0]) }}) <!-- cantidad de propiedades que se han invertido -->
 							</a>
 						</div>
 						<div class="col-lg-12">

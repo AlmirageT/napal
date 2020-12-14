@@ -197,54 +197,20 @@ Detalle Mi Inversión
 </div>
 <div class="slick-slider-area" >
     <div class="row slick-carousel" data-slick='{"autoplay":true,"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-        <div class="slick-slide-item">
-            <div class="property-box">
-                <div class="property-thumbnail">
-                    <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
+        @foreach($imagenesPropiedades as $imagenPropiedad)
+            <div class="slick-slide-item">
+                <div class="property-box">
+                    <div class="property-thumbnail">
+                        <img class="d-block w-100" src="{{ asset($imagenPropiedad->imagenPropiedadGrande) }}" alt="properties" height="350" width="233">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="slick-slide-item">
-            <div class="property-box">
-                <div class="property-thumbnail">
-                    <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                </div>
-            </div>
-        </div>
-        <div class="slick-slide-item">
-            <div class="property-box">
-                <div class="property-thumbnail">
-                    <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                </div>
-            </div>
-        </div>
-        <div class="slick-slide-item">
-            <div class="property-box">
-                <div class="property-thumbnail">
-                    <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                </div>
-            </div>
-        </div>
-        <div class="slick-slide-item">
-            <div class="property-box">
-                <div class="property-thumbnail">
-                    <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                </div>
-            </div>
-        </div>
-        <div class="slick-slide-item">
-            <div class="property-box">
-                <div class="property-thumbnail">
-                    <img class="d-block w-100" src="http://placehold.it/350x233" alt="properties">
-                </div>
-            </div>
-        </div>
-        
+        @endforeach
     </div>
     <div class="d-none d-sm-none d-md-none d-lg-block">
         <nav class="contenedor-barra">
             <ul class="lista-botones">
-               <li> <a href="#">DETALLES FINANCIACIÓN</a> </li>
+               <li> <a href="#detalleFinanciacion">DETALLES FINANCIACIÓN</a> </li>
                <span>|</span>
                <li> <a href="#">EVOLUCIÓN PROYECTO</a> </li>
                 <span>|</span>
@@ -277,46 +243,48 @@ Detalle Mi Inversión
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-6" align="left">
-                    <h4>Detalles financiación</h4>
-                </div>
-                <div class="col-lg-6" align="right">
-                    <h6>Tipo de oportunidad</h6>
-                    <a>
-                        <img src="https://static.housers.com/assets/images/icons/projects/project-ico-fixed_green.svg" alt="Tipo fijo" title="Tipo fijo">
-                        Tipo Fijo
-                    </a>
+        <div id="detalleFinanciacion">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6" align="left">
+                        <h4>Detalles financiación</h4>
+                    </div>
+                    <div class="col-lg-6" align="right">
+                        <h6>Tipo de oportunidad</h6>
+                        <a>
+                            <img src="https://static.housers.com/assets/images/icons/projects/project-ico-fixed_green.svg" alt="Tipo fijo" title="Tipo fijo">
+                            Tipo Fijo
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="table-responsive">
-                <div class="contenedor-tabla">
-                    <br>
-                    <table>
-                        <tr>
-                        <td>ESTADO<br><strong>FINANCIADO</strong></td>
-                        <td>FORMA JURÍDICA<br><strong>PRÉSTAMO</strong></td>
-                        <td>NIVEL DE RIESGO<br><br><strong class="bb">BB</strong></td>
-                        <td>FECHA INICIO INVERSIÓN<br><strong>18-09-2020</strong></td>
-                        </tr>
-                     <tr>
-                        <td>FECHA FIN INVERSIÓN<br><strong>F03-11-2020</strong></td>
-                        <td>DÍAS EN FINANCIACIÓN<br><strong>45</strong></td>
-                        <td>N DE INVERSORES<br><strong>462</strong></td>
-                        <td>INVERSIÓN MEDIA X INVERSOR<br><strong>$143.-</strong></td>
-                        </tr>
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <div class="contenedor-tabla">
+                        <br>
+                        <table>
+                            <tr>
+                            <td>ESTADO<br><strong>FINANCIADO</strong></td>
+                            <td>FORMA JURÍDICA<br><strong>PRÉSTAMO</strong></td>
+                            <td>NIVEL DE RIESGO<br><br><strong class="bb">BB</strong></td>
+                            <td>FECHA INICIO INVERSIÓN<br><strong>18-09-2020</strong></td>
+                            </tr>
+                         <tr>
+                            <td>FECHA FIN INVERSIÓN<br><strong>F03-11-2020</strong></td>
+                            <td>DÍAS EN FINANCIACIÓN<br><strong>45</strong></td>
+                            <td>N DE INVERSORES<br><strong>462</strong></td>
+                            <td>INVERSIÓN MEDIA X INVERSOR<br><strong>$143.-</strong></td>
+                            </tr>
 
-                          <tr>
-                        <td>CANTIDAD FINANCIADA<br><strong>200.000</strong></td>
-                        <td>VALOR INICIAL<br><strong>1,000/</strong></td>
-                        <td>RENTABILIDAD ANUAL/TOTAL<br><strong>10,00/10,00%</strong></td>
-                        <td>PLAZO<br><strong>12 MESES</strong></td>
-                        </tr> 
-                    </table>
-                <br>
+                              <tr>
+                            <td>CANTIDAD FINANCIADA<br><strong>200.000</strong></td>
+                            <td>VALOR INICIAL<br><strong>1,000/</strong></td>
+                            <td>RENTABILIDAD ANUAL/TOTAL<br><strong>10,00/10,00%</strong></td>
+                            <td>PLAZO<br><strong>12 MESES</strong></td>
+                            </tr> 
+                        </table>
+                    <br>
+                    </div>
                 </div>
             </div>
         </div>

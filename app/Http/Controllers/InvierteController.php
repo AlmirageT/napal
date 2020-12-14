@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use App\TrxIngreso;
 use Session;
 use DB;
@@ -38,7 +39,7 @@ class InvierteController extends Controller
                 'idMoneda' => 1,
                 'idEstado' => 1,
                 'idTipoMedioPago' => 1,
-                'idPropiedad' => $idPropiedad
+                'idPropiedad' => Crypt::decrypt($idPropiedad)
             ]);
             DB::commit();
             return view('confirmar');

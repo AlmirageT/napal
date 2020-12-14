@@ -26,24 +26,31 @@ Route::view('financiacion-empresas','public.financiacion');
 Route::view('quienes-somos','public.quienesSomos');
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'], function(){
-    Route::view('/','public.dashboard');
+    Route::get('/','DashboardController@index');
     Route::get('oportunidades','TiendaController@index');
     Route::get('oportunidades/financiado','TiendaController@financiado');
     Route::get('oportunidades/cerrado','TiendaController@cerrado');
     Route::get('oportunidades/no-financiado','TiendaController@no_financiado');
-    Route::view('mis-inversiones','public.misInversiones');
+    Route::get('mis-inversiones','MisInversionesController@index');
+    Route::get('mi-inversion/detalle','MisInversionesController@detalle');
     Route::view('mi-cuenta','public.miCuenta');  
     Route::view('documentos-informes','public.documentosInformes');
     Route::view('mis-datos','public.miDatos');  
     Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
     Route::view('mis-datos/mis-promociones','public.misPromociones');
     Route::view('mi-cuenta/movimientos','public.misMovimientos');
-    Route::view('mi-inversion/detalle','public.miInversionDetalle');
     Route::view('promo-amigo','public.invitaUnAmigo');
     Route::view('mi-cuenta/cuentas-bancarias','public.cuentasAsociadas');
     Route::view('mi-cuenta/cuentas-bancarias/nueva','public.añadirCuentaBancaria');
-    Route::view('mi-cuenta/ingresos','public.ingresos');
+    Route::get('mi-cuenta/ingresos','SaldoDisponibleController@index');
     Route::view('mi-cuenta/retiros','public.retiros');
+    //vistas fallor exito
+    Route::view('fallo','public.paypal.fallo');
+    Route::view('exito','public.paypal.exito');
+
+    //paypal
+    Route::post('paypal', 'SaldoDisponibleController@payWithpaypal');
+    Route::get('status', 'SaldoDisponibleController@getPaymentStatus');
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -63,15 +70,19 @@ Route::post('enviar-solicitud','ContactaConNosotrosController@enviarCorreo');
 Route::get('ver-documento/{ver_pdf}','DocumentoController@ver_pdf');
 //detalle propiedades
 Route::get('detalle/{idPropiedad}','DetalleController@index');
+//uri nueva
+Route::get('invierte/chile/propiedad/detalle','DetalleController@index');
 Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');
 Route::post('verificacion-pago','InvierteController@verificarDatos');
 //link mientras no haya funcionamiento con sistema transbank
 Route::view('exito','exito');
 //invierte
 Route::get('invierte','TiendaController@index');
-Route::get('invierte/financiado','TiendaController@financiado');
-Route::get('invierte/cerrado','TiendaController@cerrado');
-Route::get('invierte/no-financiado','TiendaController@no_financiado');
+//uri nueva
+Route::get('invierte/chile/propiedad','TiendaController@index');
+Route::get('invierte/chile/propiedad/financiado','TiendaController@financiado');
+Route::get('invierte/chile/propiedad/cerrado','TiendaController@cerrado');
+Route::get('invierte/chile/propiedad/no-financiado','TiendaController@no_financiado');
 
 //reenvio de msj
 Route::post('/vaes', 'LoginController@reenviarSMS');

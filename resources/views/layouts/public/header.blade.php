@@ -46,7 +46,7 @@
                             Área Pública 
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ asset('invierte') }}">Invierte</a></li>
+                            <li><a class="dropdown-item" href="{{ asset('invierte/chile/propiedad') }}">Invierte</a></li>
                             <li><a class="dropdown-item" href="{{ asset('financiacion-empresas') }}">Financiate</a></li>
                             <li><a class="dropdown-item" href="">Blog</a></li>
                             <li><a class="dropdown-item" href="{{ asset('estadisticas') }}">Estadisticas</a></li>

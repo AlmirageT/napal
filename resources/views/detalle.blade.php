@@ -185,7 +185,7 @@ Detalle Propiedad
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar-left">
                     <!-- Advanced search start -->
-                    <form action="{{ asset('invierte-propiedad') }}/{{ $propiedad->idPropiedad }}" method="POST">
+                    <form action="{{ asset('invierte-propiedad') }}/{{ Crypt::encrypt($propiedad->idPropiedad) }}" method="POST">
                         @csrf
                         <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
                             <div class="row">

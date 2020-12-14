@@ -68,21 +68,21 @@
 <script>
     function orderBy(idEstado) {
         var URLactual = window.location;
-        var urlInvierte = "{{ asset('invierte') }}";
+        var urlInvierte = "{{ asset('invierte/chile/propiedad') }}";
         if(URLactual == urlInvierte || URLactual == urlInvierte+"/financiado" || URLactual == urlInvierte+"/cerrado" || URLactual == urlInvierte+"/no-financiado"){
             if(idEstado != ""){
                 if(idEstado == "4"){
-                    window.location.href='{{ asset('invierte') }}';
+                    window.location.href='{{ asset('invierte/chile/propiedad') }}';
                 }
 
                 if(idEstado == "5"){
-                    window.location.href='{{ asset('invierte/financiado') }}';
+                    window.location.href='{{ asset('invierte/chile/propiedad/financiado') }}';
                 }
                 if(idEstado == "6"){
-                    window.location.href='{{ asset('invierte/cerrado') }}';
+                    window.location.href='{{ asset('invierte/chile/propiedad/cerrado') }}';
                 }
                 if(idEstado == "7"){
-                    window.location.href='{{ asset('invierte/no-financiado') }}';
+                    window.location.href='{{ asset('invierte/chile/propiedad/no-financiado') }}';
                 }
             }
         }else{

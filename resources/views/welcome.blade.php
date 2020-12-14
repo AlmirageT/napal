@@ -330,6 +330,9 @@
                         }
                     }
                 @endphp
+                @php
+                    $nombrePropiedad = str_replace(" ", "-", $propiedades[$i]->nombrePropiedad);
+                @endphp
                 <div class="col-lg-4">
                     <div class="property-box">
                         <div class="property-thumbnail">
@@ -375,10 +378,11 @@
                         </div>
                         <div class="detail">
                             <h1 class="title">
-                                <a href="{{ asset('detalle') }}/{{ $propiedades[$i]->idPropiedad }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
+                                {{-- <a href="{{ asset('detalle') }}/{{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a> --}}
+                                <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
                             </h1>
                             <div class="location">
-                                <a href="">
+                                <a >
                                     <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ $propiedades[$i]->nombreRegion }}
                                 </a>
                             </div>
@@ -441,7 +445,7 @@
                             <hr>  
                             <div class="row" align="center">
                                 <div class="col-lg-12">
-                                    <a href="{{ asset('detalle') }}/{{ $propiedades[$i]->idPropiedad }}" class="btn btn-primary">Invierte</a>
+                                    <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" class="btn btn-primary">Invierte</a>
                                 </div>
                             </div>
                         </div>
@@ -457,10 +461,6 @@
                     </div>
                 </div>
             @endfor
-        </div>
-        <div class="caja-porcentaje">
-            <div class="obten"><small>OBTÉN HASTA UN</small></div>
-            <div class="porcentaje">14.75%</div>
         </div>
 {{--  
         <div class="slick-slider-area">
@@ -592,7 +592,7 @@
 --}}
     </div>
     <div class="container" align="center">
-        <a href="{{ asset('invierte') }}" class="btn btn-primary">Invierte</a>
+        <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-primary">Invierte</a>
     </div>
 </div>
 <!-- Featured Properties end -->

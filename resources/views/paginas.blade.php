@@ -19,6 +19,9 @@
             }
         }
     @endphp
+    @php
+        $nombrePropiedad = str_replace(" ", "-", $propiedadesTienda[$i]->nombrePropiedad);
+    @endphp
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="property-box">
             <div class="property-thumbnail">
@@ -67,7 +70,7 @@
             </div>
             <div class="detail">
                 <h1 class="title">
-                    <a href="{{ asset('detalle') }}/{{ $propiedadesTienda[$i]->idPropiedad }}">{{ $propiedadesTienda[$i]->nombrePropiedad }}</a>
+                    <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedadesTienda[$i]->idPropiedad) }}">{{ $propiedadesTienda[$i]->nombrePropiedad }}</a>
                 </h1>
                 <div class="location">
                     <a href="properties-details.html">
@@ -113,7 +116,11 @@
                             @endif
                         </div>
                         <div class="col-lg-6" align="right">
-                            <p>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </p>
+                            @if($diff->days>0)
+                                <p>{!! $diff->days !!} días </p>
+                            @else
+                                <p>Finalizado </p>
+                            @endif
                         </div>
                     </div>
                 @endif
@@ -132,16 +139,9 @@
             </div>
             <div class="footer clearfix">
                 <div class="pull-left days">
-                    @if($diff->days>0)
-                        <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} días </p>
-                    @else
-                        <p><i class="flaticon-time"></i>Finalizado </p>
-                    @endif
+                    <p><i class="flaticon-time"></i>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </p>
+                    
                 </div>
-                <ul class="pull-right">
-                    <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                    <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                </ul>
             </div>
         </div>
     </div>
