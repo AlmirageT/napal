@@ -196,6 +196,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('mision-empresa','MisionEmpresaController@index');
     //faq
     Route::get('faqs','FaqController@index');
+    //cambio dolar
+    Route::get('cambio-dolar','CambioDolarController@index');
 });
 //quieres saber mas
 Route::get('saber-mas','CondicionServicioController@saberMas');
@@ -381,4 +383,10 @@ Route::resource('mantenedor-tipos-medios-pagos','TipoMedioPagoController');
 Route::delete('mantenedor-tipos-medios-pagos/{idTipoMedioPago}',array(
     'uses'=>'TipoMedioPagoController@destroy',
     'as'=>'mantenedor-tipos-medios-pagos.delete'
+));
+//crud cambio dolar
+Route::resource('mantenedor-cambio-dolar','CambioDolarController');
+Route::delete('mantenedor-cambio-dolar/{idCambioDolar}',array(
+    'uses'=>'CambioDolarController@destroy',
+    'as'=>'mantenedor-cambio-dolar.delete'
 ));

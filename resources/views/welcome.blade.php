@@ -860,8 +860,10 @@
         </div>
     </div>
 </div>
+<div>
 <div id="smartphone-animation" style="opacity: 1;">
     @include('scroll')
+</div>
 </div>
 <style type="text/css">
     .latimagen{

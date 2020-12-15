@@ -18,14 +18,22 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="form-group">
-						<label>Valor con porcentaje aumentado</label>
-						<input type="text" name="montoPorcentaje" id="montoPorcentaje" disabled="" class="form-control">
+						<div class="col-auto">
+							<label>Valor para cambio a dolares</label>
+						      <div class="input-group mb-2">
+						        <div class="input-group-prepend">
+						          <div class="input-group-text">$</div>
+						        </div>
+								<input type="text" name="montoPorcentaje" value="{{ $cambioDolar->valorCambioDolar }}" id="valorDolar" disabled="" class="form-control">
+						      </div>
+					    </div>
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="form-group">
 						<label>Us Dolar</label>
-						<input type="text" name="montoDolar" id="montoDolar" disabled="" class="form-control">
+						<input type="text"  id="montoDolar" disabled="" class="form-control">
+						<input type="hidden" name="montoDolar" id="montoDoldarEscondido">
 					</div>
 				</div>
 				<div class="col-lg-12" align="center">
@@ -38,7 +46,9 @@
 <br>
 <script type="text/javascript">
 	function valorPorcentaje(monto) {
-		const valor = monto * 1.06;
-		document.getElementById('montoPorcentaje').value = valor;
+		var valor = document.getElementById('valorDolar').value;
+		const valorEnDolares = monto/parseInt(valor);
+		document.getElementById('montoDolar').value = valorEnDolares.toFixed(2);
+		document.getElementById('montoDoldarEscondido').value = valorEnDolares.toFixed(2);
 	}
 </script>

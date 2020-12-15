@@ -8,15 +8,15 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
-use App\Codigo;
+use App\CambioDolar;
 use Session;
 use DB;
 
-class CodigoController extends Controller
+class CambioDolarController extends Controller
 {
     public function index()
     {
-        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+    	if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
             return abort(401);
         }
         if (Session::has('idTipoUsuario')) {
@@ -24,27 +24,26 @@ class CodigoController extends Controller
                 return abort(401);
             }
         }
-    	$codigos = Codigo::all();
-        return view('admin.codigosPromocionales.index',compact('codigos'));
+        $cambiosDolares = CambioDolar::all();
+        return view('admin.cambioDolar.index',compact('cambiosDolares'));
     }
     public function store(Request $request)
     {
     	try {
-            $validator = Validator::make($request->all(), [
-                'fechaVencimiento'=>'required'
+    		$validator = Validator::make($request->all(), [
+                'valorCambioDolar' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('No debe dejar campos en blanco');
+                toastr()->info('No deben quedar datos en blanco');
                 return back();
             }
-            DB::beginTransaction();
-                $codigo = new Codigo($request->all());
-                $codigo->codigo = uniqid();
-                $codigo->save();
-                toastr()->success('Agregado Correctamente', 'El código: '.$codigo->codigo.' ha sido agregado correctamente', ['timeOut' => 9000]);
-            DB::commit();
-            return redirect::back();
-        } catch (ModelNotFoundException $e) {
+    		DB::beginTransaction();
+    		$cambioDolar = new CambioDolar($request->all());
+    		$cambioDolar->save();
+            toastr()->success('Agregado Correctamente', 'Cambio dolar agregado correctamente', ['timeOut' => 5000]);
+    		DB::commit();
+            return back();
+    	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
             return back();
@@ -59,27 +58,27 @@ class CodigoController extends Controller
         } catch (Exception $e) {
             DB::rollback();         
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
-            return redirect::back();
+            return back();
         }
     }
-    public function update(Request $request, $idCodigo)
+    public function update(Request $request, $idCambioDolar)
     {
     	try {
-            $validator = Validator::make($request->all(), [
-                'fechaVencimiento'=>'required'
+    		$validator = Validator::make($request->all(), [
+                'valorCambioDolar' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('No debe dejar campos en blanco');
+                toastr()->info('No deben quedar datos en blanco');
                 return back();
             }
-            DB::beginTransaction();
-                $codigo = Codigo::find($idCodigo);
-                $codigo->fill($request->all());
-                $codigo->save();
-                toastr()->success('Actualizado Correctamente', 'La fecha de vencimiento ha sido actualizado correctamente', ['timeOut' => 9000]);
-            DB::commit();
-            return redirect::back();
-        } catch (ModelNotFoundException $e) {
+    		DB::beginTransaction();
+    		$cambioDolar = CambioDolar::find($idCambioDolar);
+    		$cambioDolar->fill($request->all());
+    		$cambioDolar->save();
+            toastr()->success('Actualizado Correctamente', 'Cambio dolar actualizado correctamente', ['timeOut' => 5000]);
+    		DB::commit();
+            return back();
+    	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
             return back();
@@ -94,19 +93,19 @@ class CodigoController extends Controller
         } catch (Exception $e) {
             DB::rollback();         
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
-            return redirect::back();
+            return back();
         }
     }
-    public function destroy($idCodigo)
+    public function destroy($idCambioDolar)
     {
     	try {
-            DB::beginTransaction();
-                $codigo = Codigo::find($idCodigo);
-                toastr()->success('Eliminado Correctamente', 'El código: '.$codigo->codigo.' ha sido eliminado correctamente', ['timeOut' => 9000]);
-                $codigo->delete();
-            DB::commit();
-            return redirect::back();
-        } catch (ModelNotFoundException $e) {
+    		DB::beginTransaction();
+    		$cambioDolar = CambioDolar::find($idCambioDolar);
+    		$cambioDolar->delete();
+            toastr()->success('Eliminado Correctamente', 'Cambio dolar eliminado correctamente', ['timeOut' => 5000]);
+    		DB::commit();
+            return back();
+    	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
             return back();
@@ -121,7 +120,7 @@ class CodigoController extends Controller
         } catch (Exception $e) {
             DB::rollback();         
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
-            return redirect::back();
+            return back();
         }
     }
 }

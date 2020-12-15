@@ -5,7 +5,7 @@ Ingresos
 @section('css')
 <style type="text/css">
 	.espacio{
-		width: 33.3%;
+		width: {{100/$tiposMediosPagos->count()}}%;
 	}
 </style>
 @endsection
