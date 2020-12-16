@@ -94,21 +94,21 @@ Crear Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Tipo Invesión</label>
-								{!! Form::select('idTipoInversion', $tipoInversion,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de inversion"]) !!}
+								{!! Form::select('idTipoInversion', $tipoInversion,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de inversion",'required']) !!}
 							</div>
 						</div>
 						
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Proyecto Asociado</label>
-								{!! Form::select('idProyecto', $proyecto,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione el proyecto asociado"]) !!}
+								{!! Form::select('idProyecto', $proyecto,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione el proyecto asociado",'required']) !!}
 
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Flexibilidad</label>
-								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad"]) !!}
+								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad",'required']) !!}
 							</div>
 						</div>
 						
@@ -124,13 +124,13 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Calidad</label>
-								{!! Form::select('idTipoCalidad', $tipoCalidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad"]) !!}
+								{!! Form::select('idTipoCalidad', $tipoCalidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo de Credito</label>
-								{!! Form::select('idTipoCredito', $tipoCredito,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de credito"]) !!}
+								{!! Form::select('idTipoCredito', $tipoCredito,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de credito",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -142,7 +142,7 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Moneda</label>
-								{!! Form::select('idMoneda', $monedas,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione una moneda"]) !!}
+								{!! Form::select('idMoneda', $monedas,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione una moneda",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">
@@ -154,7 +154,7 @@ Crear Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>URL Video</label>
-								{!! Form::text('urlVideo',null,['class'=>"form-control"]) !!}
+								{!! Form::text('urlVideo',null,['class'=>"form-control",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">
@@ -184,7 +184,7 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Estado</label>
-								{!! Form::select('idEstado', $estados,null,['class'=>"form-control",'placeholder'=>"Seleccione un estado de la propiedad"]) !!}
+								{!! Form::select('idEstado', $estados,null,['class'=>"form-control",'placeholder'=>"Seleccione un estado de la propiedad",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -205,7 +205,7 @@ Crear Propiedad
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Descripción</label>
-								<textarea class="form-control summernote" name="descripcion" ></textarea>
+								<textarea class="form-control summernote" name="descripcion" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -248,37 +248,52 @@ Crear Propiedad
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Oportunidad</label>
-								<textarea class="form-control summernote" name="oportunidad" ></textarea>
+								<textarea class="form-control summernote" name="oportunidad" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Invertir</label>
-								<textarea class="form-control summernote" name="invertir" ></textarea>
+								<textarea class="form-control summernote" name="invertir" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Ubicación</label>
-								<textarea class="form-control summernote" name="ubicacion" ></textarea>
+								<textarea class="form-control summernote" name="ubicacion" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Proyecto</label>
-								<textarea class="form-control summernote" name="proyecto" ></textarea>
+								<textarea class="form-control summernote" name="proyecto" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Promotor</label>
-								<textarea class="form-control summernote" name="promotor" ></textarea>
+								<textarea class="form-control summernote" name="promotor" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Notas Internas</label>
-								<textarea class="form-control summernote" name="notasInternas"></textarea>
+								<textarea class="form-control summernote" name="notasInternas" required></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12" align="center">
+							<h5>¿Rentabilidad Promocional?</h5>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Texto</label>
+								{!! Form::text('textoPromocion',null,['class'=>"form-control"]) !!}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Porcentaje</label>
+								{!! Form::text('rentabilidadPromocion',null,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 					</div>

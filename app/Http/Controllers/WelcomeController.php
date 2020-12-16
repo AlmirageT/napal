@@ -10,6 +10,7 @@ use App\RedSocial;
 use App\MisionEmpresa;
 use App\ParametroGeneral;
 use App\TrxIngreso;
+use App\PropiedadFavorita;
 use Cache;
 
 class WelcomeController extends Controller
@@ -46,6 +47,7 @@ class WelcomeController extends Controller
                 ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
                 ->join('estados','propiedades.idEstado','=','estados.idEstado')
                 ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+                ->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
                 ->orderBy('propiedades.idPropiedad','DESC')
                 ->where('propiedades.idEstado',4)
                 ->where('propiedades.destacadoPropiedad',1)
@@ -79,7 +81,8 @@ class WelcomeController extends Controller
 
         $ingresos = TrxIngreso::all();
         $valorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+        $propiedadesFavoritas = PropiedadFavorita::all();
         
-        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio'));
+        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio','propiedadesFavoritas'));
     }
 }

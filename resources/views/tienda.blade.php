@@ -1,5 +1,47 @@
 
 @extends('layouts.public.app')
+@section('title','Tienda')
+@section('css')
+<style type="text/css">
+    .circulo {
+        width: 80px;
+        height: 80px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: rgba(255, 0, 0, 0.5);
+        margin-top: -180px;
+        position: absolute;
+        margin-left: 264px;
+    }
+    .flex{
+        margin-left: 15px;
+        margin-top: 26px;
+        font-size: 25px;
+        color: white;
+    }
+    .rectangulo {
+        width: 150px; 
+        height: 70px;
+        background-color: rgba(0, 40, 255, 0.5);
+        position: absolute;
+        margin-top: -140px;
+    }
+    .tituloRentabilidad{
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+    .valorRentabilidad{
+        color: white;
+        font-size: 36px;
+        font-weight: bold;
+        margin-top: -10px;
+        margin-left: 12px;
+    }
+</style>
+@endsection
 @section('content')
 <div class="properties-section-body content-area">
     <div class="container">

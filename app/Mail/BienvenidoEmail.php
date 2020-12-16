@@ -32,6 +32,6 @@ class BienvenidoEmail extends Mailable
     {
         $url = $this->url;
         $nombre = $this->nombre;
-        return $this->subject('Cuenta Activada')->view('mail.bienvenidoEmail',compact('url','nombre'));
+        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Cuenta Activada')->view('mail.bienvenidoEmail',compact('url','nombre'));
     }
 }

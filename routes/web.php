@@ -24,6 +24,8 @@ Route::get('preguntas-frecuentes','FaqController@preguntasFrecuentes');
 Route::view('financiacion-empresas','public.financiacion');
 //quienes somos
 Route::view('quienes-somos','public.quienesSomos');
+//favoritos
+Route::get('propiedad-favorita/{idPropiedad}', 'PropiedadFavoritaController@index');
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'], function(){
     Route::get('/','DashboardController@index');

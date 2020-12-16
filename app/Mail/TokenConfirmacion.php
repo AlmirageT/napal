@@ -33,6 +33,6 @@ class TokenConfirmacion extends Mailable
     {
         $token = $this->url_token;
         $nuevoUsuario = $this->nuevoUsuario;
-        return $this->subject('Código de activación')->view('mail.mailConfirmacion',compact('token','nuevoUsuario'));
+        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Código de activación')->view('mail.mailConfirmacion',compact('token','nuevoUsuario'));
     }
 }

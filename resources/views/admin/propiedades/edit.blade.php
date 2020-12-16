@@ -293,6 +293,21 @@ Actualizar Propiedad
 								<textarea class="form-control summernote" name="notasInternas">{{ $propiedad->notasInternas }}</textarea>
 							</div>
 						</div>
+						<div class="col-lg-12" align="center">
+							<h5>¿Rentabilidad Promocional?</h5>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Texto</label>
+								{!! Form::text('textoPromocion',{{ $propiedad->textoPromocion }},['class'=>"form-control"]) !!}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Porcentaje</label>
+								{!! Form::text('rentabilidadPromocion',{{ $propiedad->rentabilidadPromocion }},['class'=>"form-control"]) !!}
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="card-footer">

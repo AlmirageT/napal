@@ -9,8 +9,11 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use App\Mail\ConfirmacionInversion;
 use App\TrxIngreso;
+use App\Propiedad;
 use Session;
+use Mail;
 use DB;
 
 class InvierteController extends Controller
@@ -41,6 +44,9 @@ class InvierteController extends Controller
                 'idTipoMedioPago' => 1,
                 'idPropiedad' => Crypt::decrypt($idPropiedad)
             ]);
+            $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+            Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
+
             DB::commit();
             return view('confirmar');
         } catch (ModelNotFoundException $e) {

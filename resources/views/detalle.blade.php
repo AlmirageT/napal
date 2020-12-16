@@ -1,7 +1,12 @@
 @extends('layouts.public.app')
-@section('title')
-Detalle Propiedad
-@endsection
+@section('title','Detalle Propiedad')
+<meta property="og:url" content="{{ $request->url() }}" >
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Inverte en nuestra propiedad {{ $propiedad->nombrePropiedad }}" >
+<meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
+<meta property="og:image" content="{{ asset($propiedad->fotoPrincipal) }}" >
+<meta property="og:image:width" content="200" >
+<meta property="og:image:height" content="200" >
 @section('content')
 <!-- Properties details page start -->
 @php
@@ -22,6 +27,7 @@ Detalle Propiedad
         }
     }
 @endphp
+
 <div class="properties-details-page content-area">
     <div class="container">
         <div class="row">

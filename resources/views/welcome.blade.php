@@ -52,7 +52,43 @@
         .footer-texto {
         margin-left: 10px;
         }
-        
+        .circulo {
+            width: 80px;
+            height: 80px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.5);
+            margin-top: -180px;
+            position: absolute;
+            margin-left: 264px;
+        }
+        .flex{
+            margin-left: 15px;
+            margin-top: 26px;
+            font-size: 25px;
+            color: white;
+        }
+        .rectangulo {
+            width: 150px; 
+            height: 70px;
+            background-color: rgba(0, 40, 255, 0.5);
+            position: absolute;
+            margin-top: -140px;
+        }
+        .tituloRentabilidad{
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .valorRentabilidad{
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: -10px;
+            margin-left: 12px;
+        }
     </style>
 @endsection
 @section('content')
@@ -79,7 +115,7 @@
                                             {{ $imagenUno->subTituloImagenCarrusel }}
                                         @endif
                                     </p>
-                                    {{-- <a href="index.html" class="btn btn-white">Read More</a> --}}
+                                    {{-- <a href="" class="btn btn-white">Read More</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -191,7 +227,7 @@
                                     <p data-animation="animated fadeInUp delay-10s">
                                         This is real estate website template based on Bootstrap 4 framework.
                                     </p>
-                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                    <a href="" class="btn btn-white">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +242,7 @@
                                         <p data-animation="animated fadeInUp delay-10s">
                                             This is real estate website template based on Bootstrap 4 framework.
                                         </p>
-                                        <a href="index.html" class="btn btn-white">Read More</a>
+                                        <a href="" class="btn btn-white">Read More</a>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +272,7 @@
                                     <p data-animation="animated fadeInUp delay-10s">
                                         This is real estate website template based on Bootstrap 4 framework.
                                     </p>
-                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                    <a href="" class="btn btn-white">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +286,7 @@
                                     <p data-animation="animated fadeInUp delay-10s">
                                         This is real estate website template based on Bootstrap 4 framework.
                                     </p>
-                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                    <a href="" class="btn btn-white">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -264,7 +300,7 @@
                                     <p data-animation="animated fadeInUp delay-10s">
                                         This is real estate website template based on Bootstrap 4 framework.
                                     </p>
-                                    <a href="index.html" class="btn btn-white">Read More</a>
+                                    <a href="" class="btn btn-white">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -333,6 +369,13 @@
                 @php
                     $nombrePropiedad = str_replace(" ", "-", $propiedades[$i]->nombrePropiedad);
                 @endphp
+                <meta property="og:url" content="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" >
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Inverte en nuestra propiedad {{ $propiedades[$i]->nombrePropiedad }}" >
+                <meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
+                <meta property="og:image" content="{{ asset($propiedades[$i]->fotoPrincipal) }}" >
+                <meta property="og:image:width" content="200" >
+                <meta property="og:image:height" content="200" >
                 <div class="col-lg-4">
                     <div class="property-box">
                         <div class="property-thumbnail">
@@ -355,16 +398,28 @@
                                     }
                                 </script>
                             </div>
+                            {{-- 
                             <div class="price-ratings-box">
                                 <p class="price">
                                     ${{ number_format($propiedades[$i]->precio,0,',','.') }}
                                 </p>
-                            </div>
+                            </div> 
+                            --}}
                             <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
-                                        
+                                        @if($propiedades[$i]->idTipoFlexibilidad == 1)
+                                            <div class="circulo">
+                                                <p class="flex">FLEX</p>
+                                            </div>
+                                        @endif
+                                        @if($propiedades[$i]->textoPromocion != null && $propiedades[$i]->rentabilidadPromocion != null)
+                                            <div class="rectangulo">
+                                                <p class="tituloRentabilidad">{{ strtoupper($propiedades[$i]->textoPromocion) }}</p>
+                                                <p class="valorRentabilidad">{{ $propiedades[$i]->rentabilidadPromocion }}%</p>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -372,6 +427,7 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
+
                                     </div>
                                 </div>
                             </div>
@@ -388,26 +444,22 @@
                             </div>
                             <ul class="facilities-list clearfix">
                                 <li>
-                                    <i class="flaticon-furniture"></i> 
-                                    @if($propiedades[$i]->habitaciones > 1)
-                                        {{ $propiedades[$i]->habitaciones }} Habitaciones
-                                    @else
-                                        {{ $propiedades[$i]->habitaciones }} Habitación
-                                    @endif
-
+                                    {{ $propiedades[$i]->nombreTipoCalidad }}
                                 </li>
                                 <li>
-                                    <i class="flaticon-holidays"></i>
-                                    @if($propiedades[$i]->baños > 1)
-                                        {{ $propiedades[$i]->baños }} Baños
+                                    @if($propiedades[$i]->tieneChat == 1)
+                                        Con Foro
                                     @else
-                                        {{ $propiedades[$i]->baños }} Baño
+                                        Sin Foro
                                     @endif
                                 </li>
                             </ul>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-6" align="left">
                                     <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
+                                </div>
+                                <div class="col-lg-6" align="right">
+                                    <p>${{ number_format($propiedades[$i]->precio,0,',','.') }}</p>
                                 </div>
                                 <div class="col-lg-12">
                                     <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
@@ -453,143 +505,53 @@
                             <div class="pull-left days" align="center">
                                 <p><i class="flaticon-time"></i>Plazo: {{ $propiedades[$i]->plazoMeses }} meses </p>
                             </div>
-                            <ul class="pull-right">
-                                <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                            </ul>
+                            @if(Session::has('idUsuario'))
+                                <ul class="pull-right">
+                                    @if(count($propiedadesFavoritas->where('idPropiedad',$propiedades[$i]->idPropiedad))>0)
+                                        <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}" style="color:red;"></i></a></li>
+                                    @else
+                                        <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}"></i></a></li>
+                                    @endif
+                                    <li><a data-toggle="modal" data-target="#propiedad{{ $propiedades[$i]->idPropiedad }}"><i class="flaticon-multimedia"></i></a></li>
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="propiedad{{ $propiedades[$i]->idPropiedad }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" style="margin-left: 20px"><i class="fab fa-facebook-f"></i></a>
+                        <a target="_blank" href="https://twitter.com/intent/tweet?text=Jaime vende su departamento directamente sin comision de corredor con isbast&amp;url=https%3A%2F%2Fisbast.com%2Fpropiedades%2FeyJpdiI6IllhNGx6UjdcL3MyeXdHZHhwbnBWZ1JBPT0iLCJ2YWx1ZSI6IkVVdkZ5YThVSEZxcXIranltdHFKYWc9PSIsIm1hYyI6ImMwODg1YTA2NzE1NjBjMDVmNTk4ZGZjODMyODljNzcwYzY1ZTRjOGI1ZGYxOWYxZDRiYTcxZGFkY2RlODg4ZTMifQ=="><i class="fab fa-twitter" style="margin-left: 20px"></i></a>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             @endfor
         </div>
-{{--  
-        <div class="slick-slider-area">
-            <div class="row slick-carousel" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                @for ($i = 0; $i < count($propiedades); $i++)
-                    @php
-                        $date1 = new DateTime($propiedades[$i]->fechaInicio);
-                        $date2 = new DateTime($propiedades[$i]->fechaFinalizacion);
-                        $diff = $date1->diff($date2);
-                    @endphp
-                    <div class="slick-slide-item">
-                        <div class="property-box">
-                            <div class="property-thumbnail">
-                                <div class="listing-badges">
-                                    <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
-                                        Flexible
-                                    </span>
-                                    <script type="text/javascript">
-                                        function pruebaId(idPropiedad, valor){
-                                            idUno = 'carouselExampleIndicators'+valor;
-                                            idDos = 'carouselExampleIndicatorss'+valor;
-                                            if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
-                                                document.getElementById(idUno).style.display = 'block';
-                                                document.getElementById(idDos).style.display = 'none';
-                                            }else{
-                                                document.getElementById(idUno).style.display = 'none';
-                                                document.getElementById(idDos).style.display = 'block';
-                                            }
-                                        }
-                                    </script>
-                                </div>
-                                <div class="price-ratings-box">
-                                    <p class="price">
-                                        ${{ number_format($propiedades[$i]->precio,0,',','.') }}
-                                    </p>
-                                </div>
-                                <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="carouselExampleIndicatorss{{ $i}}" class="carousel slide" data-ride="" style="display: none">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="{{ asset('detalle') }}/{{ $propiedades[$i]->idPropiedad }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="">
-                                        <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ $propiedades[$i]->nombreRegion }}
-                                    </a>
-                                </div>
-                                <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-furniture"></i> 
-                                        @if($propiedades[$i]->habitaciones > 1)
-                                            {{ $propiedades[$i]->habitaciones }} Habitaciones
-                                        @else
-                                            {{ $propiedades[$i]->habitaciones }} Habitación
-                                        @endif
+        {{-- modal --}}
 
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-holidays"></i>
-                                        @if($propiedades[$i]->baños > 1)
-                                            {{ $propiedades[$i]->baños }} Baños
-                                        @else
-                                            {{ $propiedades[$i]->baños }} Baño
-                                        @endif
-                                    </li>
-                                </ul>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <p>$250.000 (25%)</p>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <progress max="100" value="25" style="width: 100%;">
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p>80 inversores</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                    <div class="row">
-                                        <div class="col-lg-6" align="center">
-                                            <h4>{{ $propiedades[$i]->rentabilidadAnual }}%</h4>
-                                            <p>Rentabilidad Anual</p>
-                                        </div>
-                                        <div class="col-lg-6" align="center">
-                                            <h4>{{ $propiedades[$i]->rentabilidadTotal }}%</h4>
-                                            <p>Rentabilidad Total</p>
-                                        </div>
-                                    </div> 
-                                <hr>  
-                                <div class="row" align="center">
-                                    <div class="col-lg-12">
-                                        <a href="{{ asset('detalle') }}/{{ $propiedades[$i]->idPropiedad }}" class="btn btn-primary">Invierte</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="footer clearfix">
-                                <div class="pull-left days" align="center">
-                                    <p><i class="flaticon-time"></i>Plazo: {!! $diff->days !!} días </p>
-                                </div>
-                                <ul class="pull-right">
-                                    <li><a href="#"><i class="flaticon-favorite"></i></a></li>
-                                    <li><a href="#"><i class="flaticon-multimedia"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                @endfor
-            </div>
-            <div class="slick-prev slick-arrow-buton">
-                <i class="fa fa-angle-left"></i>
-            </div>
-            <div class="slick-next slick-arrow-buton">
-                <i class="fa fa-angle-right"></i>
-            </div>
-        </div>
---}}
+        <script type="text/javascript">
+            function propiedadFavorita(idPropiedad) {
+                $.get('{{ asset('propiedad-favorita') }}/'+idPropiedad,function(data, status){
+                    if(document.getElementById(idPropiedad).style.color == 'red'){
+                        document.getElementById(idPropiedad).style.color = '';
+                    }else{
+                        document.getElementById(idPropiedad).style.color = 'red';
+                    }
+                });
+            }
+        </script>
     </div>
     <div class="container" align="center">
         <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-primary">Invierte</a>
@@ -861,9 +823,11 @@
     </div>
 </div>
 <div>
+    {{-- 
 <div id="smartphone-animation" style="opacity: 1;">
     @include('scroll')
 </div>
+ --}}
 </div>
 <style type="text/css">
     .latimagen{

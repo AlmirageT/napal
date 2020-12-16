@@ -45,17 +45,22 @@
                             }
                         </script>
                     </div>
-                    <div class="price-ratings-box">
-                        <p class="price">
-                        ${{ number_format($propiedadesTienda[$i]->precio,0,',','.') }}
-                        </p>
-                        
-                    </div>
 
                     <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="{{ asset($propiedadesTienda[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                @if($propiedadesTienda[$i]->idTipoFlexibilidad == 1)
+                                    <div class="circulo">
+                                        <p class="flex">FLEX</p>
+                                    </div>
+                                @endif
+                                @if($propiedadesTienda[$i]->textoPromocion != null && $propiedadesTienda[$i]->rentabilidadPromocion != null)
+                                    <div class="rectangulo">
+                                        <p class="tituloRentabilidad">{{ strtoupper($propiedadesTienda[$i]->textoPromocion) }}</p>
+                                        <p class="valorRentabilidad">{{ $propiedadesTienda[$i]->rentabilidadPromocion }}%</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -98,8 +103,11 @@
                 </ul>
                 @if($propiedadesTienda[$i]->idEstado == 4)
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
+                        </div>
+                        <div class="col-lg-6" align="right">
+                            <p>${{ number_format($propiedadesTienda[$i]->precio,0,',','.') }}</p>
                         </div>
                         <div class="col-lg-12">
                             <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
@@ -142,6 +150,10 @@
                     <p><i class="flaticon-time"></i>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </p>
                     
                 </div>
+                <ul class="pull-right">
+                    <li><a ><i class="flaticon-favorite"></i></a></li>
+                    <li><a ><i class="flaticon-multimedia"></i></a></li>
+                </ul>
             </div>
         </div>
     </div>
