@@ -140,7 +140,12 @@
                 <hr>
                 <div class="separador-60 h-separator-60"></div>
                 <div class="separador-0-grey h-separator-20--horizontal-grey"></div>
-                <p class="inscrita">© 2020 HOUSERS | Housers Global Properties PFP, SL con NIF B87269999 - Inscrita en el Registro Mercantil de Madrid al Tomo:  33521, Folio: 32, Sección: 8, Hoja: M6033545.</p>
+                <p class="inscrita">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p class="inscrita">
                     Housers está autorizada por la Comisión Nacional del Mercado de Valores conforme a la ley 5/2015 de Fomento de la Financiación Empresarial. Está <a href="https://www.cnmv.es/portal/Consultas/Plataforma/Financiacion-Participativa-Detalle.aspx?nreg=20&amp;nif=B87269999&amp;lang=es" target="_blank" rel="noopener">inscrita con el número 20</a> en el Registro de Plataformas de Financiación Participativa de la CNMV.
                 </p>

@@ -218,6 +218,8 @@ Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
 Route::get('provincias/{idRegion}','UsuarioController@obtenerProvincias');
 Route::get('comunas/{idProvincia}','UsuarioController@obtenerComuna');
+//busqueda propiedad
+Route::get('obtenerPropiedad/{idPropiedad}','WelcomeController@obtenerPropiedad');
 //crud usuarios
 Route::resource('mantenedor-usuarios','UsuarioController');
 Route::get('napalm/usuarios/delete/{idUsuario}','UsuarioController@destroy');

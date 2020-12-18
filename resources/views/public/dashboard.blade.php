@@ -27,7 +27,7 @@ Dashborad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<p style="color: #fff;">Capital total invertido</p>
-								<h3 style="color: #fff;">$0</h3>
+								<h3 style="color: #fff;">${{ number_format($total,0,',','.') }}</h3>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -52,7 +52,13 @@ Dashborad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<p style="color: #fff;">Saldo disponible</p>
-								<h3 style="color: #fff;">$0</h3>
+								<h3 style="color: #fff;">
+									@if(count($saldoDisponible)>0)
+										${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
+									@else
+										$0
+									@endif
+								</h3>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -77,13 +83,13 @@ Dashborad
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-12" align="center">
-							<p>Inversión: 0,00 €</p>
+							<p>Inversión: ${{ number_format($total,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-8">
 							<p>Proyectos financiados</p>
 						</div>
 						<div class="col-lg-4" align="right">
-							<p>$0</p>
+							<p>${{ number_format($totalProyectoFinanciado,0,',','.') }}</p>
 						</div>
 
 						<div class="col-lg-8">
@@ -104,7 +110,7 @@ Dashborad
 							<p>Proyectos en financiación</p>
 						</div>
 						<div class="col-lg-4" align="right">
-							<p>$0</p>
+							<p>${{ number_format($totalProyectoEnFinanciacion,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-12" align="center">
 							<a href="{{ asset('dashboard/mis-inversiones') }}" class="btn btn-primary">Mis inversiones</a>
@@ -166,20 +172,31 @@ Dashborad
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-12" align="center">
-							<p>Saldo disponible: 0,00 €</p>
+							<p>Saldo disponible: 
+									@if(count($saldoDisponible)>0)
+										${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
+									@else
+										$0
+									@endif</p>
 						</div>
 						<div class="col-lg-8">
 							<p>Saldo total cuenta Housers</p>
 						</div>
 						<div class="col-lg-4" align="right">
-							<p>$0</p>
+							<p>
+								@if(count($saldoDisponible)>0)
+									${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
+								@else
+									$0
+								@endif
+							</p>
 						</div>
 
 						<div class="col-lg-8">
 							<p>Invertido proyectos en financiación</p>
 						</div>
 						<div class="col-lg-4" align="right">
-							<p>$0</p>
+							<p>${{ number_format($totalProyectoEnFinanciacion,0,',','.') }}</p>
 						</div>
 
 						<div class="col-lg-8">
@@ -192,7 +209,13 @@ Dashborad
 							<p>Disponible para retirada</p>
 						</div>
 						<div class="col-lg-4" align="right">
-							<p>$0</p>
+							<p>
+								@if(count($saldoDisponible)>0)
+									${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
+								@else
+									$0
+								@endif
+							</p>
 						</div>
 						<div class="col-lg-12" align="center">
 							<a href="{{ asset('dashboard/mi-cuenta') }}" class="btn btn-primary">Mi cuenta housers</a>
@@ -251,25 +274,25 @@ Dashborad
 									<p>En financiación</p>
 								</div>
 								<div class="col-lg-6" align="right">
-									<p>0</p>
+									<p>{{ count($propiedades->where('idEstado',4)) }}</p>
 								</div>
 								<div class="col-lg-6" align="left">
 									<p>Financiados</p>
 								</div>
 								<div class="col-lg-6" align="right">
-									<p>2</p>
+									<p>{{ count($propiedades->where('idEstado',5)) }}</p>
 								</div>
 								<div class="col-lg-6" align="left">
 									<p>No financiados</p>
 								</div>
 								<div class="col-lg-6" align="right">
-									<p>0</p>
+									<p>{{ count($propiedades->where('idEstado',7)) }}</p>
 								</div>
 								<div class="col-lg-6" align="left">
 									<p>Finalizados</p>
 								</div>
 								<div class="col-lg-6" align="right">
-									<p>0</p>
+									<p>{{ count($propiedades->where('idEstado',6)) }}</p>
 								</div>
 								<div class="col-lg-6" align="left">
 									<p>Vendidos CCD</p>

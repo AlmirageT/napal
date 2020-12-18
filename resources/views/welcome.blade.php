@@ -1,4 +1,14 @@
 @extends('layouts.public.app')
+{{--  
+@section('meta')
+    <meta property="og:url" content="" >
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Inverte en nuestra propiedad " >
+    <meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
+    <meta property="og:image" content="" >
+    <meta property="og:image:width" content="200" >
+    <meta property="og:image:height" content="200" >
+@endsection--}}
 @section('title','Bienvenido')
 @section('css')
   <style>
@@ -88,6 +98,21 @@
             font-weight: bold;
             margin-top: -10px;
             margin-left: 12px;
+        }
+        .cuadrado {
+            width: 40px; 
+            height: 40px; 
+            background: #1abc9c;
+            position: absolute;
+            z-index: 1;
+            margin-left: 110px;
+            cursor: pointer;
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 310px;
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -369,14 +394,8 @@
                 @php
                     $nombrePropiedad = str_replace(" ", "-", $propiedades[$i]->nombrePropiedad);
                 @endphp
-                <meta property="og:url" content="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" >
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="Inverte en nuestra propiedad {{ $propiedades[$i]->nombrePropiedad }}" >
-                <meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
-                <meta property="og:image" content="{{ asset($propiedades[$i]->fotoPrincipal) }}" >
-                <meta property="og:image:width" content="200" >
-                <meta property="og:image:height" content="200" >
-                <div class="col-lg-4">
+
+                <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block">
                     <div class="property-box">
                         <div class="property-thumbnail">
                             <div class="listing-badges">
@@ -397,6 +416,9 @@
                                         }
                                     }
                                 </script>
+                                <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
+                                    <img src="https://static.housers.com/assets/images/icons/icon-info-white.svg" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
+                                </a>
                             </div>
                             {{-- 
                             <div class="price-ratings-box">
@@ -512,34 +534,69 @@
                                     @else
                                         <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}"></i></a></li>
                                     @endif
-                                    <li><a data-toggle="modal" data-target="#propiedad{{ $propiedades[$i]->idPropiedad }}"><i class="flaticon-multimedia"></i></a></li>
                                 </ul>
                             @endif
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="propiedad{{ $propiedades[$i]->idPropiedad }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" style="margin-left: 20px"><i class="fab fa-facebook-f"></i></a>
-                        <a target="_blank" href="https://twitter.com/intent/tweet?text=Jaime vende su departamento directamente sin comision de corredor con isbast&amp;url=https%3A%2F%2Fisbast.com%2Fpropiedades%2FeyJpdiI6IllhNGx6UjdcL3MyeXdHZHhwbnBWZ1JBPT0iLCJ2YWx1ZSI6IkVVdkZ5YThVSEZxcXIranltdHFKYWc9PSIsIm1hYyI6ImMwODg1YTA2NzE1NjBjMDVmNTk4ZGZjODMyODljNzcwYzY1ZTRjOGI1ZGYxOWYxZDRiYTcxZGFkY2RlODg4ZTMifQ=="><i class="fab fa-twitter" style="margin-left: 20px"></i></a>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      </div>
+                <div class="col-lg-4" id="cartaInformacion{{ $i }}" style="display: none">
+                    <div class="property-box">
+
+                            <div class="listing-badges">
+                                <a class="cruz"  onclick="informacionRepetida({{ $i }})">
+                                    <img src="https://static.housers.com/assets/images/icons/icon-close.png" style="margin-left: -8px;margin-top: 23px;">
+                                </a>
+                            </div>
+                            <div class="detail">
+                                <h1 class="title" style="color: #1abc9c">MÁS INFORMACIÓN</h1><br>
+                                <div class="location">
+                                    <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
+                                    <br>
+                                    <p><strong>Rentabilidad Anual</strong>:  es el interés fijo pactado por el promotor. Los intereses se repartirán mensualmente.</p>
+                                    <br>
+                                    <p><strong>Rentabilidad Total</strong>: es la rentabilidad total estimada de la inversión. Tiene en cuenta el plazo y el interés fijo anual pactado por el promotor.</p>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                     </div>
-                  </div>
                 </div>
+                <script type="text/javascript">
+                    function informacionRepetida(i) {
+                        const cartaUno = document.getElementById('cartaPropiedad'+i);
+                        const cartaDos = document.getElementById('cartaInformacion'+i);
+                        if(cartaUno.style.display == 'block' && cartaDos.style.display == 'none'){
+                            cartaUno.style.display = 'none';
+                            cartaDos.style.display = 'block';
+                        }else{
+                            cartaUno.style.display = 'block';
+                            cartaDos.style.display = 'none';
+                        }
+                    }
+                </script>
             @endfor
         </div>
         {{-- modal --}}
+        <script type="text/javascript">
+            function metaFunction(idPropiedad) {
+                $.get('{{ asset('obtenerPropiedad') }}/'+idPropiedad,function(data, status){
+                    $("meta[property='og:url']").attr("content", data.rutaPagina); 
+                    $("meta[property='og:title']").attr("content", data.nombreContent); 
+                    $("meta[property='og:image']").attr("content", data.rutaImagen); 
+                    
+                });
+            }
+        </script>
 
         <script type="text/javascript">
             function propiedadFavorita(idPropiedad) {

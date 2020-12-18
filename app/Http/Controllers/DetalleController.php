@@ -52,7 +52,11 @@ class DetalleController extends Controller
                 $imagenesPlanos = FotoPlano::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->first();
                 $documentos = Documento::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
                 $ingresos = TrxIngreso::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
-                return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos'));
+                $nombrePropiedad = str_replace(" ", "-", $propiedad->nombrePropiedad);
+
+                $url = asset('invierte/chile/propiedad/detalle')."?idPropiedad=".$request->idPropiedad;
+
+                return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos','nombrePropiedad','url'));
             }
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');

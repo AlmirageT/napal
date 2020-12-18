@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use App\ImagenCarrusel;
 use App\Propiedad;
 use App\CasoExitoso;
@@ -84,5 +85,17 @@ class WelcomeController extends Controller
         $propiedadesFavoritas = PropiedadFavorita::all();
         
         return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio','propiedadesFavoritas'));
+    }
+    public function obtenerPropiedad(Request $request, $idPropiedad)
+    {
+        if ($request->ajax()) {
+            $propiedad = Propiedad::find($idPropiedad);
+            $nombrePropiedad = str_replace(" ", "-", $propiedad->nombrePropiedad);
+            $idEncriptado = Crypt::encrypt($idPropiedad);
+            $rutaImagen = asset($propiedad->fotoPrincipal);
+            $rutaPagina = asset('invierte/chile/propiedad/detalle')."?nombrePropiedad=".$nombrePropiedad."&idPropiedad=".$idEncriptado;
+            $nombreContent = "Invierte en nuestra propiedad ".$propiedad->nombrePropiedad;
+            return response()->json(['propiedad'=>$propiedad, 'nombrePropiedad'=>$nombrePropiedad,'idEncriptado'=>$idEncriptado,'rutaImagen'=>$rutaImagen,'rutaPagina'=>$rutaPagina,'nombreContent'=>$nombreContent]);
+        }
     }
 }

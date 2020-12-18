@@ -1,12 +1,15 @@
 @extends('layouts.public.app')
+
+@section('meta')
+    <meta property="og:url" content="{{ $url }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Inverte en nuestra propiedad {{ $propiedad->nombrePropiedad }}" >
+    <meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
+    <meta property="og:image" content="{{ asset($propiedad->fotoPrincipal) }}" >
+    <meta property="og:image:width" content="200" >
+    <meta property="og:image:height" content="200" >
+@endsection
 @section('title','Detalle Propiedad')
-<meta property="og:url" content="{{ $request->url() }}" >
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Inverte en nuestra propiedad {{ $propiedad->nombrePropiedad }}" >
-<meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
-<meta property="og:image" content="{{ asset($propiedad->fotoPrincipal) }}" >
-<meta property="og:image:width" content="200" >
-<meta property="og:image:height" content="200" >
 @section('content')
 <!-- Properties details page start -->
 @php
@@ -253,6 +256,12 @@
                             <br>
                             <div class="form-group mb-0">
                                 <button class="search-button">Invierte</button>
+                            </div>
+                            <div class="form-group mb-0" align="center">
+                                <br>
+                                <br>
+                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}" style="margin-left: 20px"><i class="fab fa-facebook-f"></i></a>
+                                <a target="_blank" href="https://twitter.com/intent/tweet?text=Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera&amp;url={{ $url }}"><i class="fab fa-twitter" style="margin-left: 20px"></i></a>
                             </div>
                         </div>
                     </form>
