@@ -64,6 +64,8 @@ Route::post('datatable-propiedades','BusquedaController@tablaPropiedad');
 Route::post('datatable-casos-exitosos','BusquedaController@tablaCasosExitosos');
 Route::post('datatable-comunas','BusquedaController@tablaComunas');
 Route::post('datatable-provincias','BusquedaController@tablaProvincias');
+Route::post('datatable-usuarios-transferencia','BusquedaController@tablaUsuarioTransferencia');
+Route::post('datatable-transacciones/{idUsuario}','BusquedaController@transferenciaUsuarioTabla');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -111,6 +113,11 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('usuarios/create', 'UsuarioController@create');
     Route::get('usuarios/editar/{idUsuario}','UsuarioController@edit');
     Route::get('usuarios/telefonos/{idUsuario}','TelefonoController@create');
+    //rutas transeferencia bancaria de usuario
+    Route::get('usuarios/validar-transferencia','UsuarioController@indexTransferencia');
+    Route::get('usuarios/{idUsuario}/listado-trasferencias','TrxDepositoTransaccionController@index');
+    Route::get('usuarios/{idTrxDepoTransf}/{idUsuario}/editar-transferencia','TrxDepositoTransaccionController@editar');
+    Route::get('usuarios/{idTrxDepoTransf}/{idUsuario}/eliminar-transferencia','TrxDepositoTransaccionController@destroy');
     //rutas vistas proyectos admin
     Route::get('proyectos','ProyectoController@index');
     Route::get('proyectos/create','ProyectoController@create');
@@ -393,4 +400,10 @@ Route::resource('mantenedor-cambio-dolar','CambioDolarController');
 Route::delete('mantenedor-cambio-dolar/{idCambioDolar}',array(
     'uses'=>'CambioDolarController@destroy',
     'as'=>'mantenedor-cambio-dolar.delete'
+));
+//crud transferencias
+Route::resource('mantenedor-transacciones','TrxDepositoTransaccionController');
+Route::delete('mantenedor-transacciones/{idTrxDepoTransf}',array(
+    'uses'=>'TrxDepositoTransaccionController@destroy',
+    'as'=>'mantenedor-transacciones.delete'
 ));

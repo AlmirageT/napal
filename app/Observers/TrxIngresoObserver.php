@@ -18,19 +18,37 @@ class TrxIngresoObserver
     public function created(TrxIngreso $trxIngreso)
     {
         if($trxIngreso->idPropiedad == null){
-            $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
-            if (count($saldoDisponible)>0) {
-                foreach ($saldoDisponible as $saldo) {
-                    $total = $saldo->cantidadSaldoDisponible + $trxIngreso->monto;
-                    SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->update([
-                        'cantidadSaldoDisponible'=>$total
+            if (Session::has('idUsuarioDeposito')) {
+                $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuarioDeposito'))->get();
+                if (count($saldoDisponible)>0) {
+                    foreach ($saldoDisponible as $saldo) {
+                        $total = $saldo->cantidadSaldoDisponible + $trxIngreso->monto;
+                        SaldoDisponible::where('idUsuario',Session::get('idUsuarioDeposito'))->update([
+                            'cantidadSaldoDisponible'=>$total
+                        ]);
+                    }
+                }else{
+                    SaldoDisponible::create([
+                        'cantidadSaldoDisponible' => $trxIngreso->monto,
+                        'idUsuario' => Session::get('idUsuarioDeposito')
                     ]);
                 }
+                Session::forget('idUsuarioDeposito');
             }else{
-                SaldoDisponible::create([
-                    'cantidadSaldoDisponible' => $trxIngreso->monto,
-                    'idUsuario' => Session::get('idUsuario')
-                ]);
+                $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
+                if (count($saldoDisponible)>0) {
+                    foreach ($saldoDisponible as $saldo) {
+                        $total = $saldo->cantidadSaldoDisponible + $trxIngreso->monto;
+                        SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->update([
+                            'cantidadSaldoDisponible'=>$total
+                        ]);
+                    }
+                }else{
+                    SaldoDisponible::create([
+                        'cantidadSaldoDisponible' => $trxIngreso->monto,
+                        'idUsuario' => Session::get('idUsuario')
+                    ]);
+                }
             }
         }
     }
@@ -43,7 +61,27 @@ class TrxIngresoObserver
      */
     public function updated(TrxIngreso $trxIngreso)
     {
-        //
+        if($trxIngreso->idPropiedad == null){
+            if(Session::has('montoOriginal') && Session::has('nuevoValor')){
+                $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuarioDeposito'))->get();
+                if (count($saldoDisponible)>0) {
+                    foreach ($saldoDisponible as $saldo) {
+                        $resta = $saldo->cantidadSaldoDisponible - intval(Session::get('montoOriginal'));
+                        SaldoDisponible::where('idUsuario',Session::get('idUsuarioDeposito'))->update([
+                            'cantidadSaldoDisponible'=>$resta
+                        ]);
+                        $nuevoValor = SaldoDisponible::where('idUsuario',Session::get('idUsuarioDeposito'))->first();
+                        $total = $nuevoValor->cantidadSaldoDisponible + intval(Session::get('nuevoValor'));
+                        SaldoDisponible::where('idUsuario',Session::get('idUsuarioDeposito'))->update([
+                            'cantidadSaldoDisponible'=>$total
+                        ]);
+                    }
+                    Session::forget('montoOriginal');
+                    Session::forget('nuevoValor');
+                    Session::forget('idUsuarioDeposito');
+                }
+            }
+        }
     }
 
     /**

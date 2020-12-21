@@ -112,7 +112,6 @@
   <!-- Datatable init js -->
   <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>    
 
-  <script src="{{ asset('assets/js/app.js') }}"></script>
 
   @toastr_js
   @toastr_render

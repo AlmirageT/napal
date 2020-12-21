@@ -25,6 +25,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/usuarios') }}"><i class="bx bxs-user-detail"></i> Usuarios</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/usuarios/validar-transferencia') }}"><i class="bx bxs-user-detail"></i> Transferencias Bancarias</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

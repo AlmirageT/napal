@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\TrxDepositoTransferencia;
 use App\TrxIngreso;
 use App\TrxEgresos;
 use App\DestinoEgreso;
@@ -879,6 +880,157 @@ class BusquedaController extends Controller
 		                        <div class='dropdown-menu dropdown-menu'>
 		                            <a class='dropdown-item' href='".asset('napalm/edit-provincia')."/".$provincia->idProvincia."'>Editar</a>
 		                            <a class='dropdown-item' href='".asset('napalm/destroy-provincia')."/".$provincia->idProvincia."'>Eliminar</a>
+		                        </div>
+		                    </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+    public function tablaUsuarioTransferencia(Request $request)
+    {
+    	$columns = array(
+			0=> 'tokenCorto',
+			1=> 'nombre',
+			2=> 'rut',
+			3=> 'correo',
+			4=> 'options'
+		);
+		$totalData = Usuario::select('*')
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+		$order = $columns[$request->input('order.0.column')];
+		$dir = $request->input('order.0.dir');
+
+		if(empty($request->input('search.value')))
+		{
+			$usuarios = Usuario::select('*')
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$usuarios = Usuario::select('*')
+		    	->where('tokenCorto',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+
+			$totalFiltered = Usuario::select('*')
+		        ->where('tokenCorto',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($usuarios)){
+			foreach ($usuarios as $usuario){
+				$nestedData['tokenCorto'] = $usuario->tokenCorto;
+				$nestedData['nombre'] = $usuario->nombre." ".$usuario->apellido;
+				$nestedData['rut'] = $usuario->rut;
+				$nestedData['correo'] = $usuario->correo;
+				$nestedData['options'] = "<div class='dropdown'>
+		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                        </a>
+		                        <div class='dropdown-menu dropdown-menu-right'>
+		                        	<a href='".asset('napalm/usuarios')."/".$usuario->idUsuario."/listado-trasferencias' class='dropdown-item btn btn-info'>Validar Transferencia</a>
+		                        </div>
+		                    </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+    public function transferenciaUsuarioTabla(Request $request, $idUsuario)
+    {
+    	$columns = array(
+			0=> 'idTrxDepoTransf',
+			1=> 'nombreBancoOrigen',
+			2=> 'numeroOperacion',
+			3=> 'bancoOrigen',
+			4=> 'montoDeposito',
+			5=> 'fechaDeposito',
+			6=> 'numeroCuentaBanco',
+			7=> 'correo',
+			8=> 'validado',
+			9=> 'rutaImagen',
+			10=> 'options'
+		);
+		$totalData = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+		$order = $columns[$request->input('order.0.column')];
+		$dir = $request->input('order.0.dir');
+
+		if(empty($request->input('search.value')))
+		{
+			$transferencias = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$transferencias = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+				->where('numeroOperacion',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+
+			$totalFiltered = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+				->where('numeroOperacion',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($transferencias)){
+			foreach ($transferencias as $transferencia){
+				$nestedData['idTrxDepoTransf'] = $transferencia->idTrxDepoTransf;
+				$nestedData['nombreBancoOrigen'] = $transferencia->nombreBancoOrigen;
+				$nestedData['numeroOperacion'] = $transferencia->numeroOperacion;
+				$nestedData['bancoOrigen'] = $transferencia->bancoOrigen;
+				$nestedData['montoDeposito'] = "$".number_format($transferencia->montoDeposito,0,',','.');
+				$nestedData['fechaDeposito'] = $transferencia->fechaDeposito;
+				$nestedData['numeroCuentaBanco'] = $transferencia->numeroCuentaBanco;
+				$nestedData['correo'] = $transferencia->correo;
+				if ($transferencia->validado == 1) {
+					$nestedData['validado'] = "Validado";
+				}else{
+					$nestedData['validado'] = "No Validado";
+				}
+				$nestedData['rutaImagen'] = "<img src='".asset($transferencia->rutaImagen)."' width='100' height='100'>";
+				$nestedData['options'] = "<div class='dropdown'>
+		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                        </a>
+		                        <div href='' class='dropdown-menu dropdown-menu-right'>
+		                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/editar-transferencia' class='dropdown-item btn btn-info'>Editar</a>
+		                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/eliminar-transferencia' class='dropdown-item btn btn-info'>Elimnar</a>
 		                        </div>
 		                    </div>";
 				$data[] = $nestedData;

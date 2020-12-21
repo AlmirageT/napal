@@ -359,4 +359,16 @@ class UsuarioController extends Controller
             return redirect::back();
         }
     }
+    public function indexTransferencia()
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3) {
+                return abort(401);
+            }
+        }
+        return view('admin.usuarios.validarTransferencia.index');
+    }
 }
