@@ -22,7 +22,7 @@
     @php
         $nombrePropiedad = str_replace(" ", "-", $propiedadesTienda[$i]->nombrePropiedad);
     @endphp
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block">
         <div class="property-box">
             <div class="property-thumbnail">
                 <a class="property-img">
@@ -44,6 +44,9 @@
                                 }
                             }
                         </script>
+                        <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
+                            <img src="https://static.housers.com/assets/images/icons/icon-info-white.svg" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
+                        </a>
                     </div>
 
                     <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
@@ -84,20 +87,13 @@
                 </div>
                 <ul class="facilities-list clearfix">
                     <li>
-                        <i class="flaticon-furniture"></i> 
-                        @if($propiedadesTienda[$i]->habitaciones > 1)
-                            {{ $propiedadesTienda[$i]->habitaciones }} Habitaciones
-                        @else
-                            {{ $propiedadesTienda[$i]->habitaciones }} Habitación
-                        @endif
-
+                        {{ $propiedadesTienda[$i]->nombreTipoCalidad }}
                     </li>
                     <li>
-                        <i class="flaticon-holidays"></i>
-                        @if($propiedadesTienda[$i]->baños > 1)
-                            {{ $propiedadesTienda[$i]->baños }} Baños
+                        @if($propiedadesTienda[$i]->tieneChat == 1)
+                            Con Foro
                         @else
-                            {{ $propiedadesTienda[$i]->baños }} Baño
+                            Sin Foro
                         @endif
                     </li>
                 </ul>
@@ -150,12 +146,73 @@
                     <p><i class="flaticon-time"></i>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </p>
                     
                 </div>
-                <ul class="pull-right">
-                    <li><a ><i class="flaticon-favorite"></i></a></li>
-                    <li><a ><i class="flaticon-multimedia"></i></a></li>
-                </ul>
+                @if(Session::has('idUsuario'))
+                    <ul class="pull-right">
+                        @if(count($propiedadesFavoritas->where('idPropiedad',$propiedadesTienda[$i]->idPropiedad))>0)
+                            <li><a  onclick="propiedadFavorita({{ $propiedadesTienda[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedadesTienda[$i]->idPropiedad }}" style="color:red;"></i></a></li>
+                        @else
+                            <li><a  onclick="propiedadFavorita({{ $propiedadesTienda[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedadesTienda[$i]->idPropiedad }}"></i></a></li>
+                        @endif
+                    </ul>
+                @endif
             </div>
         </div>
     </div>
+    <div class="col-lg-4" id="cartaInformacion{{ $i }}" style="display: none">
+        <div class="property-box">
+
+                <div class="listing-badges">
+                    <a class="cruz"  onclick="informacionRepetida({{ $i }})">
+                        <img src="https://static.housers.com/assets/images/icons/icon-close.png" style="margin-left: -8px;margin-top: 23px;">
+                    </a>
+                </div>
+                <div class="detail">
+                    <h1 class="title" style="color: #1abc9c">MÁS INFORMACIÓN</h1><br>
+                    <div class="location">
+                        <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
+                        <br>
+                        <p><strong>Rentabilidad Anual</strong>:  es el interés fijo pactado por el promotor. Los intereses se repartirán mensualmente.</p>
+                        <br>
+                        <p><strong>Rentabilidad Total</strong>: es la rentabilidad total estimada de la inversión. Tiene en cuenta el plazo y el interés fijo anual pactado por el promotor.</p>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function informacionRepetida(i) {
+            const cartaUno = document.getElementById('cartaPropiedad'+i);
+            const cartaDos = document.getElementById('cartaInformacion'+i);
+            if(cartaUno.style.display == 'block' && cartaDos.style.display == 'none'){
+                cartaUno.style.display = 'none';
+                cartaDos.style.display = 'block';
+            }else{
+                cartaUno.style.display = 'block';
+                cartaDos.style.display = 'none';
+            }
+        }
+    </script>
     @endfor
+    <script type="text/javascript">
+            function propiedadFavorita(idPropiedad) {
+                $.get('{{ asset('propiedad-favorita') }}/'+idPropiedad,function(data, status){
+                    if(document.getElementById(idPropiedad).style.color == 'red'){
+                        document.getElementById(idPropiedad).style.color = '';
+                    }else{
+                        document.getElementById(idPropiedad).style.color = 'red';
+                    }
+                });
+            }
+        </script>
 @endif

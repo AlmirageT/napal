@@ -40,6 +40,61 @@
         margin-top: -10px;
         margin-left: 12px;
     }
+    .cuadrado {
+        width: 40px; 
+        height: 40px; 
+        background: #1abc9c;
+        position: absolute;
+        z-index: 1;
+        margin-left: 110px;
+        cursor: pointer;
+    }
+    .cruz {
+        position: absolute;
+        z-index: 1;
+        margin-left: 310px;
+        cursor: pointer;
+    }
+    @media only screen and (min-width:360px) and (max-width: 374px) {
+            .cuadrado{
+                margin-left: 90px;
+            }
+            .circulo{
+                margin-left: 235px;
+            }
+        }
+        @media only screen and (min-width:375px) and (max-width: 413px) {
+            .cuadrado{
+                margin-left: 105px;
+            }
+            .circulo{
+                margin-left: 255px;
+            }
+        }
+        @media only screen and (min-width:414px) and (max-width: 767px) {
+            .cuadrado{
+                margin-left: 144px;
+            }
+            .circulo{
+                margin-left: 288px;
+            }
+        }
+        @media only screen and (min-width:768px) and (max-width: 991px) {
+            .cuadrado{
+                margin-left: 450px;
+            }
+            .circulo{
+                margin-left: 582px;
+            }
+        }
+        @media only screen and (min-width:992px) and (max-width: 1199px) {
+            .cuadrado{
+                margin-left: 50px;
+            }
+            .circulo{
+                margin-left: 199px;
+            }
+        }
 </style>
 @endsection
 @section('content')

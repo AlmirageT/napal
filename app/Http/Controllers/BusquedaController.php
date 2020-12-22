@@ -14,6 +14,7 @@ use App\Propiedad;
 use App\CasoExitoso;
 use App\Comuna;
 use App\Provincia;
+use Session;
 
 class BusquedaController extends Controller
 {
@@ -1024,15 +1025,27 @@ class BusquedaController extends Controller
 					$nestedData['validado'] = "No Validado";
 				}
 				$nestedData['rutaImagen'] = "<img src='".asset($transferencia->rutaImagen)."' width='100' height='100'>";
-				$nestedData['options'] = "<div class='dropdown'>
-		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
-		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
-		                        </a>
-		                        <div href='' class='dropdown-menu dropdown-menu-right'>
-		                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/editar-transferencia' class='dropdown-item btn btn-info'>Editar</a>
-		                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/eliminar-transferencia' class='dropdown-item btn btn-info'>Elimnar</a>
-		                        </div>
-		                    </div>";
+				if (Session::get('idTipoUsuario') == 10) {
+					$nestedData['options'] = "<div class='dropdown'>
+			                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+			                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+			                        </a>
+			                        <div href='' class='dropdown-menu dropdown-menu-right'>
+			                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/editar-transferencia' class='dropdown-item btn btn-info'>Editar</a>
+			                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/eliminar-transferencia' class='dropdown-item btn btn-info'>Elimnar</a>
+			                        </div>
+			                    </div>";
+				}else{
+					$nestedData['options'] = "<div class='dropdown'>
+			                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+			                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+			                        </a>
+			                        <div href='' class='dropdown-menu dropdown-menu-right'>
+			                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/editar-transferencia' class='dropdown-item btn btn-info'>Detalles</a>
+			                        </div>
+			                    </div>";
+				}
+
 				$data[] = $nestedData;
 			}
 		}

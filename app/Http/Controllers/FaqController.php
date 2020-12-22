@@ -22,7 +22,7 @@ class FaqController extends Controller
             return abort(401);
         }
         if (Session::has('idTipoUsuario')) {
-            if (Session::get('idTipoUsuario') != 3) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
                 return abort(401);
             }
         }

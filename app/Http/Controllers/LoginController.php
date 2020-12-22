@@ -64,7 +64,7 @@ class LoginController extends Controller
 		                Session::put('avatar', 'usergeneric.png');
 		            }
 
-		            if (Session::get('idTipoUsuario') == 3) {
+		            if (Session::get('idTipoUsuario') == 3 || Session::get('idTipoUsuario') == 10) {
 		                // usuarios internos
                 		toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
                         DB::commit();

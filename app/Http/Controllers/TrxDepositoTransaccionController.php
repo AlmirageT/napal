@@ -20,12 +20,10 @@ class TrxDepositoTransaccionController extends Controller
     public function index($idUsuario)
     {
     	if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
-            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
             return abort(401);
         }
         if (Session::has('idTipoUsuario')) {
-            if (Session::get('idTipoUsuario') != 3) {
-                toastr()->info('No tiene permiso para entrar a esta pagina');
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
                 return abort(401);
             }
         }
@@ -94,12 +92,10 @@ class TrxDepositoTransaccionController extends Controller
     public function editar($idTrxDepoTransf,$idUsuario)
     {
     	if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
-            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
             return abort(401);
         }
         if (Session::has('idTipoUsuario')) {
-            if (Session::get('idTipoUsuario') != 3) {
-                toastr()->info('No tiene permiso para entrar a esta pagina');
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
                 return abort(401);
             }
         }

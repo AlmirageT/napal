@@ -3,6 +3,7 @@
 	.card{
 		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 	}
+	
 </style>
 @section('title')
 Dashborad
@@ -125,7 +126,7 @@ Dashborad
 				<div class="card-body">
 					<div class="row">
 						<div class="col-lg-12" align="center">
-							<p>Beneficios promos: 0,00 €</p>
+							<p>Beneficios promos: $0</p>
 						</div>
 						<div class="col-lg-8">
 							<p>Cashback recibidos y promos</p>
@@ -367,43 +368,43 @@ Dashborad
 							 		<p>Beneficio neto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Capital invertido</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Capital devuelto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Rendimiento bruto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Promociones proyecto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Retenciones</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Comisiones Housers</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 </div>
 						</div>
@@ -435,43 +436,43 @@ Dashborad
 							 		<p>Beneficio neto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Capital invertido</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>160,00 €</p>
+							 		<p>${{ number_format($total,0,',','.') }}</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Devoluciones parciales de capital</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Rendimiento bruto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Promociones proyecto</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Retenciones</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Comisiones Housers</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-12" align="center">
 							 		<a href="{{ asset('dashboard/mis-inversiones') }}" class="btn btn-primary"><small>MIS INVERSIONES</small></a>
@@ -500,7 +501,7 @@ Dashborad
 							 		<p>Balance</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-7" align="left">
 							 		<p>Operaciones de compra</p>
@@ -518,13 +519,13 @@ Dashborad
 							 		<p>Precio de compra</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Balance de compra</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-5" align="left">
 							 		<p>Operaciones de venta</p>
@@ -542,19 +543,19 @@ Dashborad
 							 		<p>Coste adquisición</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Precio de venta</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 	<div class="col-lg-6" align="left">
 							 		<p>Balance de venta</p>
 							 	</div>
 							 	<div class="col-lg-6" align="right">
-							 		<p>0,00 €</p>
+							 		<p>$0</p>
 							 	</div>
 							 </div>
 						</div>

@@ -36,7 +36,7 @@ Retiros
 								<input type="text" name="concepto" class="form-control">
 							</div>
 						</div>
-						<div class="col-lg-3" align="right">
+						<div class="col-lg-3" align="right" style="margin-top: 30px">
 							<button class="btn btn-primary" type="submit"><small>SOLICITAR TRANSFERENCIA</small></button>
 						</div>
 					</div>

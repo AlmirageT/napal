@@ -18,7 +18,6 @@ class MisInversionesController extends Controller
             return abort(401);
         }
         $propiedadesInvertidas = TrxIngreso::where('idUsuario',Session::get('idUsuario'))->get();
-        $arrayPropiedadesInvertidas = array();
         $arrayIdPropiedad = array();
         foreach ($propiedadesInvertidas as $propiedadInvertida) {
         	$idPropiedades = array(
