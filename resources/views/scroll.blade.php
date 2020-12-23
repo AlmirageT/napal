@@ -70,11 +70,11 @@
 
         .aux {
             width: 466px;
-            margin-top: 932px;
+            margin-top: 865px;
             margin-left: 12px;
         }
         .aux-iphone{
-            margin-top: 1185px;
+            margin-top: 1097px;
             width: 192px;
         }
         @media only screen and (max-width: 1199px) {
@@ -88,18 +88,18 @@
             }
             .aux{
                 width: 414px;
-                margin-top: 550px;
+                margin-top: 807px;
                 margin-left: 96px;
             }
             .aux-iphone{
-                margin-top: 840px;
+                margin-top: 1177px;
                 width: 192px;
             }
         }
     </style>
     <div class="container" id="prueba-scroll">
         <div class="row">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" >
+
             <div class="col-md-6 col-lg-6 col-xl-6 d-none d-sm-none d-md-none d-lg-block d-xl-block" id="smartphone-display">
                 <div>
                     <img class="imagen-ipad-estatica" src="{{ asset('img_public/ipad.png') }}">
@@ -114,22 +114,8 @@
                     </div>
                 </div>
             </div>
-            {{--  
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous" ></script>
-            --}}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"  crossorigin="anonymous"></script>
+     
 
-            <script type="text/javascript">
-                $(window).scroll(function() {
-                    var scroll = $(window).scrollTop();
-                    $(".aux").css({
-                        transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
-                    });
-                    $(".aux-iphone").css({
-                        transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
-                    });
-                  });
-            </script>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-md-offset-2 title-tech">

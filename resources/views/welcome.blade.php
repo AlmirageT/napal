@@ -920,11 +920,9 @@
     </div>
 </div>
 <div>
-    {{-- 
 <div id="smartphone-animation" style="opacity: 1;">
     @include('scroll')
 </div>
- --}}
 </div>
 <style type="text/css">
     .latimagen{
@@ -952,4 +950,17 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+        $(".aux").css({
+            transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
+        });
+        $(".aux-iphone").css({
+            transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
+        });
+      });
+</script>
 @endsection
