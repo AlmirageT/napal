@@ -441,21 +441,9 @@
                             <div class="listing-badges">
                                 <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
                                     <i class="fa fa-map-marker" style="color:#fff"></i>
-                                    <img src="" class="img-responsive" alt="Ver mapa" title="Ver mapa">
+                                    <img class="img-responsive" alt="Ver mapa" title="Ver mapa">
                                 </span>
-                                <script type="text/javascript">
-                                    function pruebaId(idPropiedad, valor){
-                                        idUno = 'carouselExampleIndicators'+valor;
-                                        idDos = 'carouselExampleIndicatorss'+valor;
-                                        if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
-                                            document.getElementById(idUno).style.display = 'block';
-                                            document.getElementById(idDos).style.display = 'none';
-                                        }else{
-                                            document.getElementById(idUno).style.display = 'none';
-                                            document.getElementById(idDos).style.display = 'block';
-                                        }
-                                    }
-                                </script>
+                                
                                 <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
                                     <img src="https://static.housers.com/assets/images/icons/icon-info-white.svg" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
                                 </a>
@@ -611,44 +599,11 @@
                             <br>
                     </div>
                 </div>
-                <script type="text/javascript">
-                    function informacionRepetida(i) {
-                        const cartaUno = document.getElementById('cartaPropiedad'+i);
-                        const cartaDos = document.getElementById('cartaInformacion'+i);
-                        if(cartaUno.style.display == 'block' && cartaDos.style.display == 'none'){
-                            cartaUno.style.display = 'none';
-                            cartaDos.style.display = 'block';
-                        }else{
-                            cartaUno.style.display = 'block';
-                            cartaDos.style.display = 'none';
-                        }
-                    }
-                </script>
+                
             @endfor
         </div>
         {{-- modal --}}
-        <script type="text/javascript">
-            function metaFunction(idPropiedad) {
-                $.get('{{ asset('obtenerPropiedad') }}/'+idPropiedad,function(data, status){
-                    $("meta[property='og:url']").attr("content", data.rutaPagina); 
-                    $("meta[property='og:title']").attr("content", data.nombreContent); 
-                    $("meta[property='og:image']").attr("content", data.rutaImagen); 
-                    
-                });
-            }
-        </script>
-
-        <script type="text/javascript">
-            function propiedadFavorita(idPropiedad) {
-                $.get('{{ asset('propiedad-favorita') }}/'+idPropiedad,function(data, status){
-                    if(document.getElementById(idPropiedad).style.color == 'red'){
-                        document.getElementById(idPropiedad).style.color = '';
-                    }else{
-                        document.getElementById(idPropiedad).style.color = 'red';
-                    }
-                });
-            }
-        </script>
+        
     </div>
     <div class="container" align="center">
         <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-primary">Invierte</a>
@@ -939,7 +894,7 @@
                 <h1>Únicos, la primera plataforma pan-europea de inversión inmobiliaria.</h1>
                 <p>España, Italia y Portugal a un solo clic. <br>Empieza ya, pon tu dinero a trabajar. <br></p>
                 <div align="center">
-                    <a href="{{ asset('invierte') }}" class="btn btn-danger"><small>INVIERTE</small></a>
+                    <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-danger"><small>INVIERTE</small></a>
                 </div>
                 <br>
             </div>
@@ -962,5 +917,53 @@
             transform: 'translate(0%, -'+((scroll/10)/5)+'%) translate3d(0px, 0px, 0px)',
         });
       });
+</script>
+<script type="text/javascript">
+    function pruebaId(idPropiedad, valor){
+        idUno = 'carouselExampleIndicators'+valor;
+        idDos = 'carouselExampleIndicatorss'+valor;
+        if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
+            document.getElementById(idUno).style.display = 'block';
+            document.getElementById(idDos).style.display = 'none';
+        }else{
+            document.getElementById(idUno).style.display = 'none';
+            document.getElementById(idDos).style.display = 'block';
+        }
+    }
+</script>
+<script type="text/javascript">
+    function metaFunction(idPropiedad) {
+        $.get('{{ asset('obtenerPropiedad') }}/'+idPropiedad,function(data, status){
+            $("meta[property='og:url']").attr("content", data.rutaPagina); 
+            $("meta[property='og:title']").attr("content", data.nombreContent); 
+            $("meta[property='og:image']").attr("content", data.rutaImagen); 
+            
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function propiedadFavorita(idPropiedad) {
+        $.get('{{ asset('propiedad-favorita') }}/'+idPropiedad,function(data, status){
+            if(document.getElementById(idPropiedad).style.color == 'red'){
+                document.getElementById(idPropiedad).style.color = '';
+            }else{
+                document.getElementById(idPropiedad).style.color = 'red';
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function informacionRepetida(i) {
+        const cartaUno = document.getElementById('cartaPropiedad'+i);
+        const cartaDos = document.getElementById('cartaInformacion'+i);
+        if(cartaUno.style.display == 'block' && cartaDos.style.display == 'none'){
+            cartaUno.style.display = 'none';
+            cartaDos.style.display = 'block';
+        }else{
+            cartaUno.style.display = 'block';
+            cartaDos.style.display = 'none';
+        }
+    }
 </script>
 @endsection

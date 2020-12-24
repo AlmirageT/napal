@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Crypt;
 use App\ImagenPropiedad;
+use App\SaldoDisponible;
 use App\TrxIngreso;
 use App\Propiedad;
 use Session;
@@ -17,7 +18,22 @@ class MisInversionesController extends Controller
     	if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
             return abort(401);
         }
-        $propiedadesInvertidas = TrxIngreso::where('idUsuario',Session::get('idUsuario'))->get();
+        $totalInvertidos = TrxIngreso::where('idUsuario',Session::get('idUsuario'))->where('idPropiedad','<>',null)->get();
+        $total = 0;
+        foreach ($totalInvertidos as $totalInvertido) {
+            $total += $totalInvertido->monto;        
+        }
+        $proyectosEnFinanciacion = TrxIngreso::select('*')
+            ->join('propiedades','trx_ingresos.idPropiedad','=','propiedades.idPropiedad')
+            ->where('trx_ingresos.idUsuario',Session::get('idUsuario'))
+            ->where('propiedades.idEstado',4)
+            ->get();
+        $totalProyectoEnFinanciacion = 0;
+        foreach ($proyectosEnFinanciacion as $proyectoEnFinanciacion) {
+            $totalProyectoEnFinanciacion = $proyectoEnFinanciacion->monto;
+        }
+
+        $propiedadesInvertidas = TrxIngreso::where('idUsuario',Session::get('idUsuario'))->where('idPropiedad','<>',null)->get();
         $arrayIdPropiedad = array();
         foreach ($propiedadesInvertidas as $propiedadInvertida) {
         	$idPropiedades = array(
@@ -33,8 +49,11 @@ class MisInversionesController extends Controller
 		->join('estados','propiedades.idEstado','=','estados.idEstado')
 		->whereIn('idPropiedad',$arrayIdPropiedadSinDuplicar[0])
 		->get();
+        $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
 
-		return view('public.misInversiones',compact('propiedades'));
+        $ingresos = TrxIngreso::all();
+
+		return view('public.misInversiones',compact('propiedades','total','saldoDisponible','totalProyectoEnFinanciacion','ingresos'));
 
     }
     public function detalle(Request $request)
