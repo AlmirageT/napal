@@ -14,6 +14,7 @@ use App\Propiedad;
 use App\CasoExitoso;
 use App\Comuna;
 use App\Provincia;
+use App\Banco;
 use Session;
 
 class BusquedaController extends Controller
@@ -37,8 +38,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -50,7 +49,7 @@ class BusquedaController extends Controller
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxIngreso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -69,7 +68,7 @@ class BusquedaController extends Controller
 		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxIngreso','DESC')
 				->get();
 
 			$totalFiltered = TrxIngreso::select('*')
@@ -135,8 +134,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -146,7 +143,7 @@ class BusquedaController extends Controller
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxEgreso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -163,7 +160,7 @@ class BusquedaController extends Controller
 		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxEgreso','DESC')
 				->get();
 
 			$totalFiltered = TrxEgresos::select('*')
@@ -231,8 +228,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -244,7 +239,7 @@ class BusquedaController extends Controller
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idDestinoEgreso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -263,7 +258,7 @@ class BusquedaController extends Controller
 		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idDestinoEgreso','DESC')
 				->get();
 
 			$totalFiltered = DestinoEgreso::select('*')
@@ -322,58 +317,40 @@ class BusquedaController extends Controller
 			1=> 'nombre',
 			2=> 'rut',
 			3=> 'correo',
-			4=> 'profesion',
-			5=> 'nombreIdioma',
-			6=> 'nombreTipoPersona',
-			7=> 'rutaAvatar',
-			8=> 'activarCuenta',
-			9=> 'activarNewsletter',
-			10=> 'desactivarCuenta',
-			11=> 'options'
+			4> 'activarCuenta',
+			5=> 'activarNewsletter',
+			6=> 'desactivarCuenta',
+			7=> 'options'
 		);
 		$totalData = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 		        ->count();
 		$totalFiltered = $totalData;
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
 			$usuarios = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idUsuario','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
 			$caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
 			$sinCaracteres = str_replace($caracteresEspeciales, " ", $search);
 			$usuarios = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idUsuario','DESC')
 				->get();
 
 			$totalFiltered = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
@@ -388,14 +365,6 @@ class BusquedaController extends Controller
 				$nestedData['nombre'] = $usuario->nombre." ".$usuario->apellido;
 				$nestedData['rut'] = $usuario->rut;
 				$nestedData['correo'] = $usuario->correo;
-				$nestedData['profesion'] = $usuario->profesion;
-				$nestedData['nombreIdioma'] = $usuario->nombreIdioma;
-				$nestedData['nombreTipoPersona'] = $usuario->nombreTipoPersona;
-				if ($usuario->idAvatar != null) {
-					$nestedData['rutaAvatar'] = "<img src='".asset($usuario->rutaAvatar)."' width='100' height='100'>";
-				}else{
-					$nestedData['rutaAvatar'] = "No tiene imagen";
-				}
 				if ($usuario->activarCuenta == 0) {
 					$nestedData['activarCuenta'] = "Esta cuenta aun no se activa";
 				}else{
@@ -556,8 +525,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -576,7 +543,7 @@ class BusquedaController extends Controller
 		    	->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('propiedades.idPropiedad','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -596,7 +563,7 @@ class BusquedaController extends Controller
 		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('propiedades.idPropiedad','DESC')
 				->get();
 
 			$totalFiltered = Propiedad::select('*')
@@ -690,8 +657,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -699,7 +664,7 @@ class BusquedaController extends Controller
     			->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idCasoExitoso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -708,7 +673,7 @@ class BusquedaController extends Controller
 		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idCasoExitoso','DESC')
 				->get();
 
 			$totalFiltered = CasoExitoso::select('*')
@@ -762,8 +727,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -773,7 +736,7 @@ class BusquedaController extends Controller
 				->join('paises','regiones.idPais','=','paises.idPais')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idComuna','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -784,7 +747,7 @@ class BusquedaController extends Controller
 		    	->where('comunas.nombreComuna', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idComuna','DESC')
 				->get();
 
 			$totalFiltered = Comuna::select('*')
@@ -837,8 +800,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -847,7 +808,7 @@ class BusquedaController extends Controller
 				->join('paises','regiones.idPais','=','paises.idPais')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idProvincia','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -857,7 +818,7 @@ class BusquedaController extends Controller
 		    	->where('provincias.nombreProvincia', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idProvincia','DESC')
 				->get();
 
 			$totalFiltered = Provincia::select('*')
@@ -1056,5 +1017,10 @@ class BusquedaController extends Controller
 			"data" => $data
 		);
 		echo json_encode($json_data);
+    }
+    public function bancoPorPais($idPais)
+    {
+    	$bancos = Banco::where('idPais',$idPais)->get();
+    	return response()->json($bancos);
     }
 }

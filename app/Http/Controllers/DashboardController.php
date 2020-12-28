@@ -16,7 +16,6 @@ class DashboardController extends Controller
             return abort(401);
         }
         $propiedadesInvertidas = TrxIngreso::where('idUsuario',Session::get('idUsuario'))->where('idPropiedad','<>',null)->get();
-        $arrayPropiedadesInvertidas = array();
         $arrayIdPropiedad = array();
         foreach ($propiedadesInvertidas as $propiedadInvertida) {
         	$idPropiedades = array(

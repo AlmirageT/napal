@@ -3,6 +3,9 @@
 	.card{
 		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 	}
+	.file{
+		margin-top: 5rem;
+	}
 </style>
 @section('title')
 Documentos e Informes
@@ -154,6 +157,40 @@ Documentos e Informes
 							</div>
 							<div class="col-lg-12"><br></div>
 							<div class="col-lg-12"><h5>Documento de identificación</h5></div>
+							<div class="col-lg-12">
+								<p><strong>PASAPORTE / DOCUMENTO DE IDENTIDAD.</strong> El documento de identificación debe estar en vigor, debe ser legible y debe estar el documento completo contenido en un mismo archivo. En el caso del documento nacional de identidad debes adjuntar ambas caras..</p>
+							</div>
+							<div class="col-lg-3">
+								<label><strong>Tipo de Documento</strong></label>
+								<select class="form-control">
+									<option>Pasaporte</option>
+								</select>
+							</div>
+							<div class="col-lg-2 file">
+								<input type="file" class="form-control-file" >
+							</div>
+							<div class="col-lg-2 file">
+								<input type="file" class="form-control-file" >
+							</div>
+							<div class="col-lg-2 file">
+								<input type="file" class="form-control-file" >
+							</div>
+							<div class="col-lg-3 file">
+								<input type="file" class="form-control-file" >
+							</div>
+							<div class="col-lg-3">
+								<label><strong>Número Documento</strong></label>
+								<input type="number" name="" class="form-control">
+							</div>
+							<div class="col-lg-12">
+							<br>
+							<br>
+								<p><strong>Otro documento de identificación</strong></p>
+								<hr>
+							</div>
+							<div class="col-lg-12">
+								<p>Adjunta un segundo documento de identidad por ambas caras en vigor, legible y en color.</p>
+							</div>
 						</div>
 					</form>
 				</div>

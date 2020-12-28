@@ -78,22 +78,22 @@ Cuentas Asociadas
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Pais de Origen</label>
-								<select class="form-control">
-									<option>Seleccione Pais</option>
+								{!! Form::select('idPais', $paises,null,['class'=>"form-control",'placeholder'=>"Seleccione Pais",'required','onchange'=>"bancoPorPais(this.value)"]) !!}
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label>Nombre del banco</label>
+								<select class="form-control" name="idBanco" id="idBanco" onchange="BancoPorTipoCuenta(this.value)">
+									<option>Seleccione Banco</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label>Titular</label>
-								<input type="text" name="titular" class="form-control">
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
 								<label>Tipo de cuenta</label>
-								<select class="form-control">
-									<option>Seleccionar</option>
+								<select class="form-control" name="idTipoCuenta" id="idTipoCuenta">
+									<option>Seleccione Tipo de Cuenta</option>
 								</select>
 							</div>
 						</div>
@@ -111,8 +111,9 @@ Cuentas Asociadas
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
-								<label>Nombre del banco</label>
-								<input type="text" name="nombreBanco" class="form-control">
+								<label>Titular</label>
+								<input type="text" name="titular" class="form-control">
+								
 							</div>
 							<br>
 							<br>
@@ -133,6 +134,7 @@ Cuentas Asociadas
 							<br>
 							<br>
 						</div>
+						{{--  
 						<div class="col-lg-12">
 							<p>
 								<strong>ATENCIÓN:</strong> Si estás registrando una cuenta bancaria online (ej: N26, Compte Nickel, Carrefour Banque (C-SAM), Orange Bank, Sogexia, Revolut (BforBank)), es necesario que adjuntes la siguiente documentación para que la entidad de pago (Lemon Way) valide tu cuenta bancaria:
@@ -165,6 +167,7 @@ Cuentas Asociadas
 						<div class="col-lg-12" align="right">
 							<button type="submit" class="btn btn-primary"><small>GUARDAR CAMBIOS</small></button>
 						</div>
+						--}}
 					</div>
 				</div>
 			</div>
@@ -172,4 +175,18 @@ Cuentas Asociadas
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+	function bancoPorPais(idPais) {
+		$.get('{{ asset('banco-por-pais') }}/'+idPais,function(data,status){
+			var select = '';
+			data.forEach(function(element){
+				console.log(element.nombreBanco);
+				select += `<option value='${element['idBanco']}'>${element['nombreBanco']}</option>`;
+			});
+			document.getElementById('idBanco').innerHTML = select;
+		});
+	}
+</script>
 @endsection

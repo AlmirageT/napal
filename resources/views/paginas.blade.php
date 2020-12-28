@@ -22,6 +22,18 @@
     @php
         $nombrePropiedad = str_replace(" ", "-", $propiedadesTienda[$i]->nombrePropiedad);
     @endphp
+    @php
+        $arrayIdPropiedadUsuario = array();
+        foreach ($datos as $dato) {
+            if($dato->idPropiedad == $propiedadesTienda[$i]->idPropiedad && $dato->idPropiedad != null){
+                $idPropiedades = array($propiedadesTienda[$i]->idPropiedad => $dato->idUsuario
+                );
+                array_push($arrayIdPropiedadUsuario,$idPropiedades);
+            }
+        }
+        $arrayIdPropiedadSinDuplicar = array();
+        array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
+    @endphp
     <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block">
         <div class="property-box">
             <div class="property-thumbnail">
@@ -109,13 +121,13 @@
                             <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                         </div>
                         <div class="col-lg-6">
-                            @if($catidadInversores>1)
-                                <p>{{ $catidadInversores }} inversores</p>
+                            @if(count($arrayIdPropiedadSinDuplicar[0])>1)
+                                <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversores</p>
                             @else
-                                @if($catidadInversores==0)
-                                    <p>{{ $catidadInversores }} inversores</p>
+                                @if(count($arrayIdPropiedadSinDuplicar[0])==0)
+                                    <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversores</p>
                                 @else
-                                    <p>{{ $catidadInversores }} inversor</p>
+                                    <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversor</p>
                                 @endif
                             @endif
                         </div>

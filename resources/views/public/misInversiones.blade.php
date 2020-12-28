@@ -1,5 +1,71 @@
 @extends('layouts.public.app')
 @section('title','Mis Inversiones')
+@section('css')
+<style type="text/css">
+	.porcentaje{
+		position: absolute;
+		margin-top: 8rem;
+		margin-left: -15rem;
+		font-size: 1.5rem;
+	}
+	.porcentaje2{
+		position: absolute;
+		margin-top: 8rem;
+		margin-left: -14rem;
+		font-size: 1.5rem;
+	}
+	.formulario-busqueda{
+    		width: 200px; margin-right: 10px; margin-left: 10px;
+    	}
+    	.formulario-busqueda1{
+			width: 200px; margin-right: 10px; margin-left: 10px;
+    	}
+    	.formulario-busqueda2{
+			width: 200px; margin-right: 10px; margin-left: 10px;
+    	}
+    	.formulario-busqueda3{
+			width: 200px; margin-right: 10px; margin-left: 10px;
+    	}
+    	.formulario-busqueda4{
+			width: 130px; margin-right: 10px; margin-left: 10px;
+    	}
+    	.formulario-busqueda5{
+    		width: 0px; margin-right: 10px; margin-left: 10px;
+    	}
+	@media only screen and (max-width: 1199px) {
+    	.formulario-busqueda{
+    		width: 100%;
+			margin-right: 30px;
+			margin-left: 30px;
+    	}
+    	.formulario-busqueda1{
+			width: 100%;
+			margin-right: 30px;
+			margin-left: 30px;
+    	}
+    	.formulario-busqueda2{
+			width: 100%;
+			margin-right: 30px;
+			margin-left: 30px;
+    	}
+    	.formulario-busqueda3{
+			width: 100%;
+			margin-right: 30px;
+			margin-left: 30px;
+    	}
+    	.formulario-busqueda4{
+			width: 100%;
+			margin-right: 30px;
+			margin-left: 30px;
+    	}
+    	.formulario-busqueda5{
+    		width: 100%;
+			margin-right: 30px;
+			margin-left: 30px;
+    	}
+    }
+</style>
+@endsection
 @section('content')
 <div class="container">
 	<div class="row">
@@ -84,58 +150,6 @@
 			<br>
 			<br>
 		</div>
-		<style type="text/css">
-			.formulario-busqueda{
-		    		width: 200px; margin-right: 10px; margin-left: 10px;
-		    	}
-		    	.formulario-busqueda1{
-					width: 200px; margin-right: 10px; margin-left: 10px;
-		    	}
-		    	.formulario-busqueda2{
-					width: 200px; margin-right: 10px; margin-left: 10px;
-		    	}
-		    	.formulario-busqueda3{
-					width: 200px; margin-right: 10px; margin-left: 10px;
-		    	}
-		    	.formulario-busqueda4{
-					width: 130px; margin-right: 10px; margin-left: 10px;
-		    	}
-		    	.formulario-busqueda5{
-		    		width: 0px; margin-right: 10px; margin-left: 10px;
-		    	}
-			@media only screen and (max-width: 1199px) {
-		    	.formulario-busqueda{
-		    		width: 100%;
-					margin-right: 30px;
-					margin-left: 30px;
-		    	}
-		    	.formulario-busqueda1{
-					width: 100%;
-					margin-right: 30px;
-					margin-left: 30px;
-		    	}
-		    	.formulario-busqueda2{
-					width: 100%;
-					margin-right: 30px;
-					margin-left: 30px;
-		    	}
-		    	.formulario-busqueda3{
-					width: 100%;
-					margin-right: 30px;
-					margin-left: 30px;
-		    	}
-		    	.formulario-busqueda4{
-					width: 100%;
-					margin-right: 30px;
-					margin-left: 30px;
-		    	}
-		    	.formulario-busqueda5{
-		    		width: 100%;
-					margin-right: 30px;
-					margin-left: 30px;
-		    	}
-		    }
-		</style>
 		<form>
 			<div class="row">
 				<div class="formulario-busqueda">
@@ -199,23 +213,30 @@
 									<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 									<script type="text/javascript">
-										  google.charts.load("current", {packages:["corechart"]});
-										  google.charts.setOnLoadCallback(drawChart);
-										  function drawChart() {
-										    var data = google.visualization.arrayToDataTable([
-										      ['Task', 'Hours per Day'],
-										      ['Rendimientos',     100500],
-										      ['Inversión',      {{ $totalInversion }}]
-										    ]);
+									  google.charts.load("current", {packages:["corechart"]});
+									  google.charts.setOnLoadCallback(drawChart);
+									  function drawChart() {
+									    var data = google.visualization.arrayToDataTable([
+									      ['Task', 'Hours per Day'],
+									      ['Rendimientos',     100500],
+									      ['Inversión',      {{ $totalInversion }}]
+									    ]);
 
-										    var options = {
-										      pieHole: 0.9,
-										    };
+									    var options = {
+									      pieHole: 0.9,
+									    };
 
-										    var chart = new google.visualization.PieChart(document.getElementById('donutchart{{ $propiedad->idPropiedad }}'));
-										    chart.draw(data, options);
-										  }
-										</script>
+									    var chart = new google.visualization.PieChart(document.getElementById('donutchart{{ $propiedad->idPropiedad }}'));
+									    chart.draw(data, options);
+									  }
+									</script>
+								</div>
+								<div >
+									@if (strlen($propiedad->rentabilidadAnual)>2)
+										<p class="porcentaje">{{ $propiedad->rentabilidadAnual }}%</p>
+									@else
+										<p class="porcentaje2">{{ $propiedad->rentabilidadAnual }}%</p>
+									@endif
 								</div>
 								<div class="col-lg-12" align="center">
 									<br>

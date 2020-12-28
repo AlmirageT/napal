@@ -193,7 +193,7 @@ Detalle Mi Inversión
 @endsection
 @section('content')
 <div class="main-title">
-    <h1>Santina Resort & Spa</h1>
+    <h1>{{ $propiedad->nombrePropiedad }}</h1>
 </div>
 <div class="slick-slider-area" >
     <div class="row slick-carousel" data-slick='{"autoplay":true,"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
@@ -212,15 +212,15 @@ Detalle Mi Inversión
             <ul class="lista-botones">
                <li> <a href="#detalleFinanciacion">DETALLES FINANCIACIÓN</a> </li>
                <span>|</span>
-               <li> <a href="#">EVOLUCIÓN PROYECTO</a> </li>
+               <li> <a href="#evolucionProyecto">EVOLUCIÓN PROYECTO</a> </li>
                 <span>|</span>
-               <li> <a href="#">TU POSICIÓN</a> </li>
+               <li> <a href="#tuPosicion">TU POSICIÓN</a> </li>
                 <span>|</span>
-               <li> <a href="#">INGRESOS</a> </li>
+               <li> <a href="#ingresos">INGRESOS</a> </li>
                 <span>|</span>
-               <li> <a href="#">PROMOCIONES</a> </li>
+               <li> <a href="#promociones">PROMOCIONES</a> </li>
                 <span>|</span>
-               <li> <a href="#">MOVIMIENTOS</a> </li>
+               <li> <a href="#movimientos">MOVIMIENTOS</a> </li>
                 <span>|</span>
                <li> <a href="#">DOCUMENTOS</a> </li>
             </ul>
@@ -264,23 +264,23 @@ Detalle Mi Inversión
                         <br>
                         <table>
                             <tr>
-                            <td>ESTADO<br><strong>FINANCIADO</strong></td>
+                            <td>ESTADO<br><strong>{{ $propiedad->nombreEstado }}</strong></td>
                             <td>FORMA JURÍDICA<br><strong>PRÉSTAMO</strong></td>
                             <td>NIVEL DE RIESGO<br><br><strong class="bb">BB</strong></td>
-                            <td>FECHA INICIO INVERSIÓN<br><strong>18-09-2020</strong></td>
+                            <td>FECHA INICIO INVERSIÓN<br><strong>{{ date("d-m-Y", strtotime($propiedad->fechaInicio)) }}</strong></td>
                             </tr>
                          <tr>
-                            <td>FECHA FIN INVERSIÓN<br><strong>F03-11-2020</strong></td>
+                            <td>FECHA FIN INVERSIÓN<br><strong>{{ date("d-m-Y", strtotime($propiedad->fechaFinalizacion)) }}</strong></td>
                             <td>DÍAS EN FINANCIACIÓN<br><strong>45</strong></td>
-                            <td>N DE INVERSORES<br><strong>462</strong></td>
+                            <td>N DE INVERSORES<br><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong></td>
                             <td>INVERSIÓN MEDIA X INVERSOR<br><strong>$143.-</strong></td>
                             </tr>
-
+           
                               <tr>
-                            <td>CANTIDAD FINANCIADA<br><strong>200.000</strong></td>
+                            <td>CANTIDAD FINANCIADA<br><strong>${{ number_format($suma,0,',','.') }}</strong></td>
                             <td>VALOR INICIAL<br><strong>1,000/</strong></td>
-                            <td>RENTABILIDAD ANUAL/TOTAL<br><strong>10,00/10,00%</strong></td>
-                            <td>PLAZO<br><strong>12 MESES</strong></td>
+                            <td>RENTABILIDAD ANUAL/TOTAL<br><strong>{{ $propiedad->rentabilidadAnual }}/{{ $propiedad->rentabilidadTotal }}%</strong></td>
+                            <td>PLAZO<br><strong>{{ $propiedad->plazoMeses }} MESES</strong></td>
                             </tr> 
                         </table>
                     <br>
@@ -288,6 +288,7 @@ Detalle Mi Inversión
                 </div>
             </div>
         </div>
+        <div id="evolucionProyecto">
         <div class="col-lg-12" align="left">
             <br>
             <h4>Evolución del proyecto</h4>
@@ -303,6 +304,8 @@ Detalle Mi Inversión
             </div>
             <br>
         </div>
+        </div>
+        <div id="tuPosicion">
         <div class="col-lg-12" align="left">
             <br>
            <h4>Tu posición en la oportunidad</h4> 
@@ -311,15 +314,17 @@ Detalle Mi Inversión
             <div class="table-responsive">
                 <table>
                     <tr>
-                        <td>INVERSIÓN ACTUAL<br><strong>80,00 EUROS</strong></td>
+                        <td>INVERSIÓN ACTUAL<br><strong>${{ number_format($total,0,',','.') }} CLP</strong></td>
                         <td>N° DE TÍTULOS<br><strong>80,00</strong></td>
-                               <td>PRECIO MEDIO ADQUISICIÓN<br><strong>1,00 EURO</strong></td>
-                        <td>RENTABILIDAD ANUAL<br><strong>10,00%</strong></td>
+                               <td>PRECIO MEDIO ADQUISICIÓN<br><strong>$10.000 CLP</strong></td>
+                        <td>RENTABILIDAD ANUAL<br><strong>{{ $propiedad->rentabilidadAnual }}%</strong></td>
                     </tr>
                 </table>
             </div>
             <br>
         </div>
+        </div>
+        <div id="ingresos">
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-8">
@@ -378,6 +383,8 @@ Detalle Mi Inversión
                 </div>
             </div>
         </div>
+        </div>
+        <div id="promociones" class="col-lg-12">
         <div class="col-lg-12" align="left">
             <br>
             <h4>Promociones asociadas</h4>
@@ -408,37 +415,40 @@ Detalle Mi Inversión
                 <br>
         <br>
         </div>
-        <div class="col-lg-12" align="left">
-            <br>
-            <h4>Últimos movimientos</h4>
         </div>
-        <div class="col-lg-12">
-            <div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th><small>MES EFECTO</small></th>
-                                    <th><small>AÑO EFECTO</small></th>
-                                    <th><small>FECHA</small></th>
-                                    <th><small>DESCRIPCIÓN</small></th>
-                                    <th><small>IMPORTE</small></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="5" style="text-align: center !important;">No hay resultados</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div align="center">
-                            <a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-primary"><small>VER TODOS</small></a>
+        <div id="movimientos" class="col-lg-12">
+            <div class="col-lg-12" align="left">
+                <br>
+                <h4>Últimos movimientos</h4>
+            </div>
+            <div class="col-lg-12">
+                <div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><small>MES EFECTO</small></th>
+                                        <th><small>AÑO EFECTO</small></th>
+                                        <th><small>FECHA</small></th>
+                                        <th><small>DESCRIPCIÓN</small></th>
+                                        <th><small>IMPORTE</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5" style="text-align: center !important;">No hay resultados</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div align="center">
+                                <a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-primary"><small>VER TODOS</small></a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                    <br>
             </div>
-                <br>
         </div>
     </div>
 </div>

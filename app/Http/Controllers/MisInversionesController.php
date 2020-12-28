@@ -70,7 +70,27 @@ class MisInversionesController extends Controller
                     ->where('propiedades.idPropiedad',Crypt::decrypt($request->idPropiedad))
                     ->firstOrFail();
             $imagenesPropiedades = ImagenPropiedad::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
-    		return view('public.miInversionDetalle',compact('propiedad','imagenesPropiedades'));
+            $datos = TrxIngreso::where('idPropiedad',$propiedad->idPropiedad)->get();
+            $suma = 0;
+            foreach($datos as $dato){
+                $suma = $suma + $dato->monto;
+            }
+            $arrayIdPropiedadUsuario = array();
+            foreach ($datos as $dato) {
+                if($dato->idPropiedad == $propiedad->idPropiedad && $dato->idPropiedad != null){
+                    $idPropiedades = array($propiedad->idPropiedad => $dato->idUsuario
+                    );
+                    array_push($arrayIdPropiedadUsuario,$idPropiedades);
+                }
+            }
+            $arrayIdPropiedadSinDuplicar = array();
+            array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
+            $datosUsuario = TrxIngreso::where('idPropiedad',$propiedad->idPropiedad)->where('idUsuario',Session::get('idUsuario'))->get();
+            $total = 0;
+            foreach($datosUsuario as $datoUsuario){
+                $total = $total + $datoUsuario->monto;
+            }
+    		return view('public.miInversionDetalle',compact('propiedad','imagenesPropiedades','arrayIdPropiedadSinDuplicar','suma','total'));
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');
             return back();

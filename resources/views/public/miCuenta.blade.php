@@ -84,13 +84,13 @@ Mi cuenta
 							<p style="color: #fff;">Saldo real</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p style="color: #fff;">0,00 €</p>
+							<p style="color: #fff;">${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-6" align="left">
 							<p style="color: #fff;">Saldo disponible</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p style="color: #fff;">0,00 €</p>
+							<p style="color: #fff;">${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-6" align="left">
 							<p style="color: #fff;">Comprometido</p>

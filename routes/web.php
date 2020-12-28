@@ -26,6 +26,8 @@ Route::view('financiacion-empresas','public.financiacion');
 Route::view('quienes-somos','public.quienesSomos');
 //favoritos
 Route::get('propiedad-favorita/{idPropiedad}', 'PropiedadFavoritaController@index');
+//obtener bancos por pais
+Route::get('banco-por-pais/{idPais}','BusquedaController@bancoPorPais');
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'], function(){
     Route::get('/','DashboardController@index');
@@ -35,7 +37,7 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::get('oportunidades/no-financiado','TiendaController@no_financiado');
     Route::get('mis-inversiones','MisInversionesController@index');
     Route::get('mi-inversion/detalle','MisInversionesController@detalle');
-    Route::view('mi-cuenta','public.miCuenta');  
+    Route::get('mi-cuenta','MiCuentaController@index');  
     Route::view('documentos-informes','public.documentosInformes');
     Route::view('mis-datos','public.miDatos');  
     Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
@@ -43,7 +45,7 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::view('mi-cuenta/movimientos','public.misMovimientos');
     Route::view('promo-amigo','public.invitaUnAmigo');
     Route::view('mi-cuenta/cuentas-bancarias','public.cuentasAsociadas');
-    Route::view('mi-cuenta/cuentas-bancarias/nueva','public.añadirCuentaBancaria');
+    Route::get('mi-cuenta/cuentas-bancarias/nueva','CuentaBancariaController@index');
     Route::get('mi-cuenta/ingresos','SaldoDisponibleController@index');
     Route::view('mi-cuenta/retiros','public.retiros');
     //vistas fallor exito
@@ -207,6 +209,10 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('faqs','FaqController@index');
     //cambio dolar
     Route::get('cambio-dolar','CambioDolarController@index');
+    //banco
+    Route::get('bancos','BancoController@index');
+    //tipo de cuenta bancaria
+    Route::get('tipo-cuenta','TipoCuentaController@index');
 });
 //quieres saber mas
 Route::get('saber-mas','CondicionServicioController@saberMas');
@@ -406,4 +412,16 @@ Route::resource('mantenedor-transacciones','TrxDepositoTransaccionController');
 Route::delete('mantenedor-transacciones/{idTrxDepoTransf}',array(
     'uses'=>'TrxDepositoTransaccionController@destroy',
     'as'=>'mantenedor-transacciones.delete'
+));
+//curd de bancps
+Route::resource('mantenedor-banco','BancoController');
+Route::delete('mantenedor-banco/{idBanco}',array(
+    'uses'=>'BancoController@destroy',
+    'as'=>'mantenedor-banco.delete'
+));
+//crud de tipo cuenta bancaria
+Route::resource('mantenedor-tipo-cuenta','TipoCuentaController');
+Route::delete('mantenedor-tipo-cuenta/{idTipoCuenta}',array(
+    'uses'=>'TipoCuentaController@destroy',
+    'as'=>'mantenedor-tipo-cuenta.delete'
 ));

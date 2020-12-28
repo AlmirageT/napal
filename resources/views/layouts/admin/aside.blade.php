@@ -110,6 +110,19 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-newspaper"></i>
+                        <span>Banco</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/bancos') }}"><i class="far fa-newspaper"></i> Bancos</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipo-cuenta') }}"><i class="fas fa-align-justify"></i> Tipo de Cuentas</a></li>
+                    </ul>
+                    
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-newspaper"></i>
                         <span>Transacciones</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">

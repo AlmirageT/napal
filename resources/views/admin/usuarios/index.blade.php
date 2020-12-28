@@ -21,10 +21,6 @@ Usuarios
 				      <th>Nombre</th>
 				      <th>Rut</th>
 				      <th>Correo</th>
-				      <th>Profesión</th>
-				      <th>Idioma</th>
-				      <th>Tipo Persona</th>
-				      <th>Avatar</th>
 				      <th>¿Cuenta Activada?</th>
 				      <th>Newsletter</th>
 				      <th>¿Cuenta Desactivada?</th>
@@ -54,10 +50,6 @@ $(document).ready(function () {
 			{ "data": "nombre" },
 			{ "data": "rut" },
 			{ "data": "correo" },
-			{ "data": "profesion" },
-			{ "data": "nombreIdioma" },
-			{ "data": "nombreTipoPersona" },
-			{ "data": "rutaAvatar" },
 			{ "data": "activarCuenta" },
 			{ "data": "activarNewsletter" },
 			{ "data": "desactivarCuenta" },

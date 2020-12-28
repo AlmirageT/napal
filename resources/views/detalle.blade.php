@@ -30,7 +30,18 @@
         }
     }
 @endphp
-
+@php
+    $arrayIdPropiedadUsuario = array();
+    foreach ($ingresos as $ingreso) {
+        if($ingreso->idPropiedad == $propiedad->idPropiedad && $ingreso->idPropiedad != null){
+            $idPropiedades = array($propiedad->idPropiedad => $ingreso->idUsuario
+            );
+            array_push($arrayIdPropiedadUsuario,$idPropiedades);
+        }
+    }
+    $arrayIdPropiedadSinDuplicar = array();
+    array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
+@endphp
 <div class="properties-details-page content-area">
     <div class="container">
         <div class="row">
@@ -223,14 +234,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
-                                    <p>{{  $catidadInversores  }} Inversores</p>
+                                    <p>{{  count($arrayIdPropiedadSinDuplicar[0])  }} Inversores</p>
                                 </div>
                                 <div class="col-lg-5">
-                                    @if($diff->days>0)
-                                        <p>Plazo: {!! $diff->days !!} días </p>
-                                    @else
-                                        <p>Finalizado </p>
-                                    @endif
+                                    <p>Plazo: {{ $propiedad->plazoMeses}} meses </p>
                                 </div>
                                 <div class="col-lg-6" align="center">
                                     <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
