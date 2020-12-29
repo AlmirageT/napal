@@ -1,8 +1,8 @@
-<button class="btn btn-primary" data-toggle="modal" data-target="#create">Agregar Tipo Cuenta Bancaria <i class="fas fa-plus"></i></button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#create">Agregar Asociación banco - tipo cuenta <i class="fas fa-plus"></i></button>
 
 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="create" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
-        {!!Form::open(['route' => 'mantenedor-tipo-cuenta.store', 'method' => 'POST','files'=>true])!!}
+        {!!Form::open(['route' => 'mantenedor-banco-tipo-cuenta.store', 'method' => 'POST','files'=>true])!!}
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -16,7 +16,14 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="">Nombre Tipo Cuenta</label>
-                            {!! Form::text('nombreTipoCuenta',null,['class'=>"form-control",'placeholder'=>"Ingrese nombre del banco",'required']) !!}
+                            {!! Form::select('idTipoCuenta', $tiposCuentas,null,['class'=>"form-control",'placeholder'=>"Ingrese tipo cuenta",'required']) !!}
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="">Nombre Banco</label>
+                            {!! Form::select('idBanco', $bancos,null,['class'=>"form-control",'placeholder'=>"Ingrese banco",'required']) !!}
 
                         </div>
                     </div>

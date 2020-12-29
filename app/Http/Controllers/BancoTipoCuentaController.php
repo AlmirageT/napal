@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+use App\BancoTipoCuenta;
 use App\TipoCuenta;
 use App\Banco;
 use Session;
 use DB;
 
-class TipoCuentaController extends Controller
+class BancoTipoCuentaController extends Controller
 {
     public function index()
     {
@@ -24,26 +26,31 @@ class TipoCuentaController extends Controller
                 return abort(401);
             }
         }
-        $tiposCuentas = TipoCuenta::all();
-        $bancos = Banco::pluck('nombreBanco','idBanco');
-        return view('admin.tipoCuenta.index',compact('tiposCuentas','bancos'));
+        $bancosTiposCuentas = BancoTipoCuenta::select('*')
+        	->join('bancos','bancos_tipos_cuentas.idBanco','=','bancos.idBanco')
+        	->join('tipos_cuentas','bancos_tipos_cuentas.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+        	->get();
+    	$bancos = Banco::pluck('nombreBanco','idBanco');
+    	$tiposCuentas = TipoCuenta::pluck('nombreTipoCuenta','idTipoCuenta');
+    	return view('admin.bancoTipoCuenta.index',compact('bancos','tiposCuentas','bancosTiposCuentas'));
     }
     public function store(Request $request)
     {
     	try {
-    		$validator = Validator::make($request->all(), [
-                'nombreTipoCuenta' => 'required',
+            $validator = Validator::make($request->all(), [
+                'idTipoCuenta' => 'required',
+                'idBanco' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('No deben quedar datos en blanco');
+                toastr()->info('No deben quedar datos vacios');
                 return back();
             }
             DB::beginTransaction();
-            $tipoCuenta = new TipoCuenta($request->all());
-            $tipoCuenta->save();
-    		DB::commit();
-    		toastr()->success('El tipo de cuenta se ha agregado correctamente','Tipo de Cuenta Agregado Correctamente');
-    		return back();
+        	$bancoTipoCuenta = new BancoTipoCuenta($request->all());
+        	$bancoTipoCuenta->save();
+            toastr()->success('Asociación entre banco y tipo cuenta realizado con éxito', 'Agregado Correctamente');
+            DB::commit();
+            return back();
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
@@ -62,23 +69,24 @@ class TipoCuentaController extends Controller
             return back();
         }
     }
-    public function update(Request $request, $idTipoCuenta)
+    public function update(Request $request, $idBancoTipoCuenta)
     {
     	try {
-    		$validator = Validator::make($request->all(), [
-                'nombreTipoCuenta' => 'required',
+            $validator = Validator::make($request->all(), [
+                'idTipoCuenta' => 'required',
+                'idBanco' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('No deben quedar datos en blanco');
+                toastr()->info('No deben quedar datos vacios');
                 return back();
             }
             DB::beginTransaction();
-            $tipoCuenta = TipoCuenta::find($idTipoCuenta);
-            $tipoCuenta->fill($request->all());
-            $tipoCuenta->save();
-    		DB::commit();
-    		toastr()->success('El tipo de cuenta se ha actualizado correctamente','Tipo de Cuenta Actualizado Correctamente');
-    		return back();
+        	$bancoTipoCuenta = BancoTipoCuenta::find($idBancoTipoCuenta);
+        	$bancoTipoCuenta->fill($request->all());
+        	$bancoTipoCuenta->save();
+            toastr()->success('Asociación entre banco y tipo cuenta realizado con éxito', 'Actualizado Correctamente');
+            DB::commit();
+            return back();
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
@@ -97,15 +105,15 @@ class TipoCuentaController extends Controller
             return back();
         }
     }
-    public function destroy($idTipoCuenta)
+    public function destroy($idBancoTipoCuenta)
     {
     	try {
             DB::beginTransaction();
-            $tipoCuenta = TipoCuenta::find($idTipoCuenta);
-            $tipoCuenta->delete();
-    		DB::commit();
-    		toastr()->success('El tipo de cuenta se ha eliminado correctamente','Tipo de Cuenta Eliminado Correctamente');
-    		return back();
+        	$bancoTipoCuenta = BancoTipoCuenta::find($idBancoTipoCuenta);
+        	$bancoTipoCuenta->delete();
+            toastr()->success('Asociación entre banco y tipo cuenta eliminada con éxito', 'Eliminado Correctamente');
+            DB::commit();
+            return back();
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();

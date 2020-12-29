@@ -68,6 +68,8 @@ Cuentas Asociadas
 			<br>
 		</div>
 		<div class="col-lg-12">
+        {!!Form::open(['route' => 'mantenedor-anadir-cuenta-usuario.store', 'method' => 'POST','files'=>true])!!}
+        @csrf
 			<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
 				<div class="card-body">
 					<div class="row">
@@ -84,7 +86,7 @@ Cuentas Asociadas
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Nombre del banco</label>
-								<select class="form-control" name="idBanco" id="idBanco" onchange="BancoPorTipoCuenta(this.value)">
+								<select class="form-control" name="idBanco" id="idBanco" onchange="BancoPorTipoCuenta(this.value)" required>
 									<option>Seleccione Banco</option>
 								</select>
 							</div>
@@ -92,7 +94,7 @@ Cuentas Asociadas
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo de cuenta</label>
-								<select class="form-control" name="idTipoCuenta" id="idTipoCuenta">
+								<select class="form-control" name="idTipoCuenta" id="idTipoCuenta" required>
 									<option>Seleccione Tipo de Cuenta</option>
 								</select>
 							</div>
@@ -100,19 +102,19 @@ Cuentas Asociadas
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Cuenta bancaria</label>
-								<input class="form-control" type="text" name="cuentaBancaria">
+								<input class="form-control" type="number" name="numeroCuenta" required>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Codigo BIC/SWIFT</label>
-								<input type="text" name="codigoSwift" class="form-control">
+								<input type="number" name="codigoSwift" class="form-control" required>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Titular</label>
-								<input type="text" name="titular" class="form-control">
+								<input type="text" name="titular" class="form-control" required>
 								
 							</div>
 							<br>
@@ -164,13 +166,15 @@ Cuentas Asociadas
 						<div class="col-lg-12">
 							<hr>
 						</div>
+						--}}
 						<div class="col-lg-12" align="right">
 							<button type="submit" class="btn btn-primary"><small>GUARDAR CAMBIOS</small></button>
 						</div>
-						--}}
 					</div>
 				</div>
 			</div>
+        {!!Form::close()!!}
+
 			<br>
 		</div>
 	</div>
@@ -180,12 +184,20 @@ Cuentas Asociadas
 <script type="text/javascript">
 	function bancoPorPais(idPais) {
 		$.get('{{ asset('banco-por-pais') }}/'+idPais,function(data,status){
-			var select = '';
+			var select = '<option>Seleccione Banco</option>';
 			data.forEach(function(element){
-				console.log(element.nombreBanco);
 				select += `<option value='${element['idBanco']}'>${element['nombreBanco']}</option>`;
 			});
 			document.getElementById('idBanco').innerHTML = select;
+		});
+	}
+	function BancoPorTipoCuenta(idBanco) {
+		$.get('{{ asset('tipo-cuenta-por-banco') }}/'+idBanco,function(data,status){
+			var select = '<option>Seleccione Tipo de Cuenta</option>';
+			data.forEach(function(element){
+				select += `<option value='${element['idTipoCuenta']}'>${element['nombreTipoCuenta']}</option>`;
+			});
+			document.getElementById('idTipoCuenta').innerHTML = select;
 		});
 	}
 </script>

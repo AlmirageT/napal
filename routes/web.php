@@ -28,6 +28,8 @@ Route::view('quienes-somos','public.quienesSomos');
 Route::get('propiedad-favorita/{idPropiedad}', 'PropiedadFavoritaController@index');
 //obtener bancos por pais
 Route::get('banco-por-pais/{idPais}','BusquedaController@bancoPorPais');
+//obtener tipo de cuenta por banco
+Route::get('tipo-cuenta-por-banco/{idBanco}','BusquedaController@tipoCuentaPorBanco');
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'], function(){
     Route::get('/','DashboardController@index');
@@ -44,10 +46,10 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::view('mis-datos/mis-promociones','public.misPromociones');
     Route::view('mi-cuenta/movimientos','public.misMovimientos');
     Route::view('promo-amigo','public.invitaUnAmigo');
-    Route::view('mi-cuenta/cuentas-bancarias','public.cuentasAsociadas');
+    Route::get('mi-cuenta/cuentas-bancarias','MiCuentaController@cuentaAsociada');
     Route::get('mi-cuenta/cuentas-bancarias/nueva','CuentaBancariaController@index');
     Route::get('mi-cuenta/ingresos','SaldoDisponibleController@index');
-    Route::view('mi-cuenta/retiros','public.retiros');
+    Route::get('mi-cuenta/retiros','MiCuentaController@retiro');
     //vistas fallor exito
     Route::view('fallo','public.paypal.fallo');
     Route::view('exito','public.paypal.exito');
@@ -68,6 +70,7 @@ Route::post('datatable-comunas','BusquedaController@tablaComunas');
 Route::post('datatable-provincias','BusquedaController@tablaProvincias');
 Route::post('datatable-usuarios-transferencia','BusquedaController@tablaUsuarioTransferencia');
 Route::post('datatable-transacciones/{idUsuario}','BusquedaController@transferenciaUsuarioTabla');
+Route::post('datatable-solicitud-retiro-fondos','BusquedaController@tablaRetiroFondos');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -213,6 +216,14 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('bancos','BancoController@index');
     //tipo de cuenta bancaria
     Route::get('tipo-cuenta','TipoCuentaController@index');
+    //banco tipo cuenta
+    Route::get('banco-tipo-cuenta','BancoTipoCuentaController@index');
+    //solicitudes retiro
+    Route::get('solicitud-retiro','InstruccionBancariaController@index');
+    //validar transferencia
+    Route::get('validar-transferencia/{idIntruccionBancaria}','InstruccionBancariaController@vistaValidarTransferencia');
+    //
+    Route::get('validar/transferencia/{idIntruccionBancaria}','InstruccionBancariaController@validacion');
 });
 //quieres saber mas
 Route::get('saber-mas','CondicionServicioController@saberMas');
@@ -425,3 +436,13 @@ Route::delete('mantenedor-tipo-cuenta/{idTipoCuenta}',array(
     'uses'=>'TipoCuentaController@destroy',
     'as'=>'mantenedor-tipo-cuenta.delete'
 ));
+//crud de tipo cuenta bancaria asociada a banco
+Route::resource('mantenedor-banco-tipo-cuenta','BancoTipoCuentaController');
+Route::delete('mantenedor-banco-tipo-cuenta/{idTipoCuenta}',array(
+    'uses'=>'BancoTipoCuentaController@destroy',
+    'as'=>'mantenedor-banco-tipo-cuenta.delete'
+));
+//create cuenta bancaria
+Route::resource('mantenedor-anadir-cuenta-usuario','CuentaBancariaController');
+//retiro
+Route::resource('mantenedor-retiro','MiCuentaController');

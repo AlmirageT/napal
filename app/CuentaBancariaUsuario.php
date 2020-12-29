@@ -14,6 +14,7 @@ class CuentaBancariaUsuario extends Model
     	'comprobanteBancario',
     	'idBanco',
     	'idUsuario',
-    	'idTipoCuenta'
+    	'idTipoCuenta',
+        'titular'
     ];
 }

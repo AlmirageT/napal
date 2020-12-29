@@ -118,6 +118,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/tipo-cuenta') }}"><i class="fas fa-align-justify"></i> Tipo de Cuentas</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/banco-tipo-cuenta') }}"><i class="fas fa-align-justify"></i> Tipo de Cuenta del Banco</a></li>
+                    </ul>
                     
                 </li>
                 <li>
@@ -133,6 +136,9 @@
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/destinos-egresos') }}"><i class="fas fa-align-justify"></i> Destinos Egresos</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/solicitud-retiro') }}"><i class="fas fa-align-justify"></i> Solicitudes Retiro</a></li>
                     </ul>
                 </li>
                 <!--Link a vista parametros generales. -->

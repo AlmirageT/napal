@@ -19,7 +19,7 @@ Cuentas Asociadas
 							</p>
 						</div>
 						<div class="col-lg-4" align="center">
-							<p>Cuentas asociadas: 0</p>
+							<p>Cuentas asociadas: {{ count($cuentaBancariaUsuario) }}</p>
 							<a href="{{ asset('dashboard/mi-cuenta/cuentas-bancarias/nueva') }}" class="btn btn-primary"><small>AÑADIR CUENTA BANCARIA</small></a>
 						</div>
 					</div>

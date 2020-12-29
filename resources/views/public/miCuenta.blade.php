@@ -113,7 +113,7 @@ Mi cuenta
 					<div class="row">
 						<div class="col-lg-12"><h4><small>Cuentas asociadas</small></h4><br></div>
 						<div class="col-lg-12" align="center">
-							<p style="margin-top: 43px; margin-bottom: 58px;">Cuentas asociadas: 0</p>
+							<p style="margin-top: 43px; margin-bottom: 58px;">Cuentas asociadas: {{ count($cuentaBancariaUsuario) }}</p>
 						</div>
 						<div class="col-lg-12">
 							<br>
