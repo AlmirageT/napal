@@ -47,7 +47,7 @@ Confirmar Inversion
 	@csrf
 		<div class="card">
 			<div class="card-header" align="center">
-				<h3>Nombre Propiedad</h3>
+				<h3>{{ $propiedad->nombrePropiedad }}</h3>
 			</div>
 			<div class="card-body">
 				<div class="row">
@@ -63,12 +63,13 @@ Confirmar Inversion
 							        <div class="box">
 							           <div class="datos1">
 							               <p>CAPITAL INVERTIDO</p>
-							               <h3>80</h3>
+							               <h3>${{ number_format($sinCaracteres,0,',','.') }}</h3>
 							           </div>
 							           
 							            <div class="datos">
 							               <p>N° FRACCIONES</p>
-							               <h3>80</h3>
+							               <h3>${{ number_format($sinCaracteres,0,',','.') }}</h3>
+							               <input type="hidden" name="saldo" value="{{ $sinCaracteres }}">
 							            </div>
 							        </div>
 							    </div>
@@ -81,16 +82,16 @@ Confirmar Inversion
 							        <div class="box">
 							           <div class="datos1">
 							               <p>Rentabilidad Anual</p>
-							               <h3>%</h3>
+							               <h3>{{ $propiedad->rentabilidadAnual }}%</h3>
 							           </div>
 							           
 							            <div class="datos">
 							               <p>Rentabilidad Total</p>
-							               <h3>%</h3>
+							               <h3>{{ $propiedad->rentabilidadTotal }}%</h3>
 							            </div>
 							            <div class="datos">
 							               <p>Plazo</p>
-							               <h3> Días</h3>
+							               <h3>{{ $propiedad->plazoMeses }} Meses</h3>
 							             </div>
 							        </div>
 							    </div>
@@ -117,7 +118,13 @@ Confirmar Inversion
 								  <label class="form-check-label" for="exampleRadios2">
 								    Con tu cuenta NAPALM
 								  </label>
-								  <p>Saldo disponible: </p>
+								  <p>Saldo disponible: 
+								  	@if (count($saldoDisponible)>0)
+								  		${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible) }}
+								  	@else
+								  		$0
+								  	@endif
+								  </p>
 								</div>
 							<hr>
 							</div>

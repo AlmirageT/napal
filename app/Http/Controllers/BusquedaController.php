@@ -1050,6 +1050,7 @@ class BusquedaController extends Controller
 			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
 			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
 			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('validado',0)
 		        ->count();
 		$totalFiltered = $totalData;
 
@@ -1063,6 +1064,8 @@ class BusquedaController extends Controller
 			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
 			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
 			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('validado',0)
+			  	->where('cancelada',0)
 				->offset($start)
 				->limit($limit)
 				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
@@ -1074,6 +1077,8 @@ class BusquedaController extends Controller
 			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
 			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
 			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('cancelada',0)
+			  	->where('validado',0)
 				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
 				->offset($start)
 				->limit($limit)
@@ -1085,6 +1090,8 @@ class BusquedaController extends Controller
 			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
 			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
 			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('cancelada',0)
+			  	->where('validado',0)
 				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
 				->count();
 		}
@@ -1094,7 +1101,7 @@ class BusquedaController extends Controller
 			foreach ($instruccionesBancarias as $instruccionBancaria){
 				$nestedData['idIntruccionBancaria'] = $instruccionBancaria->idIntruccionBancaria;
 				$nestedData['concepto'] = $instruccionBancaria->concepto;
-				$nestedData['importe'] = $instruccionBancaria->importe;
+				$nestedData['importe'] = "$".number_format($instruccionBancaria->importe,0,',','.');
 				$nestedData['nombre'] = $instruccionBancaria->nombre.' '.$instruccionBancaria->apellido;
 				if ($instruccionBancaria->validado == 1) {
 					$nestedData['validado'] = "Validado";
@@ -1112,6 +1119,97 @@ class BusquedaController extends Controller
 		                        	<a href='".asset('napalm/validar-transferencia')."/".$instruccionBancaria->idIntruccionBancaria."' class='dropdown-item'> Validar Transferencia</a>
 		                        </div>
 		                    </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+
+    public function tablaRetirosAceptados(Request $request)
+    {
+    	$columns = array(
+			0=> 'idIntruccionBancaria',
+			1=> 'concepto',
+			2=> 'importe',
+			3=> 'validado',
+			4=> 'nombreBanco',
+			5=> 'nombreTipoCuenta',
+			6=> 'numeroCuenta',
+			7=> 'nombreValidador'
+		);
+		$totalData = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+
+		if(empty($request->input('search.value')))
+		{
+			$instruccionesBancarias = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+				->offset($start)
+				->limit($limit)
+				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$instruccionesBancarias = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+				->get();
+
+			$totalFiltered = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($instruccionesBancarias)){
+			foreach ($instruccionesBancarias as $instruccionBancaria){
+				$nestedData['idIntruccionBancaria'] = $instruccionBancaria->idIntruccionBancaria;
+				$nestedData['concepto'] = $instruccionBancaria->concepto;
+				$nestedData['importe'] = "$".number_format($instruccionBancaria->importe,0,',','.');
+				if ($instruccionBancaria->validado == 1) {
+					$nestedData['validado'] = "Validado";
+				}else{
+					$nestedData['validado'] = "No Validado";
+				}
+				$nestedData['nombreBanco'] = $instruccionBancaria->nombreBanco;
+				$nestedData['nombreTipoCuenta'] = $instruccionBancaria->nombreTipoCuenta;
+				$nestedData['numeroCuenta'] = $instruccionBancaria->numeroCuenta;
+				$nestedData['nombreValidador'] = $instruccionBancaria->nombre.' '.$instruccionBancaria->apellido;
 				$data[] = $nestedData;
 			}
 		}

@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Observers\TrxIngresoObserver;
+use App\Observers\TrxEgresosObserver;
 use App\MisionEmpresa;
 use App\TrxIngreso;
+use App\TrxEgresos;
 use App\RedSocial;
 use Schema;
 use Cache;
@@ -51,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
         TrxIngreso::observe(TrxIngresoObserver::class);
+        TrxEgresos::observe(TrxEgresosObserver::class);
 
         View::share('redesSociales',$redesSociales);
         View::share('misionEmpresa',$misionEmpresa);

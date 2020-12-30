@@ -12,7 +12,9 @@ class InstruccionBancaria extends Model
     	'concepto',
     	'importe',
     	'validado',
+    	'cancelada',
+        'fechaSolicitud',
     	'idCuentaBancariaUsuario',
-    	'idUsuario'
+    	'idUsuarioAceptarSolicitud'
     ];
 }

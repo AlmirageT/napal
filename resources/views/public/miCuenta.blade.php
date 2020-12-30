@@ -84,13 +84,25 @@ Mi cuenta
 							<p style="color: #fff;">Saldo real</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p style="color: #fff;">${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}</p>
+							<p style="color: #fff;">
+								@if (count($saldoDisponible)>0)
+								${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
+								@else
+								$0
+								@endif
+							</p>
 						</div>
 						<div class="col-lg-6" align="left">
 							<p style="color: #fff;">Saldo disponible</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p style="color: #fff;">${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}</p>
+							<p style="color: #fff;">
+								@if (count($saldoDisponible)>0)
+								${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
+								@else
+								$0
+								@endif
+							</p>
 						</div>
 						<div class="col-lg-6" align="left">
 							<p style="color: #fff;">Comprometido</p>
@@ -277,22 +289,51 @@ Mi cuenta
 						<table class="table">
 						  <thead>
 						    <tr>
-						      <th scope="col"><small>MES EFECTO</small></th>
-						      <th scope="col"><small>AÑO EFECTO</small></th>
-						      <th scope="col"><small>FECHA</small></th>
+						      <th scope="col"><small>FECHA SOLICITUD</small></th>
 						      <th scope="col"><small>DESCRIPCIÓN</small></th>
 						      <th scope="col"><small>IMPORTE</small></th>
+						      <th scope="col"><small>VALIDADA</small></th>
+						      <th scope="col"><small>ACCIONES</small></th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<tr>
-								<td colspan="5" style="text-align: center !important;">No hay resultados</td>
-							</tr>
+						  	@if (count($instruccionesBancarias)>0)
+						  		@foreach ($instruccionesBancarias as $instruccionBancaria)
+							  		<tr>
+							  			<td>{{ date("d-m-Y", strtotime($instruccionBancaria->fechaSolicitud)) }}</td>
+							  			<td>{{ $instruccionBancaria->concepto }}</td>
+							  			<td>${{ number_format($instruccionBancaria->importe,0,',','.') }}</td>
+							  			<td>
+							  				@if ($instruccionBancaria->validado == 0)
+							  					Sin Validar
+							  				@else
+							  					Validada
+							  				@endif
+							  			</td>
+							  			<td>
+							  				@if ($instruccionBancaria->validado == 0 && $instruccionBancaria->cancelada == 0)
+							  					<a href="{{ asset('dashboard/cancelar-solicitud') }}/{{ Crypt::encrypt($instruccionBancaria->idIntruccionBancaria) }}" onclick="confirm('¿Desea Cancelar la Solicitud?')" class="btn btn-danger">Cancelar Solicitud</a>
+							  				@else
+							  					@if ($instruccionBancaria->validado == 0 && $instruccionBancaria->cancelada == 1)
+							  						Solicitud Cancelada
+							  					@endif
+					  							@if ($instruccionBancaria->validado == 1)
+						  							Solicitud Aceptada
+					  							@endif
+							  				@endif
+							  			</td>
+							  		</tr>
+						  		@endforeach
+						  	@else
+							  	<tr>
+									<td colspan="5" style="text-align: center !important;">No hay resultados</td>
+								</tr>
+						  	@endif
 						  </tbody>
 						</table>
 						<br>
 						<div align="center">
-							<button class="btn btn-light" ><small>VER TODOS LOS MOVIMIENTOS</small></button>
+							<a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-light" ><small>VER TODOS LOS MOVIMIENTOS</small></a>
 						</div>
 					</div>
 				</div>

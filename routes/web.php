@@ -44,7 +44,7 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::view('mis-datos','public.miDatos');  
     Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
     Route::view('mis-datos/mis-promociones','public.misPromociones');
-    Route::view('mi-cuenta/movimientos','public.misMovimientos');
+    Route::get('mi-cuenta/movimientos','MiCuentaController@todosLosMovimientos');
     Route::view('promo-amigo','public.invitaUnAmigo');
     Route::get('mi-cuenta/cuentas-bancarias','MiCuentaController@cuentaAsociada');
     Route::get('mi-cuenta/cuentas-bancarias/nueva','CuentaBancariaController@index');
@@ -57,6 +57,9 @@ Route::group(['prefix'=>'dashboard'], function(){
     //paypal
     Route::post('paypal', 'SaldoDisponibleController@payWithpaypal');
     Route::get('status', 'SaldoDisponibleController@getPaymentStatus');
+    //cancelar solicitud
+    Route::get('cancelar-solicitud/{idIntruccionBancaria}','MiCuentaController@cancelarSolicitud');
+
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -71,6 +74,7 @@ Route::post('datatable-provincias','BusquedaController@tablaProvincias');
 Route::post('datatable-usuarios-transferencia','BusquedaController@tablaUsuarioTransferencia');
 Route::post('datatable-transacciones/{idUsuario}','BusquedaController@transferenciaUsuarioTabla');
 Route::post('datatable-solicitud-retiro-fondos','BusquedaController@tablaRetiroFondos');
+Route::post('datatable-retiro-fondos-aceptados','BusquedaController@tablaRetirosAceptados');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -222,8 +226,10 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('solicitud-retiro','InstruccionBancariaController@index');
     //validar transferencia
     Route::get('validar-transferencia/{idIntruccionBancaria}','InstruccionBancariaController@vistaValidarTransferencia');
-    //
-    Route::get('validar/transferencia/{idIntruccionBancaria}','InstruccionBancariaController@validacion');
+    //validando transferencias realizadas
+    Route::post('validar/transferencia/{idIntruccionBancaria}','InstruccionBancariaController@validacion');
+    //transferencias realizadas
+    Route::get('retiros-aceptados','InstruccionBancariaController@retirosAceptados');
 });
 //quieres saber mas
 Route::get('saber-mas','CondicionServicioController@saberMas');

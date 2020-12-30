@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use App\CuentaBancariaUsuario;
 use App\InstruccionBancaria;
 use App\SaldoDisponible;
@@ -24,7 +25,14 @@ class MiCuentaController extends Controller
         }
         $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
         $cuentaBancariaUsuario = CuentaBancariaUsuario::where('idUsuario',Session::get('idUsuario'))->get();
-        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario'));
+        $instruccionesBancarias = InstruccionBancaria::select('*')
+        ->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+        ->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+        ->where('cuentas_bancarias_usuarios.idUsuario',Session::get('idUsuario'))
+        ->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+        ->take(3)
+        ->get();
+        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias'));
     }
     public function cuentaAsociada()
     {
@@ -85,11 +93,13 @@ class MiCuentaController extends Controller
             }
     		DB::beginTransaction();
     		$instruccionBancaria = new InstruccionBancaria($request->all());
-    		$instruccionBancaria->validado = 0;
+            $instruccionBancaria->validado = 0;
+    		$instruccionBancaria->cancelada = 0;
+            $instruccionBancaria->fechaSolicitud = date("Y-m-d H:i:s");
     		$instruccionBancaria->save();
             toastr()->success('Cuenta bancaria enviada a revisión de forma correcta', 'Solicitud Agregado Correctamente');
     		DB::commit();
-            return back();
+            return redirect::to('dashboard/mi-cuenta');
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No posee saldo para realizar esta acción');
             DB::rollback();
@@ -107,5 +117,32 @@ class MiCuentaController extends Controller
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return back();
         }
+    }
+    public function cancelarSolicitud($idIntruccionBancaria)
+    {
+       if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        InstruccionBancaria::find(Crypt::decrypt($idIntruccionBancaria))->update([
+            'cancelada'=>1
+        ]);
+        toastr()->success('Solicitud cancelada de forma correcta', 'Solicitud Cancelada Correctamente');
+        return back();
+
+    }
+    public function todosLosMovimientos()
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        $instruccionesBancarias = InstruccionBancaria::select('*')
+        ->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+        ->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+        ->where('cuentas_bancarias_usuarios.idUsuario',Session::get('idUsuario'))
+        ->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+        ->paginate(10);
+
+        return view('public.misMovimientos',compact('instruccionesBancarias'));
+
     }
 }

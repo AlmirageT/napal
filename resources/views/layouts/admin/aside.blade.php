@@ -140,6 +140,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/solicitud-retiro') }}"><i class="fas fa-align-justify"></i> Solicitudes Retiro</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/retiros-aceptados') }}"><i class="fas fa-align-justify"></i> Retiros Aceptados</a></li>
+                    </ul>
                 </li>
                 <!--Link a vista parametros generales. -->
                 {{-- <li>

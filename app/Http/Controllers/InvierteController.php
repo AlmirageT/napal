@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\ConfirmacionInversion;
+use App\SaldoDisponible;
 use App\TrxIngreso;
 use App\Propiedad;
 use Session;
@@ -35,20 +36,13 @@ class InvierteController extends Controller
             DB::beginTransaction();
             $caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
 			$sinCaracteres = str_replace($caracteresEspeciales, "", $request->valorInvertir);
-            TrxIngreso::create([
-                'monto' => $sinCaracteres,
-                'webClient' => $_SERVER['HTTP_USER_AGENT'],
-                'idUsuario' => Session::get('idUsuario'),
-                'idMoneda' => 1,
-                'idEstado' => 1,
-                'idTipoMedioPago' => 1,
-                'idPropiedad' => Crypt::decrypt($idPropiedad)
-            ]);
+            
             $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+            $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
             Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
 
             DB::commit();
-            return view('confirmar');
+            return view('confirmar',compact('propiedad','sinCaracteres','saldoDisponible'));
         } catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();
@@ -67,8 +61,17 @@ class InvierteController extends Controller
             return redirect::back();
         }
     }
-    public function verificarDatos()
+    public function verificarDatos(Request $request)
     {
+        TrxIngreso::create([
+            'monto' => $request->saldo,
+            'webClient' => $_SERVER['HTTP_USER_AGENT'],
+            'idUsuario' => Session::get('idUsuario'),
+            'idMoneda' => 1,
+            'idEstado' => 1,
+            'idTipoMedioPago' => 1,
+            'idPropiedad' => Crypt::decrypt($idPropiedad)
+        ]);
     	return redirect::to('exito');
     }
 }

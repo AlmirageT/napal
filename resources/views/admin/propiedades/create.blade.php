@@ -24,7 +24,7 @@ Crear Propiedad
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Propiedad Portada</label>
-								<input type="file" required name="fotoPrincipal" class="form-control" onchange="onFileSelected(event)">
+								<input type="file" required name="fotoPrincipal" class="form-control" onchange="onFileSelected(event)" id="image">
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -323,17 +323,27 @@ Crear Propiedad
 @endsection
 <script>
 	function onFileSelected(event) {
-	  var selectedFile = event.target.files[0];
-	  var reader = new FileReader();
+		var files = event.target.files || event.dataTransfer.files;
+	    if(files[0].size > 2000000)
+	    {
+	        alert("Imagen con tamaño superior a 2MB");
+	        $('#image').val("");
+	    }
+	    else
+	    {
+	        this.imagen = event.target.files[0];
+		  var selectedFile = event.target.files[0];
+		  var reader = new FileReader();
 
-	  var imgtag = document.getElementById("myimage");
-	  imgtag.title = selectedFile.name;
+		  var imgtag = document.getElementById("myimage");
+		  imgtag.title = selectedFile.name;
 
-	  reader.onload = function(event) {
-	    imgtag.src = event.target.result;
-	  };
+		  reader.onload = function(event) {
+		    imgtag.src = event.target.result;
+		  };
 
-	  reader.readAsDataURL(selectedFile);
+		  reader.readAsDataURL(selectedFile);
+		}
 	}
 	const sacarRegionPorPais = (pais) => {
 		$.get('{{ asset('regiones') }}/'+pais, (data, status) => {

@@ -2,40 +2,40 @@
 	<p style="color: black">Documentos financieros</p>
 	<div class="row">
 		@if(count($documentos)>0)
-			@foreach($documentos as $documento)
+			@foreach($documentos->where('idTipoDocumento',1) as $documento)
 				<div class="col-lg-6">
 					<a target="_blank" href="{{ asset('ver-documento') }}/{{ $documento->idDocumento }}" style="color: blue"><small>{{ $documento->nombreDocumento }}</small></a>
 				</div>
 			@endforeach
 		@else
-			<div class="col-lg-6">
-				<a href="" style="color: blue"><small>Aqui unos documentos</small></a>
-			</div>
-
-			<div class="col-lg-6">
-				<a href="" style="color: blue"><small>Aqui otros</small></a>
-			</div>
+			no hay documentos
 		@endif
 	</div>
 	<br>
 	<p style="color: black">Documentos de la oportunidad</p>
 	<div class="row">
-		<div class="col-lg-6">
-			<a href="" style="color: blue"><small>documentos por aqui</small></a>
-		</div>
-		<div class="col-lg-6">
-			<a href="" style="color: blue"><small>documentos por aca</small></a>
-		</div>
+		@if(count($documentos)>0)
+			@foreach($documentos->where('idTipoDocumento',2) as $documento)
+				<div class="col-lg-6">
+					<a target="_blank" href="{{ asset('ver-documento') }}/{{ $documento->idDocumento }}" style="color: blue"><small>{{ $documento->nombreDocumento }}</small></a>
+				</div>
+			@endforeach
+		@else
+			no hay documentos
+		@endif
 	</div>
 	<br>
 
 	<p style="color: black">Documentos legales</p>
 	<div class="row">
-		<div class="col-lg-6">
-			<a href="" style="color: blue"><small>Otros</small></a>
-		</div>
-		<div class="col-lg-6">
-			<a href="" style="color: blue"><small>Otras</small></a>
-		</div>
+		@if(count($documentos)>0)
+			@foreach($documentos->where('idTipoDocumento',3) as $documento)
+				<div class="col-lg-6">
+					<a target="_blank" href="{{ asset('ver-documento') }}/{{ $documento->idDocumento }}" style="color: blue"><small>{{ $documento->nombreDocumento }}</small></a>
+				</div>
+			@endforeach
+		@else
+			no hay documentos
+		@endif
 	</div>
 </div>

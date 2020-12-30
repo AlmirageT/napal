@@ -52,7 +52,7 @@ Crear Usuario
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Perfil</label>
-								<input type="file" name="avatar" class="form-control" required onchange="onFileSelected(event)" size="102400" id="imagen">
+								<input type="file" name="avatar" class="form-control" required onchange="onFileSelected(event)" id="imagen">
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -159,14 +159,24 @@ Crear Usuario
 @endsection
 <script>
 	function onFileSelected(event) {
-	  var selectedFile = event.target.files[0];
-	  var reader = new FileReader();
-	  var imgtag = document.getElementById("myimage");
-	  imgtag.title = selectedFile.name;
-	  reader.onload = function(event) {
-	    imgtag.src = event.target.result;
-	  };
-	  reader.readAsDataURL(selectedFile);
+		var files = event.target.files || event.dataTransfer.files;
+	    if(files[0].size > 2000000)
+	    {
+	        alert("Imagen con tamaño superior a 2MB");
+	        $('#imagen').val("");
+	    }
+	    else
+	    {
+	        this.imagen = event.target.files[0];
+		  var selectedFile = event.target.files[0];
+		  var reader = new FileReader();
+		  var imgtag = document.getElementById("myimage");
+		  imgtag.title = selectedFile.name;
+		  reader.onload = function(event) {
+		    imgtag.src = event.target.result;
+		  };
+		  reader.readAsDataURL(selectedFile);
+		}
 	}
 	function formateaRut(rut) {
 	    var actual = rut.replace(/^0+/, "");

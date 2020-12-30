@@ -299,13 +299,13 @@ Actualizar Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Texto</label>
-								{!! Form::text('textoPromocion',{{ $propiedad->textoPromocion }},['class'=>"form-control"]) !!}
+								{!! Form::text('textoPromocion',$propiedad->textoPromocion,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Porcentaje</label>
-								{!! Form::text('rentabilidadPromocion',{{ $propiedad->rentabilidadPromocion }},['class'=>"form-control"]) !!}
+								{!! Form::text('rentabilidadPromocion',$propiedad->rentabilidadPromocion ,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 					</div>
