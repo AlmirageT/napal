@@ -41,8 +41,8 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::get('mi-inversion/detalle','MisInversionesController@detalle');
     Route::get('mi-cuenta','MiCuentaController@index');  
     Route::view('documentos-informes','public.documentosInformes');
-    Route::view('mis-datos','public.miDatos');  
-    Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
+    Route::get('mis-datos','MisDatosController@index');  
+    Route::get('mis-datos/datos-adicionales','MisDatosController@cambioDatos');
     Route::view('mis-datos/mis-promociones','public.misPromociones');
     Route::get('mi-cuenta/movimientos','MiCuentaController@todosLosMovimientos');
     Route::view('promo-amigo','public.invitaUnAmigo');
@@ -59,6 +59,11 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::get('status', 'SaldoDisponibleController@getPaymentStatus');
     //cancelar solicitud
     Route::get('cancelar-solicitud/{idIntruccionBancaria}','MiCuentaController@cancelarSolicitud');
+
+    //actualizar datos
+    Route::post('actualizacion-datos','MisDatosController@actualizarDatos');
+    Route::post('actualizar-contrasena','MisDatosController@actualizarContrasena');
+    Route::post('actualizacion-datos-personales','MisDatosController@actualizacionDatosPersonales');
 
 });
 //datatables

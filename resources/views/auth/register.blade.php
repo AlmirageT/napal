@@ -24,7 +24,12 @@ Registrarse
                                 {!!Form::text('apellido',null,['class'=>"form-control", 'placeholder'=>"Apellidos" , 'required'])!!}
                             </div>
                             <div class="form-group">
-                                {!!Form::number('numero',null,['class'=>"form-control", 'placeholder'=>"9 87654321" , 'required'])!!}
+                                <div class="input-group mb-2">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">+56</div>
+                                  </div>
+                                {!!Form::number('numero',null,['class'=>"form-control", 'placeholder'=>"9 87654321" , 'required','id'=>"inlineFormInputGroup"])!!}
+                                </div>
                             </div>
                             <div class="form-group">
                                 {!!Form::email('correo',null,['class'=>"form-control", 'placeholder'=>"Email" , 'required'])!!}
