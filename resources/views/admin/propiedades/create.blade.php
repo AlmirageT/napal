@@ -154,7 +154,7 @@ Crear Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>URL Video</label>
-								{!! Form::text('urlVideo',null,['class'=>"form-control",'required']) !!}
+								{!! Form::text('urlVideo',null,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">

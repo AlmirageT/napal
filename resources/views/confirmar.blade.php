@@ -43,7 +43,7 @@ Confirmar Inversion
     
 </style>
 <div class="container">
-	<form action="{{ asset('verificacion-pago') }}" method="POST">
+	<form action="{{ asset('verificacion-pago') }}/{{ Crypt::encrypt($propiedad->idPropiedad) }}" method="POST">
 	@csrf
 		<div class="card">
 			<div class="card-header" align="center">
@@ -64,6 +64,7 @@ Confirmar Inversion
 							           <div class="datos1">
 							               <p>CAPITAL INVERTIDO</p>
 							               <h3>${{ number_format($sinCaracteres,0,',','.') }}</h3>
+							               <input type="hidden" name="sinCaracteres" value="{{ $sinCaracteres }}">
 							           </div>
 							           
 							            <div class="datos">
@@ -107,20 +108,20 @@ Confirmar Inversion
 							<br>
 							<br>
 								<div class="form-check">
-								  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-								  <label class="form-check-label" for="exampleRadios1">
+								  <input class="form-check-input" type="radio" name="metodoDeposito" id="tarjetaBancaria" value="1" checked>
+								  <label class="form-check-label" for="tarjetaBancaria">
 								    Tarjeta Bancaria
 								  </label>
 								  <p>Cantidad maxima $2.000.000</p>
 								</div>
 								<div class="form-check">
-								  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-								  <label class="form-check-label" for="exampleRadios2">
-								    Con tu cuenta NAPALM
+								  <input class="form-check-input" type="radio" name="metodoDeposito" id="cuentaEsMidas" value="2">
+								  <label class="form-check-label" for="cuentaEsMidas">
+								    Con tu cuenta EsMidas
 								  </label>
 								  <p>Saldo disponible: 
 								  	@if (count($saldoDisponible)>0)
-								  		${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible) }}
+								  		${{ number_format($saldoDisponible->first()->cantidadSaldoDisponible,0,',','.') }}
 								  	@else
 								  		$0
 								  	@endif

@@ -74,8 +74,7 @@ class ProvinciaController extends Controller
             return abort(401);
         }
         if (Session::has('idTipoUsuario')) {
-            if (Session::get('idTipoUsuario') != 3) {
-                toastr()->info('No tiene permiso para entrar a esta pagina');
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
                 return abort(401);
             }
         }

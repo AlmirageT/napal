@@ -21,8 +21,8 @@ Retiros
 							<div class="col-lg-3">
 								<div class="form-group">
 									<label>Cuenta bancaria</label>
-									<select class="form-control" required name="idCuentaBancariaUsuario">
-							        	<option>Seleccione Cuenta</option>
+									<select class="form-control"  name="idCuentaBancariaUsuario" required>
+							        	<option value="">Seleccione Cuenta</option>
 								        @foreach ($arrayOptBanco as $banco)
 											<optgroup label="{{ $banco['banco'] }}"></optgroup>
 											@foreach ($banco['tipoCuentas'] as $tipoCuenta)

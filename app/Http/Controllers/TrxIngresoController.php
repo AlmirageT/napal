@@ -29,9 +29,8 @@ class TrxIngresoController extends Controller
            return abort(401);
         }
         if (Session::has('idTipoUsuario')) {
-            if (Session::get('idTipoUsuario') != 3) {
-                toastr()->info('No tiene permiso para entrar a esta pagina');
-               return abort(401);
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
             }
         }
         $ingreso = TrxIngreso::select('*')

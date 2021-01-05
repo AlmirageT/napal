@@ -6,7 +6,7 @@
 	
 </style>
 @section('title')
-Dashborad
+Dashboard
 @endsection
 @section('content')
 <br>

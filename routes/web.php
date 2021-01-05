@@ -91,7 +91,7 @@ Route::get('detalle/{idPropiedad}','DetalleController@index');
 //uri nueva
 Route::get('invierte/chile/propiedad/detalle','DetalleController@index');
 Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');
-Route::post('verificacion-pago','InvierteController@verificarDatos');
+Route::post('verificacion-pago/{idPropiedad}','InvierteController@verificarDatos');
 //link mientras no haya funcionamiento con sistema transbank
 Route::view('exito','exito');
 //invierte

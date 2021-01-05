@@ -500,7 +500,7 @@
                             </h1>
                             <div class="location">
                                 <a >
-                                    <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ $propiedades[$i]->nombreRegion }}
+                                    <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ substr($propiedades[$i]->nombreRegion,0,28) }}...
                                 </a>
                             </div>
                             <ul class="facilities-list clearfix">

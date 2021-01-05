@@ -1,4 +1,5 @@
 @extends('layouts.public.app')
+@section('title','Estadisticas')
 @section('content')
 <div class="counters overview-bgi">
     <div class="container">

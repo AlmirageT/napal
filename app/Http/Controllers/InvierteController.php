@@ -39,7 +39,6 @@ class InvierteController extends Controller
             
             $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
             $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
-            Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
 
             DB::commit();
             return view('confirmar',compact('propiedad','sinCaracteres','saldoDisponible'));
@@ -61,17 +60,71 @@ class InvierteController extends Controller
             return redirect::back();
         }
     }
-    public function verificarDatos(Request $request)
+    public function verificarDatos(Request $request,$idPropiedad)
     {
-        TrxIngreso::create([
-            'monto' => $request->saldo,
-            'webClient' => $_SERVER['HTTP_USER_AGENT'],
-            'idUsuario' => Session::get('idUsuario'),
-            'idMoneda' => 1,
-            'idEstado' => 1,
-            'idTipoMedioPago' => 1,
-            'idPropiedad' => Crypt::decrypt($idPropiedad)
-        ]);
-    	return redirect::to('exito');
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        DB::beginTransaction();
+        if ($request->metodoDeposito == 1) {
+            TrxIngreso::create([
+                'monto' => $request->saldo,
+                'webClient' => $_SERVER['HTTP_USER_AGENT'],
+                'idUsuario' => Session::get('idUsuario'),
+                'idMoneda' => 1,
+                'idEstado' => 1,
+                'idTipoMedioPago' => 1,
+                'idPropiedad' => Crypt::decrypt($idPropiedad)
+            ]);
+            $caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+            $sinCaracteres = str_replace($caracteresEspeciales, "", $request->sinCaracteres);
+            $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+            $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
+            Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
+            DB::commit();
+            return redirect::to('exito');
+        }
+        if ($request->metodoDeposito == 2) {
+            $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
+            if (count($saldoDisponible)>0) {
+                if ($saldoDisponible->first()->cantidadSaldoDisponible >= $request->sinCaracteres  ) {
+                    TrxIngreso::create([
+                        'monto' => $request->saldo,
+                        'webClient' => $_SERVER['HTTP_USER_AGENT'],
+                        'idUsuario' => Session::get('idUsuario'),
+                        'idMoneda' => 1,
+                        'idEstado' => 1,
+                        'idTipoMedioPago' => 1,
+                        'idPropiedad' => Crypt::decrypt($idPropiedad)
+                    ]);
+                    $nuevoValor = $saldoDisponible->first()->cantidadSaldoDisponible - $request->sinCaracteres;
+                    SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->update([
+                        'cantidadSaldoDisponible'=>$nuevoValor
+                    ]);
+                    $caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+                    $sinCaracteres = str_replace($caracteresEspeciales, "", $request->sinCaracteres);
+                    $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+                    Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
+                    DB::commit();
+                	return redirect::to('exito');
+                }else{
+                    $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+
+                    $caracteresEspecialesNombrePropiedad = array(" ");
+                    $nombreConGuion = str_replace($caracteresEspecialesNombrePropiedad, "-", $propiedad->nombrePropiedad);
+                    toastr()->warning('Debe tener dinero en su cuenta para realizar esta transacción','Ha surgido un error inesperado');
+                    DB::rollback();         
+                    return redirect::to('invierte/chile/propiedad/detalle?nombrePropiedad='.$nombreConGuion.'&idPropiedad='.$idPropiedad);
+                }
+            }else{
+                $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+
+                $caracteresEspecialesNombrePropiedad = array(" ");
+                $nombreConGuion = str_replace($caracteresEspecialesNombrePropiedad, "-", $propiedad->nombrePropiedad);
+                toastr()->warning('Debe tener dinero en su cuenta para realizar esta transacción','Ha surgido un error inesperado');
+                DB::rollback();         
+                return redirect::to('invierte/chile/propiedad/detalle?nombrePropiedad='.$nombreConGuion.'&idPropiedad='.$idPropiedad);
+            }
+        }
     }
 }

@@ -4,7 +4,9 @@ Detalle Mi Inversión
 @endsection
 @section('css')
 <style type="text/css">
-
+    html {
+      scroll-behavior: smooth;
+    }
 	.slick-slider-area{
 		margin-right: 15px;
 		margin-left: 10px;
