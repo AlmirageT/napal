@@ -1,4 +1,5 @@
 @extends('layouts.public.app')
+@section('title','Mis Promociones')
 <style type="text/css">
 	.card{
 		box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);

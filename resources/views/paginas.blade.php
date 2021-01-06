@@ -37,11 +37,10 @@
     <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block">
         <div class="property-box">
             <div class="property-thumbnail">
-                <a class="property-img">
                     <div class="listing-badges">
                         <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedadesTienda[$i]->idPropiedad }},{{ $i }})">
                             <i class="fa fa-map-marker" style="color:#fff"></i>
-                            <img src="" class="img-responsive" alt="Ver mapa" title="Ver mapa">
+                            <a class="img-responsive">Ver mapa</a>
                         </span>
                         <script type="text/javascript">
                             function pruebaId(idPropiedad, valor){
@@ -57,7 +56,7 @@
                             }
                         </script>
                         <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
-                            <img src="https://static.housers.com/assets/images/icons/icon-info-white.svg" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
+                            <img src="{{ asset('img_public/icon-info-white.svg') }}" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
                         </a>
                     </div>
 
@@ -86,7 +85,6 @@
                             </div>
                         </div>
                     </div>
-                </a>
             </div>
             <div class="detail">
                 <h1 class="title">
@@ -99,11 +97,11 @@
                 </div>
                 <ul class="facilities-list clearfix">
                     <li>
-                        {{ $propiedadesTienda[$i]->nombreTipoCalidad }}
+                        <strong class="{{ $propiedadesTienda[$i]->nombreClase }}">{{ $propiedadesTienda[$i]->nombreTipoCalidad }}</strong>
                     </li>
                     <li>
                         @if($propiedadesTienda[$i]->tieneChat == 1)
-                            Con Foro
+                            <i class="far fa-comments" style="font-size: 30px"></i>
                         @else
                             Sin Foro
                         @endif
@@ -112,22 +110,22 @@
                 @if($propiedadesTienda[$i]->idEstado == 4)
                     <div class="row">
                         <div class="col-lg-6">
-                            <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
+                            <p><strong>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                         </div>
                         <div class="col-lg-6" align="right">
-                            <p>${{ number_format($propiedadesTienda[$i]->precio,0,',','.') }}</p>
+                            <p><strong>${{ number_format($propiedadesTienda[$i]->precio,0,',','.') }}</strong></p>
                         </div>
                         <div class="col-lg-12">
                             <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                         </div>
                         <div class="col-lg-6">
                             @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversores</p>
+                                <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                             @else
                                 @if(count($arrayIdPropiedadSinDuplicar[0])==0)
-                                    <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversores</p>
+                                    <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                 @else
-                                    <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversor</p>
+                                    <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
                                 @endif
                             @endif
                         </div>
@@ -143,19 +141,19 @@
                 <hr>
                     <div class="row">
                         <div class="col-lg-6" align="center">
-                            <h4>{{ $propiedadesTienda[$i]->rentabilidadAnual }}%</h4>
-                            <p>Rentabilidad Anual</p>
+                            <h4><strong>{{ $propiedadesTienda[$i]->rentabilidadAnual }}%</strong></h4>
+                            <p><strong>Rentabilidad Anual</strong></p>
                         </div>
                         <div class="col-lg-6" align="center">
-                            <h4>{{ $propiedadesTienda[$i]->rentabilidadTotal }}%</h4>
-                            <p>Rentabilidad Total</p>
+                            <h4><strong>{{ $propiedadesTienda[$i]->rentabilidadTotal }}%</strong></h4>
+                            <p><strong>Rentabilidad Total</strong></p>
                         </div>
                     </div> 
                 <hr>  
             </div>
             <div class="footer clearfix">
                 <div class="pull-left days">
-                    <p><i class="flaticon-time"></i>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </p>
+                    <p><i class="flaticon-time"></i><strong>Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </strong></p>
                     
                 </div>
                 @if(Session::has('idUsuario'))
@@ -175,11 +173,11 @@
 
                 <div class="listing-badges">
                     <a class="cruz"  onclick="informacionRepetida({{ $i }})">
-                        <img src="https://static.housers.com/assets/images/icons/icon-close.png" style="margin-left: -8px;margin-top: 23px;">
+                        <i class="fas fa-times" style="color: #fbd334;font-size: 30px;margin-top: 17px;"></i>
                     </a>
                 </div>
                 <div class="detail">
-                    <h1 class="title" style="color: #1abc9c">MÁS INFORMACIÓN</h1><br>
+                    <h1 class="title" style="color: #fbd334">MÁS INFORMACIÓN</h1><br>
                     <div class="location">
                         <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
                         <br>

@@ -112,7 +112,7 @@ class ComunaController extends Controller
 	            $comuna->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de calidad: '.$request->nombreComuna.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
-        	return redirect::back();
+        	return redirect::to('napalm/comunas');
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();

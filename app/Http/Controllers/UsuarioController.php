@@ -228,13 +228,10 @@ class UsuarioController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'avatar' => 'max:102400',
                 'nombre'=>'required',
                 'apellido'=>'required',
                 'correo'=>'required|email',
                 'rut'=>'required',
-                'password'=>'required',
-                'confirm_password'=>'required',
                 'profesion'=>'required',
                 'idPais'=>'required',
                 'idRegion'=>'required',

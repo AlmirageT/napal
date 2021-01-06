@@ -12,6 +12,62 @@
 @section('title','Bienvenido')
 @section('css')
   <style>
+        .a{
+            background-color: #ECD74C;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .aa{
+            background-color: #FDFF2C;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .aaa{
+            background-color: #F7FF78;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+        .b{
+            background-color: #FFAD54;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .bb{
+            background-color: #F59C1E;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .bbb{
+            background-color: #F7B933;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .c{
+            background-color: #FF0404;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .cc{
+            background-color: #FF4D1D;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+        .ccc{
+            background-color: #FF5C03;
+            color: #333;
+            border-radius: 5px;
+            padding: 3px;
+        }
+
         .box {
             width: 100%;
             height: auto;
@@ -74,8 +130,8 @@
             margin-left: 264px;
         }
         .flex{
-            margin-left: 15px;
-            margin-top: 26px;
+            margin-left: 14px;
+            margin-top: 27px;
             font-size: 25px;
             color: white;
         }
@@ -102,7 +158,7 @@
         .cuadrado {
             width: 40px; 
             height: 40px; 
-            background: #1abc9c;
+            background: #fbd334 ;
             position: absolute;
             z-index: 1;
             margin-left: 110px;
@@ -391,12 +447,13 @@
     <br>
     <br>
     
-<div class="counters overview-bgi">
-
+<div class="" style="background-color: black">
+<br>
+<br>
     <div class="container">
         <div class="row">
             <div class="col-lg-12" align="center">
-                <h5 style="color: #fff;">{!! $misionEmpresa->textoMisionEmpresa !!}</h5>
+                <h5 style="color: #fbd334;">{!! $misionEmpresa->textoMisionEmpresa !!}</h5>
                 <br>
             </div>
         </div>
@@ -452,11 +509,11 @@
                             <div class="listing-badges">
                                 <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
                                     <i class="fa fa-map-marker" style="color:#fff"></i>
-                                    <img class="img-responsive" alt="Ver mapa" title="Ver mapa">
+                                    <a class="img-responsive" >Ver mapa</a>
                                 </span>
                                 
                                 <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
-                                    <img src="https://static.housers.com/assets/images/icons/icon-info-white.svg" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
+                                    <img src="{{ asset('img_public/icon-info-white.svg') }}" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
                                 </a>
                             </div>
                             {{-- 
@@ -505,11 +562,12 @@
                             </div>
                             <ul class="facilities-list clearfix">
                                 <li>
-                                    {{ $propiedades[$i]->nombreTipoCalidad }}
+                                    <strong class="{{ $propiedades[$i]->nombreClase }}">{{ $propiedades[$i]->nombreTipoCalidad }}</strong>
                                 </li>
+                                <li></li>
                                 <li>
                                     @if($propiedades[$i]->tieneChat == 1)
-                                        Con Foro
+                                        <i class="far fa-comments" style="font-size: 30px"></i>
                                     @else
                                         Sin Foro
                                     @endif
@@ -517,22 +575,22 @@
                             </ul>
                             <div class="row">
                                 <div class="col-lg-6" align="left">
-                                    <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
+                                    <p><strong>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                                 </div>
                                 <div class="col-lg-6" align="right">
-                                    <p>${{ number_format($propiedades[$i]->precio,0,',','.') }}</p>
+                                    <p><strong>${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
                                 </div>
                                 <div class="col-lg-12">
                                     <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                                 </div>
                                 <div class="col-lg-6">
                                     @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                        <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversores</p>
+                                        <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                     @else
                                         @if(count($arrayIdPropiedadSinDuplicar[0])==0)
-                                            <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversores</p>
+                                            <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                         @else
-                                            <p>{{ count($arrayIdPropiedadSinDuplicar[0]) }} inversor</p>
+                                            <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
                                         @endif
                                     @endif
                                 </div>
@@ -547,24 +605,24 @@
                             <hr>
                                 <div class="row">
                                     <div class="col-lg-6" align="center">
-                                        <h4>{{ $propiedades[$i]->rentabilidadAnual }}%</h4>
-                                        <p>Rentabilidad Anual</p>
+                                        <h4><strong>{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
+                                        <p><strong>Rentabilidad Anual</strong></p>
                                     </div>
                                     <div class="col-lg-6" align="center">
-                                        <h4>{{ $propiedades[$i]->rentabilidadTotal }}%</h4>
-                                        <p>Rentabilidad Total</p>
+                                        <h4><strong>{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
+                                        <p><strong>Rentabilidad Total</strong></p>
                                     </div>
                                 </div> 
                             <hr>  
                             <div class="row" align="center">
                                 <div class="col-lg-12">
-                                    <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" class="btn btn-primary">Invierte</a>
+                                    <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" class="btn btn-warning"><strong style="color: black">Invierte</strong></a>
                                 </div>
                             </div>
                         </div>
                         <div class="footer clearfix">
                             <div class="pull-left days" align="center">
-                                <p><i class="flaticon-time"></i>Plazo: {{ $propiedades[$i]->plazoMeses }} meses </p>
+                                <p><i class="flaticon-time"></i><strong>Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
                             </div>
                             @if(Session::has('idUsuario'))
                                 <ul class="pull-right">
@@ -583,11 +641,11 @@
 
                             <div class="listing-badges">
                                 <a class="cruz"  onclick="informacionRepetida({{ $i }})">
-                                    <img src="https://static.housers.com/assets/images/icons/icon-close.png" style="margin-left: -8px;margin-top: 23px;">
+                                    <i class="fas fa-times" style="color: #fbd334;font-size: 30px;margin-top: 17px;"></i>
                                 </a>
                             </div>
                             <div class="detail">
-                                <h1 class="title" style="color: #1abc9c">MÁS INFORMACIÓN</h1><br>
+                                <h1 class="title" style="color: #fbd334">MÁS INFORMACIÓN</h1><br>
                                 <div class="location">
                                     <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
                                     <br>
@@ -617,7 +675,7 @@
         
     </div>
     <div class="container" align="center">
-        <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-primary">Invierte</a>
+        <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-warning"><strong style="color: black">Invierte</strong></a>
     </div>
 </div>
 <!-- Featured Properties end -->

@@ -202,7 +202,6 @@ class PropiedadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPrincipal' => 'max:102400',
                 'nombrePropiedad' => 'required',
                 'idPais' => 'required',
                 'idRegion' => 'required',
@@ -238,7 +237,7 @@ class PropiedadController extends Controller
                 'baños' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB, no debe dejar los datos vacios');
+                toastr()->info('No debe dejar los datos vacios');
                 return back();
             }
             DB::beginTransaction();

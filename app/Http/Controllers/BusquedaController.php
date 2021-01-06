@@ -879,6 +879,7 @@ class BusquedaController extends Controller
 		if(empty($request->input('search.value')))
 		{
 			$usuarios = Usuario::select('*')
+				->where('activarCuenta',1)
 				->offset($start)
 				->limit($limit)
 				->orderBy($order,$dir)
@@ -886,6 +887,7 @@ class BusquedaController extends Controller
 		}else{
 			$search = $request->input('search.value');
 			$usuarios = Usuario::select('*')
+				->where('activarCuenta',1)
 		    	->where('tokenCorto',$search)
 				->offset($start)
 				->limit($limit)
@@ -893,6 +895,7 @@ class BusquedaController extends Controller
 				->get();
 
 			$totalFiltered = Usuario::select('*')
+				->where('activarCuenta',1)
 		        ->where('tokenCorto',$search)
 				->count();
 		}

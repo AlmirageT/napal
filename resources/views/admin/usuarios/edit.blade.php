@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @section('title')
-Crear Usuario
+Editar Usuario
 @endsection
 @section('content')
 <div class="container">

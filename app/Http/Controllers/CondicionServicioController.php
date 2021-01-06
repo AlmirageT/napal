@@ -103,7 +103,7 @@ class CondicionServicioController extends Controller
 	            cache::forget('condicionServicio');
 	        }
             $validator = Validator::make($request->all(), [
-                'rutaCondicionServicio' => 'required|max:102400',
+                'rutaCondicionServicio' => 'max:102400',
                 'nombrePDFCondicionServicio' => 'required'
             ]);
             if ($validator->fails()) {

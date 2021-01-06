@@ -9,6 +9,7 @@ class TipoCalidad extends Model
     protected $table = 'tipos_calidades';
     protected $primaryKey = 'idTipoCalidad';
     protected $fillable = [
-    	'nombreTipoCalidad'
+    	'nombreTipoCalidad',
+    	'nombreClase'
     ];
 }

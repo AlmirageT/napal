@@ -18,6 +18,7 @@ Tipos Calidades
 				    <tr>
 			          <th>ID</th>
 				      <th>Nombre</th>
+				      <th>Clase</th>
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
@@ -26,6 +27,7 @@ Tipos Calidades
 					    <tr>
 					      <td>{{ $tipoCalidad->idTipoCalidad }}</td>
 					      <td>{{ $tipoCalidad->nombreTipoCalidad }}</td>
+					      <td>{{ $tipoCalidad->nombreClase }}</td>
 					      <td>
 					      	<div class="dropdown">
 		                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">

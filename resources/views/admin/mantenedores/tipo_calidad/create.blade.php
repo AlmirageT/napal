@@ -19,6 +19,12 @@
                             {!!Form::text('nombreTipoCalidad',null,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Nombre Clase</label>
+                            {!!Form::text('nombreClase',null,['class'=>"form-control", 'placeholder'=>"Ingrese un nombre..." , 'required'])!!}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

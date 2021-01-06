@@ -83,7 +83,13 @@ class WelcomeController extends Controller
         $ingresos = TrxIngreso::all();
         $valorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
         $propiedadesFavoritas = PropiedadFavorita::all();
-        
+        $totalPropiedades = Propiedad::where('idEstado',5)->get();
+        $promedioTir = 0;
+        foreach ($totalPropiedades as $totalPropiedad) {
+            $promedioTir = $promedioTir + $totalPropiedad->rentabilidadAnual;
+        }
+
+        $promedioFinal = $promedioTir/count($totalPropiedades);
         return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio','propiedadesFavoritas'));
     }
     public function obtenerPropiedad(Request $request, $idPropiedad)

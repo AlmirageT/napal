@@ -105,7 +105,7 @@ class ProvinciaController extends Controller
 	            $provincia->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de calidad: '.$request->nombreProvincia.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
-        	return redirect::back();
+        	return redirect::to('napalm/provincias');
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();

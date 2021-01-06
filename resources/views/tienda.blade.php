@@ -3,6 +3,61 @@
 @section('title','Tienda')
 @section('css')
 <style type="text/css">
+    .a{
+        background-color: #ECD74C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aa{
+        background-color: #FDFF2C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aaa{
+        background-color: #F7FF78;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+
+    .b{
+        background-color: #FFAD54;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bb{
+        background-color: #F59C1E;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bbb{
+        background-color: #F7B933;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .c{
+        background-color: #FF0404;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .cc{
+        background-color: #FF4D1D;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .ccc{
+        background-color: #FF5C03;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
     .circulo {
         width: 80px;
         height: 80px;
@@ -15,8 +70,8 @@
         margin-left: 264px;
     }
     .flex{
-        margin-left: 15px;
-        margin-top: 26px;
+        margin-left: 14px;
+        margin-top: 27px;
         font-size: 25px;
         color: white;
     }
@@ -43,7 +98,7 @@
     .cuadrado {
         width: 40px; 
         height: 40px; 
-        background: #1abc9c;
+        background: #fbd334;
         position: absolute;
         z-index: 1;
         margin-left: 110px;

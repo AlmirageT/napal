@@ -39,6 +39,6 @@ class EnvioConsulta extends Mailable
         $asunto = $this->asunto;
         $mensaje = $this->mensaje;
 
-        return $this->from($email)->subject($asunto)->view('mail.consultaEmail',compact('nombre','mensaje','email'));
+        return $this->from($email)->subject($asunto)->view('mail.consultaEmail',compact('nombre','mensaje','email','asunto'));
     }
 }

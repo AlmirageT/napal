@@ -120,7 +120,6 @@ class ProyectoController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPortada' => 'required|max:102400',
                 'nombreProyecto' => 'required',
                 'idPais' => 'required',
                 'idRegion' => 'required',
@@ -133,7 +132,7 @@ class ProyectoController extends Controller
                 'longitud' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB, los datos no puede venir vacios');
+                toastr()->info('Los datos no puede venir vacios');
                 return back();
             }
             DB::beginTransaction();

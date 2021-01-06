@@ -33,7 +33,7 @@ class ContactaConNosotrosController extends Controller
         	$asunto = $request->asunto;
         	$mensaje = $request->mensaje;
 
-            Mail::to('saezsotoivan@gmail.com')->send(new EnvioConsulta($nombre, $email, $asunto, $mensaje));
+            Mail::to('contacto@rifomipropiedad.com')->send(new EnvioConsulta($nombre, $email, $asunto, $mensaje));
             Mail::to($email)->send(new ConfirmarEnvio($asunto, $nombre, $mensaje));
             toastr()->info('Mensaje enviado correctamente, revise su correo');
         	return back();
@@ -42,6 +42,8 @@ class ContactaConNosotrosController extends Controller
             return back();
         } catch (\Exception $e) { // catch para Mail
             toastr()->warning('No se ha podido enviar la notificacion de correo, favor intente nuevamente' . $e->getMessage());
+            return back();
+            
         }
     }
 }

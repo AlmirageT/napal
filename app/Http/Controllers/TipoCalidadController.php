@@ -31,7 +31,8 @@ class TipoCalidadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'nombreTipoCalidad' => 'required'
+                'nombreTipoCalidad' => 'required',
+                'nombreClase'=>'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('Los datos no pueden estar vacios');
@@ -65,7 +66,8 @@ class TipoCalidadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'nombreTipoCalidad' => 'required'
+                'nombreTipoCalidad' => 'required',
+                'nombreClase'=>'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('Los datos no pueden estar vacios');
