@@ -30,7 +30,7 @@ class LoginController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'correo' => 'required',
+                'correo' => 'required|email',
                 'password' => 'required'
             ]);
             if ($validator->fails()) {

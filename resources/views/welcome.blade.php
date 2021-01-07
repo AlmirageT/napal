@@ -71,9 +71,7 @@
         .box {
             width: 100%;
             height: auto;
-            border: solid 2px #000;
-
-          
+            border: solid 1px #fbd334;
         }
         .footer-box {
             display: flex;
@@ -97,7 +95,7 @@
             padding: 10px;
             align-items: center;
             width: 50%;
-            border-right: solid 1px #000; 
+            border-right: solid 1px #fbd334;
         }
 
           .cajas1 {
@@ -503,7 +501,7 @@
                     $arrayIdPropiedadSinDuplicar = array();
                     array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
                 @endphp
-                <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block">
+                <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block;">
                     <div class="property-box">
                         <div class="property-thumbnail">
                             <div class="listing-badges">
@@ -550,22 +548,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="detail">
+                        <div class="detail" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
                             <h1 class="title">
                                 {{-- <a href="{{ asset('detalle') }}/{{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a> --}}
                                 <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
                             </h1>
-                            <div class="location">
-                                <a >
+                            <div class="location" style="color: #fbd334">
+                                <a style="color: #fbd334">
                                     <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ substr($propiedades[$i]->nombreRegion,0,28) }}...
                                 </a>
                             </div>
                             <ul class="facilities-list clearfix">
                                 <li>
-                                    <strong class="{{ $propiedades[$i]->nombreClase }}">{{ $propiedades[$i]->nombreTipoCalidad }}</strong>
+                                    <strong  class="{{ $propiedades[$i]->nombreClase }}">{{ $propiedades[$i]->nombreTipoCalidad }}</strong>
                                 </li>
                                 <li></li>
-                                <li>
+                                <li style="color: #fbd334">
                                     @if($propiedades[$i]->tieneChat == 1)
                                         <i class="far fa-comments" style="font-size: 30px"></i>
                                     @else
@@ -575,42 +573,42 @@
                             </ul>
                             <div class="row">
                                 <div class="col-lg-6" align="left">
-                                    <p><strong>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
+                                    <p><strong style="color: #fbd334">${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                                 </div>
                                 <div class="col-lg-6" align="right">
-                                    <p><strong>${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
+                                    <p><strong style="color: #fbd334">${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
                                 </div>
                                 <div class="col-lg-12">
                                     <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                                 </div>
                                 <div class="col-lg-6">
                                     @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                        <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                        <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                     @else
                                         @if(count($arrayIdPropiedadSinDuplicar[0])==0)
-                                            <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                            <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                         @else
-                                            <p><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
+                                            <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
                                         @endif
                                     @endif
                                 </div>
                                 <div class="col-lg-6" align="right">
                                     @if($diff->days>0)
-                                        <p> {!! $diff->days !!} días </p>
+                                        <p style="color: #fbd334"> {!! $diff->days !!} días </p>
                                     @else
-                                        <p>Finalizado </p>
+                                        <p style="color: #fbd334">Finalizado </p>
                                     @endif
                                 </div>
                             </div>
                             <hr>
                                 <div class="row">
                                     <div class="col-lg-6" align="center">
-                                        <h4><strong>{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
-                                        <p><strong>Rentabilidad Anual</strong></p>
+                                        <h4><strong style="color: #fbd334">{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
+                                        <p><strong style="color: #fbd334">Rentabilidad Anual</strong></p>
                                     </div>
                                     <div class="col-lg-6" align="center">
-                                        <h4><strong>{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
-                                        <p><strong>Rentabilidad Total</strong></p>
+                                        <h4><strong style="color: #fbd334">{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
+                                        <p><strong style="color: #fbd334">Rentabilidad Total</strong></p>
                                     </div>
                                 </div> 
                             <hr>  
@@ -620,9 +618,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="footer clearfix">
+                        <div class="footer clearfix" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
                             <div class="pull-left days" align="center">
-                                <p><i class="flaticon-time"></i><strong>Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
+                                <p><i style="color: #fbd334" class="flaticon-time"></i><strong style="color: #fbd334">Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
                             </div>
                             @if(Session::has('idUsuario'))
                                 <ul class="pull-right">
@@ -675,11 +673,11 @@
         
     </div>
     <div class="container" align="center">
-        <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-warning"><strong style="color: black">Invierte</strong></a>
+        <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-outline-warning"><strong style="color: black">Invierte</strong></a>
     </div>
 </div>
 <!-- Featured Properties end -->
-<div class="counters overview-bgi">
+<div class="counters overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidas1-02.jpg') }}')">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
@@ -688,7 +686,7 @@
                         <i class="flaticon-tag"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">967</h1>
+                        <h1 class="">{{ $promedioFinal }}%</h1>
                         <p>TIR MEDIA PLATAFORMA</p>
                     </div>
                 </div>
@@ -699,7 +697,7 @@
                         <i class="flaticon-business"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">1276</h1>
+                        <h1 class="">${{ number_format($valorTotal,0,',','.') }}</h1>
                         <p>CIFRA DE INVERSIÓN ACUMULADA</p>
                     </div>
                 </div>
@@ -721,7 +719,7 @@
                         <i class="flaticon-people-1"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">177</h1>
+                        <h1 class="">{{ number_format(count($usuarios),0,',','.') }}</h1>
                         <p>N° DE USUARIOS REGISTRADOS</p>
                     </div>
                 </div>
@@ -753,17 +751,13 @@
             <div class="row slick-carousel" data-slick='{"slidesToShow": 2, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
                 @if(count($casosExitosos) > 0)
                     @foreach($casosExitosos as $casoExitoso)
-                        <div class="slick-slide-item">
-                            <div class="row team-4">
-                                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
-                                    <div class="photo">
-                                        <img src="{{ asset($casoExitoso->imagenCasoExito) }}" alt="avatar-10" height="268" width="224">
-                                    </div>
-                                </div>
+                        <div class="slick-slide-item" >
+                            <div class="row team-4" style="background-image: url('{{ asset('img_public/paginaesmidas2-02.jpg') }}')">
                                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
+                                    <br>
                                     <div class="detail">
-                                        <h4>Caso de Exito</h4>
-                                        <h3>
+                                        <h4 style="color: #fbd334">Caso de Exito</h4>
+                                        <h3 style="color: #fbd334">
                                            {{ $casoExitoso->nombrePropiedad }}
                                         </h3>
                                             <!-- Cajita -->
@@ -771,17 +765,17 @@
                                             <div class="box">
                                                 <div class="contenedor-box">
                                                   <div class="cajas" align="center">
-                                                   <p class="dato">{{ $casoExitoso->rentabilidadAnual }}% <br> TIR estimada</p>
+                                                   <p class="dato" style="color: #fbd334">{{ $casoExitoso->rentabilidadAnual }}% <br> TIR estimada</p>
                                                   </div>
                                                      
                                                     <div class="cajas1" align="center">
-                                                        <p class="dato">{{ $casoExitoso->rentabilidadTotal }}% <br>TIR entregada</p>
+                                                        <p class="dato" style="color: #fbd334">{{ $casoExitoso->rentabilidadTotal }}% <br>TIR entregada</p>
                                                     </div>
                                                 </div>
-                                                <hr>
+                                                <hr style="border-top: 1px solid #fbd334">
                                                 <div class="footer-box">
-                                                    <p class="dato">8'27%</p>
-                                                      <p class="footer-texto" style="color: red">RENTABILIDAD NETA ACUMULADA </p>
+                                                    <p class="dato" style="color: #fbd334">8'27%</p>
+                                                      <p class="footer-texto" style="color: #fbd334">RENTABILIDAD NETA ACUMULADA </p>
                                                 </div>
                                             </div>
                                             {{-- 
@@ -807,6 +801,30 @@
                                             <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
                                         </ul>
                                         --}}
+                                    </div>
+                                </div>
+                                <style>
+                                    .imagen-propiedad{
+                                        border: 1px solid yellow;
+                                        margin-left: -12px;
+                                        height: 287px;
+                                        width: 287px;
+                                    }
+                                    @media only screen and (min-width:320px) and (max-width: 450px) {
+                                        .imagen-propiedad{
+                                            border: 2px solid yellow;
+                                            width: 94% !important;
+                                            margin-left: 8px;
+                                            margin-top: -38px;
+                                        }
+                                    }
+
+                                </style>
+                                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
+                                    <br>
+                                    <div class="photo">
+                                        <img class="imagen-propiedad" src="{{ asset($casoExitoso->imagenCasoExito) }}" >
+                                        <br>
                                     </div>
                                 </div>
                             </div>
@@ -842,7 +860,7 @@
                                     </div>
 
                                     <div class="contact">
-                                        <a href="" class="btn btn-primary">Registrate</a>
+                                        <a href="" class="btn btn-outline-warning">Registrate</a>
                                     </div>
                                 </div>
                             </div>
@@ -938,7 +956,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12" align="center">
-            <a href="{{ asset('registro') }}" class="btn btn-primary">Registrate</a>
+            <a href="{{ asset('registro') }}" class="btn btn-outline-warning"><strong>Registrate</strong></a>
             <br>
         </div>
     </div>
@@ -963,7 +981,7 @@
                 <h1>Únicos, la primera plataforma pan-europea de inversión inmobiliaria.</h1>
                 <p>España, Italia y Portugal a un solo clic. <br>Empieza ya, pon tu dinero a trabajar. <br></p>
                 <div align="center">
-                    <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-danger"><small>INVIERTE</small></a>
+                    <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-outline-warning"><small style="color: black">INVIERTE</small></a>
                 </div>
                 <br>
             </div>

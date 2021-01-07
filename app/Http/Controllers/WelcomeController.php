@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\ImagenCarrusel;
-use App\Propiedad;
-use App\CasoExitoso;
-use App\RedSocial;
-use App\MisionEmpresa;
-use App\ParametroGeneral;
-use App\TrxIngreso;
 use App\PropiedadFavorita;
+use App\ParametroGeneral;
+use App\ImagenCarrusel;
+use App\MisionEmpresa;
+use App\CasoExitoso;
+use App\TrxIngreso;
+use App\Propiedad;
+use App\RedSocial;
+use App\Usuario;
 use Cache;
 
 class WelcomeController extends Controller
@@ -81,16 +82,24 @@ class WelcomeController extends Controller
         }
 
         $ingresos = TrxIngreso::all();
+        $ingresosFinanciados = TrxIngreso::select('*')
+            ->join('propiedades','trx_ingresos.idPropiedad','=','propiedades.idPropiedad')
+            ->where('propiedades.idEstado',5)
+            ->get();
         $valorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
         $propiedadesFavoritas = PropiedadFavorita::all();
         $totalPropiedades = Propiedad::where('idEstado',5)->get();
+        $usuarios = Usuario::where('idTipoUsuario',2)->get();
         $promedioTir = 0;
+        $valorTotal = 0;
         foreach ($totalPropiedades as $totalPropiedad) {
             $promedioTir = $promedioTir + $totalPropiedad->rentabilidadAnual;
         }
-
         $promedioFinal = $promedioTir/count($totalPropiedades);
-        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio','propiedadesFavoritas'));
+        foreach ($ingresosFinanciados as $ingresoFinanciado) {
+            $valorTotal = $valorTotal + $ingresoFinanciado->monto;
+        }
+        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio','propiedadesFavoritas','promedioFinal','valorTotal','usuarios'));
     }
     public function obtenerPropiedad(Request $request, $idPropiedad)
     {

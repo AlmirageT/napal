@@ -3,7 +3,7 @@
                                     <table style="font-family: Arial,Helvetica,sans-serif; font-size: 15px; color: #483b3e" width="660" cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
                                             <tr>
-                                                <td style="border-bottom: 1px solid #91ccc9">
+                                                <td style="border-bottom: 1px solid #fbd334">
                                                     <img src="https://www.housers.com/img/mails/housers-spacer.gif" height="15">
                                                 </td>
                                             </tr>
@@ -43,7 +43,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="border-bottom: 1px solid #91ccc9">
+                                                <td style="border-bottom: 1px solid #fbd334">
                                                     <img src="https://www.housers.com/img/mails/housers-spacer.gif" height="56">
                                                 </td>
                                             </tr>
@@ -82,7 +82,7 @@
                                     <strong>*·Invierte en activos que puedes ver y tocar*</strong>
                                     {{-- 
                                     <br>
-                                    Invertir ahora. <a href="https://mailtrack.io/trace/link/bc1b715636590eb02a8e89a5330ea5ad65fd5505?url=https%3A%2F%2Fwww.housers.com%2Fes%3Futm_source%3Dmailchimp%26utm_medium%3Demail_campaign%26utm_campaign%3Dagosto2017&amp;userId=5850591&amp;signature=78075b3a5d4f71f4" style="color: #91ccc9; font-weight: bold" target="_blank" rel="noreferrer">Haz click aquí</a>
+                                    Invertir ahora. <a href="https://mailtrack.io/trace/link/bc1b715636590eb02a8e89a5330ea5ad65fd5505?url=https%3A%2F%2Fwww.housers.com%2Fes%3Futm_source%3Dmailchimp%26utm_medium%3Demail_campaign%26utm_campaign%3Dagosto2017&amp;userId=5850591&amp;signature=78075b3a5d4f71f4" style="color: #fbd334; font-weight: bold" target="_blank" rel="noreferrer">Haz click aquí</a>
                                      --}}
                                 </td>
                             </tr>

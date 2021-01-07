@@ -3,7 +3,7 @@
 Login
 @endsection
 @section('content')
-<div class="contact-section overview-bgi">
+<div class="contact-section overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidaspantalla-02.jpg') }}');">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

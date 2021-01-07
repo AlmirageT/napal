@@ -153,7 +153,7 @@
                 <div class="row">
 
                     <div class="col-md-12 text-center">
-                        <a href="{{ asset('como-funciona') }}" class="btn btn-primary">¿Cómo funciona?</a>
+                        <a href="{{ asset('como-funciona') }}" class="btn btn-outline-warning"><strong>¿Cómo funciona?</strong></a>
                     </div>
                 </div>
             </div>

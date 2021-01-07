@@ -1293,7 +1293,7 @@ input[type=checkbox]:checked + label:before {
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
-    color: #FFF;
+    color: #000000;
     transition: .5s;
     border-radius: 2px;
     border: none;
@@ -5731,13 +5731,13 @@ blockquote {
 }
 
 .tabbing-box .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #fbd334;
+    color: #000000;
     border-radius: 0;
 }
 
 .tabbing-box .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover {
     border-radius: 0;
-    color: #fbd334;
+    color: #000000;
 }
 
 .tabbing-box .nav-tabs .nav-link {

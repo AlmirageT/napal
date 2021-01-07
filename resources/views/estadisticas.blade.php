@@ -1,11 +1,11 @@
 @extends('layouts.public.app')
 @section('title','Estadisticas')
 @section('content')
-<div class="counters overview-bgi">
+<div class="counters overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidas1-02.jpg') }}')">
     <div class="container">
         <div class="row">
         	<div class="col-lg-12 col-md-12 col-sm-12" align="center">
-        		<h3>Apostamos por la total transparencia</h3>
+        		<h3 style="color: #fbd334">Apostamos por la total transparencia</h3>
         	<br>
         	<br>
         	</div>
@@ -15,7 +15,7 @@
                         <i class="flaticon-tag"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">967</h1>
+                        <h1 class="">{{ $promedioFinal }}%</h1>
                         <p>TIR MEDIA PLATAFORMA</p>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                         <i class="flaticon-business"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">1276</h1>
+                        <h1 class="">${{ number_format($valorTotal,0,',','.') }}</h1>
                         <p>CIFRA DE INVERSIÓN ACUMULADA</p>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                         <i class="flaticon-people"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">396</h1>
+                        <h1 class="">396</h1>
                         <p>RENDIMIENTO REPARTIDOS + DEVOLUCIÓN + DE CAPITAL + CCD</p>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <i class="flaticon-people-1"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">177</h1>
+                        <h1 class="">{{ number_format(count($usuarios),0,',','.') }}</h1>
                         <p>N° DE USUARIOS REGISTRADOS</p>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <i class="flaticon-tag"></i>
                 </div>
                 <div class="media-body">
-                    <h1 class="counter" style="color: black">967</h1>
+                    <h1 class="" style="color: black">{{ $promedioFinal }}%</h1>
                     <p style="color: black">TIR MEDIA PLATAFORMA</p>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     <i class="flaticon-business"></i>
                 </div>
                 <div class="media-body">
-                    <h1 class="counter" style="color: black">1276</h1>
+                    <h1 class="" style="color: black">${{ number_format($valorTotal,0,',','.') }}</h1>
                     <p style="color: black">CIFRA DE INVERSIÓN ACUMULADA</p>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                     <i class="flaticon-people-1"></i>
                 </div>
                 <div class="media-body">
-                    <h1 class="counter" style="color: black">177</h1>
+                    <h1 class="" style="color: black">{{ number_format(count($usuarios),0,',','.') }}</h1>
                     <p style="color: black">N° DE USUARIOS REGISTRADOS</p>
                 </div>
             </div>

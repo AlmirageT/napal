@@ -44,7 +44,7 @@ class RegistroController extends Controller
                 'nombre'=> 'required',
                 'apellido'=> 'required',
                 'numero'=> 'required',
-                'correo'=> 'required',
+                'correo'=> 'required|email',
                 'rut'=> 'required',
                 'password'=> 'required',
                 'condiciones'=>'required',

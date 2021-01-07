@@ -3,15 +3,15 @@
 Registrarse
 @endsection
 @section('content')
-<div class="contact-section overview-bgi">
+<div class="contact-section overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidaspantalla-02.jpg') }}');">
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
                 <div class="form-content-box">
-                    <a class=" d-block d-sm-block d-md-block d-lg-none">
+                    <a class=" d-block d-sm-block d-md-block d-lg-none" href="{{ asset('/') }}">
                         <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo">
                     </a>
-                    <a>
+                    <a href="{{ asset('/') }}">
                         <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
@@ -94,14 +94,14 @@ Registrarse
             </div>
             <div class="col-lg-2 d-none d-sm-none d-md-none d-lg-block">
               <div class="form-content-box">
-                <a href="">
+                <a href="{{ asset('/') }}">
                     <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo">
                 </a>
               </div>
             </div>
             <div class="col-lg-5 d-none d-sm-none d-md-none d-lg-block">
                 <div class="form-content-box">
-                    <a href="">
+                    <a href="{{ asset('/') }}">
                         <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
