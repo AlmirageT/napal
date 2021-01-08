@@ -378,7 +378,6 @@
                                     <p data-animation="animated fadeInUp delay-10s">
                                         
                                     </p>
-                                    <a href="" class="btn btn-white"></a>
                                 </div>
                             </div>
                         </div>
@@ -393,7 +392,6 @@
                                         <p data-animation="animated fadeInUp delay-10s">
                                             
                                         </p>
-                                        <a href="" class="btn btn-white"></a>
                                     </div>
                                 </div>
                             </div>
