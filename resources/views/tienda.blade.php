@@ -70,10 +70,10 @@
         margin-left: 264px;
     }
     .flex{
-        margin-left: 14px;
         margin-top: 27px;
         font-size: 25px;
         color: white;
+        text-align: center;
     }
     .rectangulo {
         width: 150px; 

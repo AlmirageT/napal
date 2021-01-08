@@ -34,7 +34,7 @@
         $arrayIdPropiedadSinDuplicar = array();
         array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
     @endphp
-    <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block">
+    <div class="col-lg-4 col-sm-6" id="cartaPropiedad{{ $i }}" style="display: block">
         <div class="property-box">
             <div class="property-thumbnail">
                     <div class="listing-badges">
@@ -168,7 +168,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4" id="cartaInformacion{{ $i }}" style="display: none">
+    <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $i }}" style="display: none">
         <div class="property-box">
 
                 <div class="listing-badges">

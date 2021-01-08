@@ -61,6 +61,7 @@
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/oportunidades') }}">Invierte</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/mis-inversiones') }}">Mis inversiones</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/mi-cuenta') }}">Mi cuenta</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard/favoritos') }}">Favoritos</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/documentos-informes') }}">Documentos e informes</a></li>
                             </ul>
                         </li>

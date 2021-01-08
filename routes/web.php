@@ -45,11 +45,14 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::get('mis-datos/datos-adicionales','MisDatosController@cambioDatos');
     Route::view('mis-datos/mis-promociones','public.misPromociones');
     Route::get('mi-cuenta/movimientos','MiCuentaController@todosLosMovimientos');
+    Route::post('mi-cuenta/movimientos','MiCuentaController@buscadorTodosLosMovimientos');
+    Route::get('exportar/excel/instrucciones-bancarias','MiCuentaController@exportar');
     Route::view('promo-amigo','public.invitaUnAmigo');
     Route::get('mi-cuenta/cuentas-bancarias','MiCuentaController@cuentaAsociada');
     Route::get('mi-cuenta/cuentas-bancarias/nueva','CuentaBancariaController@index');
     Route::get('mi-cuenta/ingresos','SaldoDisponibleController@index');
     Route::get('mi-cuenta/retiros','MiCuentaController@retiro');
+    Route::get('favoritos','PropiedadFavoritaController@favoritos');
     //vistas fallor exito
     Route::view('fallo','public.paypal.fallo');
     Route::view('exito','public.paypal.exito');

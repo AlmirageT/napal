@@ -74,7 +74,7 @@
             margin-left: 12px;
         }
         .aux-iphone{
-            margin-top: 1097px;
+            margin-top: 3376px;
             width: 192px;
         }
         @media only screen and (max-width: 1199px) {
@@ -88,11 +88,11 @@
             }
             .aux{
                 width: 414px;
-                margin-top: 807px;
+                margin-top: 756px;
                 margin-left: 96px;
             }
             .aux-iphone{
-                margin-top: 1177px;
+                margin-top: 3475px;
                 width: 192px;
             }
         }
@@ -104,13 +104,13 @@
                 <div>
                     <img class="imagen-ipad-estatica" src="{{ asset('img_public/ipad.png') }}">
                     <div class="ipad-content" id="ipad-content">
-                        <img class="aux" src="{{ asset('img_public/ipad_content_es.png') }}" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+                        <img class="aux" src="{{ asset('img_public/estadisticas-web.png') }}" style="transform: matrix(1, 0, 0, 1, 0, 0);">
                     </div>
                 </div>
                 <div id="div-iphone">
                     <img class="lazy img-responsive-iphone" src="{{ asset('img_public/iphone.png') }}">
                     <div class="iphone-content" id="iphone-content">
-                        <img class="aux-iphone" src="{{ asset('img_public/iphone_content_es.png') }}" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+                        <img class="aux-iphone" src="{{ asset('img_public/estadisticas-celular.png') }}" style="transform: matrix(1, 0, 0, 1, 0, 0);">
                     </div>
                 </div>
             </div>

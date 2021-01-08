@@ -9,6 +9,8 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InstruccionBancariaExport;
 use App\CuentaBancariaUsuario;
 use App\InstruccionBancaria;
 use App\SaldoDisponible;
@@ -144,5 +146,35 @@ class MiCuentaController extends Controller
 
         return view('public.misMovimientos',compact('instruccionesBancarias'));
 
+    }
+    public function buscadorTodosLosMovimientos(Request $request)
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        $validator = Validator::make($request->all(), [
+            'solicitudes' => 'required',
+            'fechaInicio' => 'required',
+            'fechaFinal' => 'required'
+        ]);
+        if ($validator->fails()) {
+            toastr()->info('Los datos no deben quedar datos en blanco');
+            return back();
+        }
+        $instruccionesBancarias = InstruccionBancaria::select('*')
+        ->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+        ->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+        ->where('cuentas_bancarias_usuarios.idUsuario',Session::get('idUsuario'))
+        ->where('instrucciones_bancarias.validado',$request->solicitudes)
+        ->whereBetween('instrucciones_bancarias.created_at',[$request->fechaInicio,$request->fechaFinal])
+        ->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+        ->paginate(10);
+
+        return view('public.misMovimientos',compact('instruccionesBancarias'));
+
+    }
+    public function exportar()
+    {
+        return Excel::download(new InstruccionBancariaExport, 'Instrucciones Bancarias.xlsx');
     }
 }

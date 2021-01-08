@@ -14,33 +14,46 @@ Mis Movimientos
 		<div class="col-lg-12" align="center"><h4>Mis movimientos</h4><br><br></div>
 		<div class="col-lg-12">
 			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="row">
-								<div class="col-lg-3">
-									<select class="form-control">
-										<option>Tipo</option>
-									</select>
-								</div>
-								<div class="col-lg-3">
-									<select class="form-control">
-										<option>Oportunidad</option>
-									</select>
-								</div>
-								<div class="col-lg-2">
-									<input type="date" name="" class="form-control">
-								</div>
-								<div class="col-lg-2">
-									<input type="date" name="" class="form-control">
-								</div>
-								<div class="col-lg-2" align="right">
-									<button class="btn btn-danger"><small>BUSCAR</small></button>
+				<form action="{{ asset('dashboard/mi-cuenta/movimientos') }}" method="post">
+					@csrf
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="row">
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label for="">Solicitudes</label>
+											<select class="form-control" name="solicitudes" required>
+												<option>Seleccione</option>
+												<option value="0">No Validadas</option>
+												<option value="1">Validadas</option>
+												<option value="2">Todas</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label for="">Fecha Inicio</label>
+											<input type="date" name="fechaInicio" class="form-control" required>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label for="">Fecha Final</label>
+											<input type="date" name="fechaFinal" class="form-control" required>
+										</div>
+									</div>
+									<div class="col-lg-3" align="center">
+										<div class="form-group">
+											<br>
+											<button class="btn btn-danger" style="margin-top: 10px;"><small>BUSCAR</small></button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		<br>
 		<br>
@@ -101,7 +114,7 @@ Mis Movimientos
 				</div>
 				<div class="card-footer">
 					<div class="col-lg-12" align="right">
-						<button class="btn btn-info"><small>EXPORTAR (.CSV)</small></button>
+						<a href="{{ asset('dashboard/exportar/excel/instrucciones-bancarias') }}" class="btn btn-info"><small>EXPORTAR (.CSV)</small></a>
 					</div>
 				</div>
 			</div>

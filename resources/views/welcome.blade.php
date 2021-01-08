@@ -9,7 +9,7 @@
     <meta property="og:image:width" content="200" >
     <meta property="og:image:height" content="200" >
 @endsection--}}
-@section('title','Bienvenido')
+@section('title','Bienvenid@')
 @section('css')
   <style>
         .a{
@@ -128,10 +128,10 @@
             margin-left: 264px;
         }
         .flex{
-            margin-left: 14px;
             margin-top: 27px;
             font-size: 25px;
             color: white;
+            text-align: center;
         }
         .rectangulo {
             width: 150px; 
@@ -501,7 +501,7 @@
                     $arrayIdPropiedadSinDuplicar = array();
                     array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
                 @endphp
-                <div class="col-lg-4" id="cartaPropiedad{{ $i }}" style="display: block;">
+                <div class="col-lg-4 col-sm-6" id="cartaPropiedad{{ $i }}" style="display: block;">
                     <div class="property-box">
                         <div class="property-thumbnail">
                             <div class="listing-badges">
@@ -634,7 +634,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4" id="cartaInformacion{{ $i }}" style="display: none">
+                <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $i }}" style="display: none">
                     <div class="property-box">
 
                             <div class="listing-badges">

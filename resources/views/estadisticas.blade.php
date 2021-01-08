@@ -203,10 +203,10 @@
                     <tr>
                         <td>29</td>
                         <td>9</td>
-                        <td>17.596.590 &euro;</td>
+                        <td>17.596.590 </td>
                         <td>4,97 %</td>
                         <td>4,33 %</td>
-                        <td>10.797.281,99 &euro;</td>
+                        <td>10.797.281,99 </td>
                     </tr>
                 </table>
             </div>
@@ -228,10 +228,10 @@
                     <tr>
                         <td>52</td>
                         <td>30</td>
-                        <td>17.545.224,75 &euro;</td>
+                        <td>17.545.224,75 </td>
                         <td>7,8 %</td>
                         <td>7,93 %</td>
-                        <td>9.615.288,18 &euro;</td>
+                        <td>9.615.288,18 </td>
                     </tr>
                 </table>
             </div>
@@ -254,10 +254,10 @@
                     <tr>
                         <td>144</td>
                         <td>28</td>
-                        <td>64.066.572 &euro;</td>
+                        <td>64.066.572 </td>
                         <td>9,21 %</td>
                         <td>9,9 %</td>
-                        <td>25.920.815,93 &euro;</td>
+                        <td>25.920.815,93 </td>
                     </tr>
                 </table>
             </div>
@@ -280,10 +280,10 @@
                     <tr>
                         <td>7</td>
                         <td>0</td>
-                        <td>2.943.639,62 &euro;</td>
+                        <td>2.943.639,62 </td>
                         <td> - </td>
                         <td> - </td>
-                        <td>806.358,58 &euro;</td>
+                        <td>806.358,58 </td>
                     </tr>
                 </table>
             </div>
@@ -306,10 +306,10 @@
                     <tr>
                         <td>6</td>
                         <td>4</td>
-                        <td>2.203.442,84 &euro;</td>
+                        <td>2.203.442,84 </td>
                         <td>7,46 %</td>
                         <td>7,82 %</td>
-                        <td>1.783.363,15 &euro;</td>
+                        <td>1.783.363,15 </td>
                     </tr>
                 </table>
             </div>
@@ -332,10 +332,10 @@
                     <tr>
                         <td>59</td>
                         <td>25</td>
-                        <td>23.324.920 &euro;</td>
+                        <td>23.324.920 </td>
                         <td>8,41 %</td>
                         <td>8,77 %</td>
-                        <td>10.267.981,39 &euro;</td>
+                        <td>10.267.981,39 </td>
                     </tr>
                 </table>
             </div>
@@ -640,194 +640,114 @@ google.charts.setOnLoadCallback(graficoCuatro);
 google.charts.setOnLoadCallback(graficoCinco);
 
 function drawBasic() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('timeofday', 'Time of Day');
-  data.addColumn('number', 'Motivation Level');
-
-  data.addRows([
-    [{v: [8, 0, 0], f: '8 am'}, 1],
-    [{v: [9, 0, 0], f: '9 am'}, 2],
-    [{v: [10, 0, 0], f:'10 am'}, 3],
-    [{v: [11, 0, 0], f: '11 am'}, 4],
-    [{v: [12, 0, 0], f: '12 pm'}, 5],
-    [{v: [13, 0, 0], f: '1 pm'}, 6],
-    [{v: [14, 0, 0], f: '2 pm'}, 7],
-    [{v: [15, 0, 0], f: '3 pm'}, 8],
-    [{v: [16, 0, 0], f: '4 pm'}, 9],
-    [{v: [17, 0, 0], f: '5 pm'}, 10],
-  ]);
-
-  var options = {
-    title: 'Motivation Level Throughout the Day',
-    hAxis: {
-      title: 'Time of Day',
-      format: 'h:mm a',
-      viewWindow: {
-        min: [7, 30, 0],
-        max: [17, 30, 0]
-      }
-    },
-    vAxis: {
-      title: 'Rating (scale of 1-10)'
-    }
-  };
+    var data = google.visualization.arrayToDataTable([
+        ['Months', 'Aumento en Meses', { role: 'style' } ],
+        ['Enero', 10, 'color: gray'],
+        ['Febrero', 14, 'color: #76A7FA'],
+        ['Marzo', 16, 'opacity: 0.2'],
+        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+      ]);
 
   var chart = new google.visualization.ColumnChart(
     document.getElementById('chart_div'));
 
-  chart.draw(data, options);
+  chart.draw(data);
 }
 function graficoDos() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('timeofday', 'Time of Day');
-  data.addColumn('number', 'Motivation Level');
-
-  data.addRows([
-    [{v: [8, 0, 0], f: '8 am'}, 1],
-    [{v: [9, 0, 0], f: '9 am'}, 2],
-    [{v: [10, 0, 0], f:'10 am'}, 3],
-    [{v: [11, 0, 0], f: '11 am'}, 4],
-    [{v: [12, 0, 0], f: '12 pm'}, 5],
-    [{v: [13, 0, 0], f: '1 pm'}, 6],
-    [{v: [14, 0, 0], f: '2 pm'}, 7],
-    [{v: [15, 0, 0], f: '3 pm'}, 8],
-    [{v: [16, 0, 0], f: '4 pm'}, 9],
-    [{v: [17, 0, 0], f: '5 pm'}, 10],
-  ]);
-
-  var options = {
-    title: 'Motivation Level Throughout the Day',
-    hAxis: {
-      title: 'Time of Day',
-      format: 'h:mm a',
-      viewWindow: {
-        min: [7, 30, 0],
-        max: [17, 30, 0]
-      }
-    },
-    vAxis: {
-      title: 'Rating (scale of 1-10)'
-    }
-  };
+  var data = google.visualization.arrayToDataTable([
+        ['Months', 'Aumento en Meses', { role: 'style' } ],
+        ['Enero', 10, 'color: gray'],
+        ['Febrero', 14, 'color: #76A7FA'],
+        ['Marzo', 16, 'opacity: 0.2'],
+        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+      ]);
 
   var chart = new google.visualization.ColumnChart(
     document.getElementById('cifra_acumulada'));
 
-  chart.draw(data, options);
+  chart.draw(data);
 }
 function graficoTres() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('timeofday', 'Time of Day');
-  data.addColumn('number', 'Motivation Level');
-
-  data.addRows([
-    [{v: [8, 0, 0], f: '8 am'}, 1],
-    [{v: [9, 0, 0], f: '9 am'}, 2],
-    [{v: [10, 0, 0], f:'10 am'}, 3],
-    [{v: [11, 0, 0], f: '11 am'}, 4],
-    [{v: [12, 0, 0], f: '12 pm'}, 5],
-    [{v: [13, 0, 0], f: '1 pm'}, 6],
-    [{v: [14, 0, 0], f: '2 pm'}, 7],
-    [{v: [15, 0, 0], f: '3 pm'}, 8],
-    [{v: [16, 0, 0], f: '4 pm'}, 9],
-    [{v: [17, 0, 0], f: '5 pm'}, 10],
-  ]);
-
-  var options = {
-    title: 'Motivation Level Throughout the Day',
-    hAxis: {
-      title: 'Time of Day',
-      format: 'h:mm a',
-      viewWindow: {
-        min: [7, 30, 0],
-        max: [17, 30, 0]
-      }
-    },
-    vAxis: {
-      title: 'Rating (scale of 1-10)'
-    }
-  };
+    var data = google.visualization.arrayToDataTable([
+        ['Months', 'Aumento en Meses', { role: 'style' } ],
+        ['Enero', 10, 'color: gray'],
+        ['Febrero', 14, 'color: #76A7FA'],
+        ['Marzo', 16, 'opacity: 0.2'],
+        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+      ]);
 
   var chart = new google.visualization.ColumnChart(
     document.getElementById('rendimiento_repartido'));
 
-  chart.draw(data, options);
+  chart.draw(data);
 }
 function graficoCuatro() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('timeofday', 'Time of Day');
-  data.addColumn('number', 'Motivation Level');
-
-  data.addRows([
-    [{v: [8, 0, 0], f: '8 am'}, 1],
-    [{v: [9, 0, 0], f: '9 am'}, 2],
-    [{v: [10, 0, 0], f:'10 am'}, 3],
-    [{v: [11, 0, 0], f: '11 am'}, 4],
-    [{v: [12, 0, 0], f: '12 pm'}, 5],
-    [{v: [13, 0, 0], f: '1 pm'}, 6],
-    [{v: [14, 0, 0], f: '2 pm'}, 7],
-    [{v: [15, 0, 0], f: '3 pm'}, 8],
-    [{v: [16, 0, 0], f: '4 pm'}, 9],
-    [{v: [17, 0, 0], f: '5 pm'}, 10],
-  ]);
-
-  var options = {
-    title: 'Motivation Level Throughout the Day',
-    hAxis: {
-      title: 'Time of Day',
-      format: 'h:mm a',
-      viewWindow: {
-        min: [7, 30, 0],
-        max: [17, 30, 0]
-      }
-    },
-    vAxis: {
-      title: 'Rating (scale of 1-10)'
-    }
-  };
+  var data = google.visualization.arrayToDataTable([
+        ['Months', 'Aumento en Meses', { role: 'style' } ],
+        ['Enero', 10, 'color: gray'],
+        ['Febrero', 14, 'color: #76A7FA'],
+        ['Marzo', 16, 'opacity: 0.2'],
+        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+      ]);
 
   var chart = new google.visualization.ColumnChart(
     document.getElementById('proyectos_cerrados'));
 
-  chart.draw(data, options);
+  chart.draw(data);
 }
 function graficoCinco() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('timeofday', 'Time of Day');
-  data.addColumn('number', 'Motivation Level');
-
-  data.addRows([
-    [{v: [8, 0, 0], f: '8 am'}, 1],
-    [{v: [9, 0, 0], f: '9 am'}, 2],
-    [{v: [10, 0, 0], f:'10 am'}, 3],
-    [{v: [11, 0, 0], f: '11 am'}, 4],
-    [{v: [12, 0, 0], f: '12 pm'}, 5],
-    [{v: [13, 0, 0], f: '1 pm'}, 6],
-    [{v: [14, 0, 0], f: '2 pm'}, 7],
-    [{v: [15, 0, 0], f: '3 pm'}, 8],
-    [{v: [16, 0, 0], f: '4 pm'}, 9],
-    [{v: [17, 0, 0], f: '5 pm'}, 10],
-  ]);
-
-  var options = {
-    title: 'Motivation Level Throughout the Day',
-    hAxis: {
-      title: 'Time of Day',
-      format: 'h:mm a',
-      viewWindow: {
-        min: [7, 30, 0],
-        max: [17, 30, 0]
-      }
-    },
-    vAxis: {
-      title: 'Rating (scale of 1-10)'
-    }
-  };
+  var data = google.visualization.arrayToDataTable([
+        ['Months', 'Aumento en Meses', { role: 'style' } ],
+        ['Enero', 10, 'color: gray'],
+        ['Febrero', 14, 'color: #76A7FA'],
+        ['Marzo', 16, 'opacity: 0.2'],
+        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
+        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+      ]);
 
   var chart = new google.visualization.ColumnChart(
     document.getElementById('usuarios_registrados'));
 
-  chart.draw(data, options);
+  chart.draw(data);
 }
 </script>
 @endsection
