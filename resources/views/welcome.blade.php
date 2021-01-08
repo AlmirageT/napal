@@ -312,9 +312,9 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -325,9 +325,9 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-right">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -338,9 +338,9 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-left">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -374,11 +374,11 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
-                                    <a href="" class="btn btn-white">Read More</a>
+                                    <a href="" class="btn btn-white"></a>
                                 </div>
                             </div>
                         </div>
@@ -389,11 +389,11 @@
                             <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                                 <div class="carousel-content container">
                                     <div class="text-right">
-                                        <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                        <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                         <p data-animation="animated fadeInUp delay-10s">
-                                            This is real estate website template based on Bootstrap 4 framework.
+                                            
                                         </p>
-                                        <a href="" class="btn btn-white">Read More</a>
+                                        <a href="" class="btn btn-white"></a>
                                     </div>
                                 </div>
                             </div>
@@ -419,9 +419,9 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
                                     <a href="" class="btn btn-white">Read More</a>
                                 </div>
@@ -433,9 +433,9 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-right">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
                                     <a href="" class="btn btn-white">Read More</a>
                                 </div>
@@ -447,9 +447,9 @@
                         <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-left">
-                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">Find Your Dream House</h3>
+                                    <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
                                     <p data-animation="animated fadeInUp delay-10s">
-                                        This is real estate website template based on Bootstrap 4 framework.
+                                        
                                     </p>
                                     <a href="" class="btn btn-white">Read More</a>
                                 </div>
