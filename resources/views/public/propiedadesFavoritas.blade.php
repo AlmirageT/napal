@@ -125,20 +125,52 @@
                 margin-left: 255px;
             }
         }
-        @media only screen and (min-width:414px) and (max-width: 767px) {
+        @media only screen and (min-width:553px) and (max-width: 558px) {
             .cuadrado{
-                margin-left: 144px;
+                margin-left: 288px;
             }
             .circulo{
-                margin-left: 288px;
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:559px) and (max-width: 563px) {
+            .cuadrado{
+                margin-left: 294px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:564px) and (max-width: 569px) {
+            .cuadrado{
+                margin-left: 299px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:570px) and (max-width: 575px) {
+            .cuadrado{
+                margin-left: 305px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:576px) and (max-width: 767px) {
+            .cuadrado{
+                margin-left: 4px;
+            }
+            .circulo{
+                margin-left: 157px;
             }
         }
         @media only screen and (min-width:768px) and (max-width: 991px) {
             .cuadrado{
-                margin-left: 450px;
+                margin-left: 92px;
             }
             .circulo{
-                margin-left: 582px;
+                margin-left: 238px;
             }
         }
         @media only screen and (min-width:992px) and (max-width: 1199px) {
@@ -247,12 +279,12 @@
                                     </div>
                                 </div>
                         </div>
-                        <div class="detail" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
+                        <div class="detail" >
                             <h1 class="title">
-                                <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedadesFavoritas[$i]->idPropiedad) }}">{{ $propiedadesFavoritas[$i]->nombrePropiedad }}</a>
+                                <a style="color: black" href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedadesFavoritas[$i]->idPropiedad) }}">{{ $propiedadesFavoritas[$i]->nombrePropiedad }}</a>
                             </h1>
-                            <div class="location" style="color: #fbd334">
-                                <a style="color: #fbd334">
+                            <div class="location" >
+                                <a >
                                     <i class="fa fa-map-marker"></i>{{ $propiedadesFavoritas[$i]->direccion1 }}, {{ $propiedadesFavoritas[$i]->nombreRegion }}
                                 </a>
                             </div>
@@ -270,31 +302,31 @@
                             </ul>
                             @if($propiedadesFavoritas[$i]->idEstado == 4)
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <p><strong style="color: #fbd334">${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
+                                    <div class="col-lg-6 col-sm-6">
+                                        <p><strong >${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                                     </div>
-                                    <div class="col-lg-6" align="right">
-                                        <p><strong style="color: #fbd334">${{ number_format($propiedadesFavoritas[$i]->precio,0,',','.') }}</strong></p>
+                                    <div class="col-lg-6 col-sm-6" align="right">
+                                        <p><strong >${{ number_format($propiedadesFavoritas[$i]->precio,0,',','.') }}</strong></p>
                                     </div>
                                     <div class="col-lg-12">
                                         <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 col-sm-6">
                                         @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                            <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                            <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                         @else
                                             @if(count($arrayIdPropiedadSinDuplicar[0])==0)
-                                                <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                                <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                             @else
-                                                <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
+                                                <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
                                             @endif
                                         @endif
                                     </div>
-                                    <div class="col-lg-6" align="right">
+                                    <div class="col-lg-6 col-sm-6" align="right">
                                         @if($diff->days>0)
-                                            <p style="color: #fbd334">{!! $diff->days !!} días </p>
+                                            <p >{!! $diff->days !!} días </p>
                                         @else
-                                            <p style="color: #fbd334">Finalizado </p>
+                                            <p >Finalizado </p>
                                         @endif
                                     </div>
                                 </div>
@@ -302,12 +334,12 @@
                             <hr>
                                 <div class="row">
                                     <div class="col-lg-6" align="center">
-                                        <h4><strong style="color: #fbd334">{{ $propiedadesFavoritas[$i]->rentabilidadAnual }}%</strong></h4>
-                                        <p><strong style="color: #fbd334">Rentabilidad Anual</strong></p>
+                                        <h4><strong >{{ $propiedadesFavoritas[$i]->rentabilidadAnual }}%</strong></h4>
+                                        <p><strong >Rentabilidad Anual</strong></p>
                                     </div>
                                     <div class="col-lg-6" align="center">
-                                        <h4><strong style="color: #fbd334">{{ $propiedadesFavoritas[$i]->rentabilidadTotal }}%</strong></h4>
-                                        <p><strong style="color: #fbd334">Rentabilidad Total</strong></p>
+                                        <h4><strong >{{ $propiedadesFavoritas[$i]->rentabilidadTotal }}%</strong></h4>
+                                        <p><strong >Rentabilidad Total</strong></p>
                                     </div>
                                 </div> 
                             <hr> 
@@ -317,9 +349,9 @@
                                 </div>
                             </div> 
                         </div>
-                        <div class="footer clearfix" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
+                        <div class="footer clearfix" >
                             <div class="pull-left days">
-                                <p><i class="flaticon-time"></i><strong style="color: #fbd334">Plazo: {{ $propiedadesFavoritas[$i]->plazoMeses }} meses </strong></p>
+                                <p><i class="flaticon-time"></i><strong >Plazo: {{ $propiedadesFavoritas[$i]->plazoMeses }} meses </strong></p>
                                 
                             </div>
                             @if(Session::has('idUsuario'))
@@ -343,7 +375,7 @@
                                 </a>
                             </div>
                             <div class="detail">
-                                <h1 class="title" style="color: #fbd334">MÁS INFORMACIÓN</h1><br>
+                                <h1 class="title" >MÁS INFORMACIÓN</h1><br>
                                 <div class="location">
                                     <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
                                     <br>

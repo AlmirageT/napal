@@ -86,12 +86,12 @@
                         </div>
                     </div>
             </div>
-            <div class="detail" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
+            <div class="detail" >
                 <h1 class="title">
-                    <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedadesTienda[$i]->idPropiedad) }}">{{ $propiedadesTienda[$i]->nombrePropiedad }}</a>
+                    <a style="color: black" href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedadesTienda[$i]->idPropiedad) }}">{{ $propiedadesTienda[$i]->nombrePropiedad }}</a>
                 </h1>
-                <div class="location" style="color: #fbd334">
-                    <a style="color: #fbd334">
+                <div class="location" >
+                    <a >
                         <i class="fa fa-map-marker"></i>{{ $propiedadesTienda[$i]->direccion1 }}, {{ $propiedadesTienda[$i]->nombreRegion }}
                     </a>
                 </div>
@@ -109,31 +109,31 @@
                 </ul>
                 @if($propiedadesTienda[$i]->idEstado == 4)
                     <div class="row">
-                        <div class="col-lg-6">
-                            <p><strong style="color: #fbd334">${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
+                        <div class="col-lg-6 col-sm-6">
+                            <p><strong >${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                         </div>
-                        <div class="col-lg-6" align="right">
-                            <p><strong style="color: #fbd334">${{ number_format($propiedadesTienda[$i]->precio,0,',','.') }}</strong></p>
+                        <div class="col-lg-6 col-sm-6" align="right">
+                            <p><strong >${{ number_format($propiedadesTienda[$i]->precio,0,',','.') }}</strong></p>
                         </div>
                         <div class="col-lg-12">
                             <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                             @else
                                 @if(count($arrayIdPropiedadSinDuplicar[0])==0)
-                                    <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                    <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                 @else
-                                    <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
+                                    <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
                                 @endif
                             @endif
                         </div>
-                        <div class="col-lg-6" align="right">
+                        <div class="col-lg-6 col-sm-6" align="right">
                             @if($diff->days>0)
-                                <p style="color: #fbd334">{!! $diff->days !!} días </p>
+                                <p >{!! $diff->days !!} días </p>
                             @else
-                                <p style="color: #fbd334">Finalizado </p>
+                                <p >Finalizado </p>
                             @endif
                         </div>
                     </div>
@@ -141,19 +141,19 @@
                 <hr>
                     <div class="row">
                         <div class="col-lg-6" align="center">
-                            <h4><strong style="color: #fbd334">{{ $propiedadesTienda[$i]->rentabilidadAnual }}%</strong></h4>
-                            <p><strong style="color: #fbd334">Rentabilidad Anual</strong></p>
+                            <h4><strong >{{ $propiedadesTienda[$i]->rentabilidadAnual }}%</strong></h4>
+                            <p><strong >Rentabilidad Anual</strong></p>
                         </div>
                         <div class="col-lg-6" align="center">
-                            <h4><strong style="color: #fbd334">{{ $propiedadesTienda[$i]->rentabilidadTotal }}%</strong></h4>
-                            <p><strong style="color: #fbd334">Rentabilidad Total</strong></p>
+                            <h4><strong >{{ $propiedadesTienda[$i]->rentabilidadTotal }}%</strong></h4>
+                            <p><strong >Rentabilidad Total</strong></p>
                         </div>
                     </div> 
                 <hr>  
             </div>
-            <div class="footer clearfix" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
+            <div class="footer clearfix" >
                 <div class="pull-left days">
-                    <p><i class="flaticon-time"></i><strong style="color: #fbd334">Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </strong></p>
+                    <p><i class="flaticon-time"></i><strong >Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </strong></p>
                     
                 </div>
                 @if(Session::has('idUsuario'))
@@ -177,7 +177,7 @@
                     </a>
                 </div>
                 <div class="detail">
-                    <h1 class="title" style="color: #fbd334">MÁS INFORMACIÓN</h1><br>
+                    <h1 class="title" >MÁS INFORMACIÓN</h1><br>
                     <div class="location">
                         <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
                         <br>

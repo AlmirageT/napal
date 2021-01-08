@@ -71,7 +71,7 @@
         .box {
             width: 100%;
             height: auto;
-            border: solid 1px #fbd334;
+            border: solid 1px #000000;
         }
         .footer-box {
             display: flex;
@@ -95,7 +95,7 @@
             padding: 10px;
             align-items: center;
             width: 50%;
-            border-right: solid 1px #fbd334;
+            border-right: solid 1px #000000;
         }
 
           .cajas1 {
@@ -184,20 +184,52 @@
                 margin-left: 255px;
             }
         }
-        @media only screen and (min-width:414px) and (max-width: 767px) {
+        @media only screen and (min-width:553px) and (max-width: 558px) {
             .cuadrado{
-                margin-left: 144px;
+                margin-left: 288px;
             }
             .circulo{
-                margin-left: 288px;
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:559px) and (max-width: 563px) {
+            .cuadrado{
+                margin-left: 294px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:564px) and (max-width: 569px) {
+            .cuadrado{
+                margin-left: 299px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:570px) and (max-width: 575px) {
+            .cuadrado{
+                margin-left: 305px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:576px) and (max-width: 767px) {
+            .cuadrado{
+                margin-left: 4px;
+            }
+            .circulo{
+                margin-left: 157px;
             }
         }
         @media only screen and (min-width:768px) and (max-width: 991px) {
             .cuadrado{
-                margin-left: 450px;
+                margin-left: 92px;
             }
             .circulo{
-                margin-left: 582px;
+                margin-left: 238px;
             }
         }
         @media only screen and (min-width:992px) and (max-width: 1199px) {
@@ -548,13 +580,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="detail" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
+                        <div class="detail" >
                             <h1 class="title">
                                 {{-- <a href="{{ asset('detalle') }}/{{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a> --}}
-                                <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
+                                <a style="color: black" href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
                             </h1>
-                            <div class="location" style="color: #fbd334">
-                                <a style="color: #fbd334">
+                            <div class="location" >
+                                <a >
                                     <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ substr($propiedades[$i]->nombreRegion,0,28) }}...
                                 </a>
                             </div>
@@ -563,7 +595,7 @@
                                     <strong  class="{{ $propiedades[$i]->nombreClase }}">{{ $propiedades[$i]->nombreTipoCalidad }}</strong>
                                 </li>
                                 <li></li>
-                                <li style="color: #fbd334">
+                                <li >
                                     @if($propiedades[$i]->tieneChat == 1)
                                         <i class="far fa-comments" style="font-size: 30px"></i>
                                     @else
@@ -572,43 +604,43 @@
                                 </li>
                             </ul>
                             <div class="row">
-                                <div class="col-lg-6" align="left">
-                                    <p><strong style="color: #fbd334">${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
+                                <div class="col-lg-6 col-sm-6" align="left">
+                                    <p><strong >${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                                 </div>
-                                <div class="col-lg-6" align="right">
-                                    <p><strong style="color: #fbd334">${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
+                                <div class="col-lg-6 col-sm-6" align="right">
+                                    <p><strong >${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
                                 </div>
                                 <div class="col-lg-12">
                                     <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-sm-6">
                                     @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                        <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                        <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                     @else
                                         @if(count($arrayIdPropiedadSinDuplicar[0])==0)
-                                            <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                            <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                         @else
-                                            <p style="color: #fbd334"><strong style="color: #fbd334">{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
+                                            <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
                                         @endif
                                     @endif
                                 </div>
-                                <div class="col-lg-6" align="right">
+                                <div class="col-lg-6 col-sm-6" align="right">
                                     @if($diff->days>0)
-                                        <p style="color: #fbd334"> {!! $diff->days !!} días </p>
+                                        <p > {!! $diff->days !!} días </p>
                                     @else
-                                        <p style="color: #fbd334">Finalizado </p>
+                                        <p >Finalizado </p>
                                     @endif
                                 </div>
                             </div>
                             <hr>
                                 <div class="row">
                                     <div class="col-lg-6" align="center">
-                                        <h4><strong style="color: #fbd334">{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
-                                        <p><strong style="color: #fbd334">Rentabilidad Anual</strong></p>
+                                        <h4><strong >{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
+                                        <p><strong >Rentabilidad Anual</strong></p>
                                     </div>
                                     <div class="col-lg-6" align="center">
-                                        <h4><strong style="color: #fbd334">{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
-                                        <p><strong style="color: #fbd334">Rentabilidad Total</strong></p>
+                                        <h4><strong >{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
+                                        <p><strong >Rentabilidad Total</strong></p>
                                     </div>
                                 </div> 
                             <hr>  
@@ -618,9 +650,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="footer clearfix" style="background-image: url('{{ asset('img_public/paginaesmidas-02.jpg') }}')">
+                        <div class="footer clearfix" >
                             <div class="pull-left days" align="center">
-                                <p><i style="color: #fbd334" class="flaticon-time"></i><strong style="color: #fbd334">Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
+                                <p><i  class="flaticon-time"></i><strong >Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
                             </div>
                             @if(Session::has('idUsuario'))
                                 <ul class="pull-right">
@@ -643,7 +675,7 @@
                                 </a>
                             </div>
                             <div class="detail">
-                                <h1 class="title" style="color: #fbd334">MÁS INFORMACIÓN</h1><br>
+                                <h1 class="title" >MÁS INFORMACIÓN</h1><br>
                                 <div class="location">
                                     <p><strong>Plazo</strong>: es la duración estimada de la oportunidad.</p>
                                     <br>
@@ -752,12 +784,12 @@
                 @if(count($casosExitosos) > 0)
                     @foreach($casosExitosos as $casoExitoso)
                         <div class="slick-slide-item" >
-                            <div class="row team-4" style="background-image: url('{{ asset('img_public/paginaesmidas2-02.jpg') }}')">
+                            <div class="row team-4" >
                                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
                                     <br>
                                     <div class="detail">
-                                        <h4 style="color: #fbd334">Caso de Exito</h4>
-                                        <h3 style="color: #fbd334">
+                                        <h4 >Caso de Exito</h4>
+                                        <h3 >
                                            {{ $casoExitoso->nombrePropiedad }}
                                         </h3>
                                             <!-- Cajita -->
@@ -765,17 +797,17 @@
                                             <div class="box">
                                                 <div class="contenedor-box">
                                                   <div class="cajas" align="center">
-                                                   <p class="dato" style="color: #fbd334">{{ $casoExitoso->rentabilidadAnual }}% <br> TIR estimada</p>
+                                                   <p class="dato" >{{ $casoExitoso->rentabilidadAnual }}% <br> TIR estimada</p>
                                                   </div>
                                                      
                                                     <div class="cajas1" align="center">
-                                                        <p class="dato" style="color: #fbd334">{{ $casoExitoso->rentabilidadTotal }}% <br>TIR entregada</p>
+                                                        <p class="dato" >{{ $casoExitoso->rentabilidadTotal }}% <br>TIR entregada</p>
                                                     </div>
                                                 </div>
-                                                <hr style="border-top: 1px solid #fbd334">
+                                                <hr >
                                                 <div class="footer-box">
-                                                    <p class="dato" style="color: #fbd334">8'27%</p>
-                                                      <p class="footer-texto" style="color: #fbd334">RENTABILIDAD NETA ACUMULADA </p>
+                                                    <p class="dato" >8'27%</p>
+                                                      <p class="footer-texto" >RENTABILIDAD NETA ACUMULADA </p>
                                                 </div>
                                             </div>
                                             {{-- 
@@ -805,14 +837,14 @@
                                 </div>
                                 <style>
                                     .imagen-propiedad{
-                                        border: 1px solid yellow;
+                                        border: 1px solid black;
                                         margin-left: -12px;
                                         height: 287px;
                                         width: 287px;
                                     }
                                     @media only screen and (min-width:320px) and (max-width: 450px) {
                                         .imagen-propiedad{
-                                            border: 2px solid yellow;
+                                            border: 2px solid black;
                                             width: 94% !important;
                                             margin-left: 8px;
                                             margin-top: -38px;
