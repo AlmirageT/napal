@@ -253,7 +253,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
                         <img class="d-block w-100" src="{{ asset($imagenUno->rutaImagenCarrusel) }}" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">
@@ -274,7 +274,7 @@
                     @foreach($imagenesWeb as $imagenWeb)
                         <div class="carousel-item banner-max-height">
                             <img class="d-block w-100" src="{{ asset($imagenWeb->rutaImagenCarrusel) }}" alt="banner-1">
-                            <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-caption d-flex h-100 text-center">
                                 <div class="carousel-content container">
                                     <div class="text-right">
                                         <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s">
@@ -309,7 +309,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -322,7 +322,7 @@
                     </div>
                     <div class="carousel-item banner-max-height">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-right">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -335,7 +335,7 @@
                     </div>
                     <div class="carousel-item banner-max-height">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-left">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -371,7 +371,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
                         <img class="d-block w-100" src="{{ asset($imagenesMovil->shift()->rutaImagenCarrusel) }}" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -385,7 +385,7 @@
                     @foreach($imagenesMovil as $imagenMovil)
                         <div class="carousel-item banner-max-height">
                             <img class="d-block w-100" src="{{ asset($imagenMovil->rutaImagenCarrusel) }}" alt="banner-1">
-                            <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                            <div class="carousel-caption d-flex h-100 text-center">
                                 <div class="carousel-content container">
                                     <div class="text-right">
                                         <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -414,7 +414,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-center">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -428,7 +428,7 @@
                     </div>
                     <div class="carousel-item banner-max-height">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-right">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
@@ -442,7 +442,7 @@
                     </div>
                     <div class="carousel-item banner-max-height">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
-                        <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
+                        <div class="carousel-caption d-flex h-100 text-center">
                             <div class="carousel-content container">
                                 <div class="text-left">
                                     <h3 class="text-uppercase" data-animation="animated fadeInDown delay-05s"></h3>
