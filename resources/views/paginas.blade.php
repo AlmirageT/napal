@@ -92,7 +92,7 @@
                 </h1>
                 <div class="location" >
                     <a >
-                        <i class="fa fa-map-marker"></i>{{ $propiedadesTienda[$i]->direccion1 }}, {{ $propiedadesTienda[$i]->nombreRegion }}
+                        <i class="fa fa-map-marker"></i>{{ $propiedadesTienda[$i]->direccion1 }}, {{ substr($propiedadesTienda[$i]->nombreRegion,0,28) }}...
                     </a>
                 </div>
                 <ul class="facilities-list clearfix">

@@ -285,7 +285,7 @@
                             </h1>
                             <div class="location" >
                                 <a >
-                                    <i class="fa fa-map-marker"></i>{{ $propiedadesFavoritas[$i]->direccion1 }}, {{ $propiedadesFavoritas[$i]->nombreRegion }}
+                                    <i class="fa fa-map-marker"></i>{{ $propiedadesFavoritas[$i]->direccion1 }}, {{ substr($propiedadesFavoritas[$i]->nombreRegion,0,28)}}...
                                 </a>
                             </div>
                             <ul class="facilities-list clearfix">
