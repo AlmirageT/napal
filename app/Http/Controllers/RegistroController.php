@@ -84,7 +84,7 @@ class RegistroController extends Controller
             $nuevoUsuario->password = Crypt::encrypt($request->password);
             $nuevoUsuario->tokenCorto = uniqid();
             $nuevoUsuario->activarCuenta = 0;
-            $nuevoUsuario->activarNewsletter = 0;
+            $nuevoUsuario->activarNewsletter = 1;
             $nuevoUsuario->desactivarCuenta = 0;
             $nuevoUsuario->idTipoUsuario = 2;
             $nuevoUsuario->idTipoPersona = 1;

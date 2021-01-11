@@ -367,7 +367,7 @@
 <div class="d-sm-none d-md-none d-lg-none d-xl-none">
     <div class="banner" id="banner">
         @if(count($imagenesMovil) > 0)
-            <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+            <div id="bannerCarousolePhone" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
                         <img class="d-block w-100" src="{{ asset($imagenesMovil->shift()->rutaImagenCarrusel) }}" alt="banner-1">
@@ -398,19 +398,19 @@
                         </div>
                     @endforeach
                 </div>
-                <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#bannerCarousolePhone" role="button" data-slide="prev">
                     <span class="slider-mover-left" aria-hidden="true">
                         <i class="fa fa-angle-left"></i>
                     </span>
                 </a>
-                <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#bannerCarousolePhone" role="button" data-slide="next">
                     <span class="slider-mover-right" aria-hidden="true">
                         <i class="fa fa-angle-right"></i>
                     </span>
                 </a>
             </div>
         @else
-            <div id="bannerCarousole" class="carousel slide" data-ride="carousel">
+            <div id="bannerCarousolePhone" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item banner-max-height active">
                         <img class="d-block w-100" src="http://placehold.it/1992x1040" alt="banner-1">
@@ -455,12 +455,12 @@
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#bannerCarousole" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#bannerCarousolePhone" role="button" data-slide="prev">
                     <span class="slider-mover-left" aria-hidden="true">
                         <i class="fa fa-angle-left"></i>
                     </span>
                 </a>
-                <a class="carousel-control-next" href="#bannerCarousole" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#bannerCarousolePhone" role="button" data-slide="next">
                     <span class="slider-mover-right" aria-hidden="true">
                         <i class="fa fa-angle-right"></i>
                     </span>

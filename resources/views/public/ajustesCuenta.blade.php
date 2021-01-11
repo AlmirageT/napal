@@ -124,8 +124,12 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="form-check">
-							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-							    <label class="" for="exampleCheck1">Si quieres darte de baja de nuestra newsletter, desmarca la casilla. Si quieres volver a darte de alta, vuelve a marcarla.</label>
+								@if ($usuario->activarNewsletter == 1)
+									<input type="checkbox" checked class="form-check-input" id="newsletters" name="newsletters" onchange="activarDesactivarNewsletters()">
+								@else
+							    	<input type="checkbox" class="form-check-input" id="newsletters" name="newsletters" onchange="activarDesactivarNewsletters()">
+								@endif
+							    <label class="" for="newsletters">Si quieres darte de baja de nuestra newsletter, desmarca la casilla. Si quieres volver a darte de alta, vuelve a marcarla.</label>
 							</div>
 						</div>
 					</div>
@@ -145,5 +149,8 @@
 			document.getElementById('passwordRepite').value = '';
 			alert("Las contraseñas no son iguales");
 		}
+	}
+	function activarDesactivarNewsletters(){
+		
 	}
 </script>

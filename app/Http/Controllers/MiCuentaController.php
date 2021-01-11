@@ -14,6 +14,7 @@ use App\Exports\InstruccionBancariaExport;
 use App\CuentaBancariaUsuario;
 use App\InstruccionBancaria;
 use App\SaldoDisponible;
+use App\TrxIngreso;
 use App\Banco;
 use Session;
 use DB;
@@ -34,15 +35,28 @@ class MiCuentaController extends Controller
         ->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
         ->take(3)
         ->get();
-        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias'));
+        $trxIngresos = TrxIngreso::select('*')
+        ->join('propiedades','trx_ingresos.idPropiedad','=','propiedades.idPropiedad')
+        ->where('trx_ingresos.idUsuario',Session::get('idUsuario'))
+        ->where('propiedades.idEstado',4)
+        ->get();
+        $saldoComprometido = 0;
+        foreach ($trxIngresos as $trxIngreso) {
+            $saldoComprometido = $saldoComprometido + $trxIngreso->monto; 
+        }
+        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias','saldoComprometido'));
     }
     public function cuentaAsociada()
     {
     	if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
             return abort(401);
         }
-        $cuentaBancariaUsuario = CuentaBancariaUsuario::where('idUsuario',Session::get('idUsuario'))->get();
-    	return view('public.cuentasAsociadas',compact('cuentaBancariaUsuario'));
+        $cuentasBancariasUsuarios = CuentaBancariaUsuario::select('*')
+            ->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+            ->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+            ->where('idUsuario',Session::get('idUsuario'))
+            ->get();
+    	return view('public.cuentasAsociadas',compact('cuentasBancariasUsuarios'));
     }
     public function retiro()
     {

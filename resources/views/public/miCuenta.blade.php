@@ -108,7 +108,7 @@ Mi cuenta
 							<p style="color: #fff;">Comprometido</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p style="color: #fff;">0,00 €</p>
+							<p style="color: #fff;">${{ number_format($saldoComprometido,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-12">
 							<br>

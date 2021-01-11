@@ -16,23 +16,26 @@
 		</div>
 		<div class="col-lg-5">
 			<div class="card" >
-				<div class="card-body">
-					<div class="row">
-						<div class="col-lg-12"><h6>INSERTAR CÓDIGO PROMOCIONAL</h6><br></div>
-						<div class="col-lg-5" align="center">
-							<img src="https://static.housers.com/assets/images/dashboard/housers-ico-promos.svg" class="h-widget__bg">
+				<form action="{{ asset('dashboard/codigo-promocional') }}" method="post">
+				@csrf
+					<div class="card-body">
+						<div class="row">
+							<div class="col-lg-12"><h6>INSERTAR CÓDIGO PROMOCIONAL</h6><br></div>
+							<div class="col-lg-5" align="center">
+								<img src="https://static.housers.com/assets/images/dashboard/housers-ico-promos.svg" class="h-widget__bg">
+							</div>
+							<div class="col-lg-7" align="left">
+								<p><small>Escribe tu codigo para aplicar la promoción.</small></p>
+							</div>
+							<div class="col-lg-12"><br></div>
+							<div class="col-lg-12">
+								<input type="text" name="codigo" class="form-control" placeholder="Código" required>
+								<br>
+							</div>
+							<div class="col-lg-12" align="center"><button class="btn btn-light"><small>APLICAR CÓDIGO</small></button></div>
 						</div>
-						<div class="col-lg-7" align="left">
-							<p><small>Escribe tu codigo para aplicar la promoción.</small></p>
-						</div>
-						<div class="col-lg-12"><br></div>
-						<div class="col-lg-12">
-							<input type="text" name="codigo" class="form-control" placeholder="Código">
-							<br>
-						</div>
-						<div class="col-lg-12" align="center"><button class="btn btn-light"><small>APLICAR CÓDIGO</small></button></div>
 					</div>
-				</div>
+				</form>
 			</div>
 			<br>
 		</div>
@@ -73,9 +76,22 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td colspan="5" style="text-align: center !important;">No hay resultados</td>
-								</tr>
+								@if(count($codigosUsuarios)>0)
+									@foreach ($codigosUsuarios as $codigoUsuario)
+										<tr>
+											<td></td>
+											<td>{{ $codigoUsuario->codigo }}</td>
+											<td>{{ $codigoUsuario->created_at }}</td>
+											<td>{{ $codigoUsuario->fechaVencimiento }}</td>
+											<td></td>
+										</tr>
+									@endforeach
+								@else
+									<tr>
+										<td colspan="5" style="text-align: center !important;">No hay resultados</td>
+									</tr>
+								@endif
+									
 							</tbody>
 						</table>
 					</div>

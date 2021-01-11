@@ -642,18 +642,18 @@ google.charts.setOnLoadCallback(graficoCinco);
 function drawBasic() {
     var data = google.visualization.arrayToDataTable([
         ['Months', 'Aumento en Meses', { role: 'style' } ],
-        ['Enero', 10, 'color: gray'],
-        ['Febrero', 14, 'color: #76A7FA'],
-        ['Marzo', 16, 'opacity: 0.2'],
-        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
-        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ['Enero', 10, 'color: blue'],
+        ['Febrero', 14, 'color: blue'],
+        ['Marzo', 16, 'color: blue'],
+        ['Abril', 22, 'color: blue'],
+        ['Mayo', 28, 'color: blue'],
+        ['Junio', 28, 'color: blue'],
+        ['Julio', 28, 'color: blue'],
+        ['Agosto', 28, 'color: blue'],
+        ['Septiembre', 28, 'color: blue'],
+        ['Octubre', 28, 'color: blue'],
+        ['Noviembre', 28, 'color: blue'],
+        ['Diciembre', 28, 'color: blue']
       ]);
 
   var chart = new google.visualization.ColumnChart(
@@ -664,18 +664,18 @@ function drawBasic() {
 function graficoDos() {
   var data = google.visualization.arrayToDataTable([
         ['Months', 'Aumento en Meses', { role: 'style' } ],
-        ['Enero', 10, 'color: gray'],
-        ['Febrero', 14, 'color: #76A7FA'],
-        ['Marzo', 16, 'opacity: 0.2'],
-        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
-        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ['Enero', 10, 'color: blue'],
+        ['Febrero', 14, 'color: blue'],
+        ['Marzo', 16, 'color: blue'],
+        ['Abril', 22, 'color: blue'],
+        ['Mayo', 28, 'color: blue'],
+        ['Junio', 28, 'color: blue'],
+        ['Julio', 28, 'color: blue'],
+        ['Agosto', 28, 'color: blue'],
+        ['Septiembre', 28, 'color: blue'],
+        ['Octubre', 28, 'color: blue'],
+        ['Noviembre', 28, 'color: blue'],
+        ['Diciembre', 28, 'color: blue']
       ]);
 
   var chart = new google.visualization.ColumnChart(
@@ -686,18 +686,18 @@ function graficoDos() {
 function graficoTres() {
     var data = google.visualization.arrayToDataTable([
         ['Months', 'Aumento en Meses', { role: 'style' } ],
-        ['Enero', 10, 'color: gray'],
-        ['Febrero', 14, 'color: #76A7FA'],
-        ['Marzo', 16, 'opacity: 0.2'],
-        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
-        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ['Enero', 10, 'color: blue'],
+        ['Febrero', 14, 'color: blue'],
+        ['Marzo', 16, 'color: blue'],
+        ['Abril', 22, 'color: blue'],
+        ['Mayo', 28, 'color: blue'],
+        ['Junio', 28, 'color: blue'],
+        ['Julio', 28, 'color: blue'],
+        ['Agosto', 28, 'color: blue'],
+        ['Septiembre', 28, 'color: blue'],
+        ['Octubre', 28, 'color: blue'],
+        ['Noviembre', 28, 'color: blue'],
+        ['Diciembre', 28, 'color: blue']
       ]);
 
   var chart = new google.visualization.ColumnChart(
@@ -708,18 +708,18 @@ function graficoTres() {
 function graficoCuatro() {
   var data = google.visualization.arrayToDataTable([
         ['Months', 'Aumento en Meses', { role: 'style' } ],
-        ['Enero', 10, 'color: gray'],
-        ['Febrero', 14, 'color: #76A7FA'],
-        ['Marzo', 16, 'opacity: 0.2'],
-        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
-        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ['Enero', 10, 'color: blue'],
+        ['Febrero', 14, 'color: blue'],
+        ['Marzo', 16, 'color: blue'],
+        ['Abril', 22, 'color: blue'],
+        ['Mayo', 28, 'color: blue'],
+        ['Junio', 28, 'color: blue'],
+        ['Julio', 28, 'color: blue'],
+        ['Agosto', 28, 'color: blue'],
+        ['Septiembre', 28, 'color: blue'],
+        ['Octubre', 28, 'color: blue'],
+        ['Noviembre', 28, 'color: blue'],
+        ['Diciembre', 28, 'color: blue']
       ]);
 
   var chart = new google.visualization.ColumnChart(
@@ -730,18 +730,18 @@ function graficoCuatro() {
 function graficoCinco() {
   var data = google.visualization.arrayToDataTable([
         ['Months', 'Aumento en Meses', { role: 'style' } ],
-        ['Enero', 10, 'color: gray'],
-        ['Febrero', 14, 'color: #76A7FA'],
-        ['Marzo', 16, 'opacity: 0.2'],
-        ['Abril', 22, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
-        ['Mayo', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Junio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Julio', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Agosto', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Septiembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Octubre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Noviembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2'],
-        ['Diciembre', 28, 'stroke-color: #871B47; stroke-opacity: 0.6; stroke-width: 8; fill-color: #BC5679; fill-opacity: 0.2']
+        ['Enero', 10, 'color: blue'],
+        ['Febrero', 14, 'color: blue'],
+        ['Marzo', 16, 'color: blue'],
+        ['Abril', 22, 'color: blue'],
+        ['Mayo', 28, 'color: blue'],
+        ['Junio', 54, 'color: blue'],
+        ['Julio', 34, 'color: blue'],
+        ['Agosto', 20, 'color: blue'],
+        ['Septiembre', 18, 'color: blue'],
+        ['Octubre', 41, 'color: blue'],
+        ['Noviembre', 12, 'color: blue'],
+        ['Diciembre', 28, 'color: blue']
       ]);
 
   var chart = new google.visualization.ColumnChart(

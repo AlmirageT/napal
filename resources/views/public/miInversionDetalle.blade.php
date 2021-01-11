@@ -11,6 +11,61 @@ Detalle Mi Inversión
 		margin-right: 15px;
 		margin-left: 10px;
 	}
+    .a{
+        background-color: #ECD74C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aa{
+        background-color: #FDFF2C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aaa{
+        background-color: #F7FF78;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+
+    .b{
+        background-color: #FFAD54;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bb{
+        background-color: #F59C1E;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bbb{
+        background-color: #F7B933;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .c{
+        background-color: #FF0404;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .cc{
+        background-color: #FF4D1D;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .ccc{
+        background-color: #FF5C03;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
 @media only screen and (min-width:992px) and (max-width: 1110px) {
     .contenedor-barra{
         width: 100%;
@@ -160,13 +215,7 @@ Detalle Mi Inversión
     td {
         color: #8E8A8A;
     }
-    .bb {
-     background-color: #F59C1E;
-        color: #333;
-   
-        border-radius: 5px;
-        padding: 3px;
-    }
+
     
     td, th {
         border: 1px solid #CCCBCB;
@@ -268,7 +317,7 @@ Detalle Mi Inversión
                             <tr>
                             <td>ESTADO<br><strong>{{ $propiedad->nombreEstado }}</strong></td>
                             <td>FORMA JURÍDICA<br><strong>PRÉSTAMO</strong></td>
-                            <td>NIVEL DE RIESGO<br><br><strong class="bb">BB</strong></td>
+                            <td>NIVEL DE RIESGO<br><br><strong class="{{ $propiedad->nombreClase }}">{{ $propiedad->nombreTipoCalidad }}</strong></td>
                             <td>FECHA INICIO INVERSIÓN<br><strong>{{ date("d-m-Y", strtotime($propiedad->fechaInicio)) }}</strong></td>
                             </tr>
                          <tr>
@@ -429,23 +478,53 @@ Detalle Mi Inversión
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <tr>
-                                        <th><small>MES EFECTO</small></th>
-                                        <th><small>AÑO EFECTO</small></th>
-                                        <th><small>FECHA</small></th>
-                                        <th><small>DESCRIPCIÓN</small></th>
-                                        <th><small>IMPORTE</small></th>
-                                    </tr>
+                                  <tr>
+                                    <th scope="col"><small>FECHA SOLICITUD</small></th>
+                                    <th scope="col"><small>DESCRIPCIÓN</small></th>
+                                    <th scope="col"><small>IMPORTE</small></th>
+                                    <th scope="col"><small>VALIDADA</small></th>
+                                    <th scope="col"><small>ACCIONES</small></th>
+                                  </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td colspan="5" style="text-align: center !important;">No hay resultados</td>
-                                    </tr>
+                                    @if (count($instruccionesBancarias)>0)
+                                        @foreach ($instruccionesBancarias as $instruccionBancaria)
+                                            <tr>
+                                                <td>{{ date("d-m-Y", strtotime($instruccionBancaria->fechaSolicitud)) }}</td>
+                                                <td>{{ $instruccionBancaria->concepto }}</td>
+                                                <td>${{ number_format($instruccionBancaria->importe,0,',','.') }}</td>
+                                                <td>
+                                                    @if ($instruccionBancaria->validado == 0)
+                                                        Sin Validar
+                                                    @else
+                                                        Validada
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($instruccionBancaria->validado == 0 && $instruccionBancaria->cancelada == 0)
+                                                        <a href="{{ asset('dashboard/cancelar-solicitud') }}/{{ Crypt::encrypt($instruccionBancaria->idIntruccionBancaria) }}" onclick="confirm('¿Desea Cancelar la Solicitud?')" class="btn btn-danger">Cancelar Solicitud</a>
+                                                    @else
+                                                        @if ($instruccionBancaria->validado == 0 && $instruccionBancaria->cancelada == 1)
+                                                            Solicitud Cancelada
+                                                        @endif
+                                                        @if ($instruccionBancaria->validado == 1)
+                                                            Solicitud Aceptada
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                          <td colspan="5" style="text-align: center !important;">No hay resultados</td>
+                                      </tr>
+                                    @endif
                                 </tbody>
-                            </table>
-                            <div align="center">
-                                <a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-primary"><small>VER TODOS</small></a>
-                            </div>
+                              </table>
+                              <br>
+                              <div align="center">
+                                  <a href="{{ asset('dashboard/mi-cuenta/movimientos') }}" class="btn btn-light" ><small>VER TODOS LOS MOVIMIENTOS</small></a>
+                              </div>
                         </div>
                     </div>
                 </div>

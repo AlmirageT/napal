@@ -19,7 +19,7 @@ Cuentas Asociadas
 							</p>
 						</div>
 						<div class="col-lg-4" align="center">
-							<p>Cuentas asociadas: {{ count($cuentaBancariaUsuario) }}</p>
+							<p>Cuentas asociadas: {{ count($cuentasBancariasUsuarios) }}</p>
 							<a href="{{ asset('dashboard/mi-cuenta/cuentas-bancarias/nueva') }}" class="btn btn-primary"><small>AÑADIR CUENTA BANCARIA</small></a>
 						</div>
 					</div>
@@ -27,6 +27,40 @@ Cuentas Asociadas
 			</div>
 			<br>
 		</div>
+		@if(count($cuentasBancariasUsuarios)>0)
+			<br>
+			<div class="col-lg-12">
+				<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Titular</th>
+										<th>Codigo Swift</th>
+										<th>Número Cuenta</th>
+										<th>Banco</th>
+										<th>Tipo de Cuenta</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach ($cuentasBancariasUsuarios as $cuentaBancariaUsuario)
+										<tr>
+											<td>{{ $cuentaBancariaUsuario->titular }}</td>
+											<td>{{ $cuentaBancariaUsuario->codigoSwift }}</td>
+											<td>{{ $cuentaBancariaUsuario->numeroCuenta }}</td>
+											<td>{{ $cuentaBancariaUsuario->nombreBanco }}</td>
+											<td>{{ $cuentaBancariaUsuario->nombreTipoCuenta }}</td>
+										</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+		@endif
 	</div>
 </div>
 @endsection

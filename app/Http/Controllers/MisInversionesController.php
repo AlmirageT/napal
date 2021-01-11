@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Crypt;
 use App\ImagenPropiedad;
 use App\SaldoDisponible;
+use App\InstruccionBancaria;
 use App\TrxIngreso;
 use App\Propiedad;
 use Session;
@@ -30,7 +31,7 @@ class MisInversionesController extends Controller
             ->get();
         $totalProyectoEnFinanciacion = 0;
         foreach ($proyectosEnFinanciacion as $proyectoEnFinanciacion) {
-            $totalProyectoEnFinanciacion = $proyectoEnFinanciacion->monto;
+            $totalProyectoEnFinanciacion = $totalProyectoEnFinanciacion + $proyectoEnFinanciacion->monto;
         }
 
         $propiedadesInvertidas = TrxIngreso::where('idUsuario',Session::get('idUsuario'))->where('idPropiedad','<>',null)->get();
@@ -67,8 +68,16 @@ class MisInversionesController extends Controller
                     ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
                     ->join('estados','propiedades.idEstado','=','estados.idEstado')
                     ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+                    ->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
                     ->where('propiedades.idPropiedad',Crypt::decrypt($request->idPropiedad))
                     ->firstOrFail();
+            $instruccionesBancarias = InstruccionBancaria::select('*')
+                ->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+                ->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+                ->where('cuentas_bancarias_usuarios.idUsuario',Session::get('idUsuario'))
+                ->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+                ->take(3)
+                ->get();
             $imagenesPropiedades = ImagenPropiedad::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
             $datos = TrxIngreso::where('idPropiedad',$propiedad->idPropiedad)->get();
             $suma = 0;
@@ -90,7 +99,7 @@ class MisInversionesController extends Controller
             foreach($datosUsuario as $datoUsuario){
                 $total = $total + $datoUsuario->monto;
             }
-    		return view('public.miInversionDetalle',compact('propiedad','imagenesPropiedades','arrayIdPropiedadSinDuplicar','suma','total'));
+    		return view('public.miInversionDetalle',compact('propiedad','imagenesPropiedades','arrayIdPropiedadSinDuplicar','suma','total','instruccionesBancarias'));
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');
             return back();

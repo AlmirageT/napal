@@ -52,7 +52,7 @@ class CuentaBancariaController extends Controller
     		$cuentaBancariaUsuario->save();
             toastr()->success('Cuenta bancaria enviada a revisión de forma correcta', 'Agregado Correctamente');
     		DB::commit();
-            return back();
+            return redirect::to('dashboard/mi-cuenta/cuentas-bancarias');
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();

@@ -34,18 +34,18 @@
         $arrayIdPropiedadSinDuplicar = array();
         array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
     @endphp
-    <div class="col-lg-4 col-sm-6" id="cartaPropiedad{{ $i }}" style="display: block">
+    <div class="col-lg-4 col-sm-6" id="cartaPropiedad{{ $propiedadesTienda[$i]->idPropiedad }}" style="display: block">
         <div class="property-box">
             <div class="property-thumbnail">
                     <div class="listing-badges">
-                        <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedadesTienda[$i]->idPropiedad }},{{ $i }})">
+                        <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedadesTienda[$i]->idPropiedad }})">
                             <i class="fa fa-map-marker" style="color:#fff"></i>
                             <a class="img-responsive">Ver mapa</a>
                         </span>
                         <script type="text/javascript">
-                            function pruebaId(idPropiedad, valor){
-                                idUno = 'carouselExampleIndicators'+valor;
-                                idDos = 'carouselExampleIndicatorss'+valor;
+                            function pruebaId(idPropiedad){
+                                idUno = 'carouselExampleIndicators'+idPropiedad;
+                                idDos = 'carouselExampleIndicatorss'+idPropiedad;
                                 if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
                                     document.getElementById(idUno).style.display = 'block';
                                     document.getElementById(idDos).style.display = 'none';
@@ -55,12 +55,12 @@
                                 }
                             }
                         </script>
-                        <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
+                        <a class="cuadrado"  onclick="informacionRepetida({{ $propiedadesTienda[$i]->idPropiedad }})">
                             <img src="{{ asset('img_public/icon-info-white.svg') }}" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
                         </a>
                     </div>
 
-                    <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
+                    <div id="carouselExampleIndicators{{ $propiedadesTienda[$i]->idPropiedad}}" class="carousel slide" data-ride="" style="display: block">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="{{ asset($propiedadesTienda[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="carouselExampleIndicatorss{{ $i}}" class="carousel slide" data-ride="" style="display: none">
+                    <div id="carouselExampleIndicatorss{{$propiedadesTienda[$i]->idPropiedad}}" class="carousel slide" data-ride="" style="display: none">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img class="d-block w-100" src="{{ asset($propiedadesTienda[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
@@ -168,11 +168,11 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $i }}" style="display: none">
+    <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $propiedadesTienda[$i]->idPropiedad }}" style="display: none">
         <div class="property-box">
 
                 <div class="listing-badges">
-                    <a class="cruz"  onclick="informacionRepetida({{ $i }})">
+                    <a class="cruz"  onclick="informacionRepetida({{ $propiedadesTienda[$i]->idPropiedad }})">
                         <i class="fas fa-times" style="color: #fbd334;font-size: 30px;margin-top: 17px;"></i>
                     </a>
                 </div>
