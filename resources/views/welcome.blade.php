@@ -12,234 +12,279 @@
 @section('title','Bienvenid@')
 @section('css')
   <style>
-        .a{
-            background-color: #ECD74C;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .aa{
-            background-color: #FDFF2C;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .aaa{
-            background-color: #F7FF78;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
 
-        .b{
-            background-color: #FFAD54;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .bb{
-            background-color: #F59C1E;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .bbb{
-            background-color: #F7B933;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .c{
-            background-color: #FF0404;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .cc{
-            background-color: #FF4D1D;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
-        .ccc{
-            background-color: #FF5C03;
-            color: #333;
-            border-radius: 5px;
-            padding: 3px;
-        }
+    .prueba-giro{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 100% !important;
+    }
+    .prueba-giro-mapa{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 0% !important;
+    }
+    .prueba-giro-vuelta{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 0% !important;
+    }
+    .prueba-giro-flex{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 75% !important;
+    }
+    .prueba-giro-mapa-vuelta{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: -100% !important;
+    }
+    .imagen-datos-prueba{
+        margin-top: -233px;
+        margin-left: -349px;
+    }
+    .a{
+        background-color: #ECD74C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aa{
+        background-color: #FDFF2C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aaa{
+        background-color: #F7FF78;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
 
-        .box {
-            width: 100%;
-            height: auto;
-            border: solid 1px #000000;
-        }
-        .footer-box {
-            display: flex;
-            justify-content: center;
-            width: 70%;
+    .b{
+        background-color: #FFAD54;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bb{
+        background-color: #F59C1E;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bbb{
+        background-color: #F7B933;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .c{
+        background-color: #FF0404;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .cc{
+        background-color: #FF4D1D;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .ccc{
+        background-color: #FF5C03;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+
+    .box {
+        width: 100%;
+        height: auto;
+        border: solid 1px #000000;
+    }
+    .footer-box {
+        display: flex;
+        justify-content: center;
+        width: 70%;
+        margin: auto;
+        align-items: center;
+        
+    }
+
+    .contenedor-box {
+        
+        display: flex;
+        width: 100%;
             margin: auto;
-            align-items: center;
-          
-        }
+            padding: 10px;
+    }
     
-        .contenedor-box {
-            
-            display: flex;
-            width: 100%;
-             margin: auto;
-             padding: 10px;
-        }
-        
-        .cajas {
-            display: flex;
-            padding: 10px;
-            align-items: center;
-            width: 50%;
-            border-right: solid 1px #000000;
-        }
+    .cajas {
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        width: 50%;
+        border-right: solid 1px #000000;
+    }
 
-          .cajas1 {
-            display: flex;
-            padding: 10px;
-            align-items: center;
-            width: 50%;
-         
-        }
+        .cajas1 {
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        width: 50%;
         
-        
-      
-        .dato {
-            font-size: 15px;
-            font-family: sans-serif;
+    }
+    
+    
+    
+    .dato {
+        font-size: 15px;
+        font-family: sans-serif;
+    }
+    
+    .footer-texto {
+    margin-left: 10px;
+    }
+    .circulo {
+        width: 80px;
+        height: 80px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: rgba(255, 0, 0, 0.5);
+        margin-top: -180px;
+        position: absolute;
+        margin-left: 264px;
+    }
+    .flex{
+        margin-top: 27px;
+        font-size: 25px;
+        color: white;
+        text-align: center;
+    }
+    .rectangulo {
+        width: 150px; 
+        height: 70px;
+        background-color: rgba(0, 40, 255, 0.5);
+        position: absolute;
+        margin-top: -140px;
+    }
+    .tituloRentabilidad{
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+    .valorRentabilidad{
+        color: white;
+        font-size: 36px;
+        font-weight: bold;
+        margin-top: -10px;
+        margin-left: 12px;
+    }
+    .cuadrado {
+        width: 40px; 
+        height: 40px; 
+        background: #fbd334 ;
+        position: absolute;
+        z-index: 1;
+        margin-left: 110px;
+        cursor: pointer;
+    }
+    .cruz {
+        position: absolute;
+        z-index: 1;
+        margin-left: 310px;
+        cursor: pointer;
+    }
+    @media only screen and (min-width:360px) and (max-width: 374px) {
+        .cuadrado{
+            margin-left: 90px;
         }
-        
-        .footer-texto {
-        margin-left: 10px;
+        .circulo{
+            margin-left: 235px;
         }
-        .circulo {
-            width: 80px;
-            height: 80px;
-            -moz-border-radius: 50%;
-            -webkit-border-radius: 50%;
-            border-radius: 50%;
-            background-color: rgba(255, 0, 0, 0.5);
-            margin-top: -180px;
-            position: absolute;
-            margin-left: 264px;
+    }
+    @media only screen and (min-width:375px) and (max-width: 413px) {
+        .cuadrado{
+            margin-left: 105px;
         }
-        .flex{
-            margin-top: 27px;
-            font-size: 25px;
-            color: white;
-            text-align: center;
+        .circulo{
+            margin-left: 255px;
         }
-        .rectangulo {
-            width: 150px; 
-            height: 70px;
-            background-color: rgba(0, 40, 255, 0.5);
-            position: absolute;
-            margin-top: -140px;
+    }
+    @media only screen and (min-width:553px) and (max-width: 558px) {
+        .cuadrado{
+            margin-left: 288px;
         }
-        .tituloRentabilidad{
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            margin-left: 5px;
+        .circulo{
+            margin-left: 415px;
         }
-        .valorRentabilidad{
-            color: white;
-            font-size: 36px;
-            font-weight: bold;
-            margin-top: -10px;
-            margin-left: 12px;
+    }
+    @media only screen and (min-width:559px) and (max-width: 563px) {
+        .cuadrado{
+            margin-left: 294px;
         }
-        .cuadrado {
-            width: 40px; 
-            height: 40px; 
-            background: #fbd334 ;
-            position: absolute;
-            z-index: 1;
-            margin-left: 110px;
-            cursor: pointer;
+        .circulo{
+            margin-left: 415px;
         }
-        .cruz {
-            position: absolute;
-            z-index: 1;
-            margin-left: 310px;
-            cursor: pointer;
+    }
+    @media only screen and (min-width:564px) and (max-width: 569px) {
+        .cuadrado{
+            margin-left: 299px;
         }
-        @media only screen and (min-width:360px) and (max-width: 374px) {
-            .cuadrado{
-                margin-left: 90px;
-            }
-            .circulo{
-                margin-left: 235px;
-            }
+        .circulo{
+            margin-left: 415px;
         }
-        @media only screen and (min-width:375px) and (max-width: 413px) {
-            .cuadrado{
-                margin-left: 105px;
-            }
-            .circulo{
-                margin-left: 255px;
-            }
+    }
+    @media only screen and (min-width:570px) and (max-width: 575px) {
+        .cuadrado{
+            margin-left: 305px;
         }
-        @media only screen and (min-width:553px) and (max-width: 558px) {
-            .cuadrado{
-                margin-left: 288px;
-            }
-            .circulo{
-                margin-left: 415px;
-            }
+        .circulo{
+            margin-left: 415px;
         }
-        @media only screen and (min-width:559px) and (max-width: 563px) {
-            .cuadrado{
-                margin-left: 294px;
-            }
-            .circulo{
-                margin-left: 415px;
-            }
+    }
+    @media only screen and (min-width:576px) and (max-width: 767px) {
+        .cuadrado{
+            margin-left: 4px;
         }
-        @media only screen and (min-width:564px) and (max-width: 569px) {
-            .cuadrado{
-                margin-left: 299px;
-            }
-            .circulo{
-                margin-left: 415px;
-            }
+        .circulo{
+            margin-left: 157px;
         }
-        @media only screen and (min-width:570px) and (max-width: 575px) {
-            .cuadrado{
-                margin-left: 305px;
-            }
-            .circulo{
-                margin-left: 415px;
-            }
+    }
+    @media only screen and (min-width:768px) and (max-width: 991px) {
+        .cuadrado{
+            margin-left: 92px;
         }
-        @media only screen and (min-width:576px) and (max-width: 767px) {
-            .cuadrado{
-                margin-left: 4px;
-            }
-            .circulo{
-                margin-left: 157px;
-            }
+        .circulo{
+            margin-left: 238px;
         }
-        @media only screen and (min-width:768px) and (max-width: 991px) {
-            .cuadrado{
-                margin-left: 92px;
-            }
-            .circulo{
-                margin-left: 238px;
-            }
+    }
+    @media only screen and (min-width:992px) and (max-width: 1199px) {
+        .cuadrado{
+            margin-left: 50px;
         }
-        @media only screen and (min-width:992px) and (max-width: 1199px) {
-            .cuadrado{
-                margin-left: 50px;
-            }
-            .circulo{
-                margin-left: 199px;
-            }
+        .circulo{
+            margin-left: 199px;
         }
+    }
     </style>
 @endsection
 @section('content')
@@ -488,7 +533,7 @@
     </div>
 </div>
 
-<div class="featured-properties content-area-9">
+<div class="featured-properties content-area-9 carta-transition">
     <div class="container">
         <!-- Main title -->
         <div class="main-title">
@@ -536,8 +581,8 @@
                         <div class="property-thumbnail">
                             <div class="listing-badges">
                                 <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
-                                    <i class="fa fa-map-marker" style="color:#fff"></i>
-                                    <a class="img-responsive" >Ver mapa</a>
+                                    <i class="fa fa-map-marker" style="color:#000000"></i>
+                                    <a class="img-responsive" style="color:#000000">Ver mapa</a>
                                 </span>
                                 
                                 <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
@@ -551,17 +596,19 @@
                                 </p>
                             </div> 
                             --}}
-                            <div id="carouselExampleIndicators{{ $i}}" class="carousel slide" data-ride="" style="display: block">
+                            <div  class="carousel slide" data-ride="" style="display: block">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                        <img id="carouselExampleIndicators{{ $i}}" class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                        <img id="carouselExampleIndicatorss{{ $i}}" class="d-block w-100 imagen-datos-prueba" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
+
                                         @if($propiedades[$i]->idTipoFlexibilidad == 1)
-                                            <div class="circulo">
+                                            <div id="flexing{{ $i}}" class="circulo">
                                                 <p class="flex">FLEX</p>
                                             </div>
                                         @endif
                                         @if($propiedades[$i]->textoPromocion != null && $propiedades[$i]->rentabilidadPromocion != null)
-                                            <div class="rectangulo">
+                                            <div id="cuadrado{{ $i}}" class="rectangulo">
                                                 <p class="tituloRentabilidad">{{ strtoupper($propiedades[$i]->textoPromocion) }}</p>
                                                 <p class="valorRentabilidad">{{ $propiedades[$i]->rentabilidadPromocion }}%</p>
                                             </div>
@@ -569,14 +616,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="carouselExampleIndicatorss{{ $i}}" class="carousel slide" data-ride="" style="display: none">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
-
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="detail" >
                             <h1 class="title">
@@ -664,7 +704,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $i }}" style="display: none">
+                <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $i }}" style="display: none;">
                     <div class="property-box">
 
                             <div class="listing-badges">
@@ -1039,12 +1079,46 @@
     function pruebaId(idPropiedad, valor){
         idUno = 'carouselExampleIndicators'+valor;
         idDos = 'carouselExampleIndicatorss'+valor;
-        if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
-            document.getElementById(idUno).style.display = 'block';
-            document.getElementById(idDos).style.display = 'none';
+        if(document.getElementById(idUno).classList == 'd-block w-100 prueba-giro' ){
+            document.getElementById(idUno).classList.add('prueba-giro-vuelta');
+            if(document.getElementById('flexing'+valor)){
+                document.getElementById('flexing'+valor).classList.add('prueba-giro-flex');
+            }
+            document.getElementById(idDos).classList.add('prueba-giro-mapa-vuelta');
+            if(document.getElementById('cuadrado'+valor)){
+                document.getElementById('cuadrado'+valor).classList.add('prueba-giro-vuelta');
+            }
+            document.getElementById(idUno).classList.remove('prueba-giro');
+            if(document.getElementById('flexing'+valor)){
+                document.getElementById('flexing'+valor).classList.remove('prueba-giro');
+            }
+            document.getElementById(idDos).classList.remove('prueba-giro-mapa');
+            if(document.getElementById('cuadrado'+valor)){
+                document.getElementById('cuadrado'+valor).classList.remove('prueba-giro');
+            }
         }else{
-            document.getElementById(idUno).style.display = 'none';
-            document.getElementById(idDos).style.display = 'block';
+            if(document.getElementById(idUno).classList == 'd-block w-100 prueba-giro-vuelta'){
+                document.getElementById(idUno).classList.remove('prueba-giro-vuelta');
+                if(document.getElementById('flexing'+valor)){
+                    document.getElementById('flexing'+valor).classList.remove('prueba-giro-flex');
+                }
+                document.getElementById(idDos).classList.remove('prueba-giro-mapa-vuelta');
+                if(document.getElementById('cuadrado'+valor)){
+                    document.getElementById('cuadrado'+valor).classList.remove('prueba-giro-vuelta');
+                }
+            }
+
+            document.getElementById(idUno).classList.add('prueba-giro');
+            if(document.getElementById('flexing'+valor)){
+                document.getElementById('flexing'+valor).classList.add('prueba-giro');
+            }
+            document.getElementById(idDos).classList.add('prueba-giro-mapa');
+            if(document.getElementById('cuadrado'+valor)){
+                document.getElementById('cuadrado'+valor).classList.add('prueba-giro');
+            }
+
+            /*document.getElementById(idUno).style.display = 'none';
+            document.getElementById(idDos).style.display = 'block';*/
         }
     }
 </script>

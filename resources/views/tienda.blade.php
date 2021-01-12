@@ -3,6 +3,50 @@
 @section('title','Tienda')
 @section('css')
 <style type="text/css">
+    .prueba-giro{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 100% !important;
+    }
+    .prueba-giro-mapa{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 0% !important;
+    }
+    .prueba-giro-vuelta{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 0% !important;
+    }
+    .prueba-giro-flex{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 75% !important;
+    }
+    .prueba-giro-mapa-vuelta{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: -100% !important;
+    }
+    .imagen-datos-prueba{
+        margin-top: -233px;
+        margin-left: -349px;
+    }
     .a{
         background-color: #ECD74C;
         color: #333;

@@ -232,8 +232,8 @@
                         <div class="property-thumbnail">
                                 <div class="listing-badges">
                                     <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedadesFavoritas[$i]->idPropiedad }},{{ $i }})">
-                                        <i class="fa fa-map-marker" style="color:#fff"></i>
-                                        <a class="img-responsive">Ver mapa</a>
+                                        <i class="fa fa-map-marker" style="color:#000000"></i>
+                                        <a class="img-responsive" style="color:#000000">Ver mapa</a>
                                     </span>
                                     <script type="text/javascript">
                                         function pruebaId(idPropiedad, valor){

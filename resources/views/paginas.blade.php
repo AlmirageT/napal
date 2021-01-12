@@ -39,49 +39,78 @@
             <div class="property-thumbnail">
                     <div class="listing-badges">
                         <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedadesTienda[$i]->idPropiedad }})">
-                            <i class="fa fa-map-marker" style="color:#fff"></i>
-                            <a class="img-responsive">Ver mapa</a>
+                            <i class="fa fa-map-marker" style="color:#000000"></i>
+                            <a class="img-responsive" style="color:#000000">Ver mapa</a>
                         </span>
                         <script type="text/javascript">
                             function pruebaId(idPropiedad){
                                 idUno = 'carouselExampleIndicators'+idPropiedad;
                                 idDos = 'carouselExampleIndicatorss'+idPropiedad;
-                                if(document.getElementById(idUno).style.display == 'none' && document.getElementById(idDos).style.display == 'block'){
-                                    document.getElementById(idUno).style.display = 'block';
-                                    document.getElementById(idDos).style.display = 'none';
+                                if(document.getElementById(idUno).classList == 'd-block w-100 prueba-giro' ){
+                                    document.getElementById(idUno).classList.add('prueba-giro-vuelta');
+                                    if(document.getElementById('flexing'+idPropiedad)){
+                                        document.getElementById('flexing'+idPropiedad).classList.add('prueba-giro-flex');
+                                    }
+                                    document.getElementById(idDos).classList.add('prueba-giro-mapa-vuelta');
+                                    if(document.getElementById('cuadrado'+idPropiedad)){
+                                        document.getElementById('cuadrado'+idPropiedad).classList.add('prueba-giro-vuelta');
+                                    }
+                                    document.getElementById(idUno).classList.remove('prueba-giro');
+                                    if(document.getElementById('flexing'+idPropiedad)){
+                                        document.getElementById('flexing'+idPropiedad).classList.remove('prueba-giro');
+                                    }
+                                    document.getElementById(idDos).classList.remove('prueba-giro-mapa');
+                                    if(document.getElementById('cuadrado'+idPropiedad)){
+                                        document.getElementById('cuadrado'+idPropiedad).classList.remove('prueba-giro');
+                                    }
                                 }else{
-                                    document.getElementById(idUno).style.display = 'none';
-                                    document.getElementById(idDos).style.display = 'block';
+                                    if(document.getElementById(idUno).classList == 'd-block w-100 prueba-giro-vuelta'){
+                                        document.getElementById(idUno).classList.remove('prueba-giro-vuelta');
+                                        if(document.getElementById('flexing'+idPropiedad)){
+                                            document.getElementById('flexing'+idPropiedad).classList.remove('prueba-giro-flex');
+                                        }
+                                        document.getElementById(idDos).classList.remove('prueba-giro-mapa-vuelta');
+                                        if(document.getElementById('cuadrado'+idPropiedad)){
+                                            document.getElementById('cuadrado'+idPropiedad).classList.remove('prueba-giro-vuelta');
+                                        }
+                                    }
+
+                                    document.getElementById(idUno).classList.add('prueba-giro');
+                                    if(document.getElementById('flexing'+idPropiedad)){
+                                        document.getElementById('flexing'+idPropiedad).classList.add('prueba-giro');
+                                    }
+                                    document.getElementById(idDos).classList.add('prueba-giro-mapa');
+                                    if(document.getElementById('cuadrado'+idPropiedad)){
+                                        document.getElementById('cuadrado'+idPropiedad).classList.add('prueba-giro');
+                                    }
+
+                                    /*document.getElementById(idUno).style.display = 'none';
+                                    document.getElementById(idDos).style.display = 'block';*/
                                 }
                             }
                         </script>
-                        <a class="cuadrado"  onclick="informacionRepetida({{ $propiedadesTienda[$i]->idPropiedad }})">
+                        <a  class="cuadrado"  onclick="informacionRepetida({{ $propiedadesTienda[$i]->idPropiedad }})">
                             <img src="{{ asset('img_public/icon-info-white.svg') }}" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
                         </a>
                     </div>
 
-                    <div id="carouselExampleIndicators{{ $propiedadesTienda[$i]->idPropiedad}}" class="carousel slide" data-ride="" style="display: block">
+                    <div  class="carousel slide" data-ride="" style="display: block">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ asset($propiedadesTienda[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                <img id="carouselExampleIndicators{{ $propiedadesTienda[$i]->idPropiedad}}" class="d-block w-100" src="{{ asset($propiedadesTienda[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                <img id="carouselExampleIndicatorss{{$propiedadesTienda[$i]->idPropiedad}}" class="d-block w-100 imagen-datos-prueba" src="{{ asset($propiedadesTienda[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
+                                
                                 @if($propiedadesTienda[$i]->idTipoFlexibilidad == 1)
-                                    <div class="circulo">
+                                    <div id="flexing{{ $propiedadesTienda[$i]->idPropiedad }}" class="circulo">
                                         <p class="flex">FLEX</p>
                                     </div>
                                 @endif
                                 @if($propiedadesTienda[$i]->textoPromocion != null && $propiedadesTienda[$i]->rentabilidadPromocion != null)
-                                    <div class="rectangulo">
+                                    <div id="cuadrado{{ $propiedadesTienda[$i]->idPropiedad }}" class="rectangulo">
                                         <p class="tituloRentabilidad">{{ strtoupper($propiedadesTienda[$i]->textoPromocion) }}</p>
                                         <p class="valorRentabilidad">{{ $propiedadesTienda[$i]->rentabilidadPromocion }}%</p>
                                     </div>
                                 @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div id="carouselExampleIndicatorss{{$propiedadesTienda[$i]->idPropiedad}}" class="carousel slide" data-ride="" style="display: none">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ asset($propiedadesTienda[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
                             </div>
                         </div>
                     </div>
