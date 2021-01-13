@@ -146,9 +146,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
     <script type="text/javascript">
         $(window).on('load', function () {
-              setTimeout(function () {
-            $(".loader-page").css({visibility:"hidden",opacity:"0"})
-          }, 1000);
+            setTimeout(function () {
+                $(".loader-page").css({visibility:"hidden",opacity:"0"})
+            }, 1000);
         });
     </script>
     @toastr_js

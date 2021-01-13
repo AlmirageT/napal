@@ -12,7 +12,31 @@
 @section('title','Bienvenid@')
 @section('css')
   <style>
-
+      .opacidad{
+          opacity: 0;
+      }
+    .carta-prueba {
+        -webkit-transition: all .4s linear;
+        transition: all .4s linear;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    .face {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    .carta-prueba-onclick {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+    .back {
+        position: absolute;
+        margin-top: -752px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
     .prueba-giro{
         -webkit-transition: 0.8s;
         -moz-transition: 0.8s;
@@ -210,7 +234,7 @@
     .cruz {
         position: absolute;
         z-index: 1;
-        margin-left: 310px;
+        margin-left: 329px;
         cursor: pointer;
     }
     @media only screen and (min-width:360px) and (max-width: 374px) {
@@ -576,137 +600,138 @@
                     $arrayIdPropiedadSinDuplicar = array();
                     array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
                 @endphp
-                <div class="col-lg-4 col-sm-6" id="cartaPropiedad{{ $i }}" style="display: block;">
-                    <div class="property-box">
-                        <div class="property-thumbnail">
-                            <div class="listing-badges">
-                                <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
-                                    <i class="fa fa-map-marker" style="color:#000000"></i>
-                                    <a class="img-responsive" style="color:#000000">Ver mapa</a>
-                                </span>
-                                
-                                <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
-                                    <img src="{{ asset('img_public/icon-info-white.svg') }}" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
-                                </a>
-                            </div>
-                            {{-- 
-                            <div class="price-ratings-box">
-                                <p class="price">
-                                    ${{ number_format($propiedades[$i]->precio,0,',','.') }}
-                                </p>
-                            </div> 
-                            --}}
-                            <div  class="carousel slide" data-ride="" style="display: block">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img id="carouselExampleIndicators{{ $i}}" class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
-                                        <img id="carouselExampleIndicatorss{{ $i}}" class="d-block w-100 imagen-datos-prueba" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
-
-                                        @if($propiedades[$i]->idTipoFlexibilidad == 1)
-                                            <div id="flexing{{ $i}}" class="circulo">
-                                                <p class="flex">FLEX</p>
-                                            </div>
-                                        @endif
-                                        @if($propiedades[$i]->textoPromocion != null && $propiedades[$i]->rentabilidadPromocion != null)
-                                            <div id="cuadrado{{ $i}}" class="rectangulo">
-                                                <p class="tituloRentabilidad">{{ strtoupper($propiedades[$i]->textoPromocion) }}</p>
-                                                <p class="valorRentabilidad">{{ $propiedades[$i]->rentabilidadPromocion }}%</p>
-                                            </div>
-                                        @endif
+                <div class="col-lg-4 col-sm-6 carta-prueba" id="cartaPropiedad{{ $i }}" style="display: block;">
+                    <div class="face front" id="carta-frontal{{ $i }}">
+                        <div class="property-box">
+                            <div class="property-thumbnail">
+                                <div class="listing-badges">
+                                    <span style="cursor: pointer;" class="featured" onclick="pruebaId({{ $propiedades[$i]->idPropiedad }},{{ $i }})">
+                                        <i class="fa fa-map-marker" style="color:#000000"></i>
+                                        <a class="img-responsive" style="color:#000000">Ver mapa</a>
+                                    </span>
+                                    
+                                    <a class="cuadrado"  onclick="informacionRepetida({{ $i }})">
+                                        <img src="{{ asset('img_public/icon-info-white.svg') }}" class="h-minificha__icon-info h-minificha__show-info-window" style="margin-left: 6px;margin-top: 5px;">
+                                    </a>
+                                </div>
+                                {{-- 
+                                <div class="price-ratings-box">
+                                    <p class="price">
+                                        ${{ number_format($propiedades[$i]->precio,0,',','.') }}
+                                    </p>
+                                </div> 
+                                --}}
+                                <div  class="carousel slide" data-ride="" style="display: block">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img id="carouselExampleIndicators{{ $i}}" class="d-block w-100" src="{{ asset($propiedades[$i]->fotoPrincipal) }}" alt="First slide" height="233" width="350">
+                                            <img id="carouselExampleIndicatorss{{ $i}}" class="d-block w-100 imagen-datos-prueba" src="{{ asset($propiedades[$i]->fotoMapa) }}" alt="First slide" height="233" width="350">
+    
+                                            @if($propiedades[$i]->idTipoFlexibilidad == 1)
+                                                <div id="flexing{{ $i}}" class="circulo">
+                                                    <p class="flex">FLEX</p>
+                                                </div>
+                                            @endif
+                                            @if($propiedades[$i]->textoPromocion != null && $propiedades[$i]->rentabilidadPromocion != null)
+                                                <div id="cuadrado{{ $i}}" class="rectangulo">
+                                                    <p class="tituloRentabilidad">{{ strtoupper($propiedades[$i]->textoPromocion) }}</p>
+                                                    <p class="valorRentabilidad">{{ $propiedades[$i]->rentabilidadPromocion }}%</p>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
+                                
                             </div>
-                            
-                        </div>
-                        <div class="detail" >
-                            <h1 class="title">
-                                {{-- <a href="{{ asset('detalle') }}/{{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a> --}}
-                                <a style="color: black" href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
-                            </h1>
-                            <div class="location" >
-                                <a >
-                                    <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ substr($propiedades[$i]->nombreRegion,0,28) }}...
-                                </a>
-                            </div>
-                            <ul class="facilities-list clearfix">
-                                <li>
-                                    <strong  class="{{ $propiedades[$i]->nombreClase }}">{{ $propiedades[$i]->nombreTipoCalidad }}</strong>
-                                </li>
-                                <li></li>
-                                <li >
-                                    @if($propiedades[$i]->tieneChat == 1)
-                                        <i class="far fa-comments" style="font-size: 30px"></i>
-                                    @else
-                                        Sin Foro
-                                    @endif
-                                </li>
-                            </ul>
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6" align="left">
-                                    <p><strong >${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
+                            <div class="detail" >
+                                <h1 class="title">
+                                    {{-- <a href="{{ asset('detalle') }}/{{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a> --}}
+                                    <a style="color: black" href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}">{{ $propiedades[$i]->nombrePropiedad }}</a>
+                                </h1>
+                                <div class="location" >
+                                    <a >
+                                        <i class="fa fa-map-marker"></i>{{ $propiedades[$i]->direccion1 }}, {{ substr($propiedades[$i]->nombreRegion,0,28) }}...
+                                    </a>
                                 </div>
-                                <div class="col-lg-6 col-sm-6" align="right">
-                                    <p><strong >${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
-                                </div>
-                                <div class="col-lg-12">
-                                    <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
-                                </div>
-                                <div class="col-lg-6 col-sm-6">
-                                    @if(count($arrayIdPropiedadSinDuplicar[0])>1)
-                                        <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
-                                    @else
-                                        @if(count($arrayIdPropiedadSinDuplicar[0])==0)
+                                <ul class="facilities-list clearfix">
+                                    <li>
+                                        <strong  class="{{ $propiedades[$i]->nombreClase }}">{{ $propiedades[$i]->nombreTipoCalidad }}</strong>
+                                    </li>
+                                    <li></li>
+                                    <li >
+                                        @if($propiedades[$i]->tieneChat == 1)
+                                            <i class="far fa-comments" style="font-size: 30px"></i>
+                                        @else
+                                            Sin Foro
+                                        @endif
+                                    </li>
+                                </ul>
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6" align="left">
+                                        <p><strong >${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6" align="right">
+                                        <p><strong >${{ number_format($propiedades[$i]->precio,0,',','.') }}</strong></p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <progress max="100" value="{{ round($porcentaje) }}" style="width: 100%;">
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6">
+                                        @if(count($arrayIdPropiedadSinDuplicar[0])>1)
                                             <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
                                         @else
-                                            <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
+                                            @if(count($arrayIdPropiedadSinDuplicar[0])==0)
+                                                <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversores</p>
+                                            @else
+                                                <p ><strong >{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong> inversor</p>
+                                            @endif
                                         @endif
-                                    @endif
-                                </div>
-                                <div class="col-lg-6 col-sm-6" align="right">
-                                    @if($diff->days>0)
-                                        <p > {!! $diff->days !!} días </p>
-                                    @else
-                                        <p >Finalizado </p>
-                                    @endif
-                                </div>
-                            </div>
-                            <hr>
-                                <div class="row">
-                                    <div class="col-lg-6" align="center">
-                                        <h4><strong >{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
-                                        <p><strong >Rentabilidad Anual</strong></p>
                                     </div>
-                                    <div class="col-lg-6" align="center">
-                                        <h4><strong >{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
-                                        <p><strong >Rentabilidad Total</strong></p>
+                                    <div class="col-lg-6 col-sm-6" align="right">
+                                        @if($diff->days>0)
+                                            <p > {!! $diff->days !!} días </p>
+                                        @else
+                                            <p >Finalizado </p>
+                                        @endif
                                     </div>
-                                </div> 
-                            <hr>  
-                            <div class="row" align="center">
-                                <div class="col-lg-12">
-                                    <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" class="btn btn-warning"><strong style="color: black">Invierte</strong></a>
+                                </div>
+                                <hr>
+                                    <div class="row">
+                                        <div class="col-lg-6" align="center">
+                                            <h4><strong >{{ $propiedades[$i]->rentabilidadAnual }}%</strong></h4>
+                                            <p><strong >Rentabilidad Anual</strong></p>
+                                        </div>
+                                        <div class="col-lg-6" align="center">
+                                            <h4><strong >{{ $propiedades[$i]->rentabilidadTotal }}%</strong></h4>
+                                            <p><strong >Rentabilidad Total</strong></p>
+                                        </div>
+                                    </div> 
+                                <hr>  
+                                <div class="row" align="center">
+                                    <div class="col-lg-12">
+                                        <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedades[$i]->idPropiedad) }}" class="btn btn-warning"><strong style="color: black">Invierte</strong></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="footer clearfix" >
-                            <div class="pull-left days" align="center">
-                                <p><i  class="flaticon-time"></i><strong >Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
+                            <div class="footer clearfix" >
+                                <div class="pull-left days" align="center">
+                                    <p><i  class="flaticon-time"></i><strong >Plazo: {{ $propiedades[$i]->plazoMeses }} meses</strong> </p>
+                                </div>
+                                @if(Session::has('idUsuario'))
+                                    <ul class="pull-right">
+                                        @if(count($propiedadesFavoritas->where('idPropiedad',$propiedades[$i]->idPropiedad))>0)
+                                            <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}" style="color:red;"></i></a></li>
+                                        @else
+                                            <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}"></i></a></li>
+                                        @endif
+                                    </ul>
+                                @endif
                             </div>
-                            @if(Session::has('idUsuario'))
-                                <ul class="pull-right">
-                                    @if(count($propiedadesFavoritas->where('idPropiedad',$propiedades[$i]->idPropiedad))>0)
-                                        <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}" style="color:red;"></i></a></li>
-                                    @else
-                                        <li><a  onclick="propiedadFavorita({{ $propiedades[$i]->idPropiedad }})"><i class="flaticon-favorite" id="{{ $propiedades[$i]->idPropiedad }}"></i></a></li>
-                                    @endif
-                                </ul>
-                            @endif
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-sm-6" id="cartaInformacion{{ $i }}" style="display: none;">
-                    <div class="property-box">
-
+                    
+                    <div class="face back">
+                        <div class="property-box">
                             <div class="listing-badges">
                                 <a class="cruz"  onclick="informacionRepetida({{ $i }})">
                                     <i class="fas fa-times" style="color: #fbd334;font-size: 30px;margin-top: 17px;"></i>
@@ -734,6 +759,10 @@
                             <br>
                             <br>
                             <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
                     </div>
                 </div>
                 
@@ -1147,14 +1176,33 @@
 <script type="text/javascript">
     function informacionRepetida(i) {
         const cartaUno = document.getElementById('cartaPropiedad'+i);
-        const cartaDos = document.getElementById('cartaInformacion'+i);
+        const cartaFrontal = document.getElementById('carta-frontal'+i);
+
+        
+        if(cartaFrontal.classList == 'face front'){
+            cartaUno.classList.add('carta-prueba-onclick');
+            setTimeout(function () {
+                cartaFrontal.classList.add('opacidad');
+            }, 200);
+            
+        }else{
+            cartaUno.classList.remove('carta-prueba-onclick');
+            setTimeout(function () {
+                cartaFrontal.classList.remove('opacidad');
+            }, 200);
+
+        }
+
+        /*const cartaDos = document.getElementById('cartaInformacion'+i);
+
         if(cartaUno.style.display == 'block' && cartaDos.style.display == 'none'){
             cartaUno.style.display = 'none';
             cartaDos.style.display = 'block';
         }else{
             cartaUno.style.display = 'block';
             cartaDos.style.display = 'none';
-        }
+        }*/
+
     }
 </script>
 @endsection
