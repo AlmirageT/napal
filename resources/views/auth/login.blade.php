@@ -11,7 +11,7 @@ Login
                 <div class="form-content-box">
                     <!-- Logo -->
                     <a href="{{ asset('/') }}">
-                        <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo">
                     </a>
                     <!-- details -->
                     <div class="details">

@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Invierte con nosotros y obtén esa tan esperada independencia financiera" />
+    <meta name="keywords" content="invertir propiedades, invertir casa, invertir departamento, invertir, inversion, casa, departamento, propiedad" />
     @yield('meta')
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +25,7 @@
     <link rel="stylesheet" type="text/css"  href="{{ asset('css_public/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css_public/style.css') }}">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('css_public/skins/default.css') }}">
-    <link rel="shortcut icon" href="{{ asset('img_public/logo midas-03.png') }}" type="image/x-icon" >
+    <link rel="shortcut icon" href="{{ asset('img_public/logomidas-02.png') }}" type="image/x-icon" >
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
     <link rel="stylesheet" type="text/css" href="{{ asset('css_public/ie10-viewport-bug-workaround.css') }}">
     <script  src="{{ asset('js_public/ie-emulation-modes-warning.js') }}"></script>
@@ -148,7 +150,7 @@
         $(window).on('load', function () {
             setTimeout(function () {
                 $(".loader-page").css({visibility:"hidden",opacity:"0"})
-            }, 1000);
+            }, 10);
         });
     </script>
     @toastr_js

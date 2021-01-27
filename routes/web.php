@@ -71,6 +71,9 @@ Route::group(['prefix'=>'dashboard'], function(){
     //codigo promocional
     Route::post('codigo-promocional','PromoAmigoController@codigoPromocional');
 
+    //link antes de otros pagos
+    Route::post('toma-de-pago','SaldoDisponibleController@otrosPagos');
+
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -463,3 +466,12 @@ Route::delete('mantenedor-banco-tipo-cuenta/{idTipoCuenta}',array(
 Route::resource('mantenedor-anadir-cuenta-usuario','CuentaBancariaController');
 //retiro
 Route::resource('mantenedor-retiro','MiCuentaController');
+
+
+
+
+
+
+
+
+

@@ -9,10 +9,10 @@ Registrarse
             <div class="col-lg-5">
                 <div class="form-content-box">
                     <a class=" d-block d-sm-block d-md-block d-lg-none" href="{{ asset('/') }}">
-                        <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo">
                     </a>
                     <a href="{{ asset('/') }}">
-                        <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
                         <h3>Crea tu cuenta</h3>
@@ -95,14 +95,14 @@ Registrarse
             <div class="col-lg-2 d-none d-sm-none d-md-none d-lg-block">
               <div class="form-content-box">
                 <a href="{{ asset('/') }}">
-                    <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo">
+                    <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo">
                 </a>
               </div>
             </div>
             <div class="col-lg-5 d-none d-sm-none d-md-none d-lg-block">
                 <div class="form-content-box">
                     <a href="{{ asset('/') }}">
-                        <img src="{{ asset('img_public/logo midas-02.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
                         <div class="row">

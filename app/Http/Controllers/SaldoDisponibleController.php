@@ -19,7 +19,9 @@ use App\TrxIngreso;
 use App\CambioDolar;
 use App\TrxPaypal;
 use App\TipoMedioPago;
+use App\BoletaOtroPago;
 use Redirect;
+use DateTime;
 use Session;
 use URL;
 use Log;
@@ -172,6 +174,31 @@ class SaldoDisponibleController extends Controller
         Session::flash('usd',$result->transactions[0]->amount->total);
         toastr()->success('Pago total realizado con exito');
         return Redirect::to('dashboard/exito');
+    }
+
+    //otros pagos
+    public function otrosPagos(Request $request)
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        //caracteres especiales cantidad a invertir
+        $valorCaracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+        $cantidadSinCaracteres = str_replace($valorCaracteresEspeciales, "", $request->valorAIngresar);
+        //caracteres especiales para rut
+        $caracteresEspeciales = array(".","-");
+        $rutSinGuion = str_replace($caracteresEspeciales, "", Session::get('rut'));
+        $date = new DateTime();
+        $date->modify('+48 hours');
+
+        BoletaOtroPago::create([
+            'cantidadBoletaOtroPago' => $cantidadSinCaracteres,
+            'fechaVencimiento' => $date->format('Y-m-d H:i:s'),
+            'idUsuario' => Session::get('idUsuario'),
+            'idEstado' => 11,
+        ]);
+
+        return redirect()->to('http://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
     }
 
 }

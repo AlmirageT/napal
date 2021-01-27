@@ -13,7 +13,7 @@
                             </tr>
                             <tr>
                                 <td bgcolor="#FFFFFF">
-                                    <img src="{{ asset('img_public/logo midas-02.png') }}" alt="Housers" style="display: block; border: none;margin-left: 10px;" width="200" height="71">
+                                    <img src="{{ asset('img_public/logomidas-03.png') }}" alt="EsMidas" style="display: block; border: none;margin-left: 10px;" width="200" height="71">
                                 </td>
                             </tr>
                             

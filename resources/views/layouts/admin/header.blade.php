@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('img_public/logo midas-03.png') }}" alt="" height="22">
+                        <img src="{{ asset('img_public/logomidas_Mesa de trabajo 1.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('img_public/logo midas-02.png') }}" alt="" height="38">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" alt="" height="38">
                     </span>
                 </a>
 
                 <a href="{{ url('/dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('img_public/logo midas-03.png') }}" alt="" height="22">
+                        <img src="{{ asset('img_public/logomidas_Mesa de trabajo 1.png') }}" alt="" height="30">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('img_public/logo midas-02.png') }}" alt="" height="38">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" alt="" height="60">
                     </span>
                 </a>
             </div>

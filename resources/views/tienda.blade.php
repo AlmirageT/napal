@@ -3,6 +3,31 @@
 @section('title','Tienda')
 @section('css')
 <style type="text/css">
+.opacidad{
+          opacity: 0;
+    }
+    .carta-prueba {
+        -webkit-transition: all .4s linear;
+        transition: all .4s linear;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    .face {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    .carta-prueba-onclick {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+    .back {
+        position: absolute;
+        margin-top: -738px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
     .prueba-giro{
         -webkit-transition: 0.8s;
         -moz-transition: 0.8s;
@@ -151,7 +176,7 @@
     .cruz {
         position: absolute;
         z-index: 1;
-        margin-left: 310px;
+        margin-left: 329px;
         cursor: pointer;
     }
     @media only screen and (min-width:360px) and (max-width: 374px) {
@@ -161,6 +186,20 @@
             .circulo{
                 margin-left: 235px;
             }
+            .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
         }
         @media only screen and (min-width:375px) and (max-width: 413px) {
             .cuadrado{
@@ -169,6 +208,20 @@
             .circulo{
                 margin-left: 255px;
             }
+            .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
         }
         @media only screen and (min-width:553px) and (max-width: 558px) {
             .cuadrado{
@@ -217,6 +270,20 @@
             .circulo{
                 margin-left: 238px;
             }
+            .back {
+            position: absolute;
+            margin-top: -877px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
         }
         @media only screen and (min-width:992px) and (max-width: 1199px) {
             .cuadrado{
@@ -225,6 +292,20 @@
             .circulo{
                 margin-left: 199px;
             }
+            .back {
+            position: absolute;
+            margin-top: -822px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 272px;
+            cursor: pointer;
+        }
         }
 </style>
 @endsection

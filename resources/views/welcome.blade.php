@@ -12,9 +12,9 @@
 @section('title','Bienvenid@')
 @section('css')
   <style>
-      .opacidad{
+    .opacidad{
           opacity: 0;
-      }
+    }
     .carta-prueba {
         -webkit-transition: all .4s linear;
         transition: all .4s linear;
@@ -31,7 +31,7 @@
     }
     .back {
         position: absolute;
-        margin-top: -752px;
+        margin-top: -776px;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         -webkit-transform: rotateY(180deg);
@@ -244,6 +244,20 @@
         .circulo{
             margin-left: 235px;
         }
+        .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
     }
     @media only screen and (min-width:375px) and (max-width: 413px) {
         .cuadrado{
@@ -251,6 +265,20 @@
         }
         .circulo{
             margin-left: 255px;
+        }
+        .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
         }
     }
     @media only screen and (min-width:553px) and (max-width: 558px) {
@@ -300,6 +328,20 @@
         .circulo{
             margin-left: 238px;
         }
+        .back {
+            position: absolute;
+            margin-top: -877px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
     }
     @media only screen and (min-width:992px) and (max-width: 1199px) {
         .cuadrado{
@@ -307,6 +349,20 @@
         }
         .circulo{
             margin-left: 199px;
+        }
+        .back {
+            position: absolute;
+            margin-top: -822px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 272px;
+            cursor: pointer;
         }
     }
     </style>
@@ -729,7 +785,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <br>
                     <div class="face back">
                         <div class="property-box">
                             <div class="listing-badges">
