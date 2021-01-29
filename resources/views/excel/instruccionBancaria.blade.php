@@ -11,7 +11,7 @@
             <th>DESCRIPCIÓN</th>
             <th>IMPORTE</th>
             <th>VALIDADA</th>
-            <th>CANCELADA</th>
+            <th>ACCIONES</th>
             <th>BANCO</th>
             <th>TIPO CUENTA</th>
             <th>NUMERO DE CUENTA</th>

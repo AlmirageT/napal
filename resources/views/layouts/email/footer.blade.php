@@ -26,13 +26,13 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td align="center">
-                                                                    <a href=""><img src="https://www.housers.com/img/mails/rrss-facebook.jpg" alt="facebook" width="39" height="39" border="0"></a>
+                                                                    <a href="{{ $redesSociales->where('nombreRedSocial','Facebook')->pluck('rutaRedSocial')->first() }}"><img src="https://www.housers.com/img/mails/rrss-facebook.jpg" alt="facebook" width="39" height="39" border="0"></a>
                                                                 </td>
                                                                 <td align="center">
-                                                                    <a href="" target="_blank" rel="noreferrer"><img src="https://www.housers.com/img/mails/rrss-twitter.jpg" alt="twitter" width="39" height="39" border="0"></a>
+                                                                    <a href="{{ $redesSociales->where('nombreRedSocial','Twitter')->pluck('rutaRedSocial')->first() }}" target="_blank" rel="noreferrer"><img src="https://www.housers.com/img/mails/rrss-twitter.jpg" alt="twitter" width="39" height="39" border="0"></a>
                                                                 </td>
                                                                 <td align="center">
-                                                                    <a href="" target="_blank" rel="noreferrer"><img src="https://www.housers.com/img/mails/rrss-linkedin.jpg" alt="linkedin" width="39" height="39" border="0"></a>
+                                                                    <a href="{{ $redesSociales->where('nombreRedSocial','Google')->pluck('rutaRedSocial')->first() }}" target="_blank" rel="noreferrer"><img src="https://www.housers.com/img/mails/rrss-linkedin.jpg" alt="linkedin" width="39" height="39" border="0"></a>
                                                                 </td>
                                                                 <td align="center">
                                                                     <a href="" target="_blank" rel="noreferrer"><img src="https://www.housers.com/img/mails/rrss-youtube.jpg" alt="youtube" width="39" height="39" border="0"></a>

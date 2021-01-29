@@ -15,6 +15,7 @@ use App\CuentaBancariaUsuario;
 use App\InstruccionBancaria;
 use App\SaldoDisponible;
 use App\TrxIngreso;
+use App\TrxEgresos;
 use App\Banco;
 use Session;
 use DB;
@@ -44,7 +45,39 @@ class MiCuentaController extends Controller
         foreach ($trxIngresos as $trxIngreso) {
             $saldoComprometido = $saldoComprometido + $trxIngreso->monto; 
         }
-        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias','saldoComprometido'));
+        $inversionesTotales = TrxIngreso::where('idPropiedad','<>',null)->where('idUsuario',Session::get('idUsuario'))->get();
+        $totalInversion = 0;
+        foreach($inversionesTotales as $inversionTotal){
+            $totalInversion = $totalInversion + $inversionTotal->monto;
+        }
+        $egresosDeMonedero = TrxEgresos::where('idUsuario',Session::get('idUsuario'))->get();
+        $egresoTotal = 0;
+        foreach($egresosDeMonedero as $egresoMonedero){
+            $egresoTotal = $egresoTotal + $egresoMonedero->monto;
+        }
+
+        $ingresosOtrosPagos = TrxIngreso::where('idPropiedad',null)->where('idUsuario',Session::get('idUsuario'))->where('idTipoMedioPago',3)->get();
+        $ingresosPaypal = TrxIngreso::where('idPropiedad',null)->where('idUsuario',Session::get('idUsuario'))->where('idTipoMedioPago',2)->get();
+        $paypal = 0;
+        $otrosPagos = 0;
+        foreach($ingresosOtrosPagos as $ingresoBancario){
+            $otrosPagos = $otrosPagos + $ingresoBancario->monto;
+        }
+        foreach($ingresosPaypal as $ingresoBancarioPaypal){
+            $paypal = $paypal + $ingresoBancarioPaypal->monto;
+        }
+        $ingresosTransferencias = TrxIngreso::where('idPropiedad',null)->where('idUsuario',Session::get('idUsuario'))->where('idTipoMedioPago',1)->get();
+        $totalTransf = 0;
+        foreach ($ingresosTransferencias as $ingresoTransferencia) {
+            $totalTransf = $totalTransf + $ingresoTransferencia->monto;
+        }
+        $ingresosTotales = TrxIngreso::where('idPropiedad',null)->where('idUsuario',Session::get('idUsuario'))->get();
+        $totalIngresos = 0;
+        foreach ($ingresosTotales as $ingresoTotal) {
+            $totalIngresos = $totalIngresos + $ingresoTotal->monto;
+        }
+
+        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias','saldoComprometido','totalInversion','egresoTotal','otrosPagos','paypal','totalTransf','totalIngresos'));
     }
     public function cuentaAsociada()
     {

@@ -76,7 +76,7 @@ class InstruccionBancariaController extends Controller
                 'idMoneda' => 1,
                 'webClient' => $request->userAgent()
             ]);
-            Mail::to($obtenerCorreoUsuario->correo)->send(new CorreoTransferencia($obtenerCorreoUsuario));
+            Mail::to($obtenerCorreoUsuario->correo)->send(new CorreoTransferencia($obtenerCorreoUsuario,$data_uri));
             toastr()->success('Se ha aprobado la transferencia de forma correcta','Aprobado');
 
             return redirect::to('napalm/solicitud-retiro');

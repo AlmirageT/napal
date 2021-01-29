@@ -86,7 +86,6 @@ class WelcomeController extends Controller
             ->join('propiedades','trx_ingresos.idPropiedad','=','propiedades.idPropiedad')
             ->where('propiedades.idEstado',5)
             ->get();
-        $valorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
         $propiedadesFavoritas = PropiedadFavorita::all();
         $totalPropiedades = Propiedad::where('idEstado',5)->get();
         $usuarios = Usuario::where('idTipoUsuario',2)->get();
@@ -99,7 +98,7 @@ class WelcomeController extends Controller
         foreach ($ingresosFinanciados as $ingresoFinanciado) {
             $valorTotal = $valorTotal + $ingresoFinanciado->monto;
         }
-        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','valorInicio','propiedadesFavoritas','promedioFinal','valorTotal','usuarios'));
+        return view('welcome',compact('imagenesWeb','propiedades','imagenesMovil','casosExitosos','ingresos','propiedadesFavoritas','promedioFinal','valorTotal','usuarios'));
     }
     public function obtenerPropiedad(Request $request, $idPropiedad)
     {

@@ -14,11 +14,11 @@
 	<div class="row">
 		<br>
 		<div class="col-lg-12" align="center"><h3>Mis datos de usuario</h3><br><br></div>
-		<div class="col-lg-6">
+		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-12"><h5>Ajustes de la cuenta</h5></div>
+						<div class="col-lg-7" align="center"><h5>Ajustes de la cuenta</h5></div>
 						<div class="col-lg-6" align="center">
 							<br>
 							<img src="https://static.housers.com/assets/images/mis-datos/lock.svg">
@@ -35,6 +35,7 @@
 				</div>
 			</div>
 		</div>
+		{{--  
 		<div class="col-lg-6">
 			<div class="card" style="background-color: #13294A">
 				<div class="card-body">
@@ -55,7 +56,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>--}}
 	</div>
 	<br>
 	<br>

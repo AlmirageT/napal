@@ -62,7 +62,7 @@
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/mis-inversiones') }}">Mis inversiones</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/mi-cuenta') }}">Mi cuenta</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/favoritos') }}">Favoritos</a></li>
-                                <li><a class="dropdown-item" href="{{ asset('dashboard/documentos-informes') }}">Documentos e informes</a></li>
+                            {{--  <li><a class="dropdown-item" href="{{ asset('dashboard/documentos-informes') }}">Documentos e informes</a></li>--}}    
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -70,11 +70,12 @@
                                 Mis datos
                             </a>
                         </li>
+                        {{--  
                         <li class="nav-item">
                             <a class="nav-link link-color" href="#">
                                 Notificaciones
                             </a>
-                        </li>
+                        </li>--}}
                     @endif
                     @if (Session::has('idUsuario') && Session::has('correo') && Session::has('rut'))
                         <form action="{{ asset('logout') }}" method="post">

@@ -14,6 +14,7 @@ class TrxPaypal extends Model
     	'descripcionPaypal',
     	'facturaPaypal',
     	'idEstadoPago',
-    	'idUsuario'
+		'idUsuario',
+		'idPropiedad'
     ];
 }

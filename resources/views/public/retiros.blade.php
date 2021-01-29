@@ -18,35 +18,46 @@ Retiros
 				<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
 					<div class="card-body">
 						<div class="row">
-							<div class="col-lg-3">
-								<div class="form-group">
-									<label>Cuenta bancaria</label>
-									<select class="form-control"  name="idCuentaBancariaUsuario" required>
-							        	<option value="">Seleccione Cuenta</option>
-								        @foreach ($arrayOptBanco as $banco)
-											<optgroup label="{{ $banco['banco'] }}"></optgroup>
-											@foreach ($banco['tipoCuentas'] as $tipoCuenta)
-									        	<option value="{{ $tipoCuenta['idCuentaBancariaUsuario'] }}">{{ $tipoCuenta['nombreTipoCuenta'] }} - {{ $tipoCuenta['numeroCuenta'] }}</option>
+							@if (count($arrayOptBanco)>0)
+								<div class="col-lg-3">
+									<div class="form-group">
+										<label>Cuenta bancaria</label>
+										<select class="form-control"  name="idCuentaBancariaUsuario" required>
+											<option value="">Seleccione Cuenta</option>
+											@foreach ($arrayOptBanco as $banco)
+												<optgroup label="{{ $banco['banco'] }}"></optgroup>
+												@foreach ($banco['tipoCuentas'] as $tipoCuenta)
+													<option value="{{ $tipoCuenta['idCuentaBancariaUsuario'] }}">{{ $tipoCuenta['nombreTipoCuenta'] }} - {{ $tipoCuenta['numeroCuenta'] }}</option>
+												@endforeach
 											@endforeach
-								        @endforeach
-									</select>
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-3">
-								<div class="form-group">
-									<label>Concepto</label>
-									<input type="text" name="concepto" class="form-control" required="">
+								<div class="col-lg-3">
+									<div class="form-group">
+										<label>Concepto</label>
+										<input type="text" name="concepto" class="form-control" required="">
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-3">
-								<div class="form-group">
-									<label>Importe</label>
-									<input type="number" name="importe" class="form-control" required="">
+								<div class="col-lg-3">
+									<div class="form-group">
+										<label>Importe</label>
+										<input type="number" name="importe" class="form-control" required="">
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-3" align="right" style="margin-top: 30px">
-								<button class="btn btn-primary" type="submit"><small>SOLICITAR TRANSFERENCIA</small></button>
-							</div>
+								<div class="col-lg-3" align="right" style="margin-top: 30px">
+									<button class="btn btn-primary" type="submit"><small>SOLICITAR TRANSFERENCIA</small></button>
+								</div>
+							@else
+								<div class="col-lg-12">
+									<div class="form-group" align="center">
+										<h4>No posee ninguna cuenta asociada</h4>
+										<br>
+										<a href="{{ asset('dashboard/mi-cuenta/cuentas-bancarias/nueva') }}" class="btn btn-danger">Click aqui para agregar cuenta</a>
+									</div>
+								</div>
+							@endif
+								
 						</div>
 					</div>
 				</div>

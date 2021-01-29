@@ -14,6 +14,7 @@ class BoletaOtroPago extends Model
         'idOtrosPagosTransaccion',
     	'idUsuario',
     	'idEstado',
-    	'idTrxIngreso'
+        'idTrxIngreso',
+        'idPropiedad'
     ];
 }

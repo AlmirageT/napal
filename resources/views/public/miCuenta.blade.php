@@ -175,28 +175,28 @@ Mi cuenta
 						<br>
 						</div>
 						<div class="col-lg-6" align="right">
-							<h4>0,00 €</h4>
+							<h4>${{ number_format($totalIngresos,0,',','.') }}</h4>
 						<br>
 						</div>
 						<div class="col-lg-6" align="left">
 							<p>Ingresos por transferencia</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p>0,00 €</p>
+							<p>${{ number_format($totalTransf,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-6" align="left">
-							<p>Ingresos por tarjeta bancaria</p>
+							<p>Ingresos por otros pagos</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p>0,00 €</p>
+							<p>${{ number_format($otrosPagos,0,',','.') }}</p>
 						</div>
 						<div class="col-lg-6" align="left">
-							<p>Rendimientos</p>
+							<p>Ingresos por paypal</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p>0,00 €</p>
+							<p>${{ number_format($paypal,0,',','.') }}</p>
 						</div>
-						<div class="col-lg-6" align="left">
+						{{--  <div class="col-lg-6" align="left">
 							<p>Beneficios por venta de fracciones</p>
 						</div>
 						<div class="col-lg-6" align="right">
@@ -207,12 +207,12 @@ Mi cuenta
 						</div>
 						<div class="col-lg-6" align="right">
 							<p>0,00 €</p>
-						</div>
+						</div>--}}
 						<div class="col-lg-6" align="left">
 							<p>Devolución capital</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p>0,00 €</p>
+							<p>$0</p>
 						</div>
 					</div>
 				</div>
@@ -232,21 +232,21 @@ Mi cuenta
 						<br>
 						</div>
 						<div class="col-lg-6" align="right">
-							<h4>0,00 €</h4>
+							<h4>${{ number_format($totalInversion,0,',','.') }}</h4>
 						<br>
 						</div>
 						<div class="col-lg-6" align="left">
 							<p>Inversiones</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p>0,00 €</p>
+							<p>${{ number_format($totalInversion,0,',','.') }}</p>
 						</div>
-						<div class="col-lg-6" align="left">
+						{{-- <div class="col-lg-6" align="left">
 							<p>Impuestos</p>
 						</div>
 						<div class="col-lg-6" align="right">
 							<p>0,00 €</p>
-						</div>
+						</div> 
 						<div class="col-lg-6" align="left">
 							<p>Comisiones Housers</p>
 						</div>
@@ -258,19 +258,20 @@ Mi cuenta
 						</div>
 						<div class="col-lg-6" align="right">
 							<p>0,00 €</p>
-						</div>
+						</div>--}}
 						<div class="col-lg-6" align="left">
 							<p>Transferencias a cuenta bancaria</p>
 						</div>
 						<div class="col-lg-6" align="right">
-							<p>0,00 €</p>
+							<p>${{ number_format($egresoTotal,0,',','.') }}</p>
 						</div>
+						{{-- 
 						<div class="col-lg-6" align="left">
 							<p>Pérdidas por venta de fracciones</p>
 						</div>
 						<div class="col-lg-6" align="right">
 							<p>0,00 €</p>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 			</div>

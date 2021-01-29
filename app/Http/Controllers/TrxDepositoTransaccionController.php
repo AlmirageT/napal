@@ -132,7 +132,9 @@ class TrxDepositoTransaccionController extends Controller
             }
             if($request->file('rutaImagen')){
             	if ($deposito->rutaImagen != null) {
-	            	unlink($deposito->rutaImagen);
+                    if(file_exists($deposito->rutaImagen)){
+                        unlink($deposito->rutaImagen);
+                    }
             	}
                 $imagen = $request->file('rutaImagen');
                 $imgName = uniqid().'.'.$imagen->getClientOriginalExtension();
@@ -173,7 +175,9 @@ class TrxDepositoTransaccionController extends Controller
     	try {
     		DB::beginTransaction();
             $deposito = TrxDepositoTransferencia::find($idTrxDepoTransf);
-        	unlink($deposito->rutaImagen);
+        	if(file_exists($deposito->rutaImagen)){
+                unlink($deposito->rutaImagen);
+            }
             $valorTransferencia = $deposito->montoDeposito;
             TrxIngreso::find($deposito->idTrxIngreso)->delete();
             $deposito->delete();

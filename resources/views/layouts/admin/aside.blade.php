@@ -46,6 +46,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/propiedades') }}"><i class="bx bx-home-alt"></i> Propiedades</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/propiedad-cambio-fecha') }}"><i class="bx bx-home-alt"></i> Cambio Fecha Propiedad</a></li>
+                    </ul>
                    {{--  <ul class="sub-menu" aria-expanded="false">
                                                                                                     <li><a href=""><i class="bx bx-store-alt"></i> Tienda</a></li>
                                                                                                 </ul> --}}

@@ -50,89 +50,173 @@ class SaldoDisponibleController extends Controller
     }
     public function payWithpaypal(Request $request)
     {
-        if(Session::has('idTrxPaypal')){
-            Session::forget('idTrxPaypal');
-        }
-        if(Session::has('clp')){
-            Session::forget('clp');
-        }
-    	$ingresoSaldo = TrxPaypal::create([
-    		
-    	]);
-    	Session::put('idTrxPaypal',$ingresoSaldo->idTrxPaypal);
-        Session::put('clp',$request->monto);
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
+        if(Session::has('propiedadPaypal')){
+            $ingresoSaldo = TrxPaypal::create([
+                'idPropiedad' => Session::get('propiedadPaypal')
+            ]);
+            Session::put('idTrxPaypal',$ingresoSaldo->idTrxPaypal);
+            $cambioDolar = CambioDolar::first();
 
-        //crear "boleta"
-        $item_1 = new Item();
-        $item_1->setName('Item 1')
-            ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setSku(2)
-            ->setPrice($request->montoDolar);
+            $montoDolar = Session::get('clp')/$cambioDolar->valorCambioDolar;
 
-        //crear item de la boleta
-        $item_list = new ItemList();
-        $item_list->setItems(array($item_1));
-
-        //crear monto final
-        $amount = new Amount();
-        $amount->setCurrency('USD')
-            ->setTotal($request->montoDolar);
-
-        //transaccion
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription('Ingreso de dinero a mi billetera')
-            ->setInvoiceNumber(uniqid());
-
-        //redireccion
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::to('dashboard/status'))
-            ->setCancelUrl(URL::to('dashboard/status'));
-
-        //pago
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-        try
-        {
-            $payment->create($this->_api_context);
-        }
-        catch (\PayPal\Exception\PPConnectionException $ex)
-        {
-            if (\Config::get('app.debug'))
+            $payer = new Payer();
+            $payer->setPaymentMethod('paypal');
+    
+            //crear "boleta"
+            $item_1 = new Item();
+            $item_1->setName('Item 1')
+                ->setCurrency('USD')
+                ->setQuantity(1)
+                ->setSku(2)
+                ->setPrice($montoDolar);
+    
+            //crear item de la boleta
+            $item_list = new ItemList();
+            $item_list->setItems(array($item_1));
+    
+            //crear monto final
+            $amount = new Amount();
+            $amount->setCurrency('USD')
+                ->setTotal($montoDolar);
+    
+            //transaccion
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($item_list)
+                ->setDescription('Ingreso de dinero a mi billetera')
+                ->setInvoiceNumber(uniqid());
+    
+            //redireccion
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::to('dashboard/status'))
+                ->setCancelUrl(URL::to('dashboard/status'));
+    
+            //pago
+            $payment = new Payment();
+            $payment->setIntent('Sale')
+                ->setPayer($payer)
+                ->setRedirectUrls($redirect_urls)
+                ->setTransactions(array($transaction));
+            try
             {
-                \Session::put('error', 'Connection timeout');
-                return Redirect::to('dashboard/status');
+                $payment->create($this->_api_context);
             }
-            else
+            catch (\PayPal\Exception\PPConnectionException $ex)
             {
-                \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::to('dashboard/status');
+                if (\Config::get('app.debug'))
+                {
+                    \Session::put('error', 'Connection timeout');
+                    return Redirect::to('dashboard/status');
+                }
+                else
+                {
+                    \Session::put('error', 'Some error occur, sorry for inconvenient');
+                    return Redirect::to('dashboard/status');
+                }
             }
-        }
+    
+            foreach ($payment->getLinks() as $link)
+            {
+                if($link->getRel() == 'approval_url')
+                {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
+            }
+            Session::put('paypal_payment_id', $payment->getId());
+            if(isset($redirect_url))
+            {
+                Log::info("llego1");
+                return Redirect::away($redirect_url);
+            }
+            \Session::put('error', 'Unknown error occurred');
+            return Redirect::to('dashboard/status');
 
-        foreach ($payment->getLinks() as $link)
-        {
-            if($link->getRel() == 'approval_url')
-            {
-                $redirect_url = $link->getHref();
-                break;
+        }else{
+            if(Session::has('idTrxPaypal')){
+                Session::forget('idTrxPaypal');
             }
+            if(Session::has('clp')){
+                Session::forget('clp');
+            }
+            $ingresoSaldo = TrxPaypal::create([
+                
+            ]);
+            Session::put('idTrxPaypal',$ingresoSaldo->idTrxPaypal);
+            Session::put('clp',$request->monto);
+            $payer = new Payer();
+            $payer->setPaymentMethod('paypal');
+    
+            //crear "boleta"
+            $item_1 = new Item();
+            $item_1->setName('Item 1')
+                ->setCurrency('USD')
+                ->setQuantity(1)
+                ->setSku(2)
+                ->setPrice($request->montoDolar);
+    
+            //crear item de la boleta
+            $item_list = new ItemList();
+            $item_list->setItems(array($item_1));
+    
+            //crear monto final
+            $amount = new Amount();
+            $amount->setCurrency('USD')
+                ->setTotal($request->montoDolar);
+    
+            //transaccion
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($item_list)
+                ->setDescription('Ingreso de dinero a mi billetera')
+                ->setInvoiceNumber(uniqid());
+    
+            //redireccion
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::to('dashboard/status'))
+                ->setCancelUrl(URL::to('dashboard/status'));
+    
+            //pago
+            $payment = new Payment();
+            $payment->setIntent('Sale')
+                ->setPayer($payer)
+                ->setRedirectUrls($redirect_urls)
+                ->setTransactions(array($transaction));
+            try
+            {
+                $payment->create($this->_api_context);
+            }
+            catch (\PayPal\Exception\PPConnectionException $ex)
+            {
+                if (\Config::get('app.debug'))
+                {
+                    \Session::put('error', 'Connection timeout');
+                    return Redirect::to('dashboard/status');
+                }
+                else
+                {
+                    \Session::put('error', 'Some error occur, sorry for inconvenient');
+                    return Redirect::to('dashboard/status');
+                }
+            }
+    
+            foreach ($payment->getLinks() as $link)
+            {
+                if($link->getRel() == 'approval_url')
+                {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
+            }
+            Session::put('paypal_payment_id', $payment->getId());
+            if(isset($redirect_url))
+            {
+                Log::info("llego1");
+                return Redirect::away($redirect_url);
+            }
+            \Session::put('error', 'Unknown error occurred');
+            return Redirect::to('dashboard/status');
         }
-        Session::put('paypal_payment_id', $payment->getId());
-        if(isset($redirect_url))
-        {
-            Log::info("llego1");
-            return Redirect::away($redirect_url);
-        }
-        \Session::put('error', 'Unknown error occurred');
-        return Redirect::to('dashboard/status');
     }
 
     public function getPaymentStatus(Request $request)
@@ -152,7 +236,7 @@ class SaldoDisponibleController extends Controller
 
         $result = $payment->execute($execution, $this->_api_context);
         $idTxr = Session::get('idTrxPaypal');
-        TrxPaypal::find($idTxr)->update([
+        $ingresoPaypal = TrxPaypal::find($idTxr)->update([
             'transaccionPaypal'=> $result->id,
             'totalPaypal' => $result->transactions[0]->amount->total,
             'descripcionPaypal' => $result->transactions[0]->description,
@@ -162,15 +246,32 @@ class SaldoDisponibleController extends Controller
         ]);
         Session::forget('idTrxPaypal');
         $cambioDolar = CambioDolar::first();
-        $ingresoSaldo = TrxIngreso::create([
-            'monto' => ($result->transactions[0]->amount->total)*($cambioDolar->valorCambioDolar),
-            'webClient' => $request->userAgent(),
-            'idUsuario' => Session::get('idUsuario'),
-            'idMoneda' => 1,
-            'idEstado' => 1,
-            'idTipoMedioPago' => 2,
-            'numeroTransaccion' => $result->id
-        ]);
+        if(Session::has('propiedadPaypal')){
+
+            $ingresoSaldo = TrxIngreso::create([
+                'monto' => ($result->transactions[0]->amount->total)*($cambioDolar->valorCambioDolar),
+                'webClient' => $request->userAgent(),
+                'idUsuario' => Session::get('idUsuario'),
+                'idMoneda' => 1,
+                'idEstado' => 1,
+                'idTipoMedioPago' => 2,
+                'numeroTransaccion' => $result->id,
+                'idPropiedad' => Session::get('propiedadPaypal')
+            ]);
+            Session::forget('propiedadPaypal');
+
+        }else{
+            $ingresoSaldo = TrxIngreso::create([
+                'monto' => ($result->transactions[0]->amount->total)*($cambioDolar->valorCambioDolar),
+                'webClient' => $request->userAgent(),
+                'idUsuario' => Session::get('idUsuario'),
+                'idMoneda' => 1,
+                'idEstado' => 1,
+                'idTipoMedioPago' => 2,
+                'numeroTransaccion' => $result->id
+            ]);
+        }
+        
         Session::flash('usd',$result->transactions[0]->amount->total);
         toastr()->success('Pago total realizado con exito');
         return Redirect::to('dashboard/exito');

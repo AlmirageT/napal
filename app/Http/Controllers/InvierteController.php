@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\ConfirmacionInversion;
 use App\SaldoDisponible;
+use App\BoletaOtroPago;
 use App\TrxIngreso;
 use App\Propiedad;
 use Session;
+use DateTime;
 use Mail;
 use DB;
 
@@ -65,9 +67,32 @@ class InvierteController extends Controller
         if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
             return abort(401);
         }
+        $validator = Validator::make($request->all(), [
+            'condiciones'=> 'required',
+            'metodoDeposito'=> 'required'
+        ]);
+        if ($validator->fails()) {
+            toastr()->info('Los datos deben estar llenos');
+            return redirect::to('invierte-propiedad/'.$idPropiedad);
+        }
         DB::beginTransaction();
         if ($request->metodoDeposito == 1) {
-            TrxIngreso::create([
+            //caracteres especiales para rut
+            $caracteresEspeciales = array(".","-");
+            $rutSinGuion = str_replace($caracteresEspeciales, "", Session::get('rut'));
+            $date = new DateTime();
+            $date->modify('+48 hours');
+
+            BoletaOtroPago::create([
+                'cantidadBoletaOtroPago' => $request->saldo,
+                'fechaVencimiento' => $date->format('Y-m-d H:i:s'),
+                'idUsuario' => Session::get('idUsuario'),
+                'idEstado' => 11,
+                'idPropiedad' => Crypt::decrypt($idPropiedad)
+            ]);
+            DB::commit();
+            return redirect()->to('http://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
+           /* TrxIngreso::create([
                 'monto' => $request->saldo,
                 'webClient' => $_SERVER['HTTP_USER_AGENT'],
                 'idUsuario' => Session::get('idUsuario'),
@@ -81,8 +106,7 @@ class InvierteController extends Controller
             $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
             $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
             Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
-            DB::commit();
-            return redirect::to('exito');
+            return redirect::to('exito');*/
         }
         if ($request->metodoDeposito == 2) {
             $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
@@ -125,6 +149,17 @@ class InvierteController extends Controller
                 DB::rollback();         
                 return redirect::to('invierte/chile/propiedad/detalle?nombrePropiedad='.$nombreConGuion.'&idPropiedad='.$idPropiedad);
             }
+        }
+        if($request->metodoDeposito == 3){
+            if(Session::has('propiedadPaypal')){
+                Session::forget('propiedadPaypal');
+            }
+            if(Session::has('clp')){
+                Session::forget('clp');
+            }
+            Session::put('propiedadPaypal',Crypt::decrypt($idPropiedad));
+            Session::put('clp',$request->saldo);
+            return redirect::to('dashboard/paypal');
         }
     }
 }

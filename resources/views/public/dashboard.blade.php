@@ -79,7 +79,7 @@ Dashboard
 			<h3>Inversión, beneficios y saldo disponible</h3>
 			<br>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="card" >
 				<div class="card-body">
 					<div class="row">
@@ -121,6 +121,7 @@ Dashboard
 			</div>
 			<br>
 		</div>
+		{{--  
 		<div class="col-lg-4">
 			<div class="card">
 				<div class="card-body">
@@ -167,8 +168,8 @@ Dashboard
 				</div>
 			</div>
 			<br>
-		</div>
-		<div class="col-lg-4">
+		</div>--}}
+		<div class="col-lg-6">
 			<div class="card" >
 				<div class="card-body">
 					<div class="row">
@@ -199,13 +200,13 @@ Dashboard
 						<div class="col-lg-4" align="right">
 							<p>${{ number_format($totalProyectoEnFinanciacion,0,',','.') }}</p>
 						</div>
-
+						{{-- 
 						<div class="col-lg-8">
 							<p>Promos pendientes de uso</p>
 						</div>
 						<div class="col-lg-4" align="right">
 							<p>$0</p>
-						</div>
+						</div> --}}
 						<div class="col-lg-8">
 							<p>Disponible para retirada</p>
 						</div>
@@ -219,7 +220,7 @@ Dashboard
 							</p>
 						</div>
 						<div class="col-lg-12" align="center">
-							<a href="{{ asset('dashboard/mi-cuenta') }}" class="btn btn-primary">Mi cuenta housers</a>
+							<a href="{{ asset('dashboard/mi-cuenta') }}" class="btn btn-primary">Mi Cuenta EsMidas</a>
 						</div>
 					</div>
 				</div>

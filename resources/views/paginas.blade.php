@@ -177,8 +177,14 @@
                                 <p><strong >Rentabilidad Total</strong></p>
                             </div>
                         </div> 
-                    <hr>  
+                <hr>
+                <div class="row" align="center">
+                    <div class="col-lg-12">
+                        <a href="{{ asset('invierte/chile/propiedad/detalle') }}?nombrePropiedad={{ $nombrePropiedad }}&idPropiedad={{ Crypt::encrypt($propiedadesTienda[$i]->idPropiedad) }}" class="btn btn-warning"><strong style="color: black">Invierte</strong></a>
+                    </div>
                 </div>
+                </div>
+                
                 <div class="footer clearfix" >
                     <div class="pull-left days">
                         <p><i class="flaticon-time"></i><strong >Plazo: {{ $propiedadesTienda[$i]->plazoMeses }} meses </strong></p>

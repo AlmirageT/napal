@@ -73,7 +73,7 @@
         Video
     </h3>
     @if($propiedad->urlVideo != null)
-    <iframe src="{{ $propiedad->urlVideo }}" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube.com/embed/{{ $propiedad->urlVideo }}"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <br>
 
     @else

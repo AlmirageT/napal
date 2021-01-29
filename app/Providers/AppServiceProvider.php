@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Observers\TrxIngresoObserver;
 use App\Observers\TrxEgresosObserver;
+use App\ParametroGeneral;
 use App\MisionEmpresa;
 use App\TrxIngreso;
 use App\TrxEgresos;
@@ -43,6 +44,14 @@ class AppServiceProvider extends ServiceProvider
                 return $cacheRedesSociales;
             });
         }
+        if(cache::has('diversifica')){
+            $valorInicio = cache::get('diversifica');
+        }else{
+            $valorInicio = cache::remember('diversifica', 99999999999*60, function(){
+                $cacheValorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+                return $cacheValorInicio;
+            });
+        }
 
         if (cache::has('misionEmpresa')) {
             $misionEmpresa = cache::get('misionEmpresa');
@@ -57,5 +66,6 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('redesSociales',$redesSociales);
         View::share('misionEmpresa',$misionEmpresa);
+        View::share('valorInicio',$valorInicio);
     }
 }

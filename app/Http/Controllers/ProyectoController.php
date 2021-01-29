@@ -144,7 +144,9 @@ class ProyectoController extends Controller
 	            }
 	            $proyecto = Proyecto::find($idProyecto);
                 if ($imgName != null) {
-                    unlink($proyecto->fotoPortada);
+                    if(file_exists($proyecto->fotoPortada)){
+                        unlink($proyecto->fotoPortada);
+                    }
                 }
 	            $proyecto->fill($request->all());
 	            if ($imgName != null) {
@@ -183,7 +185,9 @@ class ProyectoController extends Controller
     			$proyecto = Proyecto::find($idProyecto);
 	            toastr()->success('Eliminado Correctamente', 'El proyecto: '.$proyecto->nombreProyecto.' ha sido eliminado correctamente', ['timeOut' => 9000]);
                 if ($proyecto->fotoPortada) {
-                    unlink($proyecto->fotoPortada);
+                    if(file_exists($proyecto->fotoPortada)){
+                        unlink($proyecto->fotoPortada);
+                    }
                 }
 	            $proyecto->delete();
     		DB::commit();

@@ -22,7 +22,7 @@
     }
     .back {
         position: absolute;
-        margin-top: -738px;
+        margin-top: -776px;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         -webkit-transform: rotateY(180deg);

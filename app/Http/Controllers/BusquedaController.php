@@ -1223,6 +1223,146 @@ class BusquedaController extends Controller
 			"data" => $data
 		);
 		echo json_encode($json_data);
-    }
+	}
+	
+	public function tablaPropiedadesEnFinanciacion(Request $request)
+	{
+		$columns = array(
+			0=> 'idPropiedad',
+			1=> 'nombrePropiedad',
+			2=> 'fotoPrincipal',
+			3=> 'fotoMapa',
+			4=> 'nombreProyecto',
+			5=> 'nombreTipoFlexibilidad',
+			6=> 'nombreEstado',
+			7=> 'precio',
+			8=> 'nombreMoneda',
+			9=> 'plazoMeses',
+			10=> 'rentabilidadAnual',
+			11=> 'rentabilidadTotal',
+			12=> 'options'
+		);
+		$totalData = Propiedad::select('*')
+		->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		->join('paises','propiedades.idPais','=','paises.idPais')
+		->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		->join('estados','propiedades.idEstado','=','estados.idEstado')
+		->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+		->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+		->where('propiedades.idEstado',5)
+		->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+
+		if(empty($request->input('search.value')))
+		{
+			$propiedades = Propiedad::select('*')
+		    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		    	->join('paises','propiedades.idPais','=','paises.idPais')
+		    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		    	->join('estados','propiedades.idEstado','=','estados.idEstado')
+		    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+				->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+				->where('propiedades.idEstado',5)
+				->offset($start)
+				->limit($limit)
+				->orderBy('propiedades.idPropiedad','DESC')
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$propiedades = Propiedad::select('*')
+		    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		    	->join('paises','propiedades.idPais','=','paises.idPais')
+		    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		    	->join('estados','propiedades.idEstado','=','estados.idEstado')
+		    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+				->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+				->where('propiedades.idEstado',5)
+		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
+				->offset($start)
+				->limit($limit)
+				->orderBy('propiedades.idPropiedad','DESC')
+				->get();
+
+			$totalFiltered = Propiedad::select('*')
+		    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		    	->join('paises','propiedades.idPais','=','paises.idPais')
+		    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		    	->join('estados','propiedades.idEstado','=','estados.idEstado')
+		    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+				->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+				->where('propiedades.idEstado',5)
+		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
+				->count();
+		}
+
+		$data = array();
+		if(!empty($propiedades)){
+			foreach ($propiedades as $propiedad){
+				$nestedData['idPropiedad'] = $propiedad->idPropiedad;
+				$nestedData['nombrePropiedad'] = $propiedad->nombrePropiedad;
+				if ($propiedad->fotoPrincipal != null) {
+					$nestedData['fotoPrincipal'] = "<img src='".asset($propiedad->fotoPrincipal)."' width='100' height='100'>";
+				}else{
+					$nestedData['fotoPrincipal'] = "No tiene imagen";
+				}
+				if ($propiedad->fotoMapa != null) {
+					$nestedData['fotoMapa'] = "<img src='".asset($propiedad->fotoMapa)."' width='100' height='100'>";
+				}else{
+					$nestedData['fotoMapa'] = "No tiene mapa";
+				}
+				$nestedData['nombreProyecto'] = $propiedad->nombreProyecto;
+				$nestedData['nombreTipoFlexibilidad'] = $propiedad->nombreTipoFlexibilidad;
+				$nestedData['nombreEstado'] = $propiedad->nombreEstado;
+				$nestedData['precio'] = "$".number_format($propiedad->precio,0,',','.');
+				$nestedData['nombreMoneda'] = $propiedad->nombreMoneda;
+				$nestedData['plazoMeses'] = $propiedad->plazoMeses;
+				$nestedData['rentabilidadAnual'] = $propiedad->rentabilidadAnual."%";
+				$nestedData['rentabilidadTotal'] = $propiedad->rentabilidadTotal."%";
+				$nestedData['options'] = "<div class='dropdown'>
+		                            <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                                <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                            </a>
+		                            <div class='dropdown-menu dropdown-menu-center'>
+						      			<a href='".asset('napalm/propiedad-cambio-fecha/editar')."/".$propiedad->idPropiedad."' class='dropdown-item'>Cambiar Fecha</a>
+		                            </div>
+		                        </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+	}
 
 }

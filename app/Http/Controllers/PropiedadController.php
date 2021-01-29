@@ -248,10 +248,17 @@ class PropiedadController extends Controller
                     cache::forget('propiedadesTienda');
                 }
             	$imgName = null;
-            	$propiedad = Propiedad::find($idPropiedad);
+                $propiedad = Propiedad::find($idPropiedad);
+                if ($propiedad->fotoMapa != null) {
+                    if(file_exists($propiedad->fotoMapa )){
+                        unlink($propiedad->fotoMapa);
+                    }
+                }
 	            if($request->file('fotoPrincipal')){
                     if ($propiedad->fotoPrincipal != null) {
-                        unlink($propiedad->fotoPrincipal);
+                        if(file_exists($propiedad->fotoPrincipal)){
+                            unlink($propiedad->fotoPrincipal);
+                        }
                     }
 	                $imagen = $request->file('fotoPrincipal');
 	                $img = Image::make($imagen);
@@ -278,9 +285,7 @@ class PropiedadController extends Controller
                     $propiedad->destacadoPropiedad = 0;
                 }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
-                if ($propiedad->fotoMapa != null) {
-                    unlink($propiedad->fotoMapa);
-                }
+                
                 $linkMapa = "https://maps.googleapis.com/maps/api/staticmap?center=".$request->latitud.",".$request->longitud."&zoom=17&size=350x233&markers=color:blue%7Clabel:S%7C".$request->latitud.",".$request->longitud."&key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g";
                 $mapa = Image::make($linkMapa);
                 $mapa->resize(350, 233, function ($constraint) {
@@ -326,10 +331,14 @@ class PropiedadController extends Controller
     			$propiedad = Propiedad::find($idPropiedad);
 	            toastr()->success('Eliminado Correctamente', 'La propiedad '.$propiedad->nombrePropiedad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
 	            if ($propiedad->fotoPrincipal != null) {
-	                unlink($propiedad->fotoPrincipal);
+                    if(file_exists($propiedad->fotoPrincipal)){
+	                    unlink($propiedad->fotoPrincipal);
+                    }
 	            }
                 if ($propiedad->fotoMapa != null) {
-                    unlink($propiedad->fotoMapa);
+                    if(file_exists($propiedad->fotoMapa )){
+                        unlink($propiedad->fotoMapa);
+                    }
                 }
 	            $propiedad->delete();
     		DB::commit();
@@ -351,5 +360,42 @@ class PropiedadController extends Controller
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
+    }
+    public function cambioFecha()
+    {
+        return view('admin.propiedades.fecha.index');
+    }
+    public function editarCambioFecha($idPropiedad)
+    {
+        $propiedad = Propiedad::find($idPropiedad);
+        
+        return view('admin.propiedades.fecha.edit',compact('propiedad'));
+    }
+    public function actualizarFecha(Request $request, $idPropiedad)
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
+        $validator = Validator::make($request->all(), [
+            'fechaFinalizacion' => 'required'
+        ]);
+        if ($validator->fails()) {
+            toastr()->info('No debe dejar los datos vacios');
+            return back();
+        }
+        DB::beginTransaction();
+        $propiedad = Propiedad::find($idPropiedad);
+        $propiedad->fill($request->all());
+        $propiedad->save();
+        DB::commit();
+        toastr()->success('La fecha de la propiedad ha sido extendida', 'Fecha Actualizada Correctamente');
+        return redirect::to('napalm/propiedad-cambio-fecha');
+        
+        
     }
 }

@@ -256,7 +256,7 @@
                                     <div class="input-group-prepend">
                                       <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" maxlength="8" onkeyup="format(this)" onchange="format(this)" required>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="{{ number_format($valorInicio->valorParametroGeneral,0,',','.') }}" maxlength="8" onkeyup="format(this)" onchange="format(this)" required>
                                   </div>
                                 </div>
                             </div>

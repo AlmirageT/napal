@@ -59,6 +59,7 @@ Route::group(['prefix'=>'dashboard'], function(){
 
     //paypal
     Route::post('paypal', 'SaldoDisponibleController@payWithpaypal');
+    Route::get('paypal', 'SaldoDisponibleController@payWithpaypal');
     Route::get('status', 'SaldoDisponibleController@getPaymentStatus');
     //cancelar solicitud
     Route::get('cancelar-solicitud/{idIntruccionBancaria}','MiCuentaController@cancelarSolicitud');
@@ -89,6 +90,7 @@ Route::post('datatable-usuarios-transferencia','BusquedaController@tablaUsuarioT
 Route::post('datatable-transacciones/{idUsuario}','BusquedaController@transferenciaUsuarioTabla');
 Route::post('datatable-solicitud-retiro-fondos','BusquedaController@tablaRetiroFondos');
 Route::post('datatable-retiro-fondos-aceptados','BusquedaController@tablaRetirosAceptados');
+Route::post('datatable-propiedades-fecha-propiedad','BusquedaController@tablaPropiedadesEnFinanciacion');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -149,6 +151,9 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('propiedades','PropiedadController@index');
     Route::get('propiedades/create','PropiedadController@create');
     Route::get('propiedades/editar/{idPropiedad}','PropiedadController@edit');
+    Route::get('propiedad-cambio-fecha','PropiedadController@cambioFecha');
+    Route::get('propiedad-cambio-fecha/editar/{idPropiedad}','PropiedadController@editarCambioFecha');
+    Route::post('editar-fecha-finalizacion-propiedad/{idPropiedad}','PropiedadController@actualizarFecha');
     //mantenedores
     //tipos usuarios
     Route::get('tipos_usuarios','TipoUsuarioController@index');
