@@ -63,6 +63,7 @@
 
   <!-- Responsive datatable examples -->
   <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />   
+  
   {{-- <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
   @yield('css')
   @toastr_css

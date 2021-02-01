@@ -210,23 +210,23 @@
                         <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p>{{ $propiedad->nombrePais }}</p>
+                                    <p><strong> Pais:</strong></p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p>{{ $propiedad->cantidadSubPropiedad }} SubPropiedades</p>
+                                    <p> <strong> {{ $propiedad->nombrePais }} </strong></p>
                                 </div>
                                 <hr>
                                 <div class="col-lg-6">
-                                    <p>ESTADO:</p>
+                                    <p> <strong> ESTADO: </strong></p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p>{{ $propiedad->nombreEstado }}</p>
+                                    <p> <strong> {{ $propiedad->nombreEstado }} </strong> </p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <p>${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</p>
+                                    <p> <strong> ${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                                 </div>
                                 <div class="col-lg-5">
-                                    <p>${{ number_format($propiedad->precio,0,',','.') }}</p>
+                                    <p> <strong> ${{ number_format($propiedad->precio,0,',','.') }} </strong> </p>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -234,22 +234,22 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
-                                    <p>{{  count($arrayIdPropiedadSinDuplicar[0])  }} Inversores</p>
+                                    <p> <strong> {{  count($arrayIdPropiedadSinDuplicar[0])  }} Inversores</strong></p>
                                 </div>
                                 <div class="col-lg-5">
-                                    <p>Plazo: {{ $propiedad->plazoMeses}} meses </p>
+                                    <p> <strong> Plazo: {{ $propiedad->plazoMeses}} meses </strong></p>
                                 </div>
                                 <div class="col-lg-6" align="center">
-                                    <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
-                                    <p>Rentabilidad Anual</p>
+                                    <h4> <strong> {{ $propiedad->rentabilidadAnual }}% </strong> </h4>
+                                    <p> <strong> Rentabilidad Anual </strong></p>
                                 </div>
                                 <div class="col-lg-6" align="center">
-                                    <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
-                                    <p>Rentabilidad Total</p>
+                                    <h4> <strong> {{ $propiedad->rentabilidadTotal }}% </strong> </h4>
+                                    <p> <strong> Rentabilidad Total </strong></p>
                                 </div>
                                 <br>
                                 <div class="col-lg-6">
-                                    <p>Quiero invertir</p>
+                                    <p> <strong> Quiero invertir </strong> </p>
                                 </div>
                                 <div class="col-lg-6">
                                   <div class="input-group mb-2">

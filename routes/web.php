@@ -75,6 +75,9 @@ Route::group(['prefix'=>'dashboard'], function(){
     //link antes de otros pagos
     Route::post('toma-de-pago','SaldoDisponibleController@otrosPagos');
 
+    //pantalla exito
+    Route::get('exito','InvierteController@vistaExito');
+
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -104,7 +107,7 @@ Route::get('invierte/chile/propiedad/detalle','DetalleController@index');
 Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');
 Route::post('verificacion-pago/{idPropiedad}','InvierteController@verificarDatos');
 //link mientras no haya funcionamiento con sistema transbank
-Route::view('exito','exito');
+
 //invierte
 Route::get('invierte','TiendaController@index');
 //uri nueva
@@ -215,6 +218,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('edit-casos-exitoso/{idCasoExitoso}','CasoExitosoController@edit');
     //parametros generales
     Route::get('parametros-generales','ParametroGeneralController@index');
+    //tipografia
+    Route::get('tipografia','TipografiaController@index');
     //redes sociales
     Route::get('redes-sociales','RedSocialController@index');
     //codigos
@@ -471,12 +476,9 @@ Route::delete('mantenedor-banco-tipo-cuenta/{idTipoCuenta}',array(
 Route::resource('mantenedor-anadir-cuenta-usuario','CuentaBancariaController');
 //retiro
 Route::resource('mantenedor-retiro','MiCuentaController');
-
-
-
-
-
-
-
-
-
+//tipografia
+Route::resource('mantenedor-tipografia','TipografiaController');
+Route::delete('mantenedor-tipografia/{idTipografia}',array(
+    'uses'=>'TipografiaController@destroy',
+    'as'=>'mantenedor-tipografia.delete'
+));

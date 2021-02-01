@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InstruccionBancariaExport;
+use App\ParametroGeneral;
 use App\CuentaBancariaUsuario;
 use App\InstruccionBancaria;
 use App\SaldoDisponible;
@@ -135,13 +136,21 @@ class MiCuentaController extends Controller
                 toastr()->info('No deben quedar datos en blanco');
                 return back();
             }
+            $valorCaracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
+            $cantidadSinCaracteres = str_replace($valorCaracteresEspeciales, "", $request->importe);
             $revisarSaldo = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->firstOrFail();
-            if ($request->importe > $revisarSaldo->cantidadSaldoDisponible  ) {
+            if (intval($cantidadSinCaracteres) > $revisarSaldo->cantidadSaldoDisponible  ) {
             	toastr()->warning('No posee saldo suficiente para realizar esta acción');
             	return back();
             }
+            $valorMinimo = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+            if (intval($cantidadSinCaracteres) < $valorMinimo->valorParametroGeneral) {
+            	toastr()->warning('No puede ser menor a $'.number_format($valorMinimo->valorParametroGeneral,0,',','.'));
+            	return back();
+            }
     		DB::beginTransaction();
-    		$instruccionBancaria = new InstruccionBancaria($request->all());
+            $instruccionBancaria = new InstruccionBancaria($request->all());
+            $instruccionBancaria->importe = $cantidadSinCaracteres;
             $instruccionBancaria->validado = 0;
     		$instruccionBancaria->cancelada = 0;
             $instruccionBancaria->fechaSolicitud = date("Y-m-d H:i:s");

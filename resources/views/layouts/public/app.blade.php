@@ -33,6 +33,12 @@
     <link rel="stylesheet" href="{{ asset('css_public/btn.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/btn-tablets.css') }}">
     <link rel="stylesheet" href="{{ asset('css_public/btn-mobile.css') }}">
+    {!! $tipografia->linkTipografia !!}
+    <style>
+        *{
+            font-family: '{{ $tipografia->nombreTipografia }}',cursive;
+        }
+    </style>
     <style type="text/css">
         .loader-page {
             position: fixed;

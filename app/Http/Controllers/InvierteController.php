@@ -14,6 +14,7 @@ use App\SaldoDisponible;
 use App\BoletaOtroPago;
 use App\TrxIngreso;
 use App\Propiedad;
+use App\ParametroGeneral;
 use Session;
 use DateTime;
 use Mail;
@@ -36,8 +37,14 @@ class InvierteController extends Controller
                 return back();
             }
             DB::beginTransaction();
+            $parametroGeneral = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->firstOrFail();
             $caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
-			$sinCaracteres = str_replace($caracteresEspeciales, "", $request->valorInvertir);
+            $sinCaracteres = str_replace($caracteresEspeciales, "", $request->valorInvertir);
+            if(intval($sinCaracteres) < intval($parametroGeneral->valorParametroGeneral)){
+                DB::rollback();
+                toastr()->info('ser mayor a $'.number_format($parametroGeneral->valorParametroGeneral,0,',','.').' pesos');
+                return back();
+            }
             
             $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
             $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
@@ -82,6 +89,12 @@ class InvierteController extends Controller
             $rutSinGuion = str_replace($caracteresEspeciales, "", Session::get('rut'));
             $date = new DateTime();
             $date->modify('+48 hours');
+
+            if(intval($request->saldo) > 2000000 ){
+                toastr()->info('No puede superar los 2 millones');
+                DB::rollback();
+                return redirect::to('invierte/chile/propiedad/detalle?idPropiedad='.$idPropiedad);
+            }
 
             BoletaOtroPago::create([
                 'cantidadBoletaOtroPago' => $request->saldo,
@@ -129,8 +142,36 @@ class InvierteController extends Controller
                     $sinCaracteres = str_replace($caracteresEspeciales, "", $request->sinCaracteres);
                     $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
                     Mail::to(Session::get('correo'))->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
+                    $propiedadesInversion = Propiedad::select('*')
+                    ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+                    ->join('paises','propiedades.idPais','=','paises.idPais')
+                    ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+                    ->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+                    ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+                    ->join('estados','propiedades.idEstado','=','estados.idEstado')
+                    ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+                    ->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+                    ->where('propiedades.idPropiedad',Crypt::decrypt($idPropiedad))
+                    ->first();
+
+                    $totalIngresos = TrxIngreso::where('idPropiedad',Crypt::decrypt($idPropiedad))->get();
+                    $suma = 0;
+                    $porcentaje = 0;
+
+                    foreach($totalIngresos as $totalIngreso){
+                        $suma = $suma + $totalIngreso->monto;
+                        if($suma>0){
+                            $porcentaje = ($suma*100)/$propiedadesInversion->precio;
+                        }else{
+                            $porcentaje = 0;
+                        }
+                    }
+                    $date1 = new DateTime($propiedadesInversion->fechaInicio);
+                    $date2 = new DateTime($propiedadesInversion->fechaFinalizacion);
+                    $diff = $date1->diff($date2);
+                    $inversion = $request->saldo;
                     DB::commit();
-                	return redirect::to('exito');
+                	return view('exito',compact('propiedadesInversion','suma','porcentaje','diff','inversion'));
                 }else{
                     $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
 
@@ -151,6 +192,11 @@ class InvierteController extends Controller
             }
         }
         if($request->metodoDeposito == 3){
+            if(intval($request->saldo) > 2000000 ){
+                toastr()->info('No puede superar los 2 millones');
+                DB::rollback();
+                return redirect::to('invierte/chile/propiedad/detalle?idPropiedad='.$idPropiedad);
+            }
             if(Session::has('propiedadPaypal')){
                 Session::forget('propiedadPaypal');
             }
@@ -161,5 +207,9 @@ class InvierteController extends Controller
             Session::put('clp',$request->saldo);
             return redirect::to('dashboard/paypal');
         }
+    }
+    public function vistaExito(Type $var = null)
+    {
+        # code...
     }
 }

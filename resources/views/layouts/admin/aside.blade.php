@@ -202,6 +202,9 @@
                         <li><a href="{{ asset('napalm/parametros-generales') }}"><i class="bx bxs-book"></i> Parametros Generales</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipografia') }}"><i class="bx bxs-book"></i> Tipografia</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/redes-sociales') }}"><i class="bx bxs-book"></i> Redes Sociales</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">

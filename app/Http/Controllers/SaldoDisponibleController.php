@@ -20,6 +20,7 @@ use App\CambioDolar;
 use App\TrxPaypal;
 use App\TipoMedioPago;
 use App\BoletaOtroPago;
+use App\ParametroGeneral;
 use Redirect;
 use DateTime;
 use Session;
@@ -133,6 +134,11 @@ class SaldoDisponibleController extends Controller
             return Redirect::to('dashboard/status');
 
         }else{
+            $valorInicial = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+            if(intval($request->monto) < intval($valorInicial->valorParametroGeneral)){
+                toastr()->info('El monto no puede ser menor a $'.number_format($valorInicial->valorParametroGeneral,0,',','.'));
+                return back();
+            }
             if(Session::has('idTrxPaypal')){
                 Session::forget('idTrxPaypal');
             }
@@ -286,6 +292,11 @@ class SaldoDisponibleController extends Controller
         //caracteres especiales cantidad a invertir
         $valorCaracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
         $cantidadSinCaracteres = str_replace($valorCaracteresEspeciales, "", $request->valorAIngresar);
+        $valorInicial = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+        if(intval($cantidadSinCaracteres) < intval($valorInicial->valorParametroGeneral)){
+            toastr()->info('El monto no puede ser menor a $'.number_format($valorInicial->valorParametroGeneral,0,',','.'));
+            return back();
+        }
         //caracteres especiales para rut
         $caracteresEspeciales = array(".","-");
         $rutSinGuion = str_replace($caracteresEspeciales, "", Session::get('rut'));

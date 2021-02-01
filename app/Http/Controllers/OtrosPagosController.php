@@ -73,7 +73,7 @@ class OtrosPagosController extends Controller
                 return response()->json(['r_retcod'=>"03"],200);
             }
         }else{
-            return response()->json(['r_retcod'=>"03"],200);
+            return response()->json(['r_retcod'=>"01"],200);
         }
 
     }

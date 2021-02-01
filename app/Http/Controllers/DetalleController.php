@@ -49,7 +49,7 @@ class DetalleController extends Controller
                     ->firstOrFail();
                 $imagenesPropiedadesGrandes = ImagenPropiedad::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
                 $imagenesPropiedadesPequeñas = ImagenPropiedad::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
-                $imagenesPlanos = FotoPlano::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->first();
+                $imagenesPlanos = FotoPlano::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
                 $documentos = Documento::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
                 $ingresos = TrxIngreso::where('idPropiedad',Crypt::decrypt($request->idPropiedad))->get();
                 $nombrePropiedad = str_replace(" ", "-", $propiedad->nombrePropiedad);

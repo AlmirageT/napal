@@ -8,12 +8,12 @@ Confirmar Inversion
 		<h3>INVERSIÓN CONFIRMADA</h3>
 		<br>
 		<br>
-		<h3>Nombre Propiedad</h3>
+		<h3>{{ $propiedadesInversion->nombrePropiedad }}</h3>
 		<h3>Tu inversion se ha realizado correctamente</h3>
-		<p>Puedes seguir la evolucion del proyecto a través de la ficha del mismo o en tu área de usuario</p>
+		<p>Puedes seguir la evolución del proyecto a través de la ficha del mismo o en tu área de usuario</p>
 		<p>Muchas gracias por confiar en nosotros. Es un auténtico placer para nosotros poder acompañarte en todo este proceso. Nos gustaria saber tu opinión ¿Tienes un minuto?</p>
 		<br>
-		<button class="btn btn-danger">Opina sobre nosotros</button>
+		<a class="btn btn-danger" href="{{ $redesSociales->where('nombreRedSocial','Facebook')->pluck('rutaRedSocial')->first() }}" target="_blank">Redes Sociales</a>
 		<br>
 		<br>
 	</div>
@@ -32,7 +32,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>Prestamo tipo fijo</p>
+								<p>{{ $propiedadesInversion->nombreTipoFlexibilidad }}</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">
@@ -42,7 +42,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>$12.235.323</p>
+								<p>${{ number_format($propiedadesInversion->precio,0,',','.') }}</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">
@@ -52,8 +52,8 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>$12.000.000</p>
-								<p>(85.69%)</p>
+								<p>${{ number_format($suma,0,',','.') }}</p>
+								<p>({{ round($porcentaje) }}%)</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">
@@ -63,7 +63,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>13 dias</p>
+								<p>{!! $diff->days !!} dias</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">
@@ -73,7 +73,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>12 meses</p>
+								<p>{{ $propiedadesInversion->propiedadplazoMeses }} meses</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">
@@ -83,7 +83,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>8.00%</p>
+								<p>{{ $propiedadesInversion->rentabilidadAnual }}%</p>
 							<hr>
 						</div>
 					</div>
@@ -100,7 +100,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>$50.000</p>
+								<p>${{ number_format($inversion,0,',','.') }}</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">
@@ -110,7 +110,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>13/11/2020 13:50:00</p>
+								<p>{{ date('d-m-Y') }}</p>
 							<hr>
 						</div>
 					</div>

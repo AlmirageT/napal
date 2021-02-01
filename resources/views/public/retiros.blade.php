@@ -42,7 +42,12 @@ Retiros
 								<div class="col-lg-3">
 									<div class="form-group">
 										<label>Importe</label>
-										<input type="number" name="importe" class="form-control" required="">
+										<div class="input-group mb-2">
+											<div class="input-group-prepend">
+												<div class="input-group-text">$</div>
+											</div>
+											<input type="text" class="form-control" id="inlineFormInputGroup" name="importe" placeholder="{{ number_format($valorInicio->valorParametroGeneral,0,',','.') }}" maxlength="8" onkeyup="format(this)" onchange="format(this)" required>
+										</div>
 									</div>
 								</div>
 								<div class="col-lg-3" align="right" style="margin-top: 30px">
@@ -67,3 +72,17 @@ Retiros
 	</div>
 </div>
 @endsection
+<script type="text/javascript">
+    function format(input)
+    {
+        var num = input.value.replace(/\./g,'');
+        if(!isNaN(num)){
+            num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+            num = num.split('').reverse().join('').replace(/^[\.]/,'');
+            input.value = num;
+        }else{ 
+            alert('Solo se permiten numeros');
+            input.value = input.value.replace(/[^\d\.]*/g,'');
+        }
+    }
+</script>

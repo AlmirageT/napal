@@ -59,26 +59,52 @@
             </tbody>
         </table>
     </div>
+    
     @if(isset($imagenesPlanos))
-    <img src="{{ asset($imagenesPlanos->fotoPlano) }}" alt="floor-plans" class="img-fluid">
-    <br>
+    @php
+        $imagenUno = $imagenesPlanos->shift();
+    @endphp
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          @if (count($imagenesPlanos)>0)
+            @for ($i = 0; $i < count($imagenesPlanos); $i++)
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $i+1 }}"></li>
+            @endfor
+          @endif
+          
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="{{ asset($imagenUno->fotoPlano) }}" alt="First slide">
+          </div>
+          @if (count($imagenesPlanos)>0)
+            @for ($i = 0; $i < count($imagenesPlanos); $i++)
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{ asset($imagenesPlanos[$i]->fotoPlano) }}" alt="Second slide">
+                </div>
+            @endfor
+          @endif
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
 
-    @else
-    No tiene imagenes de planos
-    <br>
     @endif
+    @if($propiedad->urlVideo != null)
+
     <h3 class="heading-2">
     <br>
 
         Video
     </h3>
-    @if($propiedad->urlVideo != null)
     <iframe src="https://www.youtube.com/embed/{{ $propiedad->urlVideo }}"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <br>
-
-    @else
-    No tiene video asociado
-    <br>
     @endif
     <input type="hidden" id="paises" value="{{ $propiedad->nombrePais }}">
     <input type="hidden" id="select_regiones" value="{{ $propiedad->nombreRegion }}">

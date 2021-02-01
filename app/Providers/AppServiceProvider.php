@@ -10,6 +10,7 @@ use App\MisionEmpresa;
 use App\TrxIngreso;
 use App\TrxEgresos;
 use App\RedSocial;
+use App\Tipografia;
 use Schema;
 use Cache;
 use View;
@@ -61,11 +62,15 @@ class AppServiceProvider extends ServiceProvider
                 return $cacheMisionEmpresa;
             });
         }
+
+        $tipografia = Tipografia::where('nombreGeneral','TIPOGRAFIA')->first();
+
         TrxIngreso::observe(TrxIngresoObserver::class);
         TrxEgresos::observe(TrxEgresosObserver::class);
 
         View::share('redesSociales',$redesSociales);
         View::share('misionEmpresa',$misionEmpresa);
         View::share('valorInicio',$valorInicio);
+        View::share('tipografia',$tipografia);
     }
 }
