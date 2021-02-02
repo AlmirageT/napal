@@ -10,15 +10,18 @@ use Illuminate\Queue\SerializesModels;
 class EnvioConfirmacion extends Mailable
 {
     use Queueable, SerializesModels;
+    protected $usuario;
+    protected $boleta;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($usuario, $boleta)
     {
-        //
+        $this->usuario = $usuario;
+        $this->boleta = $boleta;
     }
 
     /**
@@ -28,6 +31,8 @@ class EnvioConfirmacion extends Mailable
      */
     public function build()
     {
-        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Su cargo de dinero ha sido exitoso')->view('mail.envioConfirmacionOtrosPagos');
+        $usuario = $this->usuario;
+        $boleta = $this->boleta;
+        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Su cargo de dinero ha sido exitoso')->view('mail.envioConfirmacionOtrosPagos',compact('usuario','boleta'));
     }
 }

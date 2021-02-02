@@ -18,6 +18,7 @@ Mision Empresa
 				    <tr>
 			          <th>ID</th>
 				      <th>Nombre</th>
+				      <th>Texto</th>
 				      <th>Acciones</th>
 				    </tr>
 				  </thead>
@@ -25,6 +26,7 @@ Mision Empresa
 				  	@foreach($misionesEmpresas as $misionEmpresa)
 					    <tr>
 					      <td>{{ $misionEmpresa->idMisionEmpresa }}</td>
+					      <td>{{ $misionEmpresa->nombreMisionEmpresa }}</td>
 					      <td>{{ substr($misionEmpresa->textoMisionEmpresa, 0, 30) }}</td>
 					      <td>
 					      	<div class="dropdown">
@@ -47,4 +49,14 @@ Mision Empresa
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script type="text/javascript">
+    $('.summernote').summernote({
+        height: 200
+    });
+
+</script>
 @endsection

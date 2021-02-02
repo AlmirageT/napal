@@ -54,6 +54,7 @@ class Propiedad extends Model
         'proyecto',
         'promotor',
         'textoPromocion',
-        'rentabilidadPromocion'
+		'rentabilidadPromocion',
+		'contratoFlex'
     ];
 }

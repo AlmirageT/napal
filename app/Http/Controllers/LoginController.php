@@ -38,6 +38,39 @@ class LoginController extends Controller
                 return redirect::back();
             }
             DB::beginTransaction();
+            if(Session::has('redirect_url')){
+                $correo = Usuario::where('correo', $request->correo)->firstOrFail();
+    		    if ($correo) {
+	    		    $pass_decrytp = Crypt::decrypt($correo->password);
+                    if ($pass_decrytp == $request->password) {
+                        if ($correo->activarCuenta == 0) {
+                            // cuenta aun no activada
+                            toastr()->info('Su cuenta aún no ha sido activada. Active su cuenta mediante el link enviado');
+                            return redirect::back();
+                        }
+                        Session::put('idUsuario', $correo->idUsuario);
+                        Session::put('idTipoUsuario', $correo->idTipoUsuario);
+                        Session::put('nombre', $correo->nombre);
+                        Session::put('apellido', $correo->apellido);
+                        Session::put('correo', $correo->correo);
+                        Session::put('rut', $correo->rut);
+                        LogRegistro::create([
+                            'idUsuario'=> $correo->idUsuario
+                        ]);
+
+                        if ($correo->idAvatar) {
+                            $imgAvatar = Avatar::findOrFail($correo->idAvatar);
+                            Session::put('avatar', $imgAvatar->rutaAvatar);
+                        } else {
+                            Session::put('avatar', 'usergeneric.png');
+                        }
+                        toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
+                        DB::commit();
+
+                        return redirect::to(Session::get('redirect_url'));
+                    }
+                }
+            }
     		$correo = Usuario::where('correo', $request->correo)->firstOrFail();
     		if ($correo) {
 	    		$pass_decrytp = Crypt::decrypt($correo->password);

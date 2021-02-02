@@ -21,6 +21,9 @@ Dashboard
 		<br>
 		<br>
 		</div>
+		<div class="col-lg-5" align="right">
+			<a href="{{ asset('dashboard/oportunidades') }}" class="btn btn-danger">Invierte</a>
+		</div>
 		<div class="col-lg-12">
 			<div class="card" style="background-color: #13294A">
 				<div class="card-body">

@@ -57,12 +57,20 @@ class AppServiceProvider extends ServiceProvider
         if (cache::has('misionEmpresa')) {
             $misionEmpresa = cache::get('misionEmpresa');
         }else{
-            $misionEmpresa = cache::remember('misionEmpresa',1*60, function(){
-                $cacheMisionEmpresa = MisionEmpresa::first();
+            $misionEmpresa = cache::remember('misionEmpresa',99999999999999999999*60, function(){
+                $cacheMisionEmpresa = MisionEmpresa::where('nombreMisionEmpresa','MISION')->first();
                 return $cacheMisionEmpresa;
             });
         }
 
+        if (cache::has('footer')) {
+            $footerLorem = cache::get('footer');
+        }else{
+            $footerLorem = cache::remember('footer',999999999999999999999*60, function(){
+                $cacheFooterLorem = MisionEmpresa::where('nombreMisionEmpresa','FOOTER')->first();
+                return $cacheFooterLorem;
+            });
+        }
         $tipografia = Tipografia::where('nombreGeneral','TIPOGRAFIA')->first();
 
         TrxIngreso::observe(TrxIngresoObserver::class);
@@ -72,5 +80,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('misionEmpresa',$misionEmpresa);
         View::share('valorInicio',$valorInicio);
         View::share('tipografia',$tipografia);
+        View::share('footerLorem',$footerLorem);
     }
 }

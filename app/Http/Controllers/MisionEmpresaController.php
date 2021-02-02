@@ -39,6 +39,9 @@ class MisionEmpresaController extends Controller
                 return redirect::back();
             }
             DB::beginTransaction();
+            if(cache::has('riesgoAdvertencia')){
+                cache::forget('riesgoAdvertencia');
+            }
             	$misionEmpresa = new MisionEmpresa($request->all());
             	$misionEmpresa->save();
                 toastr()->success('Agregado Correctamente', 'Mision empresa agrergado correctamente', ['timeOut' => 5000]);
@@ -73,6 +76,9 @@ class MisionEmpresaController extends Controller
                 return redirect::back();
             }
             DB::beginTransaction();
+            if(cache::has('riesgoAdvertencia')){
+                cache::forget('riesgoAdvertencia');
+            }
 	    		$misionEmpresa = MisionEmpresa::find($idMisionEmpresa);
 	            $misionEmpresa->fill($request->all());
 	            $misionEmpresa->save();
@@ -100,7 +106,10 @@ class MisionEmpresaController extends Controller
     public function destroy($idMisionEmpresa)
     {
     	try {
-    		DB::beginTransaction();
+            DB::beginTransaction();
+            if(cache::has('riesgoAdvertencia')){
+                cache::forget('riesgoAdvertencia');
+            }
     			$misionEmpresa = MisionEmpresa::find($idMisionEmpresa);
 	            toastr()->success('Eliminado Correctamente', 'La mision de la empresa ha sido eliminado', ['timeOut' => 5000]);
 	            $misionEmpresa->delete();

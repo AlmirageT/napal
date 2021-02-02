@@ -17,6 +17,7 @@ use App\InstruccionBancaria;
 use App\SaldoDisponible;
 use App\TrxIngreso;
 use App\TrxEgresos;
+use App\Propiedad;
 use App\Banco;
 use Session;
 use DB;
@@ -46,7 +47,7 @@ class MiCuentaController extends Controller
         foreach ($trxIngresos as $trxIngreso) {
             $saldoComprometido = $saldoComprometido + $trxIngreso->monto; 
         }
-        $inversionesTotales = TrxIngreso::where('idPropiedad','<>',null)->where('idUsuario',Session::get('idUsuario'))->get();
+        $inversionesTotales = TrxIngreso::where('idPropiedad','<>',null)->where('idUsuario',Session::get('idUsuario'))->where('idEstado',12)->get();
         $totalInversion = 0;
         foreach($inversionesTotales as $inversionTotal){
             $totalInversion = $totalInversion + $inversionTotal->monto;
@@ -78,7 +79,17 @@ class MiCuentaController extends Controller
             $totalIngresos = $totalIngresos + $ingresoTotal->monto;
         }
 
-        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias','saldoComprometido','totalInversion','egresoTotal','otrosPagos','paypal','totalTransf','totalIngresos'));
+        $cuentasBancarias = Propiedad::select('*')
+            ->join('trx_ingresos','propiedades.idPropiedad','=','trx_ingresos.idPropiedad')
+            ->where('propiedades.idEstado',6)
+            ->where('trx_ingresos.idUsuario',Session::get('idUsuario'))
+            ->get();
+        $totalCuentaBancaria = 0;
+        foreach ($cuentasBancarias as $cuentaBancaria) {
+            $totalCuentaBancaria = $totalCuentaBancaria + $cuentaBancaria->monto;
+        }
+
+        return view('public.miCuenta',compact('saldoDisponible','cuentaBancariaUsuario','instruccionesBancarias','saldoComprometido','totalInversion','egresoTotal','otrosPagos','paypal','totalTransf','totalIngresos','totalCuentaBancaria'));
     }
     public function cuentaAsociada()
     {

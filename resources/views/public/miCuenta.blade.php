@@ -74,7 +74,12 @@ Mi cuenta
 <br>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12" align="center"><h3>MI CUENTA</h3><br><br></div>
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4" align="center"><h3>MI CUENTA</h3><br><br></div>
+		<div class="col-lg-4" align="right">
+			<a href="{{ asset('dashboard/oportunidades') }}" class="btn btn-danger">Invierte</a>
+
+		</div>
 		<div class="col-lg-4">
 			<div class="card" style="background-color: #8FCCC9">
 				<div class="card-body">
@@ -240,6 +245,12 @@ Mi cuenta
 						</div>
 						<div class="col-lg-6" align="right">
 							<p>${{ number_format($totalInversion,0,',','.') }}</p>
+						</div>
+						<div class="col-lg-6" align="left">
+							<p>Inversiones en proyectos cerrados</p>
+						</div>
+						<div class="col-lg-6" align="right">
+							<p>${{ number_format($totalCuentaBancaria,0,',','.') }}</p>
 						</div>
 						{{-- <div class="col-lg-6" align="left">
 							<p>Impuestos</p>

@@ -108,7 +108,7 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Flexibilidad</label>
-								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad",'required']) !!}
+								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad",'required', 'onchange'=>"flexibilidad(this.value)"]) !!}
 							</div>
 						</div>
 						
@@ -125,6 +125,12 @@ Crear Propiedad
 							<div class="form-group">
 								<label>Tipo Calidad</label>
 								{!! Form::select('idTipoCalidad', $tipoCalidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad",'required']) !!}
+							</div>
+						</div>
+						<div class="col-lg-12" id="contratoFlex" style="display: none">
+							<div class="form-group">
+								<label for="">Texto Contrato Flex</label>
+								<textarea name="contratoFlex" id="flexContrato" cols="30" rows="10" class="form-control summernote"></textarea>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -371,6 +377,13 @@ Crear Propiedad
 			});
 			document.getElementById('select_comunas').innerHTML = comunas;
 		});
+	}
+	function flexibilidad(flexibilidad) {
+		if(flexibilidad == 1){
+			document.getElementById('contratoFlex').style.display = 'block';
+		}else{
+			document.getElementById('contratoFlex').style.display = 'none';
+		}
 	}
 </script>
 

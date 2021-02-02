@@ -108,7 +108,7 @@ Actualizar Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Flexibilidad</label>
-								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,$propiedad->idTipoFlexibilidad,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad"]) !!}
+								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,$propiedad->idTipoFlexibilidad,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad", 'onchange'=>"flexibilidad(this.value)"]) !!}
 							</div>
 						</div>
 						
@@ -131,6 +131,20 @@ Actualizar Propiedad
 							<div class="form-group">
 								<label>Tipo Calidad</label>
 								{!! Form::select('idTipoCalidad', $tipoCalidad,$propiedad->idTipoCalidad,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad"]) !!}
+							</div>
+						</div>
+						@php
+							$display = '';
+							if($propiedad->idTipoFlexibilidad == 1){
+								$display = 'block';
+							}else{
+								$display = 'none';
+							}
+						@endphp
+						<div class="col-lg-12" id="contratoFlex" style="display: {{ $display }}">
+							<div class="form-group">
+								<label for="">Texto Contrato Flex</label>
+								<textarea name="contratoFlex" id="flexContrato" cols="30" rows="10" class="form-control summernote">{{ $propiedad->contratoFlex }}</textarea>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -373,6 +387,13 @@ Actualizar Propiedad
 			});
 			document.getElementById('select_comunas').innerHTML = comunas;
 		});
+	}
+	function flexibilidad(flexibilidad) {
+		if(flexibilidad == 1){
+			document.getElementById('contratoFlex').style.display = 'block';
+		}else{
+			document.getElementById('contratoFlex').style.display = 'none';
+		}
 	}
 </script>
 

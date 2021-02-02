@@ -11,10 +11,16 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="">Nombre</label>
+                            <input type="text" class="form-control" name="nombreMisionEmpresa" required value="{{ $misionEmpresa->nombreMisionEmpresa }}">
+                        </div>
+                    </div>
                     <div class="col-12">
                         <div class="form-group">
                             <label for="">Texto</label>
-                            <textarea class="form-control" name="textoMisionEmpresa" required>{{ $misionEmpresa->textoMisionEmpresa }}</textarea>
+                            <textarea class="form-control summernote" name="textoMisionEmpresa" required>{{ $misionEmpresa->textoMisionEmpresa }}</textarea>
                         </div>
                     </div>
                 </div>

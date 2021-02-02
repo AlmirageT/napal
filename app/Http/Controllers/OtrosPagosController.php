@@ -119,7 +119,7 @@ class OtrosPagosController extends Controller
                         'webClient' => 'otrospagos.com',
                         'idUsuario' => $boleta->idUsuario,
                         'idMoneda' => 1,
-                        'idEstado' => 1,
+                        'idEstado' => 12,
                         'idTipoMedioPago' => 3,
                         'numeroTransaccion' => $idTransaccion,
                         'idPropiedad' => $boleta->idPropiedad
@@ -141,19 +141,21 @@ class OtrosPagosController extends Controller
                 $boleta->idTrxIngreso = $ingresoSaldo->idTrxIngreso;
                 $boleta->save();
 
+                $usuario = Usuario::find($boleta->idUsuario);
 
-                EnvioCorreoExito::dispatch();
+
+                EnvioCorreoExito::dispatch($usuario, $boleta);
                 //sigue otros pagos
                 return response()->json([
                     'r_tid' => $idTransaccion,
                     'r_retcod' => "00",
-                    'r_cau' => $boleta->idBoletaOtroPago
+                    'r_cau' => $request->p_doc
                 ],200);
             }else{
                 return response()->json([
                     'r_tid' => $idTransaccion,
-                    'r_retcod' => "10",
-                    'r_cau' => $boleta->idBoletaOtroPago
+                    'r_retcod' => "01",
+                    'r_cau' => $request->p_doc
                 ],200);
             }
         }

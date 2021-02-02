@@ -73,7 +73,7 @@ Confirmar Inversion
 						</div>
 						<div class="col-lg-6" align="right">
 							<hr>
-								<p>{{ $propiedadesInversion->propiedadplazoMeses }} meses</p>
+								<p>{{ $propiedadesInversion->plazoMeses }} meses</p>
 							<hr>
 						</div>
 						<div class="col-lg-6">

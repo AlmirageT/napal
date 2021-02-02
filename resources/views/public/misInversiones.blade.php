@@ -69,10 +69,14 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12" align="center">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4" align="center">
 			<h3>MIS INVERSIONES</h3>
 			<br>
 			<br>
+		</div>
+		<div class="col-lg-4" align="right">
+			<a href="{{ asset('dashboard/oportunidades') }}" class="btn btn-danger">Invierte</a>
 		</div>
 		<div class="col-lg-12">
 			<div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
@@ -150,6 +154,7 @@
 			<br>
 			<br>
 		</div>
+		{{--  
 		<form>
 			<div class="row">
 				<div class="formulario-busqueda">
@@ -178,7 +183,7 @@
 					<input class="btn btn-primary" type="submit" value="Buscar" />
 				</div>
 			</div>
-		</form>
+		</form>--}}
 	</div>
 	<br>
 	<br>

@@ -13,15 +13,17 @@ use Mail;
 class EnvioCorreoExito implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    protected $usuario;
+    protected $boleta;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($usuario, $boleta)
     {
-        //
+        $this->usuario = $usuario;
+        $this->boleta = $boleta;
     }
 
     /**
@@ -31,7 +33,9 @@ class EnvioCorreoExito implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('ivan.saez@informatica.isbast.com')->bcc(['pauloberrios@gmail.com','ivan.saez@informatica.isbast.com'])->send(new EnvioConfirmacion());
+        $usuario = $this->usuario;
+        $boleta = $this->boleta;
+        Mail::to('ivan.saez@informatica.isbast.com')->bcc(['pauloberrios@gmail.com','ivan.saez@informatica.isbast.com'])->send(new EnvioConfirmacion($usuario, $boleta));
         
     }
 }

@@ -13,7 +13,12 @@
 <div class="container">
 	<div class="row">
 		<br>
-		<div class="col-lg-12" align="center"><h3>Mis datos de usuario</h3><br><br></div>
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4" align="center"><h3>Mis datos de usuario</h3><br><br></div>
+		<div class="col-lg-4" align="right">
+			<a href="{{ asset('dashboard/oportunidades') }}" class="btn btn-danger">Invierte</a>
+
+		</div>
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-body">
@@ -205,6 +210,7 @@
 								</div>
 							</div>
 							<div class="col-lg-12"><br></div>
+							{{--  
 							<div class="col-lg-12"><h5>Documento de identificación</h5></div>
 							<div class="col-lg-12">
 								<p><strong>PASAPORTE / DOCUMENTO DE IDENTIDAD.</strong> El documento de identificación debe estar en vigor, debe ser legible y debe estar el documento completo contenido en un mismo archivo. En el caso del documento nacional de identidad debes adjuntar ambas caras..</p>
@@ -240,7 +246,7 @@
 							<div class="col-lg-12">
 								<p>Adjunta un segundo documento de identidad por ambas caras en vigor, legible y en color.</p>
 							</div>
-							
+							--}}
 						</div>
 					</div>
 					<div class="card-footer">

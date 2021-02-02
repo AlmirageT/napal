@@ -140,6 +140,11 @@ class PropiedadController extends Controller
                 }else{
                     $propiedad->destacadoPropiedad = 0;
                 }
+                if($request->idTipoFlexibilidad == 1){
+                    $propiedad->contratoFlex = $request->contratoFlex;
+                }else{
+                    $propiedad->contratoFlex = null;
+                }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
                 $linkMapa = "https://maps.googleapis.com/maps/api/staticmap?center=".$request->latitud.",".$request->longitud."&zoom=17&size=350x233&markers=color:blue%7Clabel:S%7C".$request->latitud.",".$request->longitud."&key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g";
                 $mapa = Image::make($linkMapa);
@@ -269,7 +274,12 @@ class PropiedadController extends Controller
                         $constraint->upsize();
                     });
                     $img->save('assets/images/propiedades/'.$imgName);
-	            }
+                }
+                if($request->idTipoFlexibilidad == 1){
+                    $propiedad->contratoFlex = $request->contratoFlex;
+                }else{
+                    $propiedad->contratoFlex = null;
+                }
             	$propiedad->fill($request->all());
             	if ($imgName != null) {
             		$propiedad->fotoPrincipal = 'assets/images/propiedades/'.$imgName;

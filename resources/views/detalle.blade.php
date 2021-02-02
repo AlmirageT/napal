@@ -212,15 +212,21 @@
                                 <div class="col-lg-6">
                                     <p><strong> Pais:</strong></p>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" align="center">
                                     <p> <strong> {{ $propiedad->nombrePais }} </strong></p>
                                 </div>
                                 <hr>
                                 <div class="col-lg-6">
-                                    <p> <strong> ESTADO: </strong></p>
+                                    <p> <strong> Estado: </strong></p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <p> <strong> {{ $propiedad->nombreEstado }} </strong> </p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p> <strong> {{ $propiedad->nombreEstado }} </strong> </p>
+                                    <p> <strong> Modalidad de prestamo: </strong></p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <p> <strong> {{ $propiedad->nombreTipoFlexibilidad }} </strong> </p>
                                 </div>
                                 <div class="col-lg-7">
                                     <p> <strong> ${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>

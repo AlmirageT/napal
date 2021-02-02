@@ -26,7 +26,11 @@ class InvierteController extends Controller
     {
     	if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
             toastr()->info('Debe estar ingresado para poder invertir');
-    		return back();
+            if(Session::has('redirect_url')){
+                Session::forget('redirect_url');
+            }
+            Session::put('redirect_url','invierte/chile/propiedad/detalle?idPropiedad='.$idPropiedad);
+    		return redirect::to('login');
     	}
 		try {
             $validator = Validator::make($request->all(), [
@@ -37,6 +41,9 @@ class InvierteController extends Controller
                 return back();
             }
             DB::beginTransaction();
+            if(Session::has('redirect_url')){
+                Session::forget('redirect_url');
+            }
             $parametroGeneral = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->firstOrFail();
             $caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
             $sinCaracteres = str_replace($caracteresEspeciales, "", $request->valorInvertir);
@@ -130,7 +137,7 @@ class InvierteController extends Controller
                         'webClient' => $_SERVER['HTTP_USER_AGENT'],
                         'idUsuario' => Session::get('idUsuario'),
                         'idMoneda' => 1,
-                        'idEstado' => 1,
+                        'idEstado' => 12,
                         'idTipoMedioPago' => 1,
                         'idPropiedad' => Crypt::decrypt($idPropiedad)
                     ]);

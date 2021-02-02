@@ -259,7 +259,7 @@ class SaldoDisponibleController extends Controller
                 'webClient' => $request->userAgent(),
                 'idUsuario' => Session::get('idUsuario'),
                 'idMoneda' => 1,
-                'idEstado' => 1,
+                'idEstado' => 12,
                 'idTipoMedioPago' => 2,
                 'numeroTransaccion' => $result->id,
                 'idPropiedad' => Session::get('propiedadPaypal')

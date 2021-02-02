@@ -13,12 +13,34 @@ use App\Propiedad;
 use App\FotoPlano;
 use App\Documento;
 use App\TrxIngreso;
+use App\MisionEmpresa;
+use Cache;
+use Session;
 
 class DetalleController extends Controller
 {
     public function index(Request $request, $idPropiedad = null)
     {
     	try {
+            if(Session::has('redirect_url')){
+                Session::forget('redirect_url');
+            }
+            if(cache::has('riesgoAdvertencia')){
+                $riesgoAdvertencia = cache::get('riesgoAdvertencia');
+            }else{
+                $riesgoAdvertencia = cache::remember('riesgoAdvertencia', 99999999999*60, function(){
+                    $cacheRiesgoAdvertencia = MisionEmpresa::where('nombreMisionEmpresa','RIESGOS Y ADVERTENCIAS')->get();
+                    return $cacheRiesgoAdvertencia;
+                });
+            }
+            if(cache::has('infoFinanciera')){
+                $infoFinanciera = cache::get('infoFinanciera');
+            }else{
+                $infoFinanciera = cache::remember('infoFinanciera', 99999999999*60, function(){
+                    $cacheInfoFinanciera = MisionEmpresa::where('nombreMisionEmpresa','INFORMACION FINANCIERA')->get();
+                    return $cacheInfoFinanciera;
+                });
+            }
             if ($idPropiedad != null) {
         		$propiedad = Propiedad::select('*')
                     ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
@@ -35,7 +57,7 @@ class DetalleController extends Controller
                 $imagenesPlanos = FotoPlano::where('idPropiedad',Crypt::decrypt($idPropiedad))->first();
                 $documentos = Documento::where('idPropiedad',Crypt::decrypt($idPropiedad))->get();
                 $ingresos = TrxIngreso::where('idPropiedad',Crypt::decrypt($idPropiedad))->get();
-        		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos'));
+        		return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos','riesgoAdvertencia','infoFinanciera'));
             }else{
                 $propiedad = Propiedad::select('*')
                     ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
@@ -56,7 +78,7 @@ class DetalleController extends Controller
 
                 $url = asset('invierte/chile/propiedad/detalle')."?idPropiedad=".$request->idPropiedad;
 
-                return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos','nombrePropiedad','url'));
+                return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos','nombrePropiedad','url','riesgoAdvertencia','infoFinanciera'));
             }
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');
