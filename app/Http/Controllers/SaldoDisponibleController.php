@@ -310,7 +310,18 @@ class SaldoDisponibleController extends Controller
             'idEstado' => 11,
         ]);
 
-        return redirect()->to('http://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
+        return redirect()->to('https://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
+    }
+    public function reversarEstadoDeNoPagados()
+    {
+        $boletas = BoletaOtroPago::where('idEstado', 11)->get();
+        foreach ($boletas as $boleta) {
+            if(date('d-m-Y',strtotime($boleta->fechaVencimiento)) == date('d-m-Y') ){
+                $boleta->update([
+                    'idEstado'=>3
+                ]);
+            }
+        }
     }
 
 }

@@ -237,6 +237,7 @@ Dashboard
 			<h4>Tus proyectos: situación general</h4>
 			<br>
 		</div>
+		{{--  
 		<div class="col-lg-4">
 			<div class="card">
 				<div class="card-body">
@@ -255,7 +256,8 @@ Dashboard
 				</div>
 			</div>
 			<br>
-		</div>
+		</div>--}}
+		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="card">
 				<div class="card-body">
@@ -316,6 +318,9 @@ Dashboard
 			</div>
 			<br>
 		</div>
+		<div class="col-lg-4"></div>
+
+		{{--  
 		<div class="col-lg-4">
 			<div class="card">
 				<div class="card-body">
@@ -334,7 +339,8 @@ Dashboard
 				</div>
 			</div>
 			<br>
-		</div>
+		</div>--}}
+		{{--  
 		<div class="col-lg-12">
 			<br>
 			<br>
@@ -565,7 +571,7 @@ Dashboard
 				</div>
 			</div>
 			<br>
-		</div>
+		</div>--}}
 	</div>
 		<br>
 </div>

@@ -48,7 +48,7 @@
                             <li><a class="dropdown-item" href="{{ asset('invierte/chile/propiedad') }}">Invierte</a></li>
                             <li><a class="dropdown-item" href="{{ asset('financiacion-empresas') }}">Financiate</a></li>
                             <li><a class="dropdown-item" href="">Blog</a></li>
-                            <li><a class="dropdown-item" href="{{ asset('estadisticas') }}">Estadisticas</a></li>
+                           {{--   <li><a class="dropdown-item" href="{{ asset('estadisticas') }}">Estadisticas</a></li>--}}
                         </ul>
                     </li>
                     @if (Session::has('idUsuario') && Session::has('correo') && Session::has('rut'))

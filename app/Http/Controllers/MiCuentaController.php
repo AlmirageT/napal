@@ -155,8 +155,8 @@ class MiCuentaController extends Controller
             	return back();
             }
             $valorMinimo = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
-            if (intval($cantidadSinCaracteres) < $valorMinimo->valorParametroGeneral) {
-            	toastr()->warning('No puede ser menor a $'.number_format($valorMinimo->valorParametroGeneral,0,',','.'));
+            if (intval($cantidadSinCaracteres) < 0) {
+            	toastr()->warning('No puede ser menor a $0');
             	return back();
             }
     		DB::beginTransaction();

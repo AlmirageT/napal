@@ -16,11 +16,13 @@ use App\TrxIngreso;
 use App\MisionEmpresa;
 use Cache;
 use Session;
+use DB;
 
 class DetalleController extends Controller
 {
     public function index(Request $request, $idPropiedad = null)
     {
+        
     	try {
             if(Session::has('redirect_url')){
                 Session::forget('redirect_url');
@@ -41,6 +43,46 @@ class DetalleController extends Controller
                     return $cacheInfoFinanciera;
                 });
             }
+            $diasPorInversiones = DB::select('SELECT CONCAT(ELT(WEEKDAY(trx_ingresos.created_at), 
+                "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo","Lunes")) AS DIA_SEMANA
+                FROM  trx_ingresos
+                WHERE MONTH(trx_ingresos.created_at) BETWEEN 01 AND 12 AND YEAR(trx_ingresos.created_at) = (:ano) AND trx_ingresos.idPropiedad = (:propiedad)',["ano" => date("Y"),"propiedad"=>Crypt::decrypt($request->idPropiedad)]);
+            
+            $lunes = 0;
+            $martes = 0;
+            $miercoles = 0;
+            $jueves = 0;
+            $viernes = 0;
+            $sabado = 0;
+            $domingo = 0;
+
+            foreach ($diasPorInversiones as $diaPorInversion) {
+                switch ($diaPorInversion->DIA_SEMANA) {
+                    case "Lunes":
+                        $lunes = $lunes + 1;
+                        break;
+                    case "Martes":
+                        $martes = $martes + 1;
+                        break;
+                    case "Miercoles":
+                        $miercoles = $miercoles + 1;
+                        break;
+                    case "Jueves":
+                        $jueves = $jueves + 1;
+                        break;
+                    case "Viernes":
+                        $viernes = $viernes + 1;
+                        break;
+                    case "Sabado":
+                        $sabado = $sabado + 1;
+                        break;
+                    case "Domingo":
+                        $domingo = $domingo + 1;
+                        break;
+                }
+            }
+            
+
             if ($idPropiedad != null) {
         		$propiedad = Propiedad::select('*')
                     ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
@@ -78,7 +120,7 @@ class DetalleController extends Controller
 
                 $url = asset('invierte/chile/propiedad/detalle')."?idPropiedad=".$request->idPropiedad;
 
-                return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos','nombrePropiedad','url','riesgoAdvertencia','infoFinanciera'));
+                return view('detalle',compact('propiedad','imagenesPropiedadesGrandes','imagenesPropiedadesPequeñas','imagenesPlanos','documentos','ingresos','nombrePropiedad','url','riesgoAdvertencia','infoFinanciera','lunes','martes','miercoles','jueves','viernes','sabado','domingo'));
             }
     	} catch (ModelNotFoundException $e) {
             toastr()->error('Propiedad que busca no existe');

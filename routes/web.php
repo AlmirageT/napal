@@ -30,6 +30,10 @@ Route::get('propiedad-favorita/{idPropiedad}', 'PropiedadFavoritaController@inde
 Route::get('banco-por-pais/{idPais}','BusquedaController@bancoPorPais');
 //obtener tipo de cuenta por banco
 Route::get('tipo-cuenta-por-banco/{idBanco}','BusquedaController@tipoCuentaPorBanco');
+
+//pagina momentanea de blog
+Route::get('blog/contratos-flex-nueva-tipologia','BlogController@tipo_flex');
+
 //paginas dashboard usuario
 Route::group(['prefix'=>'dashboard'], function(){
     Route::get('/','DashboardController@index');
@@ -254,6 +258,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::post('validar/transferencia/{idIntruccionBancaria}','InstruccionBancariaController@validacion');
     //transferencias realizadas
     Route::get('retiros-aceptados','InstruccionBancariaController@retirosAceptados');
+    //blog
+    Route::get('blogs','BlogController@index');
 });
 //quieres saber mas
 Route::get('saber-mas','CondicionServicioController@saberMas');
@@ -481,4 +487,10 @@ Route::resource('mantenedor-tipografia','TipografiaController');
 Route::delete('mantenedor-tipografia/{idTipografia}',array(
     'uses'=>'TipografiaController@destroy',
     'as'=>'mantenedor-tipografia.delete'
+));
+//blogs
+Route::resource('mantenedor-blog','BlogController');
+Route::delete('mantenedor-blog/{idBlog}',array(
+    'uses'=>'BlogController@destroy',
+    'as'=>'mantenedor-blog.delete'
 ));

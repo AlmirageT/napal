@@ -14,6 +14,7 @@ use App\Propiedad;
 use App\RedSocial;
 use App\Usuario;
 use Cache;
+use DB;
 
 class WelcomeController extends Controller
 {

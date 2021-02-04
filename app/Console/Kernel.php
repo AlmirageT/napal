@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call('App\Http\Controllers\MensajeriaController@correoUsuariosQueNoHanInvertido')->weeklyOn(1,'13:00');
         $schedule->call('App\Http\Controllers\MensajeriaController@corrreoUsuariosQueHanInvertido')->weeklyOn(1,'13:00');
+        $schedule->call('App\Http\Controllers\SaldoDisponibleController@reversarEstadoDeNoPagados')->dailyAt('13:00');
     }
 
     /**

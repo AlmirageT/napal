@@ -368,6 +368,15 @@
     </style>
 @endsection
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+            <img src="{{ asset($imagenesWeb->shift()->rutaImagenCarrusel) }}" alt="" style="width: 100%;">
+        </div>
+    </div>
+</div>
+{{-- 
 <div class="d-none d-sm-block">
     <div class="banner" id="banner">
         @if(count($imagenesWeb) > 0)
@@ -391,7 +400,7 @@
                                             {{ $imagenUno->subTituloImagenCarrusel }}
                                         @endif
                                     </p>
-                                    {{-- <a href="" class="btn btn-white">Read More</a> --}}
+                                     <a href="" class="btn btn-white">Read More</a> x
                                 </div>
                             </div>
                         </div>
@@ -489,6 +498,7 @@
         <!-- Search Section end -->
     </div>
 </div>
+ --}}
 <div class="d-sm-none d-md-none d-lg-none d-xl-none">
     <div class="banner" id="banner">
         @if(count($imagenesMovil) > 0)
@@ -600,17 +610,25 @@
     <br>
     <br>
     
-<div class="" style="background-color: black">
-<br>
-<br>
+<div class="" >
+    <br>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-lg-12" align="center">
-                <h5 style="color: #fbd334;">{!! $misionEmpresa->textoMisionEmpresa !!}</h5>
+                <h5 style="color: black;">{!! $misionEmpresa->textoMisionEmpresa !!}</h5>
                 <br>
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+    <br>
+    <br>
+    <div align="center">
+        <h3>Es muy fácil</h3>
+    </div>
+    <img src="{{ asset('img_public/grafica esmidas_Mesa de trabajo 1.png') }}" alt="" class="img-fluid">
 </div>
 
 <div class="featured-properties content-area-9 carta-transition">
@@ -892,7 +910,7 @@
         <a href="{{ asset('estadisticas') }}" class="btn btn-white">Ver Estadisticas</a>
     </div>
 </div>
-
+@if(count($casosExitosos) > 0)
 <div class="our-team-2 content-area-3">
     <br>
     <br>
@@ -904,7 +922,7 @@
         </div>
         <div class="slick-slider-area">
             <div class="row slick-carousel" data-slick='{"slidesToShow": 2, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                @if(count($casosExitosos) > 0)
+                
                     @foreach($casosExitosos as $casoExitoso)
                         <div class="slick-slide-item" >
                             <div class="row team-4" >
@@ -985,119 +1003,7 @@
                             </div>
                         </div>
                     @endforeach        
-                @else
-                    <div class="slick-slide-item">
-                        <div class="row team-4">
-                            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
-                                <div class="photo">
-                                    <img src="http://placehold.it/224x268" alt="avatar-10" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
-                                <div class="detail">
-                                    <h5>Office Manager</h5>
-                                    <h4>
-                                        <a href="agent-detail.html">Karen Paran</a>
-                                    </h4>
 
-                                    <div class="contact">
-                                        <ul>
-                                            <li>
-                                                <span>Direccion:</span><a href="#"> 44 New Design Street,</a>
-                                            </li>
-                                            <li>
-                                                <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>
-                                            </li>
-                                            <li>
-                                                <span>Mobile:</span><a href="tel:+554XX-634-7071"> +55 4XX-634-7071</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="contact">
-                                        <a href="" class="btn btn-outline-warning">Registrate</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slick-slide-item">
-                        <div class="row team-4">
-                            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
-                                <div class="photo">
-                                    <img src="http://placehold.it/224x268" alt="avatar-10" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
-                                <div class="detail">
-                                    <h5>Office Manager</h5>
-                                    <h4>
-                                        <a href="agent-detail.html">Karen Paran</a>
-                                    </h4>
-
-                                    <div class="contact">
-                                        <ul>
-                                            <li>
-                                                <span>Address:</span><a href="#"> 44 New Design Street,</a>
-                                            </li>
-                                            <li>
-                                                <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>
-                                            </li>
-                                            <li>
-                                                <span>Mobile:</span><a href="tel:+554XX-634-7071"> +55 4XX-634-7071</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="social-list clearfix">
-                                        <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slick-slide-item">
-                        <div class="row team-4">
-                            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-pad ">
-                                <div class="photo">
-                                    <img src="http://placehold.it/224x268" alt="avatar-10" class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-pad align-self-center">
-                                <div class="detail">
-                                    <h5>Office Manager</h5>
-                                    <h4>
-                                        <a href="agent-detail.html">Karen Paran</a>
-                                    </h4>
-
-                                    <div class="contact">
-                                        <ul>
-                                            <li>
-                                                <span>Address:</span><a href="#"> 44 New Design Street,</a>
-                                            </li>
-                                            <li>
-                                                <span>Email:</span><a href="mailto:info@themevessel.com"> info@themevessel.com</a>
-                                            </li>
-                                            <li>
-                                                <span>Mobile:</span><a href="tel:+554XX-634-7071"> +55 4XX-634-7071</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="social-list clearfix">
-                                        <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
             <div class="slick-prev slick-arrow-buton">
                 <i class="fa fa-angle-left"></i>
@@ -1108,6 +1014,8 @@
         </div>
     </div>
 </div>
+@endif
+
 <div class="container">
     <div class="row">
         <div class="col-lg-12" align="center">

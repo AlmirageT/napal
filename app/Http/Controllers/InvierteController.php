@@ -111,7 +111,7 @@ class InvierteController extends Controller
                 'idPropiedad' => Crypt::decrypt($idPropiedad)
             ]);
             DB::commit();
-            return redirect()->to('http://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
+            return redirect()->to('https://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
            /* TrxIngreso::create([
                 'monto' => $request->saldo,
                 'webClient' => $_SERVER['HTTP_USER_AGENT'],

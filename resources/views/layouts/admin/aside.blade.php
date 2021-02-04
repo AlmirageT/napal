@@ -187,6 +187,15 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-book"></i>
+                        <span>Blog</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/blogs') }}"><i class="bx bxs-book"></i> Blogs</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-book"></i>
                         <span>Casos Exitosos</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">

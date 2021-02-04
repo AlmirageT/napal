@@ -103,7 +103,7 @@
     	<br>
     
     <h3 class="heading-2">
-    	Inversión Diaria
+    	Número de inversiones diarias
     </h3>
     <div class="row">
       <div class="col-lg-12">
@@ -126,14 +126,14 @@
   function drawBasic() {
 
     var data = google.visualization.arrayToDataTable([
-      ['Days', 'Aumento en dias', { role: 'style' } ],
-      ['Lunes', 10, 'color: blue'],
-      ['Martes', 14, 'color: blue'],
-      ['Miercoles', 16, 'color: blue'],
-      ['Jueves', 22, 'color: blue'],
-      ['Viernes', 28, 'color: blue'],
-      ['Sabado', 28, 'color: blue'],
-      ['Domingo', 28, 'color: blue']
+      ['Days', 'Total', { role: 'style' } ],
+      ['Lunes', {{ $lunes }}, 'color: blue'],
+      ['Martes', {{ $martes }}, 'color: blue'],
+      ['Miercoles', {{ $miercoles }}, 'color: blue'],
+      ['Jueves', {{ $jueves }}, 'color: blue'],
+      ['Viernes', {{ $viernes }}, 'color: blue'],
+      ['Sabado', {{ $sabado }}, 'color: blue'],
+      ['Domingo', {{ $domingo }}, 'color: blue']
     ]);
     var chart = new google.visualization.ColumnChart(
       document.getElementById('chart_div')
