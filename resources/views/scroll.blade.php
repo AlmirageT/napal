@@ -99,6 +99,14 @@
     </style>
     <div class="container" id="prueba-scroll">
         <div class="row">
+            <div class="col-lg-6">
+                <img src="{{ asset('img_public/CELULAR MONEDAS 2.png') }}" alt="celular monedas">
+            </div>  
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+        {{--  <div class="row">
 
             <div class="col-md-6 col-lg-6 col-xl-6 d-none d-sm-none d-md-none d-lg-block d-xl-block" id="smartphone-display">
                 <div>
@@ -157,7 +165,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </div>
     <br>
     <br>

@@ -40,6 +40,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link link-color" href="{{ asset('invierte/chile/propiedad') }}">
+                            Invierte
+                        </a>
+                    </li>
+                    {{--  
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Área Pública 
@@ -48,9 +54,9 @@
                             <li><a class="dropdown-item" href="{{ asset('invierte/chile/propiedad') }}">Invierte</a></li>
                             <li><a class="dropdown-item" href="{{ asset('financiacion-empresas') }}">Financiate</a></li>
                             <li><a class="dropdown-item" href="">Blog</a></li>
-                           {{--   <li><a class="dropdown-item" href="{{ asset('estadisticas') }}">Estadisticas</a></li>--}}
+                           <li><a class="dropdown-item" href="{{ asset('estadisticas') }}">Estadisticas</a></li>
                         </ul>
-                    </li>
+                    </li>--}}
                     @if (Session::has('idUsuario') && Session::has('correo') && Session::has('rut'))
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

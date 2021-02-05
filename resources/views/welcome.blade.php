@@ -498,7 +498,7 @@
         <!-- Search Section end -->
     </div>
 </div>
- --}}
+
 <div class="d-sm-none d-md-none d-lg-none d-xl-none">
     <div class="banner" id="banner">
         @if(count($imagenesMovil) > 0)
@@ -606,7 +606,7 @@
 
         <!-- Search Section end -->
     </div>
-</div>
+</div> --}}
     <br>
     <br>
     
@@ -616,8 +616,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12" align="center">
-                <h5 style="color: black;">{!! $misionEmpresa->textoMisionEmpresa !!}</h5>
+                {!! $misionEmpresa->textoMisionEmpresa !!}
                 <br>
+            </div>
+            <div class="col-lg-12" align="center">
+                <img src="{{ asset('img_public/PLAYA CELULAR.png') }}" alt="vacaciones" style="width: 50%" class="img-fluid">
             </div>
         </div>
     </div>
@@ -850,57 +853,59 @@
     </div>
 </div>
 <!-- Featured Properties end -->
-<div class="counters overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidas1-02.jpg') }}')">
+<div style="background-color: white">
+    <br>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
                 <div class="media counter-box">
                     <div class="media-left">
-                        <i class="flaticon-tag"></i>
+                        <i style="color: black" class="flaticon-tag"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="">{{ $promedioFinal }}%</h1>
-                        <p>TIR MEDIA PLATAFORMA</p>
+                        <h1 class="" style="color: black">{{ $promedioFinal }}%</h1>
+                        <p style="color: black">TIR MEDIA PLATAFORMA</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInLeft delay-04s">
                 <div class="media counter-box">
                     <div class="media-left">
-                        <i class="flaticon-business"></i>
+                        <i style="color: black" class="flaticon-business"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="">${{ number_format($valorTotal,0,',','.') }}</h1>
-                        <p>CIFRA DE INVERSIÓN ACUMULADA</p>
+                        <h1 style="color: black" class="">${{ number_format($valorTotal,0,',','.') }}</h1>
+                        <p style="color: black">CIFRA DE INVERSIÓN ACUMULADA</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
                 <div class="media counter-box">
                     <div class="media-left">
-                        <i class="flaticon-people"></i>
+                        <i style="color: black" class="flaticon-people"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="counter">396</h1>
-                        <p>RENDIMIENTO REPARTIDOS + DEVOLUCIÓN + DE CAPITAL + CCD</p>
+                        <h1 style="color: black" class="counter">396</h1>
+                        <p style="color: black">RENDIMIENTO REPARTIDOS + DEVOLUCIÓN + DE CAPITAL + CCD</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 wow fadeInRight delay-04s">
                 <div class="media counter-box">
                     <div class="media-left">
-                        <i class="flaticon-people-1"></i>
+                        <i style="color: black" class="flaticon-people-1"></i>
                     </div>
                     <div class="media-body">
-                        <h1 class="">{{ number_format(count($usuarios),0,',','.') }}</h1>
-                        <p>N° DE USUARIOS REGISTRADOS</p>
+                        <h1 style="color: black" class="">{{ number_format(count($usuarios),0,',','.') }}</h1>
+                        <p style="color: black">N° DE USUARIOS REGISTRADOS</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-            
+          {{--    
 <div class="container">
     <div align="right">
         <br>
@@ -909,7 +914,7 @@
     <div align="right" >
         <a href="{{ asset('estadisticas') }}" class="btn btn-white">Ver Estadisticas</a>
     </div>
-</div>
+</div>--}}
 @if(count($casosExitosos) > 0)
 <div class="our-team-2 content-area-3">
     <br>
