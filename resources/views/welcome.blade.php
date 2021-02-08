@@ -370,7 +370,23 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>Fuera los pequeños detalles. </h3>
+            <h2>Tu dinero, tu decisión.</h2>
+            <h4>Invierte en el activo mas noble, pero sin comisión.</h4>
+            <div align="center">
+                <br>
+                <br>
+                <a href="{{ asset('invierte/chile/propiedad') }}" class="btn btn-outline-warning"><strong style="color: black">Invierte</strong></a>
+            </div>
+
+        </div>
         <div class="col-lg-6">
             <img src="{{ asset($imagenesWeb->shift()->rutaImagenCarrusel) }}" alt="" style="width: 100%;">
         </div>
@@ -1041,6 +1057,7 @@
     }
 </style>
 <!-- Services 2 start -->
+{{--  
 <div class="services-2 content-area-5 bg-grea-3">
     <div class="container">
         <!-- Main title -->
@@ -1059,7 +1076,7 @@
         </div>
     </div>
 </div>
-
+--}}
 @endsection
 @section('scripts')
 <script type="text/javascript">

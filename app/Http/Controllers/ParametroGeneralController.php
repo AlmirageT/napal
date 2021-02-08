@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\ParametroGeneral;
 use Session;
 use DB;
+use Cache;
 
 class ParametroGeneralController extends Controller
 {
@@ -39,6 +40,9 @@ class ParametroGeneralController extends Controller
                 return back();
             }
             DB::beginTransaction();
+            if(cache::has('diversifica')){
+                cache::forget('diversifica');
+            }
             	$parametroGeneral = new ParametroGeneral($request->all());
             	$parametroGeneral->save();
                 toastr()->success('Agregado Correctamente', 'El parametro general: '.$request->nombreParametroGeneral.' ha sido agregado correctamente', ['timeOut' => 9000]);
@@ -74,6 +78,9 @@ class ParametroGeneralController extends Controller
                 return back();
             }
             DB::beginTransaction();
+            if(cache::has('diversifica')){
+                cache::forget('diversifica');
+            }
 	    		$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
 	            $parametroGeneral->fill($request->all());
 	            $parametroGeneral->save();
@@ -102,6 +109,9 @@ class ParametroGeneralController extends Controller
     {
     	try {
     		DB::beginTransaction();
+            if(cache::has('diversifica')){
+                cache::forget('diversifica');
+            }
     			$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
 	            toastr()->success('Eliminado Correctamente', 'El parametro general: '.$parametroGeneral->nombreParametroGeneral.' ha sido eliminado correctamente', ['timeOut' => 9000]);
 	            $parametroGeneral->delete();

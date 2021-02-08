@@ -100,11 +100,23 @@
     <div class="container" id="prueba-scroll">
         <div class="row">
             <div class="col-lg-6">
-                <img src="{{ asset('img_public/CELULAR MONEDAS 2.png') }}" alt="celular monedas">
-            </div>  
-            <div class="col-lg-6">
-
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h3>¡HEY! Aumento tus ingresos y empieza a ganar.</h3>
+                <div align="center">
+                    <a href="{{ asset('registro') }}" class="btn btn-outline-warning"><strong>Registrate</strong></a>
+                </div>
             </div>
+            <div class="col-lg-6">
+                <img src="{{ asset('img_public/CELULAR MONEDAS 2.png') }}" alt="celular monedas" class="img-fluid">
+            </div>  
+            
         </div>
         {{--  <div class="row">
 
