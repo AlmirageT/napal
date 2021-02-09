@@ -65,6 +65,7 @@
             font-family: '{{ $tipografia->nombreTipografia }}',cursive;
         }
     </style>
+    {{--  
     <style type="text/css">
         .loader-page {
             position: fixed;
@@ -109,12 +110,13 @@
             animation: rotarload 1s ease-out infinite;
             transform: rotate(0deg);
           }
-    </style>
+    </style>--}}
     @yield('css')
     @toastr_css
 </head>
 <body >
-    <div class="loader-page"></div>
+    {{-- 
+    <div class="loader-page"></div> --}}
     <!-- BOTÓN RRSS -->
     <div class="contenedor">
         <input type="checkbox" id="btn-share">
