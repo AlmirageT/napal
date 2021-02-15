@@ -3,7 +3,7 @@
 Login
 @endsection
 @section('content')
-<div class="contact-section overview-bgi">
+<div class="contact-section overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidaspantalla-02.jpg') }}');">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -11,7 +11,7 @@ Login
                 <div class="form-content-box">
                     <!-- Logo -->
                     <a href="{{ asset('/') }}">
-                        <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo">
                     </a>
                     <!-- details -->
                     <div class="details">
@@ -33,7 +33,7 @@ Login
                                         Recuerdame
                                     </label>
                                 </div>
-                                <a href="forgot-password.html" class="link-not-important pull-right">¿Olvidaste tu contraseña?</a>
+                                <a href="" class="link-not-important pull-right">¿Olvidaste tu contraseña?</a>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group mb-0">

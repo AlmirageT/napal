@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+use App\Actions\VerificarRutAction;
 use App\Mail\TokenConfirmacion;
 use App\Helpers\Mensajeria;
 use App\CondicionServicio;
@@ -43,7 +44,7 @@ class RegistroController extends Controller
                 'nombre'=> 'required',
                 'apellido'=> 'required',
                 'numero'=> 'required',
-                'correo'=> 'required',
+                'correo'=> 'required|email',
                 'rut'=> 'required',
                 'password'=> 'required',
                 'condiciones'=>'required',
@@ -63,15 +64,27 @@ class RegistroController extends Controller
                 }
             }
             // registrando OK el nuevo usuario sin activar
+            $rut = $request->rut;
+            $caracteresEspeciales = array(".");
+            $rutSinCaracteres = str_replace($caracteresEspeciales, "", $rut);
+
+            $VerificarRutAction = new VerificarRutAction();
+            $rutVerificado = $VerificarRutAction->execute($rutSinCaracteres);
+            if ($rutVerificado == false) {
+                toastr()->warning('El rut que ingreso es invalido, ingreso uno nuevo');
+                DB::rollback();
+                return back();
+            }
+
             $nuevoUsuario = new Usuario();
             $nuevoUsuario->nombre = $request->nombre;
             $nuevoUsuario->apellido = $request->apellido;
-            $nuevoUsuario->rut = $request->rut;
+            $nuevoUsuario->rut = $rutSinCaracteres;
             $nuevoUsuario->correo = $request->correo;
             $nuevoUsuario->password = Crypt::encrypt($request->password);
             $nuevoUsuario->tokenCorto = uniqid();
             $nuevoUsuario->activarCuenta = 0;
-            $nuevoUsuario->activarNewsletter = 0;
+            $nuevoUsuario->activarNewsletter = 1;
             $nuevoUsuario->desactivarCuenta = 0;
             $nuevoUsuario->idTipoUsuario = 2;
             $nuevoUsuario->idTipoPersona = 1;

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Helpers\Mensajeria;
 use App\Usuario;
 use App\Avatar;
@@ -28,7 +29,48 @@ class LoginController extends Controller
     public function ingreso_session(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'correo' => 'required|email',
+                'password' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
+            if(Session::has('redirect_url')){
+                $correo = Usuario::where('correo', $request->correo)->firstOrFail();
+    		    if ($correo) {
+	    		    $pass_decrytp = Crypt::decrypt($correo->password);
+                    if ($pass_decrytp == $request->password) {
+                        if ($correo->activarCuenta == 0) {
+                            // cuenta aun no activada
+                            toastr()->info('Su cuenta aún no ha sido activada. Active su cuenta mediante el link enviado');
+                            return redirect::back();
+                        }
+                        Session::put('idUsuario', $correo->idUsuario);
+                        Session::put('idTipoUsuario', $correo->idTipoUsuario);
+                        Session::put('nombre', $correo->nombre);
+                        Session::put('apellido', $correo->apellido);
+                        Session::put('correo', $correo->correo);
+                        Session::put('rut', $correo->rut);
+                        LogRegistro::create([
+                            'idUsuario'=> $correo->idUsuario
+                        ]);
+
+                        if ($correo->idAvatar) {
+                            $imgAvatar = Avatar::findOrFail($correo->idAvatar);
+                            Session::put('avatar', $imgAvatar->rutaAvatar);
+                        } else {
+                            Session::put('avatar', 'usergeneric.png');
+                        }
+                        toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
+                        DB::commit();
+
+                        return redirect::to(Session::get('redirect_url'));
+                    }
+                }
+            }
     		$correo = Usuario::where('correo', $request->correo)->firstOrFail();
     		if ($correo) {
 	    		$pass_decrytp = Crypt::decrypt($correo->password);
@@ -36,7 +78,7 @@ class LoginController extends Controller
 	    			if ($correo->activarCuenta == 0) {
 		                // cuenta aun no activada
 		                toastr()->info('Su cuenta aún no ha sido activada. Active su cuenta mediante el link enviado');
-		                return redirect('/');
+		                 return redirect::back();
 		            }
 		            Session::put('idUsuario', $correo->idUsuario);
 		            Session::put('idTipoUsuario', $correo->idTipoUsuario);
@@ -55,7 +97,7 @@ class LoginController extends Controller
 		                Session::put('avatar', 'usergeneric.png');
 		            }
 
-		            if (Session::get('idTipoUsuario') == 3) {
+		            if (Session::get('idTipoUsuario') == 3 || Session::get('idTipoUsuario') == 10) {
 		                // usuarios internos
                 		toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
                         DB::commit();
@@ -63,16 +105,16 @@ class LoginController extends Controller
 		            }
             		toastr()->success('Ingreso Exitoso','Bienvenido: '.$correo->nombre, ['timeOut' => 5000]);
                     DB::commit();
-        			return redirect::to('/');
+        			return redirect::to('dashboard');
 	    		}else{
             		toastr()->warning('Usuario y/o contraseña incorrecto');
                     DB::rollback();
-        			return redirect::to('/');
+        			 return redirect::back();
 	    		}
 	    	}
     		toastr()->warning('Usuario y/o contraseña incorrecto');
             DB::rollback();
-			return redirect::to('/');
+			return back();
         } catch (QueryException $e) {
             // error conexion a BBDD
             toastr()->warning('Se ha producido un error interno. Favor intente nuevamente');

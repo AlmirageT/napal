@@ -7,15 +7,25 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Provincia;
 use App\Region;
 use App\Pais;
+use Session;
 use DB;
 
 class ProvinciaController extends Controller
 {
     public function index()
-    {  	  
+    {  	
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }  
     	$regiones = Region::pluck('nombreRegion','idRegion');
     	$paises = Pais::pluck('nombrePais','idPais');
     	return view('admin.ubicaciones.provincias.index',compact('regiones','paises'));
@@ -23,6 +33,14 @@ class ProvinciaController extends Controller
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreProvincia' => 'required',
+                'idRegion' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$provincia = new Provincia();
             	$provincia->nombreProvincia = $request->nombreProvincia;
@@ -51,6 +69,15 @@ class ProvinciaController extends Controller
     }
     public function edit($idProvincia)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            toastr()->info('Debe estar ingresado para poder entrar a esta pagina');
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
         $provincia = Provincia::select('*')
                 ->join('regiones','provincias.idRegion','=','regiones.idRegion')
                 ->join('paises','regiones.idPais','=','paises.idPais')
@@ -63,6 +90,14 @@ class ProvinciaController extends Controller
     public function update(Request $request, $idProvincia)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreProvincia' => 'required',
+                'idRegion' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$provincia = Provincia::find($idProvincia);
 	            $provincia->nombreProvincia = $request->nombreProvincia;
@@ -70,7 +105,7 @@ class ProvinciaController extends Controller
 	            $provincia->save();
                 toastr()->success('Actualizado Correctamente', 'El tipo de calidad: '.$request->nombreProvincia.' ha sido actualizado correctamente', ['timeOut' => 9000]);
             DB::commit();
-        	return redirect::back();
+        	return redirect::to('napalm/provincias');
     	} catch (ModelNotFoundException $e) {
             toastr()->warning('No autorizado');
             DB::rollback();

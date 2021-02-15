@@ -4,23 +4,45 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use DB;
-use App\ParametroGeneral;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\ParametroGeneral;
+use Session;
+use DB;
+use Cache;
 
 class ParametroGeneralController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$parametrosGenerales = ParametroGeneral::all();
     	return view('admin.parametros_generales.index',compact('parametrosGenerales'));
     }
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreParametroGeneral' => 'required',
+                'valorParametroGeneral' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos vacios');
+                return back();
+            }
             DB::beginTransaction();
+            if(cache::has('diversifica')){
+                cache::forget('diversifica');
+            }
             	$parametroGeneral = new ParametroGeneral($request->all());
             	$parametroGeneral->save();
                 toastr()->success('Agregado Correctamente', 'El parametro general: '.$request->nombreParametroGeneral.' ha sido agregado correctamente', ['timeOut' => 9000]);
@@ -47,7 +69,18 @@ class ParametroGeneralController extends Controller
     public function update(Request $request, $idParametroGeneral)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreParametroGeneral' => 'required',
+                'valorParametroGeneral' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos vacios');
+                return back();
+            }
             DB::beginTransaction();
+            if(cache::has('diversifica')){
+                cache::forget('diversifica');
+            }
 	    		$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
 	            $parametroGeneral->fill($request->all());
 	            $parametroGeneral->save();
@@ -76,6 +109,9 @@ class ParametroGeneralController extends Controller
     {
     	try {
     		DB::beginTransaction();
+            if(cache::has('diversifica')){
+                cache::forget('diversifica');
+            }
     			$parametroGeneral = ParametroGeneral::find($idParametroGeneral);
 	            toastr()->success('Eliminado Correctamente', 'El parametro general: '.$parametroGeneral->nombreParametroGeneral.' ha sido eliminado correctamente', ['timeOut' => 9000]);
 	            $parametroGeneral->delete();

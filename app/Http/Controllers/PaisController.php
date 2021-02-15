@@ -9,12 +9,21 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\Pais;
+use Session;
 use DB;
 
 class PaisController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$paises = Pais::all();
     	return view('admin.ubicaciones.paises.index',compact('paises'));
     }
@@ -22,7 +31,8 @@ class PaisController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPais' => 'max:102400'
+                'fotoPais' => 'max:102400',
+                'nombrePais' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');
@@ -64,7 +74,8 @@ class PaisController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPais' => 'max:102400'
+                'fotoPais' => 'max:102400',
+                'nombrePais' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');

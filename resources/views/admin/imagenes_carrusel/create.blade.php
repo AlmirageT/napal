@@ -39,6 +39,18 @@
                             {!! Form::select('idTipoImagen', $tiposImagenes,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de imagen",'required']) !!}
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Titulo</label>
+                            {!! Form::text('tituloImagenCarrusel',null,['class'=>"form-control",'placeholder'=>"Titulo"]) !!}
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>SubTitulo</label>
+                            {!! Form::text('subTituloImagenCarrusel',null,['class'=>"form-control",'placeholder'=>"SubTitulo"]) !!}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

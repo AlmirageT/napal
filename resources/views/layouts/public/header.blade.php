@@ -33,14 +33,30 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand logo" href="{{ asset('/') }}">
-                <img src="{{ asset('img_public/logos/logo.png') }}" alt="logo">
+                <img src="{{ asset('img_public/logomidas-03.png') }}" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link link-color" href="{{ asset('invierte/chile/propiedad') }}">
+                            Invierte
+                        </a>
+                    </li>
+                    {{--  
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Área Pública 
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{ asset('invierte/chile/propiedad') }}">Invierte</a></li>
+                            <li><a class="dropdown-item" href="{{ asset('financiacion-empresas') }}">Financiate</a></li>
+                            <li><a class="dropdown-item" href="">Blog</a></li>
+                           <li><a class="dropdown-item" href="{{ asset('estadisticas') }}">Estadisticas</a></li>
+                        </ul>
+                    </li>--}}
                     @if (Session::has('idUsuario') && Session::has('correo') && Session::has('rut'))
                         <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,7 +67,8 @@
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/oportunidades') }}">Invierte</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/mis-inversiones') }}">Mis inversiones</a></li>
                                 <li><a class="dropdown-item" href="{{ asset('dashboard/mi-cuenta') }}">Mi cuenta</a></li>
-                                <li><a class="dropdown-item" href="{{ asset('dashboard/documentos-informes') }}">Documentos e informes</a></li>
+                                <li><a class="dropdown-item" href="{{ asset('dashboard/favoritos') }}">Favoritos</a></li>
+                            {{--  <li><a class="dropdown-item" href="{{ asset('dashboard/documentos-informes') }}">Documentos e informes</a></li>--}}    
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -59,11 +76,12 @@
                                 Mis datos
                             </a>
                         </li>
+                        {{--  
                         <li class="nav-item">
                             <a class="nav-link link-color" href="#">
                                 Notificaciones
                             </a>
-                        </li>
+                        </li>--}}
                     @endif
                     @if (Session::has('idUsuario') && Session::has('correo') && Session::has('rut'))
                         <form action="{{ asset('logout') }}" method="post">

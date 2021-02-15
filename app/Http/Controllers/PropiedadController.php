@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use App\Pais;
 use App\Comuna;
 use App\Provincia;
@@ -17,22 +21,35 @@ use App\TipoFlexibilidad;
 use App\Proyecto;
 use App\TipoInversion;
 use App\Propiedad;
-use DB;
 use Image;
 use Cache;
-use Illuminate\Database\QueryException;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Validator;
+use Session;
+use DB;
 
 class PropiedadController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	return view('admin.propiedades.index');
     }
     public function create()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$usuarios = Usuario::pluck('nombre','idUsuario');
     	$paises = Pais::pluck('nombrePais','idPais');
         $regiones = Region::pluck('nombreRegion','idRegion');
@@ -51,10 +68,43 @@ class PropiedadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPrincipal' => 'max:102400'
+                'fotoPrincipal' => 'max:102400',
+                'nombrePropiedad' => 'required',
+                'idPais' => 'required',
+                'idRegion' => 'required',
+                'idProvincia' => 'required',
+                'idComuna' => 'required',
+                'direccion1' => 'required',
+                'direccion2' => 'required',
+                'codigoPostal' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required',
+                'idTipoInversion' => 'required',
+                'idProyecto' => 'required',
+                'idTipoFlexibilidad' => 'required',
+                'tieneChat' => 'required',
+                'idTipoCalidad' => 'required',
+                'idTipoCredito' => 'required',
+                'precio' => 'required',
+                'idMoneda' => 'required',
+                'plazoMeses' => 'required',
+                'fechaInicio' => 'required',
+                'fechaFinalizacion' => 'required',
+                'rentabilidadAnual' => 'required',
+                'rentabilidadTotal' => 'required',
+                'idEstado' => 'required',
+                'idUsuario' => 'required',
+                'destacadoPropiedad' => 'required',
+                'descripcion' => 'required',
+                'mConstruido' => 'required',
+                'mSuperficie' => 'required',
+                'mTerraza' => 'required',
+                'cantidadSubPropiedad' => 'required',
+                'habitaciones' => 'required',
+                'baños' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('El archivo no puede pasar de los 100MB, no debe dejar los datos vacios');
                 return back();
             }
             DB::beginTransaction();
@@ -89,6 +139,11 @@ class PropiedadController extends Controller
                     $propiedad->destacadoPropiedad = 1;
                 }else{
                     $propiedad->destacadoPropiedad = 0;
+                }
+                if($request->idTipoFlexibilidad == 1){
+                    $propiedad->contratoFlex = $request->contratoFlex;
+                }else{
+                    $propiedad->contratoFlex = null;
                 }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
                 $linkMapa = "https://maps.googleapis.com/maps/api/staticmap?center=".$request->latitud.",".$request->longitud."&zoom=17&size=350x233&markers=color:blue%7Clabel:S%7C".$request->latitud.",".$request->longitud."&key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g";
@@ -125,6 +180,14 @@ class PropiedadController extends Controller
     }
     public function edit($idPropiedad)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$propiedad = Propiedad::find($idPropiedad);
     	$usuarios = Usuario::pluck('nombre','idUsuario');
     	$paises = Pais::pluck('nombrePais','idPais');
@@ -144,10 +207,42 @@ class PropiedadController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'fotoPrincipal' => 'max:102400'
+                'nombrePropiedad' => 'required',
+                'idPais' => 'required',
+                'idRegion' => 'required',
+                'idProvincia' => 'required',
+                'idComuna' => 'required',
+                'direccion1' => 'required',
+                'direccion2' => 'required',
+                'codigoPostal' => 'required',
+                'latitud' => 'required',
+                'longitud' => 'required',
+                'idTipoInversion' => 'required',
+                'idProyecto' => 'required',
+                'idTipoFlexibilidad' => 'required',
+                'tieneChat' => 'required',
+                'idTipoCalidad' => 'required',
+                'idTipoCredito' => 'required',
+                'precio' => 'required',
+                'idMoneda' => 'required',
+                'plazoMeses' => 'required',
+                'fechaInicio' => 'required',
+                'fechaFinalizacion' => 'required',
+                'rentabilidadAnual' => 'required',
+                'rentabilidadTotal' => 'required',
+                'idEstado' => 'required',
+                'idUsuario' => 'required',
+                'destacadoPropiedad' => 'required',
+                'descripcion' => 'required',
+                'mConstruido' => 'required',
+                'mSuperficie' => 'required',
+                'mTerraza' => 'required',
+                'cantidadSubPropiedad' => 'required',
+                'habitaciones' => 'required',
+                'baños' => 'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('No debe dejar los datos vacios');
                 return back();
             }
             DB::beginTransaction();
@@ -158,10 +253,17 @@ class PropiedadController extends Controller
                     cache::forget('propiedadesTienda');
                 }
             	$imgName = null;
-            	$propiedad = Propiedad::find($idPropiedad);
+                $propiedad = Propiedad::find($idPropiedad);
+                if ($propiedad->fotoMapa != null) {
+                    if(file_exists($propiedad->fotoMapa )){
+                        unlink($propiedad->fotoMapa);
+                    }
+                }
 	            if($request->file('fotoPrincipal')){
                     if ($propiedad->fotoPrincipal != null) {
-                        unlink($propiedad->fotoPrincipal);
+                        if(file_exists($propiedad->fotoPrincipal)){
+                            unlink($propiedad->fotoPrincipal);
+                        }
                     }
 	                $imagen = $request->file('fotoPrincipal');
 	                $img = Image::make($imagen);
@@ -172,7 +274,12 @@ class PropiedadController extends Controller
                         $constraint->upsize();
                     });
                     $img->save('assets/images/propiedades/'.$imgName);
-	            }
+                }
+                if($request->idTipoFlexibilidad == 1){
+                    $propiedad->contratoFlex = $request->contratoFlex;
+                }else{
+                    $propiedad->contratoFlex = null;
+                }
             	$propiedad->fill($request->all());
             	if ($imgName != null) {
             		$propiedad->fotoPrincipal = 'assets/images/propiedades/'.$imgName;
@@ -188,9 +295,7 @@ class PropiedadController extends Controller
                     $propiedad->destacadoPropiedad = 0;
                 }
             	$geoHash = DB::select("SELECT ST_GeoHash($request->longitud, $request->latitud, 16) as geoHash");
-                if ($propiedad->fotoMapa != null) {
-                    unlink($propiedad->fotoMapa);
-                }
+                
                 $linkMapa = "https://maps.googleapis.com/maps/api/staticmap?center=".$request->latitud.",".$request->longitud."&zoom=17&size=350x233&markers=color:blue%7Clabel:S%7C".$request->latitud.",".$request->longitud."&key=AIzaSyB9BKzI4HVxT1mjnxQIHx_8va7FBvROI6g";
                 $mapa = Image::make($linkMapa);
                 $mapa->resize(350, 233, function ($constraint) {
@@ -236,10 +341,14 @@ class PropiedadController extends Controller
     			$propiedad = Propiedad::find($idPropiedad);
 	            toastr()->success('Eliminado Correctamente', 'La propiedad '.$propiedad->nombrePropiedad.' ha sido eliminado correctamente', ['timeOut' => 9000]);
 	            if ($propiedad->fotoPrincipal != null) {
-	                unlink($propiedad->fotoPrincipal);
+                    if(file_exists($propiedad->fotoPrincipal)){
+	                    unlink($propiedad->fotoPrincipal);
+                    }
 	            }
                 if ($propiedad->fotoMapa != null) {
-                    unlink($propiedad->fotoMapa);
+                    if(file_exists($propiedad->fotoMapa )){
+                        unlink($propiedad->fotoMapa);
+                    }
                 }
 	            $propiedad->delete();
     		DB::commit();
@@ -261,5 +370,42 @@ class PropiedadController extends Controller
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
+    }
+    public function cambioFecha()
+    {
+        return view('admin.propiedades.fecha.index');
+    }
+    public function editarCambioFecha($idPropiedad)
+    {
+        $propiedad = Propiedad::find($idPropiedad);
+        
+        return view('admin.propiedades.fecha.edit',compact('propiedad'));
+    }
+    public function actualizarFecha(Request $request, $idPropiedad)
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
+        $validator = Validator::make($request->all(), [
+            'fechaFinalizacion' => 'required'
+        ]);
+        if ($validator->fails()) {
+            toastr()->info('No debe dejar los datos vacios');
+            return back();
+        }
+        DB::beginTransaction();
+        $propiedad = Propiedad::find($idPropiedad);
+        $propiedad->fill($request->all());
+        $propiedad->save();
+        DB::commit();
+        toastr()->success('La fecha de la propiedad ha sido extendida', 'Fecha Actualizada Correctamente');
+        return redirect::to('napalm/propiedad-cambio-fecha');
+        
+        
     }
 }

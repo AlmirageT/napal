@@ -18,6 +18,8 @@ Imagenes Carrusel
 				    <tr>
 			          <th>ID</th>
 				      <th>Imagen</th>
+				      <th>Titulo</th>
+				      <th>SubTitulo</th>
 				      <th>Activo</th>
 				      <th>Tipo Imagen</th>
 				      <th>Acciones</th>
@@ -34,6 +36,8 @@ Imagenes Carrusel
 					      		No tiene imagen
 					      	@endif
 					      </td>
+					      <td>{{ $imagenCarrusel->tituloImagenCarrusel }}</td>
+					      <td>{{ $imagenCarrusel->subTituloImagenCarrusel }}</td>
 					      <td>
 					      	@if($imagenCarrusel->activoImagenCarrusel == 1)
 					      		Si

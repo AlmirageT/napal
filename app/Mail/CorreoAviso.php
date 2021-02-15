@@ -29,6 +29,6 @@ class CorreoAviso extends Mailable
     public function build()
     {
         $propiedad = $this->propiedad;
-        return $this->subject('Quedan pocos dias para que la propiedad finalice')->view('mail.avisoCorreo',compact('propiedad'));
+        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Quedan pocos dias para que la propiedad finalice')->view('mail.avisoCorreo',compact('propiedad'));
     }
 }

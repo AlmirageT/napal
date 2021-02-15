@@ -23,7 +23,7 @@
                     <div class="col-lg-12">
 						<div class="form-group">
 							<label>Foto Perfil</label>
-							<input type="file" name="fotoPais" class="form-control" required onchange="selectFile(event)">
+							<input type="file" name="fotoPais" class="form-control"  onchange="selectFile(event)">
 						</div>
 					</div>
 					<div class="col-lg-12">

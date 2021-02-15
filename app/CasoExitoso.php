@@ -9,6 +9,7 @@ class CasoExitoso extends Model
     protected $table = 'casos_exitosos';
     protected $primaryKey = 'idCasoExitoso';
     protected $fillable = [
-    	'idPropiedad'
+    	'idPropiedad',
+    	'imagenCasoExito'
     ];
 }

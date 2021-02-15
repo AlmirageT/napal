@@ -11,27 +11,77 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 //politicas de privacidad
-Route::get('politicas-privacidad',function(){
-    return view('politicasPrivacidad');
-});
-Route::get('contacta-con-nosotros',function(){
-    return view('contactaNosotros');
-});
+Route::view('politicas-privacidad','politicasPrivacidad');
+//contacta con nosotros
+Route::view('contacta-con-nosotros','contactaNosotros');
+//como funciona
+Route::view('como-funciona','public.comoFunciona');
+//faq's
+Route::get('preguntas-frecuentes','FaqController@preguntasFrecuentes');
+//financiate
+Route::view('financiacion-empresas','public.financiacion');
+//quienes somos
+Route::view('quienes-somos','public.quienesSomos');
+//favoritos
+Route::get('propiedad-favorita/{idPropiedad}', 'PropiedadFavoritaController@index');
+//obtener bancos por pais
+Route::get('banco-por-pais/{idPais}','BusquedaController@bancoPorPais');
+//obtener tipo de cuenta por banco
+Route::get('tipo-cuenta-por-banco/{idBanco}','BusquedaController@tipoCuentaPorBanco');
+
+//pagina momentanea de blog
+Route::get('blog/contratos-flex-nueva-tipologia','BlogController@tipo_flex');
+
 //paginas dashboard usuario
-Route::group(['prefix'=>'dashboard'],function(){
-    Route::view('/','public.dashboard');
+Route::group(['prefix'=>'dashboard'], function(){
+    Route::get('/','DashboardController@index');
     Route::get('oportunidades','TiendaController@index');
-    Route::view('mis-inversiones','public.misInversiones');
-    Route::view('mi-cuenta','public.miCuenta');  
-    Route::view('documentos-informes','public.documentosInformes');
-    Route::view('mis-datos','public.miDatos');  
-    Route::view('mis-datos/datos-adicionales','public.ajustesCuenta');
-    Route::view('mis-datos/mis-promociones','public.misPromociones');
-    Route::view('mi-cuenta/movimientos','public.misMovimientos');
+    Route::get('oportunidades/financiado','TiendaController@financiado');
+    Route::get('oportunidades/cerrado','TiendaController@cerrado');
+    Route::get('oportunidades/no-financiado','TiendaController@no_financiado');
+    Route::get('mis-inversiones','MisInversionesController@index');
+    Route::get('mi-inversion/detalle','MisInversionesController@detalle');
+    Route::get('mi-cuenta','MiCuentaController@index');  
+    Route::get('documentos-informes','DocumentoInformesController@index');
+    Route::get('mis-datos','MisDatosController@index');  
+    Route::get('mis-datos/datos-adicionales','MisDatosController@cambioDatos');
+    Route::get('mis-datos/mis-promociones','PromoAmigoController@misPromociones');
+    Route::get('mi-cuenta/movimientos','MiCuentaController@todosLosMovimientos');
+    Route::post('mi-cuenta/movimientos','MiCuentaController@buscadorTodosLosMovimientos');
+    Route::get('exportar/excel/instrucciones-bancarias','MiCuentaController@exportar');
+    Route::get('promo-amigo','PromoAmigoController@index');
+    Route::get('mi-cuenta/cuentas-bancarias','MiCuentaController@cuentaAsociada');
+    Route::get('mi-cuenta/cuentas-bancarias/nueva','CuentaBancariaController@index');
+    Route::get('mi-cuenta/ingresos','SaldoDisponibleController@index');
+    Route::get('mi-cuenta/retiros','MiCuentaController@retiro');
+    Route::get('favoritos','PropiedadFavoritaController@favoritos');
+    //vistas fallor exito
+    Route::view('fallo','public.paypal.fallo');
+    Route::view('exito','public.paypal.exito');
+
+    //paypal
+    Route::post('paypal', 'SaldoDisponibleController@payWithpaypal');
+    Route::get('paypal', 'SaldoDisponibleController@payWithpaypal');
+    Route::get('status', 'SaldoDisponibleController@getPaymentStatus');
+    //cancelar solicitud
+    Route::get('cancelar-solicitud/{idIntruccionBancaria}','MiCuentaController@cancelarSolicitud');
+
+    //actualizar datos
+    Route::post('actualizacion-datos','MisDatosController@actualizarDatos');
+    Route::post('actualizar-contrasena','MisDatosController@actualizarContrasena');
+    Route::post('actualizacion-datos-personales','MisDatosController@actualizacionDatosPersonales');
+
+    //codigo promocional
+    Route::post('codigo-promocional','PromoAmigoController@codigoPromocional');
+
+    //link antes de otros pagos
+    Route::post('toma-de-pago','SaldoDisponibleController@otrosPagos');
+
+    //pantalla exito
+    Route::get('exito','InvierteController@vistaExito');
+
 });
 //datatables
 Route::post('datatable-ingresos','BusquedaController@tablaIngresos');
@@ -43,6 +93,11 @@ Route::post('datatable-propiedades','BusquedaController@tablaPropiedad');
 Route::post('datatable-casos-exitosos','BusquedaController@tablaCasosExitosos');
 Route::post('datatable-comunas','BusquedaController@tablaComunas');
 Route::post('datatable-provincias','BusquedaController@tablaProvincias');
+Route::post('datatable-usuarios-transferencia','BusquedaController@tablaUsuarioTransferencia');
+Route::post('datatable-transacciones/{idUsuario}','BusquedaController@transferenciaUsuarioTabla');
+Route::post('datatable-solicitud-retiro-fondos','BusquedaController@tablaRetiroFondos');
+Route::post('datatable-retiro-fondos-aceptados','BusquedaController@tablaRetirosAceptados');
+Route::post('datatable-propiedades-fecha-propiedad','BusquedaController@tablaPropiedadesEnFinanciacion');
 //ruta para prueba de envio de mail por x tiempo de finalizacion
 //Route::get('link-prueba','MensajeriaController@correoUsuariosQueNoHanInvertido');
 //Route::get('link-prueba-2','MensajeriaController@corrreoUsuariosQueHanInvertido');
@@ -51,14 +106,20 @@ Route::post('enviar-solicitud','ContactaConNosotrosController@enviarCorreo');
 Route::get('ver-documento/{ver_pdf}','DocumentoController@ver_pdf');
 //detalle propiedades
 Route::get('detalle/{idPropiedad}','DetalleController@index');
+//uri nueva
+Route::get('invierte/chile/propiedad/detalle','DetalleController@index');
 Route::post('invierte-propiedad/{idPropiedad}','InvierteController@invierte');
-Route::post('verificacion-pago','InvierteController@verificarDatos');
+Route::post('verificacion-pago/{idPropiedad}','InvierteController@verificarDatos');
 //link mientras no haya funcionamiento con sistema transbank
-Route::get('exito',function (){
-   return view('exito'); 
-});
+
 //invierte
 Route::get('invierte','TiendaController@index');
+//uri nueva
+Route::get('invierte/chile/propiedad','TiendaController@index');
+Route::get('invierte/chile/propiedad/financiado','TiendaController@financiado');
+Route::get('invierte/chile/propiedad/cerrado','TiendaController@cerrado');
+Route::get('invierte/chile/propiedad/no-financiado','TiendaController@no_financiado');
+
 //reenvio de msj
 Route::post('/vaes', 'LoginController@reenviarSMS');
 //errores
@@ -84,6 +145,11 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('usuarios/create', 'UsuarioController@create');
     Route::get('usuarios/editar/{idUsuario}','UsuarioController@edit');
     Route::get('usuarios/telefonos/{idUsuario}','TelefonoController@create');
+    //rutas transeferencia bancaria de usuario
+    Route::get('usuarios/validar-transferencia','UsuarioController@indexTransferencia');
+    Route::get('usuarios/{idUsuario}/listado-trasferencias','TrxDepositoTransaccionController@index');
+    Route::get('usuarios/{idTrxDepoTransf}/{idUsuario}/editar-transferencia','TrxDepositoTransaccionController@editar');
+    Route::get('usuarios/{idTrxDepoTransf}/{idUsuario}/eliminar-transferencia','TrxDepositoTransaccionController@destroy');
     //rutas vistas proyectos admin
     Route::get('proyectos','ProyectoController@index');
     Route::get('proyectos/create','ProyectoController@create');
@@ -92,6 +158,9 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('propiedades','PropiedadController@index');
     Route::get('propiedades/create','PropiedadController@create');
     Route::get('propiedades/editar/{idPropiedad}','PropiedadController@edit');
+    Route::get('propiedad-cambio-fecha','PropiedadController@cambioFecha');
+    Route::get('propiedad-cambio-fecha/editar/{idPropiedad}','PropiedadController@editarCambioFecha');
+    Route::post('editar-fecha-finalizacion-propiedad/{idPropiedad}','PropiedadController@actualizarFecha');
     //mantenedores
     //tipos usuarios
     Route::get('tipos_usuarios','TipoUsuarioController@index');
@@ -111,6 +180,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('tipos-creditos','TipoCreditoController@index');
     //tipo calidades
     Route::get('tipos-calidades','TipoCalidadController@index');
+    //tipo faq
+    Route::get('tipos-faqs','TipoFaqController@index');
     //Monedas
     Route::get('monedas','MonedaController@index');
     //idiomas
@@ -131,6 +202,8 @@ Route::group(['prefix' => 'napalm'], function(){
     //destino egresos
     Route::get('destinos-egresos','DestinoEgresoController@index');
     Route::get('destinos-egresos/detalles/{idTrxEgreso}','DestinoEgresoController@detalle');
+    //tipo medios de pago
+    Route::get('tipos-medio-pago','TipoMedioPagoController@index');
     //ubicaciones
     //paises
     Route::get('paises','PaisController@index');
@@ -149,6 +222,8 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('edit-casos-exitoso/{idCasoExitoso}','CasoExitosoController@edit');
     //parametros generales
     Route::get('parametros-generales','ParametroGeneralController@index');
+    //tipografia
+    Route::get('tipografia','TipografiaController@index');
     //redes sociales
     Route::get('redes-sociales','RedSocialController@index');
     //codigos
@@ -163,10 +238,35 @@ Route::group(['prefix' => 'napalm'], function(){
     Route::get('planos/{idPropiedad}/create','FotoPlanoController@index');
     //dropzone planos
     Route::post('img-planos/{idPropiedad}','FotoPlanoController@dropzone');
+    //mision empresa
+    Route::get('mision-empresa','MisionEmpresaController@index');
+    //faq
+    Route::get('faqs','FaqController@index');
+    //cambio dolar
+    Route::get('cambio-dolar','CambioDolarController@index');
+    //banco
+    Route::get('bancos','BancoController@index');
+    //tipo de cuenta bancaria
+    Route::get('tipo-cuenta','TipoCuentaController@index');
+    //banco tipo cuenta
+    Route::get('banco-tipo-cuenta','BancoTipoCuentaController@index');
+    //solicitudes retiro
+    Route::get('solicitud-retiro','InstruccionBancariaController@index');
+    //validar transferencia
+    Route::get('validar-transferencia/{idIntruccionBancaria}','InstruccionBancariaController@vistaValidarTransferencia');
+    //validando transferencias realizadas
+    Route::post('validar/transferencia/{idIntruccionBancaria}','InstruccionBancariaController@validacion');
+    //transferencias realizadas
+    Route::get('retiros-aceptados','InstruccionBancariaController@retirosAceptados');
+    //blog
+    Route::get('blogs','BlogController@index');
 });
+//quieres saber mas
+Route::get('saber-mas','CondicionServicioController@saberMas');
+//condiciones y servicios pdf de register
 Route::get('condiciones-servicios/documento/{idCondicionServicio}','CondicionServicioController@ver_condiciones_servicios');
 //order by
-Route::get('ordenar-propiedades/{idEstado}','TiendaController@ordenarPropiedades');
+//Route::get('ordenar-propiedades/{idEstado}','TiendaController@ordenarPropiedades');
 //busqueda en tiempo real para datatable ingresos
 Route::post('buscador-prueba','BusquedaController@busqueda_ingresos');
 //busqueda en tiempo real para datatable de egresos
@@ -178,6 +278,8 @@ Route::get('curls/{request}','UsuarioController@curls');
 Route::get('regiones/{idPais}','UsuarioController@obtenerRegiones');
 Route::get('provincias/{idRegion}','UsuarioController@obtenerProvincias');
 Route::get('comunas/{idProvincia}','UsuarioController@obtenerComuna');
+//busqueda propiedad
+Route::get('obtenerPropiedad/{idPropiedad}','WelcomeController@obtenerPropiedad');
 //crud usuarios
 Route::resource('mantenedor-usuarios','UsuarioController');
 Route::get('napalm/usuarios/delete/{idUsuario}','UsuarioController@destroy');
@@ -321,4 +423,74 @@ Route::resource('mantenedor-condiciones-servicios','CondicionServicioController'
 Route::delete('mantenedor-condiciones-servicios/{idCondicionServicio}',array(
     'uses'=>'CondicionServicioController@destroy',
     'as'=>'mantenedor-condiciones-servicios.delete'
+));
+//crud mision de la empresa
+Route::resource('mantenedor-mision-empresa','MisionEmpresaController');
+Route::delete('mantenedor-mision-empresa/{idMisionEmpresa}',array(
+    'uses'=>'MisionEmpresaController@destroy',
+    'as'=>'mantenedor-mision-empresa.delete'
+));
+//crud tipo faq
+Route::resource('mantenedor-tipos-faqs','TipoFaqController');
+Route::delete('mantenedor-tipos-faqs/{idTipoFaq}',array(
+    'uses'=>'TipoFaqController@destroy',
+    'as'=>'mantenedor-tipos-faqs.delete'
+));
+//crud faq
+Route::resource('mantenedor-faqs','FaqController');
+Route::delete('mantenedor-faqs/{idFaq}',array(
+    'uses'=>'FaqController@destroy',
+    'as'=>'mantenedor-faqs.delete'
+));
+//crud medios de pago
+Route::resource('mantenedor-tipos-medios-pagos','TipoMedioPagoController');
+Route::delete('mantenedor-tipos-medios-pagos/{idTipoMedioPago}',array(
+    'uses'=>'TipoMedioPagoController@destroy',
+    'as'=>'mantenedor-tipos-medios-pagos.delete'
+));
+//crud cambio dolar
+Route::resource('mantenedor-cambio-dolar','CambioDolarController');
+Route::delete('mantenedor-cambio-dolar/{idCambioDolar}',array(
+    'uses'=>'CambioDolarController@destroy',
+    'as'=>'mantenedor-cambio-dolar.delete'
+));
+//crud transferencias
+Route::resource('mantenedor-transacciones','TrxDepositoTransaccionController');
+Route::delete('mantenedor-transacciones/{idTrxDepoTransf}',array(
+    'uses'=>'TrxDepositoTransaccionController@destroy',
+    'as'=>'mantenedor-transacciones.delete'
+));
+//curd de bancps
+Route::resource('mantenedor-banco','BancoController');
+Route::delete('mantenedor-banco/{idBanco}',array(
+    'uses'=>'BancoController@destroy',
+    'as'=>'mantenedor-banco.delete'
+));
+//crud de tipo cuenta bancaria
+Route::resource('mantenedor-tipo-cuenta','TipoCuentaController');
+Route::delete('mantenedor-tipo-cuenta/{idTipoCuenta}',array(
+    'uses'=>'TipoCuentaController@destroy',
+    'as'=>'mantenedor-tipo-cuenta.delete'
+));
+//crud de tipo cuenta bancaria asociada a banco
+Route::resource('mantenedor-banco-tipo-cuenta','BancoTipoCuentaController');
+Route::delete('mantenedor-banco-tipo-cuenta/{idTipoCuenta}',array(
+    'uses'=>'BancoTipoCuentaController@destroy',
+    'as'=>'mantenedor-banco-tipo-cuenta.delete'
+));
+//create cuenta bancaria
+Route::resource('mantenedor-anadir-cuenta-usuario','CuentaBancariaController');
+//retiro
+Route::resource('mantenedor-retiro','MiCuentaController');
+//tipografia
+Route::resource('mantenedor-tipografia','TipografiaController');
+Route::delete('mantenedor-tipografia/{idTipografia}',array(
+    'uses'=>'TipografiaController@destroy',
+    'as'=>'mantenedor-tipografia.delete'
+));
+//blogs
+Route::resource('mantenedor-blog','BlogController');
+Route::delete('mantenedor-blog/{idBlog}',array(
+    'uses'=>'BlogController@destroy',
+    'as'=>'mantenedor-blog.delete'
 ));

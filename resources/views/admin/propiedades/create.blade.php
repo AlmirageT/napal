@@ -24,7 +24,7 @@ Crear Propiedad
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Foto Propiedad Portada</label>
-								<input type="file" required name="fotoPrincipal" class="form-control" onchange="onFileSelected(event)">
+								<input type="file" required name="fotoPrincipal" class="form-control" onchange="onFileSelected(event)" id="image">
 							</div>
 						</div>
 						<div class="col-lg-12">
@@ -94,21 +94,21 @@ Crear Propiedad
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Tipo Invesión</label>
-								{!! Form::select('idTipoInversion', $tipoInversion,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de inversion"]) !!}
+								{!! Form::select('idTipoInversion', $tipoInversion,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de inversion",'required']) !!}
 							</div>
 						</div>
 						
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label>Proyecto Asociado</label>
-								{!! Form::select('idProyecto', $proyecto,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione el proyecto asociado"]) !!}
+								{!! Form::select('idProyecto', $proyecto,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione el proyecto asociado",'required']) !!}
 
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Flexibilidad</label>
-								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad"]) !!}
+								{!! Form::select('idTipoFlexibilidad', $tipoFlexibilidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de flexibilidad",'required', 'onchange'=>"flexibilidad(this.value)"]) !!}
 							</div>
 						</div>
 						
@@ -124,13 +124,19 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo Calidad</label>
-								{!! Form::select('idTipoCalidad', $tipoCalidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad"]) !!}
+								{!! Form::select('idTipoCalidad', $tipoCalidad,null,['class'=>"form-control",'placeholder'=>"Seleccione un tipo de calidad",'required']) !!}
+							</div>
+						</div>
+						<div class="col-lg-12" id="contratoFlex" style="display: none">
+							<div class="form-group">
+								<label for="">Texto Contrato Flex</label>
+								<textarea name="contratoFlex" id="flexContrato" cols="30" rows="10" class="form-control summernote"></textarea>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Tipo de Credito</label>
-								{!! Form::select('idTipoCredito', $tipoCredito,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de credito"]) !!}
+								{!! Form::select('idTipoCredito', $tipoCredito,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione un tipo de credito",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -142,7 +148,7 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Moneda</label>
-								{!! Form::select('idMoneda', $monedas,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione una moneda"]) !!}
+								{!! Form::select('idMoneda', $monedas,null,['class'=>"form-control js-example-basic-multiple",'placeholder'=>"Seleccione una moneda",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-6">
@@ -184,7 +190,7 @@ Crear Propiedad
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Estado</label>
-								{!! Form::select('idEstado', $estados,null,['class'=>"form-control",'placeholder'=>"Seleccione un estado de la propiedad"]) !!}
+								{!! Form::select('idEstado', $estados,null,['class'=>"form-control",'placeholder'=>"Seleccione un estado de la propiedad",'required']) !!}
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -205,7 +211,7 @@ Crear Propiedad
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Descripción</label>
-								<textarea class="form-control summernote" name="descripcion" ></textarea>
+								<textarea class="form-control summernote" name="descripcion" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -248,37 +254,52 @@ Crear Propiedad
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Oportunidad</label>
-								<textarea class="form-control summernote" name="oportunidad" ></textarea>
+								<textarea class="form-control summernote" name="oportunidad" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Invertir</label>
-								<textarea class="form-control summernote" name="invertir" ></textarea>
+								<textarea class="form-control summernote" name="invertir" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Ubicación</label>
-								<textarea class="form-control summernote" name="ubicacion" ></textarea>
+								<textarea class="form-control summernote" name="ubicacion" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Proyecto</label>
-								<textarea class="form-control summernote" name="proyecto" ></textarea>
+								<textarea class="form-control summernote" name="proyecto" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Promotor</label>
-								<textarea class="form-control summernote" name="promotor" ></textarea>
+								<textarea class="form-control summernote" name="promotor" required></textarea>
 							</div>
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
 								<label>Notas Internas</label>
-								<textarea class="form-control summernote" name="notasInternas"></textarea>
+								<textarea class="form-control summernote" name="notasInternas" required></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12" align="center">
+							<h5>¿Rentabilidad Promocional?</h5>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Texto</label>
+								{!! Form::text('textoPromocion',null,['class'=>"form-control"]) !!}
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Porcentaje</label>
+								{!! Form::text('rentabilidadPromocion',null,['class'=>"form-control"]) !!}
 							</div>
 						</div>
 					</div>
@@ -308,17 +329,27 @@ Crear Propiedad
 @endsection
 <script>
 	function onFileSelected(event) {
-	  var selectedFile = event.target.files[0];
-	  var reader = new FileReader();
+		var files = event.target.files || event.dataTransfer.files;
+	    if(files[0].size > 2000000)
+	    {
+	        alert("Imagen con tamaño superior a 2MB");
+	        $('#image').val("");
+	    }
+	    else
+	    {
+	        this.imagen = event.target.files[0];
+		  var selectedFile = event.target.files[0];
+		  var reader = new FileReader();
 
-	  var imgtag = document.getElementById("myimage");
-	  imgtag.title = selectedFile.name;
+		  var imgtag = document.getElementById("myimage");
+		  imgtag.title = selectedFile.name;
 
-	  reader.onload = function(event) {
-	    imgtag.src = event.target.result;
-	  };
+		  reader.onload = function(event) {
+		    imgtag.src = event.target.result;
+		  };
 
-	  reader.readAsDataURL(selectedFile);
+		  reader.readAsDataURL(selectedFile);
+		}
 	}
 	const sacarRegionPorPais = (pais) => {
 		$.get('{{ asset('regiones') }}/'+pais, (data, status) => {
@@ -346,6 +377,13 @@ Crear Propiedad
 			});
 			document.getElementById('select_comunas').innerHTML = comunas;
 		});
+	}
+	function flexibilidad(flexibilidad) {
+		if(flexibilidad == 1){
+			document.getElementById('contratoFlex').style.display = 'block';
+		}else{
+			document.getElementById('contratoFlex').style.display = 'none';
+		}
 	}
 </script>
 

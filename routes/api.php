@@ -18,4 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/activarCuenta', 'ActivarCuentaController@activarCuenta');
 Route::get('/activarCuentaSMS', 'ActivarCuentaController@activarCuentaSMS');
-
+//api de otros pagos
+Route::group(['prefix'=>'otrospagos'], function(){
+    Route::post('condeu','OtrosPagosController@condeu01req');
+    Route::post('notpag','OtrosPagosController@notpag01req');
+    Route::post('revpag','OtrosPagosController@revpag01req');
+});

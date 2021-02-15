@@ -11,6 +11,8 @@ class ImagenCarrusel extends Model
     protected $fillable = [
     	'rutaImagenCarrusel',
     	'activoImagenCarrusel',
-    	'idTipoImagen'
+    	'idTipoImagen',
+    	'tituloImagenCarrusel',
+    	'subTituloImagenCarrusel'
     ];
 }

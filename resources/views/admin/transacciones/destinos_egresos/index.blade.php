@@ -10,9 +10,9 @@ Destinos Egresos
 </div>
 <div class="row">
 	<div class="col-lg-12">
-		<div class="">
-			<div class="table-responsive">
-				<table class="table project-list-table table-nowrap table-centered table-borderless" id="datos">
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-bordered dt-responsive nowrap" id="datos" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 				  <thead>
 				    <tr>
 			          <th>ID</th>

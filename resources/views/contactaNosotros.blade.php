@@ -1,4 +1,5 @@
 @extends('layouts.public.app')
+@section('title','Contacta con Nosotros')
 @section('content')
 <div class="container">
 	<br>

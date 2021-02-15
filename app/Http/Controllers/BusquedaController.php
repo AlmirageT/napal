@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\TrxDepositoTransferencia;
 use App\TrxIngreso;
 use App\TrxEgresos;
 use App\DestinoEgreso;
@@ -13,6 +14,11 @@ use App\Propiedad;
 use App\CasoExitoso;
 use App\Comuna;
 use App\Provincia;
+use App\Banco;
+use App\BancoTipoCuenta;
+use App\InstruccionBancaria;
+use App\TipoCuenta;
+use Session;
 
 class BusquedaController extends Controller
 {
@@ -35,8 +41,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -48,7 +52,7 @@ class BusquedaController extends Controller
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxIngreso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -67,7 +71,7 @@ class BusquedaController extends Controller
 		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxIngreso','DESC')
 				->get();
 
 			$totalFiltered = TrxIngreso::select('*')
@@ -133,8 +137,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -144,7 +146,7 @@ class BusquedaController extends Controller
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxEgreso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -161,7 +163,7 @@ class BusquedaController extends Controller
 		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idTrxEgreso','DESC')
 				->get();
 
 			$totalFiltered = TrxEgresos::select('*')
@@ -229,8 +231,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -242,7 +242,7 @@ class BusquedaController extends Controller
 		    	->join('telefonos','usuarios.idUsuario','=','telefonos.idUsuario')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idDestinoEgreso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -261,7 +261,7 @@ class BusquedaController extends Controller
 		    	->orWhereRaw(" MATCH(telefonos.numero) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idDestinoEgreso','DESC')
 				->get();
 
 			$totalFiltered = DestinoEgreso::select('*')
@@ -320,58 +320,40 @@ class BusquedaController extends Controller
 			1=> 'nombre',
 			2=> 'rut',
 			3=> 'correo',
-			4=> 'profesion',
-			5=> 'nombreIdioma',
-			6=> 'nombreTipoPersona',
-			7=> 'rutaAvatar',
-			8=> 'activarCuenta',
-			9=> 'activarNewsletter',
-			10=> 'desactivarCuenta',
-			11=> 'options'
+			4> 'activarCuenta',
+			5=> 'activarNewsletter',
+			6=> 'desactivarCuenta',
+			7=> 'options'
 		);
 		$totalData = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 		        ->count();
 		$totalFiltered = $totalData;
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
 			$usuarios = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idUsuario','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
 			$caracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
 			$sinCaracteres = str_replace($caracteresEspeciales, " ", $search);
 			$usuarios = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.correo) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idUsuario','DESC')
 				->get();
 
 			$totalFiltered = Usuario::select('*')
-		        ->join('idiomas','usuarios.idIdioma','=','idiomas.idIdioma')
-		        ->join('avatares','usuarios.idAvatar','=','avatares.idAvatar')
-		        ->join('tipo_personas','usuarios.idTipoPersona','=','tipo_personas.idTipoPersona')
 		    	->whereRaw(" MATCH(usuarios.nombre) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.apellido) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
 		    	->orWhereRaw(" MATCH(usuarios.rut) AGAINST('+".$sinCaracteres."' IN BOOLEAN MODE)")
@@ -386,14 +368,6 @@ class BusquedaController extends Controller
 				$nestedData['nombre'] = $usuario->nombre." ".$usuario->apellido;
 				$nestedData['rut'] = $usuario->rut;
 				$nestedData['correo'] = $usuario->correo;
-				$nestedData['profesion'] = $usuario->profesion;
-				$nestedData['nombreIdioma'] = $usuario->nombreIdioma;
-				$nestedData['nombreTipoPersona'] = $usuario->nombreTipoPersona;
-				if ($usuario->idAvatar != null) {
-					$nestedData['rutaAvatar'] = "<img src='".asset($usuario->rutaAvatar)."' width='100' height='100'>";
-				}else{
-					$nestedData['rutaAvatar'] = "No tiene imagen";
-				}
 				if ($usuario->activarCuenta == 0) {
 					$nestedData['activarCuenta'] = "Esta cuenta aun no se activa";
 				}else{
@@ -554,8 +528,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -574,7 +546,7 @@ class BusquedaController extends Controller
 		    	->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('propiedades.idPropiedad','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -594,7 +566,7 @@ class BusquedaController extends Controller
 		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('propiedades.idPropiedad','DESC')
 				->get();
 
 			$totalFiltered = Propiedad::select('*')
@@ -656,7 +628,7 @@ class BusquedaController extends Controller
 		                            <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
 		                                <i class='mdi mdi-dots-horizontal font-size-18'></i>
 		                            </a>
-		                            <div class='dropdown-menu dropdown-menu-right'>
+		                            <div class='dropdown-menu dropdown-menu-center'>
 						      			<a href='".asset('napalm/propiedades/editar')."/".$propiedad->idPropiedad."' class='dropdown-item btn btn-info'>Editar</a>
 		                    			<a href='".asset('napalm/subir-documentos/create')."/".$propiedad->idPropiedad."' class='dropdown-item'>Documentos</a>
 		                    			<a href='".asset('napalm/propiedades/destroy')."/".$propiedad->idPropiedad."' class='dropdown-item'>Eliminar</a>
@@ -680,15 +652,14 @@ class BusquedaController extends Controller
     	$columns = array(
 			0=> 'idCasoExitoso',
 			1=> 'nombrePropiedad',
-			2=> 'options'
+			2=> 'imagenCasoExito',
+			3=> 'options'
 		);
 		$totalData = CasoExitoso::all()->count();
 		$totalFiltered = $totalData;
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -696,7 +667,7 @@ class BusquedaController extends Controller
     			->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idCasoExitoso','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -705,7 +676,7 @@ class BusquedaController extends Controller
 		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idCasoExitoso','DESC')
 				->get();
 
 			$totalFiltered = CasoExitoso::select('*')
@@ -719,6 +690,11 @@ class BusquedaController extends Controller
 			foreach ($casosExitosos as $casoExitoso){
 				$nestedData['idCasoExitoso'] = $casoExitoso->idCasoExitoso;
 				$nestedData['nombrePropiedad'] = $casoExitoso->nombrePropiedad;
+				if ($casoExitoso->imagenCasoExito != null) {
+					$nestedData['imagenCasoExito'] = "<img src='".asset($casoExitoso->imagenCasoExito)."' width='100' height='100'>";
+				}else{
+					$nestedData['imagenCasoExito'] = "No tiene imagen";
+				}
 				$nestedData['options'] = "<div class='dropdown'>
 		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
 		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
@@ -754,8 +730,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -765,7 +739,7 @@ class BusquedaController extends Controller
 				->join('paises','regiones.idPais','=','paises.idPais')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idComuna','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -776,7 +750,7 @@ class BusquedaController extends Controller
 		    	->where('comunas.nombreComuna', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idComuna','DESC')
 				->get();
 
 			$totalFiltered = Comuna::select('*')
@@ -829,8 +803,6 @@ class BusquedaController extends Controller
 
 		$limit = $request->input('length');
 		$start = $request->input('start');
-		$order = $columns[$request->input('order.0.column')];
-		$dir = $request->input('order.0.dir');
 
 		if(empty($request->input('search.value')))
 		{
@@ -839,7 +811,7 @@ class BusquedaController extends Controller
 				->join('paises','regiones.idPais','=','paises.idPais')
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idProvincia','DESC')
 				->get();
 		}else{
 			$search = $request->input('search.value');
@@ -849,7 +821,7 @@ class BusquedaController extends Controller
 		    	->where('provincias.nombreProvincia', 'LIKE',"%{$search}%")
 				->offset($start)
 				->limit($limit)
-				->orderBy($order,$dir)
+				->orderBy('idProvincia','DESC')
 				->get();
 
 			$totalFiltered = Provincia::select('*')
@@ -886,4 +858,511 @@ class BusquedaController extends Controller
 		);
 		echo json_encode($json_data);
     }
+    public function tablaUsuarioTransferencia(Request $request)
+    {
+    	$columns = array(
+			0=> 'tokenCorto',
+			1=> 'nombre',
+			2=> 'rut',
+			3=> 'correo',
+			4=> 'options'
+		);
+		$totalData = Usuario::select('*')
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+		$order = $columns[$request->input('order.0.column')];
+		$dir = $request->input('order.0.dir');
+
+		if(empty($request->input('search.value')))
+		{
+			$usuarios = Usuario::select('*')
+				->where('activarCuenta',1)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$usuarios = Usuario::select('*')
+				->where('activarCuenta',1)
+		    	->where('tokenCorto',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+
+			$totalFiltered = Usuario::select('*')
+				->where('activarCuenta',1)
+		        ->where('tokenCorto',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($usuarios)){
+			foreach ($usuarios as $usuario){
+				$nestedData['tokenCorto'] = $usuario->tokenCorto;
+				$nestedData['nombre'] = $usuario->nombre." ".$usuario->apellido;
+				$nestedData['rut'] = $usuario->rut;
+				$nestedData['correo'] = $usuario->correo;
+				$nestedData['options'] = "<div class='dropdown'>
+		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                        </a>
+		                        <div class='dropdown-menu dropdown-menu-right'>
+		                        	<a href='".asset('napalm/usuarios')."/".$usuario->idUsuario."/listado-trasferencias' class='dropdown-item btn btn-info'>Validar Transferencia</a>
+		                        </div>
+		                    </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+    public function transferenciaUsuarioTabla(Request $request, $idUsuario)
+    {
+    	$columns = array(
+			0=> 'idTrxDepoTransf',
+			1=> 'nombreBancoOrigen',
+			2=> 'numeroOperacion',
+			3=> 'bancoOrigen',
+			4=> 'montoDeposito',
+			5=> 'fechaDeposito',
+			6=> 'numeroCuentaBanco',
+			7=> 'correo',
+			8=> 'validado',
+			9=> 'rutaImagen',
+			10=> 'options'
+		);
+		$totalData = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+		$order = $columns[$request->input('order.0.column')];
+		$dir = $request->input('order.0.dir');
+
+		if(empty($request->input('search.value')))
+		{
+			$transferencias = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$transferencias = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+				->where('numeroOperacion',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy($order,$dir)
+				->get();
+
+			$totalFiltered = TrxDepositoTransferencia::select('*')
+				->where('idUsuario',$idUsuario)
+				->where('numeroOperacion',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($transferencias)){
+			foreach ($transferencias as $transferencia){
+				$nestedData['idTrxDepoTransf'] = $transferencia->idTrxDepoTransf;
+				$nestedData['nombreBancoOrigen'] = $transferencia->nombreBancoOrigen;
+				$nestedData['numeroOperacion'] = $transferencia->numeroOperacion;
+				$nestedData['bancoOrigen'] = $transferencia->bancoOrigen;
+				$nestedData['montoDeposito'] = "$".number_format($transferencia->montoDeposito,0,',','.');
+				$nestedData['fechaDeposito'] = $transferencia->fechaDeposito;
+				$nestedData['numeroCuentaBanco'] = $transferencia->numeroCuentaBanco;
+				$nestedData['correo'] = $transferencia->correo;
+				if ($transferencia->validado == 1) {
+					$nestedData['validado'] = "Validado";
+				}else{
+					$nestedData['validado'] = "No Validado";
+				}
+				$nestedData['rutaImagen'] = "<img src='".asset($transferencia->rutaImagen)."' width='100' height='100'>";
+				if (Session::get('idTipoUsuario') == 10) {
+					$nestedData['options'] = "<div class='dropdown'>
+			                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+			                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+			                        </a>
+			                        <div href='' class='dropdown-menu dropdown-menu-right'>
+			                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/editar-transferencia' class='dropdown-item btn btn-info'>Editar</a>
+			                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/eliminar-transferencia' class='dropdown-item btn btn-info'>Elimnar</a>
+			                        </div>
+			                    </div>";
+				}else{
+					$nestedData['options'] = "<div class='dropdown'>
+			                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+			                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+			                        </a>
+			                        <div href='' class='dropdown-menu dropdown-menu-right'>
+			                        	<a href='".asset('napalm/usuarios')."/".$transferencia->idTrxDepoTransf."/".$idUsuario."/editar-transferencia' class='dropdown-item btn btn-info'>Detalles</a>
+			                        </div>
+			                    </div>";
+				}
+
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+    public function bancoPorPais($idPais)
+    {
+    	$bancos = Banco::where('idPais',$idPais)->get();
+    	return response()->json($bancos);
+    }
+    public function tipoCuentaPorBanco($idBanco)
+    {
+    	$asociacion = BancoTipoCuenta::where('idBanco',$idBanco)->pluck('idTipoCuenta');
+    	$tiposCuentas = TipoCuenta::whereIn('idTipoCuenta',$asociacion)->get();
+    	return response()->json($tiposCuentas);
+    }
+    public function tablaRetiroFondos(Request $request)
+    {
+    	$columns = array(
+			0=> 'idIntruccionBancaria',
+			1=> 'concepto',
+			2=> 'importe',
+			3=> 'nombre',
+			4=> 'validado',
+			5=> 'nombreBanco',
+			6=> 'nombreTipoCuenta',
+			7=> 'numeroCuenta',
+			8=> 'options'
+		);
+		$totalData = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('validado',0)
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+
+		if(empty($request->input('search.value')))
+		{
+			$instruccionesBancarias = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('validado',0)
+			  	->where('cancelada',0)
+				->offset($start)
+				->limit($limit)
+				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$instruccionesBancarias = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('cancelada',0)
+			  	->where('validado',0)
+				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+				->get();
+
+			$totalFiltered = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('usuarios','cuentas_bancarias_usuarios.idUsuario','=','usuarios.idUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->where('cancelada',0)
+			  	->where('validado',0)
+				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($instruccionesBancarias)){
+			foreach ($instruccionesBancarias as $instruccionBancaria){
+				$nestedData['idIntruccionBancaria'] = $instruccionBancaria->idIntruccionBancaria;
+				$nestedData['concepto'] = $instruccionBancaria->concepto;
+				$nestedData['importe'] = "$".number_format($instruccionBancaria->importe,0,',','.');
+				$nestedData['nombre'] = $instruccionBancaria->nombre.' '.$instruccionBancaria->apellido;
+				if ($instruccionBancaria->validado == 1) {
+					$nestedData['validado'] = "Validado";
+				}else{
+					$nestedData['validado'] = "No Validado";
+				}
+				$nestedData['nombreBanco'] = $instruccionBancaria->nombreBanco;
+				$nestedData['nombreTipoCuenta'] = $instruccionBancaria->nombreTipoCuenta;
+				$nestedData['numeroCuenta'] = $instruccionBancaria->numeroCuenta;
+				$nestedData['options'] = "<div class='dropdown'>
+		                        <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                            <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                        </a>
+		                        <div href='' class='dropdown-menu dropdown-menu-right'>
+		                        	<a href='".asset('napalm/validar-transferencia')."/".$instruccionBancaria->idIntruccionBancaria."' class='dropdown-item'> Validar Transferencia</a>
+		                        </div>
+		                    </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+    }
+
+    public function tablaRetirosAceptados(Request $request)
+    {
+    	$columns = array(
+			0=> 'idIntruccionBancaria',
+			1=> 'concepto',
+			2=> 'importe',
+			3=> 'validado',
+			4=> 'nombreBanco',
+			5=> 'nombreTipoCuenta',
+			6=> 'numeroCuenta',
+			7=> 'nombreValidador'
+		);
+		$totalData = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+		        ->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+
+		if(empty($request->input('search.value')))
+		{
+			$instruccionesBancarias = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+				->offset($start)
+				->limit($limit)
+				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$instruccionesBancarias = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
+				->offset($start)
+				->limit($limit)
+				->orderBy('instrucciones_bancarias.idIntruccionBancaria','DESC')
+				->get();
+
+			$totalFiltered = InstruccionBancaria::select('*')
+			  	->join('cuentas_bancarias_usuarios','instrucciones_bancarias.idCuentaBancariaUsuario','=','cuentas_bancarias_usuarios.idCuentaBancariaUsuario')
+			  	->join('bancos','cuentas_bancarias_usuarios.idBanco','=','bancos.idBanco')
+			  	->join('tipos_cuentas','cuentas_bancarias_usuarios.idTipoCuenta','=','tipos_cuentas.idTipoCuenta')
+			  	->join('usuarios as u','instrucciones_bancarias.idUsuarioAceptarSolicitud','=','u.idUsuario')
+			  	->where('cancelada',0)
+			  	->where('validado',1)
+				->where('cuentas_bancarias_usuarios.numeroCuenta',$search)
+				->count();
+		}
+
+		$data = array();
+		if(!empty($instruccionesBancarias)){
+			foreach ($instruccionesBancarias as $instruccionBancaria){
+				$nestedData['idIntruccionBancaria'] = $instruccionBancaria->idIntruccionBancaria;
+				$nestedData['concepto'] = $instruccionBancaria->concepto;
+				$nestedData['importe'] = "$".number_format($instruccionBancaria->importe,0,',','.');
+				if ($instruccionBancaria->validado == 1) {
+					$nestedData['validado'] = "Validado";
+				}else{
+					$nestedData['validado'] = "No Validado";
+				}
+				$nestedData['nombreBanco'] = $instruccionBancaria->nombreBanco;
+				$nestedData['nombreTipoCuenta'] = $instruccionBancaria->nombreTipoCuenta;
+				$nestedData['numeroCuenta'] = $instruccionBancaria->numeroCuenta;
+				$nestedData['nombreValidador'] = $instruccionBancaria->nombre.' '.$instruccionBancaria->apellido;
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+	}
+	
+	public function tablaPropiedadesEnFinanciacion(Request $request)
+	{
+		$columns = array(
+			0=> 'idPropiedad',
+			1=> 'nombrePropiedad',
+			2=> 'fotoPrincipal',
+			3=> 'fotoMapa',
+			4=> 'nombreProyecto',
+			5=> 'nombreTipoFlexibilidad',
+			6=> 'nombreEstado',
+			7=> 'precio',
+			8=> 'nombreMoneda',
+			9=> 'plazoMeses',
+			10=> 'rentabilidadAnual',
+			11=> 'rentabilidadTotal',
+			12=> 'options'
+		);
+		$totalData = Propiedad::select('*')
+		->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		->join('paises','propiedades.idPais','=','paises.idPais')
+		->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		->join('estados','propiedades.idEstado','=','estados.idEstado')
+		->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+		->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+		->where('propiedades.idEstado',5)
+		->count();
+		$totalFiltered = $totalData;
+
+		$limit = $request->input('length');
+		$start = $request->input('start');
+
+		if(empty($request->input('search.value')))
+		{
+			$propiedades = Propiedad::select('*')
+		    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		    	->join('paises','propiedades.idPais','=','paises.idPais')
+		    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		    	->join('estados','propiedades.idEstado','=','estados.idEstado')
+		    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+				->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+				->where('propiedades.idEstado',5)
+				->offset($start)
+				->limit($limit)
+				->orderBy('propiedades.idPropiedad','DESC')
+				->get();
+		}else{
+			$search = $request->input('search.value');
+			$propiedades = Propiedad::select('*')
+		    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		    	->join('paises','propiedades.idPais','=','paises.idPais')
+		    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		    	->join('estados','propiedades.idEstado','=','estados.idEstado')
+		    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+				->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+				->where('propiedades.idEstado',5)
+		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
+				->offset($start)
+				->limit($limit)
+				->orderBy('propiedades.idPropiedad','DESC')
+				->get();
+
+			$totalFiltered = Propiedad::select('*')
+		    	->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
+		    	->join('paises','propiedades.idPais','=','paises.idPais')
+		    	->join('regiones','propiedades.idRegion','=','regiones.idRegion')
+		    	->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
+		    	->join('comunas','propiedades.idComuna','=','comunas.idComuna')
+		    	->join('estados','propiedades.idEstado','=','estados.idEstado')
+		    	->join('monedas','propiedades.idMoneda','=','monedas.idMoneda')
+		    	->join('tipos_creditos','propiedades.idTipoCredito','=','tipos_creditos.idTipoCredito')
+		    	->join('tipos_calidades','propiedades.idTipoCalidad','=','tipos_calidades.idTipoCalidad')
+		    	->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
+		    	->join('proyectos','propiedades.idProyecto','=','proyectos.idProyecto')
+				->join('tipo_inversiones','propiedades.idTipoInversion','=','tipo_inversiones.idTipoInversion')
+				->where('propiedades.idEstado',5)
+		    	->where('propiedades.nombrePropiedad', 'LIKE',"%{$search}%")
+				->count();
+		}
+
+		$data = array();
+		if(!empty($propiedades)){
+			foreach ($propiedades as $propiedad){
+				$nestedData['idPropiedad'] = $propiedad->idPropiedad;
+				$nestedData['nombrePropiedad'] = $propiedad->nombrePropiedad;
+				if ($propiedad->fotoPrincipal != null) {
+					$nestedData['fotoPrincipal'] = "<img src='".asset($propiedad->fotoPrincipal)."' width='100' height='100'>";
+				}else{
+					$nestedData['fotoPrincipal'] = "No tiene imagen";
+				}
+				if ($propiedad->fotoMapa != null) {
+					$nestedData['fotoMapa'] = "<img src='".asset($propiedad->fotoMapa)."' width='100' height='100'>";
+				}else{
+					$nestedData['fotoMapa'] = "No tiene mapa";
+				}
+				$nestedData['nombreProyecto'] = $propiedad->nombreProyecto;
+				$nestedData['nombreTipoFlexibilidad'] = $propiedad->nombreTipoFlexibilidad;
+				$nestedData['nombreEstado'] = $propiedad->nombreEstado;
+				$nestedData['precio'] = "$".number_format($propiedad->precio,0,',','.');
+				$nestedData['nombreMoneda'] = $propiedad->nombreMoneda;
+				$nestedData['plazoMeses'] = $propiedad->plazoMeses;
+				$nestedData['rentabilidadAnual'] = $propiedad->rentabilidadAnual."%";
+				$nestedData['rentabilidadTotal'] = $propiedad->rentabilidadTotal."%";
+				$nestedData['options'] = "<div class='dropdown'>
+		                            <a href='' class='dropdown-toggle card-drop' data-toggle='dropdown' aria-expanded='false'>
+		                                <i class='mdi mdi-dots-horizontal font-size-18'></i>
+		                            </a>
+		                            <div class='dropdown-menu dropdown-menu-center'>
+						      			<a href='".asset('napalm/propiedad-cambio-fecha/editar')."/".$propiedad->idPropiedad."' class='dropdown-item'>Cambiar Fecha</a>
+		                            </div>
+		                        </div>";
+				$data[] = $nestedData;
+			}
+		}
+		$json_data = array(
+			"draw" => intval($request->input('draw')),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data
+		);
+		echo json_encode($json_data);
+	}
+
 }

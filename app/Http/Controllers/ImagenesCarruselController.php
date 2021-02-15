@@ -10,13 +10,23 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\ImagenCarrusel;
 use App\TipoImagen;
+use Cache;
 use Image;
+use Session;
 use DB;
 
 class ImagenesCarruselController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$imagenesCarruseles = ImagenCarrusel::select('*')
     	->join('tipos_imagenes','imagenes_carruseles.idTipoImagen','=','tipos_imagenes.idTipoImagen')
     	->orderBy('imagenes_carruseles.idImagenCarrusel','DESC')
@@ -71,7 +81,9 @@ class ImagenesCarruselController extends Controller
             	}else{
             		$imagenCarrusel->activoImagenCarrusel = 0;
             	}
-            	$imagenCarrusel->idTipoImagen = $request->idTipoImagen;
+                $imagenCarrusel->idTipoImagen = $request->idTipoImagen;
+                $imagenCarrusel->tituloImagenCarrusel = $request->tituloImagenCarrusel;
+            	$imagenCarrusel->subTituloImagenCarrusel = $request->subTituloImagenCarrusel;
             	$imagenCarrusel->save();
                 toastr()->success('Agregado Correctamente', 'La imagen ha sido agregada correctamente', ['timeOut' => 9000]);
             DB::commit();
@@ -145,6 +157,8 @@ class ImagenesCarruselController extends Controller
             		$imagenCarrusel->activoImagenCarrusel = 0;
             	}
             	$imagenCarrusel->idTipoImagen = $request->idTipoImagen;
+                $imagenCarrusel->tituloImagenCarrusel = $request->tituloImagenCarrusel;
+                $imagenCarrusel->subTituloImagenCarrusel = $request->subTituloImagenCarrusel;
 	            $imagenCarrusel->save();
                 toastr()->success('Actualizado Correctamente', 'La imagen ha sido agregada correctamente', ['timeOut' => 9000]);
             DB::commit();

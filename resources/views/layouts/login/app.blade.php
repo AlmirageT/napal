@@ -18,10 +18,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css_public/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css_public/style.css') }}">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('css_public/skins/default.css') }}">
-    <link rel="shortcut icon" href="{{ asset('img_public/favicon.ico') }}" type="image/x-icon" >
+    <link rel="shortcut icon" href="{{ asset('img_public/logomidas-02.png') }}" type="image/x-icon" >
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
     <script  src="{{ asset('js_public/ie-emulation-modes-warning.js') }}"></script>
+    {!! $tipografia->linkTipografia !!}
+    <style>
+        *{
+            font-family: '{{ $tipografia->nombreTipografia }}',cursive;
+        }
+    </style>
     @yield('css')
     @toastr_css
 </head>

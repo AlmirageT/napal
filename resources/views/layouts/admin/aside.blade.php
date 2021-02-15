@@ -25,6 +25,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/usuarios') }}"><i class="bx bxs-user-detail"></i> Usuarios</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/usuarios/validar-transferencia') }}"><i class="bx bxs-user-detail"></i> Transferencias Bancarias</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -43,9 +46,21 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/propiedades') }}"><i class="bx bx-home-alt"></i> Propiedades</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/propiedad-cambio-fecha') }}"><i class="bx bx-home-alt"></i> Cambio Fecha Propiedad</a></li>
+                    </ul>
                    {{--  <ul class="sub-menu" aria-expanded="false">
                                                                                                     <li><a href=""><i class="bx bx-store-alt"></i> Tienda</a></li>
                                                                                                 </ul> --}}
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-user"></i>
+                        <span>Faqs</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/faqs') }}"><i class="bx bxs-user-detail"></i> Faqs</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -80,6 +95,9 @@
                         <li><a href="{{ asset('napalm/tipos-calidades') }}"><i class="bx bx-store-alt"></i>Tipo de Calidad</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipos-medio-pago') }}"><i class="bx bx-store-alt"></i>Tipo Medio de Pago</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/monedas') }}"><i class="bx bx-store-alt"></i>Moneda</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
@@ -88,6 +106,25 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/estados') }}"><i class="bx bx-store-alt"></i>Estado</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipos-faqs') }}"><i class="bx bx-store-alt"></i>Tipo Faq</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Banco</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/bancos') }}"><i class="far fa-newspaper"></i> Bancos</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipo-cuenta') }}"><i class="fas fa-align-justify"></i> Tipo de Cuentas</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/banco-tipo-cuenta') }}"><i class="fas fa-align-justify"></i> Tipo de Cuenta del Banco</a></li>
+                    </ul>
+                    
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -102,6 +139,12 @@
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/destinos-egresos') }}"><i class="fas fa-align-justify"></i> Destinos Egresos</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/solicitud-retiro') }}"><i class="fas fa-align-justify"></i> Solicitudes Retiro</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/retiros-aceptados') }}"><i class="fas fa-align-justify"></i> Retiros Aceptados</a></li>
                     </ul>
                 </li>
                 <!--Link a vista parametros generales. -->
@@ -144,6 +187,15 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-book"></i>
+                        <span>Blog</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/blogs') }}"><i class="bx bxs-book"></i> Blogs</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-book"></i>
                         <span>Casos Exitosos</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -159,6 +211,9 @@
                         <li><a href="{{ asset('napalm/parametros-generales') }}"><i class="bx bxs-book"></i> Parametros Generales</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/tipografia') }}"><i class="bx bxs-book"></i> Tipografia</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/redes-sociales') }}"><i class="bx bxs-book"></i> Redes Sociales</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
@@ -166,6 +221,12 @@
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ asset('napalm/condiciones-servicios') }}"><i class="bx bxs-book"></i> Condiciones y Servicios</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/mision-empresa') }}"><i class="bx bxs-book"></i> Misión Empresa</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ asset('napalm/cambio-dolar') }}"><i class="bx bxs-book"></i> Cambio Dolar</a></li>
                     </ul>
                     
                 </li>

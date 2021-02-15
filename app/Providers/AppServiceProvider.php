@@ -3,13 +3,17 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\ImagenCarrusel;
-use App\Propiedad;
-use App\CasoExitoso;
+use App\Observers\TrxIngresoObserver;
+use App\Observers\TrxEgresosObserver;
+use App\ParametroGeneral;
+use App\MisionEmpresa;
+use App\TrxIngreso;
+use App\TrxEgresos;
 use App\RedSocial;
+use App\Tipografia;
 use Schema;
-use View;
 use Cache;
+use View;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -32,56 +36,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        if (cache::has('imagenesWeb')) {
-            $imagenesWeb = cache::get('imagenesWeb');
-        }else{
-           $imagenesWeb = cache::remember('imagenesWeb', 1*60, function(){
-                $cacheImagenesWeb = ImagenCarrusel::where('activoImagenCarrusel',1)->where('idTipoImagen',1)->get();
-                return $cacheImagenesWeb;
-            }); 
-        }
-
-        if (cache::has('imagenesMovil')) {
-            $imagenesMovil = cache::get('imagenesMovil');
-        }else{
-            $imagenesMovil = cache::remember('imagenesMovil', 1*60, function(){
-                $cacheImagenesMovil = ImagenCarrusel::where('activoImagenCarrusel',1)->where('idTipoImagen',2)->get();
-                return $cacheImagenesMovil;
-            });
-        }
-        if (cache::has('propiedades')) {
-            $propiedades = cache::get('propiedades');
-        }else{
-            $propiedades = cache::remember('propiedades', 1*60, function(){
-                $cachePropiedades = Propiedad::select('*')
-                ->join('usuarios','propiedades.idUsuario','=','usuarios.idUsuario')
-                ->join('paises','propiedades.idPais','=','paises.idPais')
-                ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
-                ->join('provincias','propiedades.idProvincia','=','provincias.idProvincia')
-                ->join('comunas','propiedades.idComuna','=','comunas.idComuna')
-                ->join('estados','propiedades.idEstado','=','estados.idEstado')
-                ->join('tipos_flexibilidades','propiedades.idTipoFlexibilidad','=','tipos_flexibilidades.idTipoFlexibilidad')
-                ->orderBy('propiedades.idPropiedad','DESC')
-                ->where('propiedades.idEstado',4)
-                ->where('propiedades.destacadoPropiedad',1)
-                ->take(10)
-                ->get();
-                return $cachePropiedades;
-            });
-        }
-        if (cache::has('casosExitosos')) {
-            $casosExitosos = cache::get('casosExitosos');
-        }else{
-            $casosExitosos = cache::remember('casosExitosos', 1*60, function(){
-                $cacheCasosExitosos = CasoExitoso::select('*')
-                ->join('propiedades','casos_exitosos.idPropiedad','=','propiedades.idPropiedad')
-                ->join('regiones','propiedades.idRegion','=','regiones.idRegion')
-                ->take(6)
-                ->get();
-                return $cacheCasosExitosos;
-            });
-        }
-
+        
         if (cache::has('redesSociales')) {
             $redesSociales = cache::get('redesSociales');
         }else{
@@ -90,11 +45,41 @@ class AppServiceProvider extends ServiceProvider
                 return $cacheRedesSociales;
             });
         }
+        if(cache::has('diversifica')){
+            $valorInicio = cache::get('diversifica');
+        }else{
+            $valorInicio = cache::remember('diversifica', 99999999999*60, function(){
+                $cacheValorInicio = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
+                return $cacheValorInicio;
+            });
+        }
 
-        View::share('imagenesWeb',$imagenesWeb);
-        View::share('propiedades',$propiedades);
-        View::share('imagenesMovil',$imagenesMovil);
-        View::share('casosExitosos',$casosExitosos);
+        if (cache::has('misionEmpresa')) {
+            $misionEmpresa = cache::get('misionEmpresa');
+        }else{
+            $misionEmpresa = cache::remember('misionEmpresa',99999999999999999999*60, function(){
+                $cacheMisionEmpresa = MisionEmpresa::where('nombreMisionEmpresa','MISION')->first();
+                return $cacheMisionEmpresa;
+            });
+        }
+
+        if (cache::has('footer')) {
+            $footerLorem = cache::get('footer');
+        }else{
+            $footerLorem = cache::remember('footer',999999999999999999999*60, function(){
+                $cacheFooterLorem = MisionEmpresa::where('nombreMisionEmpresa','FOOTER')->first();
+                return $cacheFooterLorem;
+            });
+        }
+        $tipografia = Tipografia::where('nombreGeneral','TIPOGRAFIA')->first();
+
+        TrxIngreso::observe(TrxIngresoObserver::class);
+        TrxEgresos::observe(TrxEgresosObserver::class);
+
         View::share('redesSociales',$redesSociales);
+        View::share('misionEmpresa',$misionEmpresa);
+        View::share('valorInicio',$valorInicio);
+        View::share('tipografia',$tipografia);
+        View::share('footerLorem',$footerLorem);
     }
 }

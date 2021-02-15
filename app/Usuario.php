@@ -13,16 +13,19 @@ class Usuario extends Model
     	'apellido',
     	'rut',
     	'correo',
-    	'idAvatar',
     	'password',
     	'profesion',
-    	'idIdioma',
     	'token',
     	'tokenCorto',
     	'activarCuenta',
     	'activarNewsletter',
     	'desactivarCuenta',
+        'fechaNacimiento',
+    	'idIdioma',
+    	'idAvatar',
     	'idTipoPersona',
-        'idTipoUsuario'
+        'idTipoUsuario',
+        'idSexo',
+        'idEstadoCivil'
     ];
 }

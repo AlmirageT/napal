@@ -1,5 +1,314 @@
 
 @extends('layouts.public.app')
+@section('title','Tienda')
+@section('css')
+<style type="text/css">
+.opacidad{
+          opacity: 0;
+    }
+    .carta-prueba {
+        -webkit-transition: all .4s linear;
+        transition: all .4s linear;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    .face {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    .carta-prueba-onclick {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+    .back {
+        position: absolute;
+        margin-top: -776px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+    .prueba-giro{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 100% !important;
+    }
+    .prueba-giro-mapa{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 0% !important;
+    }
+    .prueba-giro-vuelta{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 0% !important;
+    }
+    .prueba-giro-flex{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: 75% !important;
+    }
+    .prueba-giro-mapa-vuelta{
+        -webkit-transition: 0.8s;
+        -moz-transition: 0.8s;
+        -ms-transition: 0.8s;
+        -o-transition: 0.8s;
+        transition: 0.8s;
+        margin-left: -100% !important;
+    }
+    .imagen-datos-prueba{
+        margin-top: -233px;
+        margin-left: -349px;
+    }
+    .a{
+        background-color: #ECD74C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aa{
+        background-color: #FDFF2C;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .aaa{
+        background-color: #F7FF78;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+
+    .b{
+        background-color: #FFAD54;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bb{
+        background-color: #F59C1E;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .bbb{
+        background-color: #F7B933;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .c{
+        background-color: #FF0404;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .cc{
+        background-color: #FF4D1D;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .ccc{
+        background-color: #FF5C03;
+        color: #333;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    .circulo {
+        width: 80px;
+        height: 80px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: rgba(255, 0, 0, 0.5);
+        margin-top: -180px;
+        position: absolute;
+        margin-left: 264px;
+    }
+    .flex{
+        margin-top: 27px;
+        font-size: 25px;
+        color: white;
+        text-align: center;
+    }
+    .rectangulo {
+        width: 150px; 
+        height: 70px;
+        background-color: rgba(0, 40, 255, 0.5);
+        position: absolute;
+        margin-top: -140px;
+    }
+    .tituloRentabilidad{
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+    .valorRentabilidad{
+        color: white;
+        font-size: 36px;
+        font-weight: bold;
+        margin-top: -10px;
+        margin-left: 12px;
+    }
+    .cuadrado {
+        width: 40px; 
+        height: 40px; 
+        background: #fbd334;
+        position: absolute;
+        z-index: 1;
+        margin-left: 110px;
+        cursor: pointer;
+    }
+    .cruz {
+        position: absolute;
+        z-index: 1;
+        margin-left: 329px;
+        cursor: pointer;
+    }
+    @media only screen and (min-width:360px) and (max-width: 374px) {
+            .cuadrado{
+                margin-left: 90px;
+            }
+            .circulo{
+                margin-left: 235px;
+            }
+            .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
+        }
+        @media only screen and (min-width:375px) and (max-width: 413px) {
+            .cuadrado{
+                margin-left: 105px;
+            }
+            .circulo{
+                margin-left: 255px;
+            }
+            .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
+        }
+        @media only screen and (min-width:553px) and (max-width: 558px) {
+            .cuadrado{
+                margin-left: 288px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:559px) and (max-width: 563px) {
+            .cuadrado{
+                margin-left: 294px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:564px) and (max-width: 569px) {
+            .cuadrado{
+                margin-left: 299px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:570px) and (max-width: 575px) {
+            .cuadrado{
+                margin-left: 305px;
+            }
+            .circulo{
+                margin-left: 415px;
+            }
+        }
+        @media only screen and (min-width:576px) and (max-width: 767px) {
+            .cuadrado{
+                margin-left: 4px;
+            }
+            .circulo{
+                margin-left: 157px;
+            }
+        }
+        @media only screen and (min-width:768px) and (max-width: 991px) {
+            .cuadrado{
+                margin-left: 92px;
+            }
+            .circulo{
+                margin-left: 238px;
+            }
+            .back {
+            position: absolute;
+            margin-top: -877px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
+        }
+        @media only screen and (min-width:992px) and (max-width: 1199px) {
+            .cuadrado{
+                margin-left: 50px;
+            }
+            .circulo{
+                margin-left: 199px;
+            }
+            .back {
+            position: absolute;
+            margin-top: -822px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 272px;
+            cursor: pointer;
+        }
+        }
+</style>
+@endsection
 @section('content')
 <div class="properties-section-body content-area">
     <div class="container">
@@ -16,7 +325,11 @@
                         <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10 cod-pad">
                             <div class="sorting-options2">
                                 <span>Ordenar por:</span>
+                                @if(!isset($idEstado))
                                 {!! Form::select('idEstado', $estados,null,['class'=>"sorting",'onchange'=>"orderBy(this.value)"]) !!}
+                                @else
+                                {!! Form::select('idEstado', $estados,$idEstado,['class'=>"sorting",'onchange'=>"orderBy(this.value)"]) !!}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -63,16 +376,48 @@
 </div>
 <script>
     function orderBy(idEstado) {
-        if(idEstado != ""){
-            fetch('{{ asset('ordenar-propiedades') }}/'+idEstado,{
-                method:'get'
-            })
-            .then(response => response.text() )
-            .then(html => {
-                document.getElementById('contenedor').innerHTML = '';
-                document.getElementById("contenedor").innerHTML += html
-            })
-            .catch(error => console.log(error))
+        var URLactual = window.location;
+        var urlInvierte = "{{ asset('invierte/chile/propiedad') }}";
+        if(URLactual == urlInvierte || URLactual == urlInvierte+"/financiado" || URLactual == urlInvierte+"/cerrado" || URLactual == urlInvierte+"/no-financiado"){
+            if(idEstado != ""){
+                if(idEstado == "4"){
+                    window.location.href='{{ asset('invierte/chile/propiedad') }}';
+                }
+
+                if(idEstado == "5"){
+                    window.location.href='{{ asset('invierte/chile/propiedad/financiado') }}';
+                }
+                if(idEstado == "6"){
+                    window.location.href='{{ asset('invierte/chile/propiedad/cerrado') }}';
+                }
+                if(idEstado == "7"){
+                    window.location.href='{{ asset('invierte/chile/propiedad/no-financiado') }}';
+                }
+            }
+        }else{
+            if(idEstado != ""){
+                if(idEstado == "4"){
+                    window.location.href='{{ asset('dashboard/oportunidades') }}';
+                }
+                if(idEstado == "5"){
+                    window.location.href='{{ asset('dashboard/oportunidades/financiado') }}';
+                }
+                if(idEstado == "6"){
+                    window.location.href='{{ asset('dashboard/oportunidades/cerrado') }}';
+                }
+                if(idEstado == "7"){
+                    window.location.href='{{ asset('dashboard/oportunidades/no-financiado') }}';
+                }
+                {{-- fetch('{{ asset('ordenar-propiedades') }}/'+idEstado,{
+                        method:'get'
+                    })
+                    .then(response => response.text() )
+                    .then(html => {
+                        document.getElementById('contenedor').innerHTML = '';
+                        document.getElementById("contenedor").innerHTML += html
+                    })
+                    .catch(error => console.log(error)) --}}
+            }
         }
     }
 </script>

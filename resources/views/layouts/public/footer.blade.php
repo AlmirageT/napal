@@ -132,20 +132,10 @@
 
         <div class="row">
             <div class="col-xl-12">
-                <p class="copy">© 2017 <a href="#">Theme Vessel.</a> Trademarks and brands are the property of their respective owners.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-12">
                 <hr>
                 <div class="separador-60 h-separator-60"></div>
                 <div class="separador-0-grey h-separator-20--horizontal-grey"></div>
-                <p class="inscrita">© 2020 HOUSERS | Housers Global Properties PFP, SL con NIF B87269999 - Inscrita en el Registro Mercantil de Madrid al Tomo:  33521, Folio: 32, Sección: 8, Hoja: M6033545.</p>
-                <p class="inscrita">
-                    Housers está autorizada por la Comisión Nacional del Mercado de Valores conforme a la ley 5/2015 de Fomento de la Financiación Empresarial. Está <a href="https://www.cnmv.es/portal/Consultas/Plataforma/Financiacion-Participativa-Detalle.aspx?nreg=20&amp;nif=B87269999&amp;lang=es" target="_blank" rel="noopener">inscrita con el número 20</a> en el Registro de Plataformas de Financiación Participativa de la CNMV.
-                </p>
-                <div class="separador-0-grey h-separator-20--horizontal-grey"></div>
-                <p class="inscrita">Housers es una plataforma de financiación participativa que ofrece la posibilidad de invertir en prestamos a sociedades previamente estudiadas y analizadas.<br><br>Housers no proporciona asesoramiento financiero y nada en esta web debe interpretarse como tal. La información que aparece en estas páginas es para fines de información general y no constituye un asesoramiento específico. Los Proyectos de financiación participativa publicados en la Web no son objeto de autorización ni de supervisión por la CNMV,CMVM ni por el Banco de España ni por cualquier otro regulador, nacional o extranjero . Así como la información facilitada por el promotor no ha sido revisada por la Comisión Nacional del Mercado de Valores ni constituye un folleto informativo aprobado por la Comisión Nacional del Mercado de Valores. Las previsiones, e información presentadas son solo planes de negocio, y como tales, pueden ser distintos en el transcurso de las operaciones.<br><br>Existe riesgo de pérdida total o parcial del capital invertido, riesgo de no obtener el rendimiento dinerario esperado y riesgo de iliquidez para recuperar su inversión.&nbsp;<br><br>El capital invertido no está garantizado por el fondo de garantía de inversiones ni por el fondo de garantía de depósitos.</p>
+                {!! $footerLorem->textoMisionEmpresa !!}
             </div>
         </div>
     </div>

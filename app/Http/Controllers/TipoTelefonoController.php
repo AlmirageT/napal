@@ -4,22 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoTelefono;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoTelefono;
+use Session;
+use DB;
 
 class TipoTelefonoController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$tiposTelefonos = TipoTelefono::all();
     	return view('admin.mantenedores.tipo_telefono.index',compact('tiposTelefonos'));
     }
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoTelefono' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoTelefono = new TipoTelefono($request->all());
             	$tipoTelefono->save();
@@ -47,6 +64,13 @@ class TipoTelefonoController extends Controller
     public function update(Request $request, $idTipoTelefono)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoTelefono' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoTelefono = TipoTelefono::find($idTipoTelefono);
 	            $tipoTelefono->fill($request->all());

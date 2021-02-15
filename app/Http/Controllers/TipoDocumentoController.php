@@ -4,22 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\TipoDocumento;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\TipoDocumento;
+use Session;
+use DB;
 
 class TipoDocumentoController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$tiposDocumentos = TipoDocumento::all();
     	return view('admin.mantenedores.tipo_documento.index',compact('tiposDocumentos'));
     }
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoDocumento' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
             	$tipoDocumento = new TipoDocumento($request->all());
             	$tipoDocumento->save();
@@ -47,6 +64,13 @@ class TipoDocumentoController extends Controller
     public function update(Request $request, $idTipoDocumento)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreTipoDocumento' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('Los datos no pueden estar vacios');
+                return back();
+            }
             DB::beginTransaction();
 	    		$tipoDocumento = TipoDocumento::find($idTipoDocumento);
 	            $tipoDocumento->fill($request->all());

@@ -3,16 +3,16 @@
 Registrarse
 @endsection
 @section('content')
-<div class="contact-section overview-bgi">
+<div class="contact-section overview-bgi" style="background-image: url('{{ asset('img_public/paginaesmidaspantalla-02.jpg') }}');">
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
                 <div class="form-content-box">
-                    <a class=" d-block d-sm-block d-md-block d-lg-none">
-                        <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo">
+                    <a class=" d-block d-sm-block d-md-block d-lg-none" href="{{ asset('/') }}">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo">
                     </a>
-                    <a>
-                        <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
+                    <a href="{{ asset('/') }}">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
                         <h3>Crea tu cuenta</h3>
@@ -24,7 +24,12 @@ Registrarse
                                 {!!Form::text('apellido',null,['class'=>"form-control", 'placeholder'=>"Apellidos" , 'required'])!!}
                             </div>
                             <div class="form-group">
-                                {!!Form::number('numero',null,['class'=>"form-control", 'placeholder'=>"9 87654321" , 'required'])!!}
+                                <div class="input-group mb-2">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">+56</div>
+                                  </div>
+                                {!!Form::number('numero',null,['class'=>"form-control", 'placeholder'=>"9 87654321" , 'required','id'=>"inlineFormInputGroup"])!!}
+                                </div>
                             </div>
                             <div class="form-group">
                                 {!!Form::email('correo',null,['class'=>"form-control", 'placeholder'=>"Email" , 'required'])!!}
@@ -89,15 +94,15 @@ Registrarse
             </div>
             <div class="col-lg-2 d-none d-sm-none d-md-none d-lg-block">
               <div class="form-content-box">
-                <a href="index.html">
-                    <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo">
+                <a href="{{ asset('/') }}">
+                    <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo">
                 </a>
               </div>
             </div>
             <div class="col-lg-5 d-none d-sm-none d-md-none d-lg-block">
                 <div class="form-content-box">
-                    <a href="index.html">
-                        <img src="{{ asset('img_public/logos/white-logo.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
+                    <a href="{{ asset('/') }}">
+                        <img src="{{ asset('img_public/logomidas-03.png') }}" class="cm-logo" alt="black-logo" style="visibility: hidden;">
                     </a>
                     <div class="details">
                         <div class="row">

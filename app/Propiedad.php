@@ -52,6 +52,9 @@ class Propiedad extends Model
         'invertir',
         'ubicacion',
         'proyecto',
-        'promotor'
+        'promotor',
+        'textoPromocion',
+		'rentabilidadPromocion',
+		'contratoFlex'
     ];
 }

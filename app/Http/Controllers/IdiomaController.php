@@ -4,22 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Idioma;
-use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
+use App\Idioma;
+use Session;
+use DB;
 
 class IdiomaController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$idiomas = Idioma::all();
     	return view('admin.mantenedores.idioma.index',compact('idiomas'));
     }
     public function store(Request $request)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreIdioma' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
             	$idioma = new Idioma($request->all());
             	$idioma->save();
@@ -47,6 +64,13 @@ class IdiomaController extends Controller
     public function update(Request $request, $idIdioma)
     {
     	try {
+            $validator = Validator::make($request->all(), [
+                'nombreIdioma' => 'required'
+            ]);
+            if ($validator->fails()) {
+                toastr()->info('No deben quedar datos en blanco');
+                return redirect::back();
+            }
             DB::beginTransaction();
 	    		$idioma = Idioma::find($idIdioma);
 	            $idioma->fill($request->all());

@@ -1,9 +1,47 @@
 @extends('layouts.public.app')
-@section('title')
-Detalle Propiedad
+
+@section('meta')
+    <meta property="og:url" content="{{ $url }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Inverte en nuestra propiedad {{ $propiedad->nombrePropiedad }}" >
+    <meta property="og:description" content="Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera" >
+    <meta property="og:image" content="{{ asset($propiedad->fotoPrincipal) }}" >
+    <meta property="og:image:width" content="200" >
+    <meta property="og:image:height" content="200" >
 @endsection
+@section('title','Detalle Propiedad')
 @section('content')
 <!-- Properties details page start -->
+@php
+    $date1 = new DateTime($propiedad->fechaInicio);
+    $date2 = new DateTime($propiedad->fechaFinalizacion);
+    $diff = $date1->diff($date2);
+@endphp
+@php
+    $suma = 0;
+    $porcentaje = 0;
+    $catidadInversores = count($ingresos);
+    foreach($ingresos as $ingreso){
+        $suma = $suma + $ingreso->monto;
+        if($suma>0){
+            $porcentaje = ($suma*100)/$propiedad->precio;
+        }else{
+            $porcentaje = 0;
+        }
+    }
+@endphp
+@php
+    $arrayIdPropiedadUsuario = array();
+    foreach ($ingresos as $ingreso) {
+        if($ingreso->idPropiedad == $propiedad->idPropiedad && $ingreso->idPropiedad != null){
+            $idPropiedades = array($propiedad->idPropiedad => $ingreso->idUsuario
+            );
+            array_push($arrayIdPropiedadUsuario,$idPropiedades);
+        }
+    }
+    $arrayIdPropiedadSinDuplicar = array();
+    array_push($arrayIdPropiedadSinDuplicar, array_unique($arrayIdPropiedadUsuario, SORT_REGULAR));
+@endphp
 <div class="properties-details-page content-area">
     <div class="container">
         <div class="row">
@@ -167,64 +205,76 @@ Detalle Propiedad
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar-left">
                     <!-- Advanced search start -->
-                    <form action="{{ asset('invierte-propiedad') }}/{{ $propiedad->idPropiedad }}" method="POST">
+                    <form action="{{ asset('invierte-propiedad') }}/{{ Crypt::encrypt($propiedad->idPropiedad) }}" method="POST">
                         @csrf
                         <div class="widget search-area advanced-search d-none d-xl-block d-lg-block">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p>{{ $propiedad->nombrePais }}</p>
+                                    <p><strong> Pais:</strong></p>
                                 </div>
-                                <div class="col-lg-6">
-                                    <p>{{ $propiedad->cantidadSubPropiedad }} SubPropiedades</p>
+                                <div class="col-lg-6" align="center">
+                                    <p> <strong> {{ $propiedad->nombrePais }} </strong></p>
                                 </div>
                                 <hr>
                                 <div class="col-lg-6">
-                                    <p>ESTADO:</p>
+                                    <p> <strong> Estado: </strong></p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <p> <strong> {{ $propiedad->nombreEstado }} </strong> </p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p>{{ $propiedad->nombreEstado }}</p>
+                                    <p> <strong> Modalidad de prestamo: </strong></p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <p> <strong> {{ $propiedad->nombreTipoFlexibilidad }} </strong> </p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <p>$256.000 (25%)</p>
+                                    <p> <strong> ${{ number_format($suma,0,',','.') }} ({{ round($porcentaje) }}%)</strong></p>
                                 </div>
                                 <div class="col-lg-5">
-                                    <p>${{ number_format($propiedad->precio,0,',','.') }}</p>
+                                    <p> <strong> ${{ number_format($propiedad->precio,0,',','.') }} </strong> </p>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <progress max="100" value="25" style="width: 95%;">
+                                        <progress max="100" value="{{ round($porcentaje) }}" style="width: 95%;">
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
-                                    <p>49 Inversores</p>
+                                <div class="col-lg-7">
+                                    <p> <strong> {{  count($arrayIdPropiedadSinDuplicar[0])  }} Inversores</strong></p>
                                 </div>
-                                <div class="col-lg-4">
-                                    <p>18 dias</p>
-                                </div>
-                                <div class="col-lg-6" align="center">
-                                    <h4>{{ $propiedad->rentabilidadAnual }}%</h4>
-                                    <p>Rentabilidad Anual</p>
+                                <div class="col-lg-5">
+                                    <p> <strong> Plazo: {{ $propiedad->plazoMeses}} meses </strong></p>
                                 </div>
                                 <div class="col-lg-6" align="center">
-                                    <h4>{{ $propiedad->rentabilidadTotal }}%</h4>
-                                    <p>Rentabilidad Total</p>
+                                    <h4> <strong> {{ $propiedad->rentabilidadAnual }}% </strong> </h4>
+                                    <p> <strong> Rentabilidad Anual </strong></p>
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <h4> <strong> {{ $propiedad->rentabilidadTotal }}% </strong> </h4>
+                                    <p> <strong> Rentabilidad Total </strong></p>
                                 </div>
                                 <br>
                                 <div class="col-lg-6">
-                                    <p>Quiero invertir</p>
+                                    <p> <strong> Quiero invertir </strong> </p>
                                 </div>
                                 <div class="col-lg-6">
                                   <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                       <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="10.000" maxlength="8" onkeyup="format(this)" onchange="format(this)" required>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" name="valorInvertir" placeholder="{{ number_format($valorInicio->valorParametroGeneral,0,',','.') }}" maxlength="8" onkeyup="format(this)" onchange="format(this)" required>
                                   </div>
                                 </div>
                             </div>
                             <br>
                             <div class="form-group mb-0">
                                 <button class="search-button">Invierte</button>
+                            </div>
+                            <div class="form-group mb-0" align="center">
+                                <br>
+                                <br>
+                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}" style="margin-left: 20px"><i class="fab fa-facebook-f"></i></a>
+                                <a target="_blank" href="https://twitter.com/intent/tweet?text=Aprovecha esta oportunidad única para finalmente obtener tu independecia financiera&amp;url={{ $url }}"><i class="fab fa-twitter" style="margin-left: 20px"></i></a>
                             </div>
                         </div>
                     </form>

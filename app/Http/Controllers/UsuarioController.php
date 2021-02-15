@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 use App\Mail\TokenUsuarioPrivado;
+use App\Actions\VerificarRutAction;
 use App\Avatar;
 use App\Idioma;
 use App\TipoPersona;
@@ -22,17 +23,34 @@ use App\TipoUsuario;
 use App\DireccionUsuario;
 use App\Telefono;
 use App\TipoTelefono;
-use DB;
+use Session;
 use Mail;
+use DB;
 
 class UsuarioController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	return view('admin.usuarios.index');
     }
     public function create()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
         $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
         $tiposPersonas = TipoPersona::pluck('nombreTipoPersona','idTipoPersona');
         $paises = Pais::pluck('nombrePais','idPais');
@@ -82,8 +100,7 @@ class UsuarioController extends Controller
                 'apellido'=>'required',
                 'correo'=>'required|email',
                 'rut'=>'required',
-                'password'=>'required',
-                'confirm_password'=>'required',
+                'password'=>'required_with:confirm_password|same:confirm_password',
                 'profesion'=>'required',
                 'idPais'=>'required',
                 'idRegion'=>'required',
@@ -99,7 +116,7 @@ class UsuarioController extends Controller
                 'idTipoUsuario'=>'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('No debe dejar campos en blanco');
+                toastr()->info('No debe dejar campos en blanco, las contraseñas deben ser iguales, la imagen debe pesar menos de 100 mb');
                 return back();
             }
             DB::beginTransaction();
@@ -114,11 +131,22 @@ class UsuarioController extends Controller
                     ]);
                     $id_avatar = $id->idAvatar;
                 }
+                $rut = $request->rut;
+                $caracteresEspeciales = array(".");
+                $rutSinCaracteres = str_replace($caracteresEspeciales, "", $rut);
+
+                $VerificarRutAction = new VerificarRutAction();
+                $rutVerificado = $VerificarRutAction->execute($rutSinCaracteres);
+                if ($rutVerificado == false) {
+                    toastr()->warning('El rut que ingreso es invalido, ingreso uno nuevo');
+                    DB::rollback();
+                    return back();
+                }
                 //guardar usuario
                 $usuario = new Usuario();
                 $usuario->nombre = $request->nombre;
                 $usuario->apellido = $request->apellido;
-                $usuario->rut = $request->rut;
+                $usuario->rut = $rutSinCaracteres;
                 $usuario->correo = $request->correo;
                 $usuario->idAvatar = $id_avatar;
                 $usuario->password = Crypt::encrypt($request->password);
@@ -175,6 +203,14 @@ class UsuarioController extends Controller
     }
     public function edit($idUsuario)
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
         $usuario = Usuario::find($idUsuario);
         $avatar = Avatar::find($usuario->idAvatar);
         $idiomas = Idioma::pluck('nombreIdioma','idIdioma');
@@ -192,10 +228,26 @@ class UsuarioController extends Controller
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'avatar' => 'max:102400'
+                'nombre'=>'required',
+                'apellido'=>'required',
+                'correo'=>'required|email',
+                'rut'=>'required',
+                'profesion'=>'required',
+                'idPais'=>'required',
+                'idRegion'=>'required',
+                'idProvincia'=>'required',
+                'idComuna'=>'required',
+                'direccion1'=>'required',
+                'direccion2'=>'required',
+                'codigoPostal'=>'required',
+                'latitud'=>'required',
+                'longitud'=>'required',
+                'idIdioma'=>'required',
+                'idTipoPersona'=>'required',
+                'idTipoUsuario'=>'required'
             ]);
             if ($validator->fails()) {
-                toastr()->info('El archivo no puede pasar de los 100MB');
+                toastr()->info('No debe dejar campos en blanco');
                 return back();
             }
             DB::beginTransaction();
@@ -210,11 +262,22 @@ class UsuarioController extends Controller
                     ]);
                     $id_avatar = $idAvatar_create->idAvatar;
                 }
+                $rut = $request->rut;
+                $caracteresEspeciales = array(".");
+                $rutSinCaracteres = str_replace($caracteresEspeciales, "", $rut);
+                
+                $VerificarRutAction = new VerificarRutAction();
+                $rutVerificado = $VerificarRutAction->execute($rutSinCaracteres);
+                if ($rutVerificado == false) {
+                    toastr()->warning('El rut que ingreso es invalido, ingreso uno nuevo');
+                    DB::rollback();
+                    return back();
+                }
                 //guardar usuario
                 $usuario = Usuario::find($idUsuario);
                 $usuario->nombre = $request->nombre;
                 $usuario->apellido = $request->apellido;
-                $usuario->rut = $request->rut;
+                $usuario->rut = $rutSinCaracteres;
                 $usuario->correo = $request->correo;
                 if ($id_avatar != null) {
                     $usuario->idAvatar = $id_avatar;
@@ -288,5 +351,17 @@ class UsuarioController extends Controller
             toastr()->error('Ha surgido un error inesperado', $e->getMessage(), ['timeOut' => 9000]);
             return redirect::back();
         }
+    }
+    public function indexTransferencia()
+    {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
+        return view('admin.usuarios.validarTransferencia.index');
     }
 }

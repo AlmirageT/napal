@@ -9,13 +9,23 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use App\CondicionServicio;
+use Session;
 use Response;
+use Cache;
 use DB;
 
 class CondicionServicioController extends Controller
 {
     public function index()
     {
+        if (!Session::has('idUsuario') && !Session::has('idTipoUsuario') && !Session::has('nombre') && !Session::has('apellido') && !Session::has('correo') && !Session::has('rut')) {
+            return abort(401);
+        }
+        if (Session::has('idTipoUsuario')) {
+            if (Session::get('idTipoUsuario') != 3 && Session::get('idTipoUsuario') != 10) {
+                return abort(401);
+            }
+        }
     	$condicionesServicios = CondicionServicio::all();
     	return view('admin.condicionServicio.index',compact('condicionesServicios'));
     }
@@ -30,11 +40,23 @@ class CondicionServicioController extends Controller
                'Content-Disposition' => 'inline; filename="'.$filename.'"'
         ]);
     }
+    public function saberMas()
+    {
+        $condicionServicio = CondicionServicio::where('nombrePDFCondicionServicio','SABER MAS')->first();
+        $filename = $condicionServicio->nombrePDFCondicionServicio;
+        $path = $condicionServicio->rutaCondicionServicio;
+
+        return Response::make(file_get_contents($path), 200, [
+               'Content-Type' => 'application/pdf',
+               'Content-Disposition' => 'inline; filename="'.$filename.'"'
+        ]);
+    }
     public function store(Request $request)
     {
     	try {
             $validator = Validator::make($request->all(), [
-                'rutaCondicionServicio' => 'max:102400'
+                'rutaCondicionServicio' => 'required|max:102400',
+                'nombrePDFCondicionServicio' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');
@@ -81,7 +103,8 @@ class CondicionServicioController extends Controller
 	            cache::forget('condicionServicio');
 	        }
             $validator = Validator::make($request->all(), [
-                'rutaCondicionServicio' => 'max:102400'
+                'rutaCondicionServicio' => 'max:102400',
+                'nombrePDFCondicionServicio' => 'required'
             ]);
             if ($validator->fails()) {
                 toastr()->info('El archivo no puede pasar de los 100MB');
