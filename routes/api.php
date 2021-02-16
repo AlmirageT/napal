@@ -20,7 +20,7 @@ Route::get('/activarCuenta', 'ActivarCuentaController@activarCuenta');
 Route::get('/activarCuentaSMS', 'ActivarCuentaController@activarCuentaSMS');
 //api de otros pagos
 Route::group(['prefix'=>'otrospagos'], function(){
-    Route::post('condeu','OtrosPagosController@condeu01req');
-    Route::post('notpag','OtrosPagosController@notpag01req');
-    Route::post('revpag','OtrosPagosController@revpag01req');
+    Route::post('condeu01','OtrosPagosController@condeu01req');
+    Route::post('notpag01','OtrosPagosController@notpag01req');
+    Route::post('revpag01','OtrosPagosController@revpag01req');
 });
