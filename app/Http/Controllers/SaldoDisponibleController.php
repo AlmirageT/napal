@@ -135,8 +135,8 @@ class SaldoDisponibleController extends Controller
 
         }else{
             $valorInicial = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
-            if(intval($request->monto) < intval($valorInicial->valorParametroGeneral)){
-                toastr()->info('El monto no puede ser menor a $'.number_format($valorInicial->valorParametroGeneral,0,',','.'));
+            if(intval($request->monto) <= 0){
+                toastr()->info('El monto no puede ser menor a $0');
                 return back();
             }
             if(Session::has('idTrxPaypal')){
@@ -293,8 +293,8 @@ class SaldoDisponibleController extends Controller
         $valorCaracteresEspeciales = array("@", ".", "-", "_", ";", ":", "?", "¿", "¡", "!", "$", "#", ",", "%", "&", "/", "+");
         $cantidadSinCaracteres = str_replace($valorCaracteresEspeciales, "", $request->valorAIngresar);
         $valorInicial = ParametroGeneral::where('nombreParametroGeneral','VALOR INICIO')->first();
-        if(intval($cantidadSinCaracteres) < intval($valorInicial->valorParametroGeneral)){
-            toastr()->info('El monto no puede ser menor a $'.number_format($valorInicial->valorParametroGeneral,0,',','.'));
+        if(intval($cantidadSinCaracteres) <= 0){
+            toastr()->info('El monto no puede ser menor a $0');
             return back();
         }
         //caracteres especiales para rut
@@ -310,7 +310,7 @@ class SaldoDisponibleController extends Controller
             'idEstado' => 11,
         ]);
 
-        return redirect()->to('https://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
+        return redirect()->to('https://otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
     }
     public function reversarEstadoDeNoPagados()
     {

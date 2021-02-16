@@ -12,7 +12,7 @@
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label>Valor a ingresar</label>
-						<input type="number" name="monto" class="form-control" min="{{ number_format($valorInicio->valorParametroGeneral,0,',','.') }}" placeholder="{{ number_format($valorInicio->valorParametroGeneral,0,',','.') }}" onchange="valorPorcentaje(this.value)">
+						<input type="number" name="monto" class="form-control" min="0" placeholder="{{ $valorInicio->valorParametroGeneral }}" onchange="valorPorcentaje(this.value)">
 						<input type="hidden" name="no_shipping" value="1">
 					</div>
 				</div>

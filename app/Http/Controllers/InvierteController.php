@@ -54,6 +54,18 @@ class InvierteController extends Controller
             }
             
             $propiedad = Propiedad::find(Crypt::decrypt($idPropiedad));
+            $ingresosPropiedad = TrxIngreso::where('idPropiedad',Crypt::decrypt($idPropiedad))->get();
+            $totalIngresosPropiedad = 0;
+            foreach ($ingresosPropiedad as $ingresoPropiedad) {
+                $totalIngresosPropiedad = $totalIngresosPropiedad + $ingresoPropiedad->monto;
+            }
+            $totalIngresosPropiedad = $totalIngresosPropiedad + $sinCaracteres;
+            if(intval($propiedad->precio) < intval($totalIngresosPropiedad)){
+                DB::rollback();
+                toastr()->info('El dinero que esta ingresando sobrepasa la financiacion total de esta propiedad o ya llego a su financiación final, escoga otra para invertir');
+                return back();
+            }
+
             $saldoDisponible = SaldoDisponible::where('idUsuario',Session::get('idUsuario'))->get();
 
             DB::commit();
@@ -111,7 +123,7 @@ class InvierteController extends Controller
                 'idPropiedad' => Crypt::decrypt($idPropiedad)
             ]);
             DB::commit();
-            return redirect()->to('https://pre.otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
+            return redirect()->to('https://otrospagos.com/publico/portal/enlace?id='.getenv('OTROS_PAGOS_COVENIO').'&idcli='.$rutSinGuion.'&tiidc=01');
            /* TrxIngreso::create([
                 'monto' => $request->saldo,
                 'webClient' => $_SERVER['HTTP_USER_AGENT'],

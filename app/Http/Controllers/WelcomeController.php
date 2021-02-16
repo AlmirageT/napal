@@ -13,6 +13,7 @@ use App\TrxIngreso;
 use App\Propiedad;
 use App\RedSocial;
 use App\Usuario;
+use Session;
 use Cache;
 use DB;
 
@@ -87,7 +88,7 @@ class WelcomeController extends Controller
             ->join('propiedades','trx_ingresos.idPropiedad','=','propiedades.idPropiedad')
             ->where('propiedades.idEstado',5)
             ->get();
-        $propiedadesFavoritas = PropiedadFavorita::all();
+        $propiedadesFavoritas = PropiedadFavorita::where('idUsuario',Session::get('idUsuario'))->get();
         $totalPropiedades = Propiedad::where('idEstado',5)->get();
         $usuarios = Usuario::where('idTipoUsuario',2)->get();
         $promedioTir = 0;
