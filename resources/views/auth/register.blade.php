@@ -40,9 +40,10 @@ Registrarse
                             <div class="form-group">
                               <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                             </div>
+                            {{--  
                             <div class="form-group">
                               <input type="text" name="codigoPromocional" class="form-control" placeholder="Código promocional">
-                            </div>
+                            </div>--}}
                             <div class="form-group">
                                {!! NoCaptcha::renderJs() !!}
                                {!! NoCaptcha::display() !!}

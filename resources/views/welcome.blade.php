@@ -251,6 +251,7 @@
             backface-visibility: hidden;
             -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
+            width: 344px;
         }
         .cruz {
             position: absolute;
@@ -273,12 +274,40 @@
             backface-visibility: hidden;
             -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
+            width: 344px;
         }
         .cruz {
             position: absolute;
             z-index: 1;
             margin-left: 311px;
             cursor: pointer;
+        }
+    }
+    @media only screen and (min-width:414px) and (max-width: 466px){
+        .cuadrado{
+            margin-left: 144px;
+        }
+        .circulo{
+            margin-left: 255px;
+        }
+        .back {
+            position: absolute;
+            margin-top: -941px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+            width: 344px;
+        }
+        .cruz {
+            position: absolute;
+            z-index: 1;
+            margin-left: 311px;
+            cursor: pointer;
+        }
+        .imagen-datos-prueba{
+            margin-top: -233px;
+            margin-left: -384px;
         }
     }
     @media only screen and (min-width:553px) and (max-width: 558px) {
@@ -288,6 +317,10 @@
         .circulo{
             margin-left: 415px;
         }
+        .imagen-datos-prueba{
+            margin-top: -233px;
+            margin-left: -523px;
+        }
     }
     @media only screen and (min-width:559px) and (max-width: 563px) {
         .cuadrado{
@@ -295,6 +328,10 @@
         }
         .circulo{
             margin-left: 415px;
+        }
+        .imagen-datos-prueba{
+            margin-top: -233px;
+            margin-left: -523px;
         }
     }
     @media only screen and (min-width:564px) and (max-width: 569px) {
@@ -304,6 +341,10 @@
         .circulo{
             margin-left: 415px;
         }
+        .imagen-datos-prueba{
+            margin-top: -233px;
+            margin-left: -523px;
+        }
     }
     @media only screen and (min-width:570px) and (max-width: 575px) {
         .cuadrado{
@@ -311,6 +352,10 @@
         }
         .circulo{
             margin-left: 415px;
+        }
+        .imagen-datos-prueba{
+            margin-top: -233px;
+            margin-left: -523px;
         }
     }
     @media only screen and (min-width:576px) and (max-width: 767px) {
@@ -320,6 +365,7 @@
         .circulo{
             margin-left: 157px;
         }
+        
     }
     @media only screen and (min-width:768px) and (max-width: 991px) {
         .cuadrado{

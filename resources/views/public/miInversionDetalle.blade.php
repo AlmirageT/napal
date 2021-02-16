@@ -124,7 +124,7 @@ Detalle Mi Inversión
     .contenedor-barra{
         width: 95%;
         justify-content: flex-end;
-        margin: 60px 0;
+        margin: 60px -284px;
         
     }
     
@@ -178,7 +178,7 @@ Detalle Mi Inversión
     .contenedor-barra{
         width: 84%;
         justify-content: flex-end;
-        margin: 60px 0;
+        margin: 60px -346px;
         
     }
     
@@ -263,30 +263,37 @@ Detalle Mi Inversión
             <ul class="lista-botones">
                <li> <a href="#detalleFinanciacion">DETALLES FINANCIACIÓN</a> </li>
                <span>|</span>
+               {{--  
                <li> <a href="#evolucionProyecto">EVOLUCIÓN PROYECTO</a> </li>
-                <span>|</span>
+                <span>|</span>--}}
+                 
                <li> <a href="#tuPosicion">TU POSICIÓN</a> </li>
                 <span>|</span>
+                {{-- 
                <li> <a href="#ingresos">INGRESOS</a> </li>
                 <span>|</span>
                <li> <a href="#promociones">PROMOCIONES</a> </li>
-                <span>|</span>
+                <span>|</span>--}}
                <li> <a href="#movimientos">MOVIMIENTOS</a> </li>
-                <span>|</span>
-               <li> <a href="#">DOCUMENTOS</a> </li>
+                {{--  
+               <li> <a href="#">DOCUMENTOS</a> </li>--}}
             </ul>
         </nav>
     </div>
     <div class="d-block d-sm-block d-lg-none" align="center">
         <nav class="">
             <ul class="responsive-ul">
+                
                <li class="responsive-li"> <a href="#" class="rensposive-a">DETALLES FINANCIACIÓN</a></li>
-               <li class="responsive-li"> <a href="#" class="rensposive-a">EVOLUCIÓN PROYECTO</a> </li>
+               {{--  
+               <li class="responsive-li"> <a href="#" class="rensposive-a">EVOLUCIÓN PROYECTO</a> </li>--}}
                <li class="responsive-li"> <a href="#" class="rensposive-a">TU POSICIÓN</a> </li>
+               {{-- 
                <li class="responsive-li"> <a href="#" class="rensposive-a">INGRESOS</a> </li>
-               <li class="responsive-li"> <a href="#" class="rensposive-a">PROMOCIONES</a> </li>
+               <li class="responsive-li"> <a href="#" class="rensposive-a">PROMOCIONES</a> </li> --}}
                <li class="responsive-li"> <a href="#" class="rensposive-a">MOVIMIENTOS</a> </li>
-               <li class="responsive-li"> <a href="#" class="rensposive-a">DOCUMENTOS</a> </li>
+               {{-- 
+               <li class="responsive-li"> <a href="#" class="rensposive-a">DOCUMENTOS</a> </li> --}}
             </ul>
         </nav>
         <br>
@@ -304,7 +311,7 @@ Detalle Mi Inversión
                         <h6>Tipo de oportunidad</h6>
                         <a>
                             <img src="https://static.housers.com/assets/images/icons/projects/project-ico-fixed_green.svg" alt="Tipo fijo" title="Tipo fijo">
-                            Tipo Fijo
+                            {{ $propiedad->nombreTipoFlexibilidad }}
                         </a>
                     </div>
                 </div>
@@ -320,18 +327,23 @@ Detalle Mi Inversión
                             <td>NIVEL DE RIESGO<br><br><strong class="{{ $propiedad->nombreClase }}">{{ $propiedad->nombreTipoCalidad }}</strong></td>
                             <td>FECHA INICIO INVERSIÓN<br><strong>{{ date("d-m-Y", strtotime($propiedad->fechaInicio)) }}</strong></td>
                             </tr>
-                         <tr>
+                        <tr>
                             <td>FECHA FIN INVERSIÓN<br><strong>{{ date("d-m-Y", strtotime($propiedad->fechaFinalizacion)) }}</strong></td>
                             <td>DÍAS EN FINANCIACIÓN<br><strong>45</strong></td>
                             <td>N DE INVERSORES<br><strong>{{ count($arrayIdPropiedadSinDuplicar[0]) }}</strong></td>
-                            <td>INVERSIÓN MEDIA X INVERSOR<br><strong>$143.-</strong></td>
-                            </tr>
-           
-                              <tr>
                             <td>CANTIDAD FINANCIADA<br><strong>${{ number_format($suma,0,',','.') }}</strong></td>
-                            <td>VALOR INICIAL<br><strong>1,000/</strong></td>
+
+                            {{--  
+                            <td>INVERSIÓN MEDIA X INVERSOR<br><strong>$143.-</strong></td>--}}
+                            </tr>
+        
+                            <tr>
+                                <td></td>
+                            {{--  
+                            <td>VALOR INICIAL<br><strong>1,000/</strong></td>--}}
                             <td>RENTABILIDAD ANUAL/TOTAL<br><strong>{{ $propiedad->rentabilidadAnual }}/{{ $propiedad->rentabilidadTotal }}%</strong></td>
                             <td>PLAZO<br><strong>{{ $propiedad->plazoMeses }} MESES</strong></td>
+                            <td></td>
                             </tr> 
                         </table>
                     <br>
@@ -339,23 +351,24 @@ Detalle Mi Inversión
                 </div>
             </div>
         </div>
+        {{--  
         <div id="evolucionProyecto">
-        <div class="col-lg-12" align="left">
-            <br>
-            <h4>Evolución del proyecto</h4>
-        </div>
-        <div class="col-lg-12">
-            <div class="table-responsive">
-                <table>
-                    <tr>
-                        <td>3 de Noviembre de 2020<br><strong>Cierre financiación</strong></td>
-                        <td>22 de septiembre de 2020<br><strong>Inicio Financiación</strong></td>
-                    </tr>
-                </table>
+            <div class="col-lg-12" align="left">
+                <br>
+                <h4>Evolución del proyecto</h4>
             </div>
-            <br>
-        </div>
-        </div>
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <td>3 de Noviembre de 2020<br><strong>Cierre financiación</strong></td>
+                            <td>22 de septiembre de 2020<br><strong>Inicio Financiación</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+            </div>
+        </div>--}}
         <div id="tuPosicion">
         <div class="col-lg-12" align="left">
             <br>
@@ -366,8 +379,8 @@ Detalle Mi Inversión
                 <table>
                     <tr>
                         <td>INVERSIÓN ACTUAL<br><strong>${{ number_format($total,0,',','.') }} CLP</strong></td>
-                        <td>N° DE TÍTULOS<br><strong>80,00</strong></td>
-                               <td>PRECIO MEDIO ADQUISICIÓN<br><strong>$10.000 CLP</strong></td>
+                        {{--  <td>N° DE TÍTULOS<br><strong>80,00</strong></td>--}}
+                               <td>PRECIO MEDIO ADQUISICIÓN<br><strong>${{ number_format($valorInicio->valorParametroGeneral,0,',','.') }} CLP</strong></td>
                         <td>RENTABILIDAD ANUAL<br><strong>{{ $propiedad->rentabilidadAnual }}%</strong></td>
                     </tr>
                 </table>
@@ -375,6 +388,7 @@ Detalle Mi Inversión
             <br>
         </div>
         </div>
+        {{--  
         <div id="ingresos">
         <div class="col-lg-12">
             <div class="row">
@@ -434,39 +448,40 @@ Detalle Mi Inversión
                 </div>
             </div>
         </div>
-        </div>
+        </div>--}}
+        {{--  
         <div id="promociones" class="col-lg-12">
-        <div class="col-lg-12" align="left">
-            <br>
-            <h4>Promociones asociadas</h4>
-        </div>
-        <div class="col-lg-12">
-            <div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th><small>PROMOCIÓN</small></th>
-                                    <th><small>CÓDIGO</small></th>
-                                    <th><small>FECHA INICIO</small></th>
-                                    <th><small>FECHA FIN</small></th>
-                                    <th><small>ESTADO</small></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="5" style="text-align: center !important;">No hay resultados</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="col-lg-12" align="left">
+                <br>
+                <h4>Promociones asociadas</h4>
+            </div>
+            <div class="col-lg-12">
+                <div class="card" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><small>PROMOCIÓN</small></th>
+                                        <th><small>CÓDIGO</small></th>
+                                        <th><small>FECHA INICIO</small></th>
+                                        <th><small>FECHA FIN</small></th>
+                                        <th><small>ESTADO</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5" style="text-align: center !important;">No hay resultados</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                    <br>
+            <br>
             </div>
-                <br>
-        <br>
-        </div>
-        </div>
+        </div>--}}
         <div id="movimientos" class="col-lg-12">
             <div class="col-lg-12" align="left">
                 <br>
