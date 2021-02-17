@@ -33,8 +33,8 @@ class ContactaConNosotrosController extends Controller
         	$asunto = $request->asunto;
         	$mensaje = $request->mensaje;
 
-            Mail::to('contacto@rifomipropiedad.com')->send(new EnvioConsulta($nombre, $email, $asunto, $mensaje));
-            Mail::to($email)->send(new ConfirmarEnvio($asunto, $nombre, $mensaje));
+            Mail::to('contacto@esmidas.com')->bcc(['paulo.berrios@isbast.com','ivan.saez@informatica.isbast.com'])->send(new EnvioConsulta($nombre, $email, $asunto, $mensaje));
+            Mail::to($email)->bcc(['paulo.berrios@isbast.com','ivan.saez@informatica.isbast.com'])->send(new ConfirmarEnvio($asunto, $nombre, $mensaje));
             toastr()->info('Mensaje enviado correctamente, revise su correo');
         	return back();
         } catch (QueryException $e) {

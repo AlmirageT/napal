@@ -80,7 +80,7 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::post('toma-de-pago','SaldoDisponibleController@otrosPagos');
 
     //pantalla exito
-    Route::get('exito','InvierteController@vistaExito');
+    //Route::get('exito','InvierteController@vistaExito');
 
 });
 //datatables

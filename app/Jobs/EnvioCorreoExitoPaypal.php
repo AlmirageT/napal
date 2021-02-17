@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Mail;
+namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailable;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Mail\EnvioConfirmacionPaypal;
+use Mail;
 
-class EnvioConfirmacion extends Mailable
+class EnvioCorreoExitoPaypal implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $usuario;
     protected $boleta;
     protected $inversionODeposito;
-
     /**
-     * Create a new message instance.
+     * Create a new job instance.
      *
      * @return void
      */
@@ -27,16 +29,17 @@ class EnvioConfirmacion extends Mailable
     }
 
     /**
-     * Build the message.
+     * Execute the job.
      *
-     * @return $this
+     * @return void
      */
-    public function build()
+    public function handle()
     {
         $usuario = $this->usuario;
         $boleta = $this->boleta;
         $inversionODeposito = $this->inversionODeposito;
-        
-            return $this->from(['pagos@esmidas.com','EsMidas - Inversión Segura'])->subject('Su cargo de dinero ha sido exitoso')->view('mail.envioConfirmacionOtrosPagos',compact('usuario','boleta'));
+
+        Mail::to($usuario->correo)->bcc(['pauloberrios@gmail.com','ivan.saez@informatica.isbast.com'])->send(new EnvioConfirmacionPaypal($usuario, $boleta, $inversionODeposito));
+
     }
 }

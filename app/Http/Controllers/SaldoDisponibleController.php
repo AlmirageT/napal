@@ -15,6 +15,10 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use App\Jobs\EnvioCorreoExitoPaypal;
+use App\Jobs\InversionOtrosPagosJobs;
+use App\Usuario;
+use App\Propiedad;
 use App\TrxIngreso;
 use App\CambioDolar;
 use App\TrxPaypal;
@@ -252,8 +256,10 @@ class SaldoDisponibleController extends Controller
         ]);
         Session::forget('idTrxPaypal');
         $cambioDolar = CambioDolar::first();
+        $inversionODeposito = 0;
+        $sinCaracteres = 0;
         if(Session::has('propiedadPaypal')){
-
+            $inversionODeposito = 1;
             $ingresoSaldo = TrxIngreso::create([
                 'monto' => ($result->transactions[0]->amount->total)*($cambioDolar->valorCambioDolar),
                 'webClient' => $request->userAgent(),
@@ -264,7 +270,7 @@ class SaldoDisponibleController extends Controller
                 'numeroTransaccion' => $result->id,
                 'idPropiedad' => Session::get('propiedadPaypal')
             ]);
-            Session::forget('propiedadPaypal');
+            $sinCaracteres = ($result->transactions[0]->amount->total)*($cambioDolar->valorCambioDolar);
 
         }else{
             $ingresoSaldo = TrxIngreso::create([
@@ -276,6 +282,18 @@ class SaldoDisponibleController extends Controller
                 'idTipoMedioPago' => 2,
                 'numeroTransaccion' => $result->id
             ]);
+        }
+        $usuario = Usuario::find(Session::get('idUsuario'));
+        $boleta = $ingresoSaldo;
+
+
+        if($inversionODeposito == 1){
+            $propiedad = Propiedad::find(Session::get('propiedadPaypal'));
+            InversionOtrosPagosJobs::dispatch($usuario,$propiedad,$sinCaracteres);
+            Session::forget('propiedadPaypal');
+
+        }else{
+            EnvioCorreoExitoPaypal::dispatch($usuario, $boleta,$inversionODeposito);
         }
         
         Session::flash('usd',$result->transactions[0]->amount->total);

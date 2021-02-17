@@ -47,7 +47,11 @@ Editar Usuario
 						</div>
 						<div class="col-lg-12">
 							<div class="form-group">
-								<img id="myimage" src="{{ asset($avatar->rutaAvatar) }}" height="200">
+								@if (isset($avatar->rutaAvatar))
+									<img id="myimage" src="{{ asset($avatar->rutaAvatar) }}" height="200">
+								@else
+								<img id="myimage"  height="200">
+								@endif
 							</div>					
 						</div>
 						<div class="col-lg-12">

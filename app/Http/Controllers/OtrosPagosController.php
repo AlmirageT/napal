@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Jobs\EnvioCorreoExito;
 use App\Jobs\EnvioCorreoReverso;
+use App\Jobs\InversionOtrosPagosJobs;
 use App\SaldoDisponible;
 use App\BoletaOtroPago;
 use App\TrxIngreso;
@@ -111,9 +112,12 @@ class OtrosPagosController extends Controller
                 ->where('boletas_otros_pagos.idEstado',11)
                 ->where('usuarios.rut',$rutUsuario)
                 ->first();
-            
+            $inversionODeposito = 0;
+            $sinCaracteres = 0;
             if($boleta){
                 if($boleta->idPropiedad != null){
+                    $inversionODeposito = 1;
+                    $sinCaracteres = $boleta->cantidadBoletaOtroPago;
                     $ingresoSaldo = TrxIngreso::create([
                         'monto' => $boleta->cantidadBoletaOtroPago,
                         'webClient' => 'otrospagos.com',
@@ -143,8 +147,13 @@ class OtrosPagosController extends Controller
 
                 $usuario = Usuario::find($boleta->idUsuario);
 
+                if($inversionODeposito == 1){
+                    $propiedad = Propiedad::find($boleta->idPropiedad);
+                    InversionOtrosPagosJobs::dispatch($usuario,$propiedad,$sinCaracteres);
+                }else{
+                    EnvioCorreoExito::dispatch($usuario, $boleta,$inversionODeposito);
+                }
 
-                EnvioCorreoExito::dispatch($usuario, $boleta);
                 //sigue otros pagos
                 return response()->json([
                     'r_tid' => $idTransaccion,

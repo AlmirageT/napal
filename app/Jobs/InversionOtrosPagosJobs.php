@@ -7,25 +7,25 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\EnvioConfirmacion;
+use App\Mail\ConfirmacionInversion;
 use Mail;
 
-class EnvioCorreoExito implements ShouldQueue
+class InversionOtrosPagosJobs implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $usuario;
-    protected $boleta;
-    protected $inversionODeposito;
+    protected $propiedad;
+    protected $sinCaracteres;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($usuario, $boleta, $inversionODeposito)
+    public function __construct($usuario,$propiedad,$sinCaracteres)
     {
         $this->usuario = $usuario;
-        $this->boleta = $boleta;
-        $this->inversionODeposito = $inversionODeposito;
+        $this->propiedad = $propiedad;
+        $this->sinCaracteres = $sinCaracteres;
     }
 
     /**
@@ -36,10 +36,10 @@ class EnvioCorreoExito implements ShouldQueue
     public function handle()
     {
         $usuario = $this->usuario;
-        $boleta = $this->boleta;
-        $inversionODeposito = $this->inversionODeposito;
+        $propiedad = $this->propiedad;
+        $sinCaracteres = $this->sinCaracteres;
 
-        Mail::to($usuario->correo)->bcc(['pauloberrios@gmail.com','ivan.saez@informatica.isbast.com'])->send(new EnvioConfirmacion($usuario, $boleta, $inversionODeposito));
-        
+        Mail::to($usuario->correo)->bcc(['pauloberrios@gmail.com','ivan.saez@informatica.isbast.com'])->send(new ConfirmacionInversion($propiedad,$sinCaracteres));
+
     }
 }
