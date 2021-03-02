@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EnvioConfirmacion extends Mailable
+class EnvioConfirmacionPaypal extends Mailable
 {
     use Queueable, SerializesModels;
     protected $usuario;
@@ -37,6 +37,6 @@ class EnvioConfirmacion extends Mailable
         $boleta = $this->boleta;
         $inversionODeposito = $this->inversionODeposito;
         
-            return $this->from(['pagos@esmidas.com','EsMidas - Inversión Segura'])->subject('Su cargo de dinero ha sido exitoso')->view('mail.envioConfirmacionOtrosPagos',compact('usuario','boleta'));
+        return $this->from(['pagos@esmidas.com','EsMidas - Inversión Segura'])->subject('Su cargo de dinero ha sido exitoso')->view('mail.envioConfirmacionPaypal',compact('usuario','boleta'));
     }
 }

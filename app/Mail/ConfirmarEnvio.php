@@ -35,6 +35,6 @@ class ConfirmarEnvio extends Mailable
         $asunto = $this->asunto;
         $nombre = $this->nombre;
         $mensaje = $this->mensaje;
-        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Consulta recibida')->view('mail.recibidoEmail',compact('nombre','mensaje','asunto'));        
+        return $this->from(['contacto@esmidas.com','EsMidas - Inversión Segura'])->subject('Consulta recibida')->view('mail.recibidoEmail',compact('nombre','mensaje','asunto'));        
     }
 }

@@ -32,6 +32,6 @@ class ConfirmacionInversion extends Mailable
     {
         $propiedad = $this->propiedad;
         $sinCaracteres = $this->sinCaracteres;
-        return $this->from(['contacto@rifomipropiedad.com','EsMidas - Inversión Segura'])->subject('Inversión Realizada')->view('mail.confirmarInversion',compact('propiedad','sinCaracteres'));
+        return $this->from(['inversion@esmidas.com','EsMidas - Inversión Segura'])->subject('Inversión Realizada')->view('mail.confirmarInversion',compact('propiedad','sinCaracteres'));
     }
 }
